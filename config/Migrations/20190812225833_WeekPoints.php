@@ -12,25 +12,25 @@ class WeekPoints extends AbstractMigration
      */
     public function change()
     {
-        $table=$this->table('weeks');
-        $table->addColumn('date_start','timestamp',[
+        $table=$this->table('weeks_points');
+        $table->addColumn('date','timestamp',[
             'default' => 'CURRENT_TIMESTAMP',
             'limit' => null,
             'null' => false
-        ])->addColumn('date_end','timestamp',[
-            'default' => null,
-            'null' => true
-        ])->addColumn('count_events','integer',[
+        ])->addColumn('points','integer',[
             'default' => 0,
-            'limit'=>11,
             'null' => false
-        ])->addColumn('champion','integer',[
-            'default' => 0,
+        ])->addColumn('participant','integer',[
+            'default' => null,
+            'limit'=>11,
             'null' => true
+        ])->addColumn('season','integer',[
+            'default' => null,
+            'null' => false
         ])->create();
     }
     public function down()
     {
-        $this->dropTable('seasons');
+        $this->dropTable('weeks_points');
     }
 }

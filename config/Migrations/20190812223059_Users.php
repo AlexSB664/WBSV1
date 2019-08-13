@@ -32,18 +32,15 @@ class Users extends AbstractMigration
         ])->addColumn('active','boolean',[
             'default' => '0',
             'null' => true
-        ])->addColumn('telephone','boolean',[
+        ])->addColumn('telephone','string',[
             'default' => null,
-            'limit' => 17,
+            'limit' => 20,
             'null' => true
-        ])->addColumn('age','integer',[
-            'default' => '18',
-            'null' => false
         ])->addColumn('created','timestamp',[
             'default' => 'CURRENT_TIMESTAMP',
             'limit' => null,
             'null' => false
-        ])->addColumn('midified','timestamp',[
+        ])->addColumn('modified','timestamp',[
             'default' => null,
             'limit' => null,
             'null' => true

@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class Season extends AbstractMigration
+class Leagues extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,25 +12,14 @@ class Season extends AbstractMigration
      */
     public function change()
     {
-        $table=$this->table('seasons');
-        $table->addColumn('name','string',[
-            'default' => 'Sin nombre',
-            'limit' => 50,
-            'null' => false
-        ])->addColumn('date_start','timestamp',[
+        $table=$this->table('leagues');
+        $table->addColumn('date','timestamp',[
             'default' => 'CURRENT_TIMESTAMP',
             'limit' => null,
             'null' => false
-        ])->addColumn('date_end','timestamp',[
+        ])->addColumn('season','integer',[
             'default' => null,
-            'null' => true
-        ])->addColumn('leagues','integer',[
-            'default' => null,
-            'limit'=>11,
             'null' => false
-        ])->addColumn('champion','integer',[
-            'default' => 0,
-            'null' => true
         ])->addColumn('active','boolean',[
             'default' => '1',
             'null' => true
@@ -38,6 +27,6 @@ class Season extends AbstractMigration
     }
     public function down()
     {
-        $this->dropTable('seasons');
+        $this->dropTable('leagues');
     }
 }
