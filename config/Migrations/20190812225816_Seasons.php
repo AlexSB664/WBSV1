@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class Season extends AbstractMigration
+class Seasons extends AbstractMigration
 {
     /**
      * Change Method.

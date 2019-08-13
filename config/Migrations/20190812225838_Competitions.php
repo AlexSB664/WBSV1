@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class Events extends AbstractMigration
+class Competitions extends AbstractMigration
 {
     /**
      * Change Method.
