@@ -21,7 +21,6 @@
             echo $this->Form->control('role');
             echo $this->Form->control('active');
             echo $this->Form->control('telephone');
-            echo $this->Form->control('age');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

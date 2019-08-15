@@ -78,13 +78,9 @@ class UsersTable extends Table
             ->allowEmptyString('active');
 
         $validator
+            ->scalar('telephone')
             ->maxLength('telephone', 20)
-            ->requirePresence('telephone', 'create')
-            ->notEmptyString('telephone');
-
-        $validator
-            ->integer('age')
-            ->notEmptyString('age');
+            ->allowEmptyString('telephone');
 
         return $validator;
     }

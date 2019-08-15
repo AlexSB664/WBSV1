@@ -33,12 +33,12 @@
             <td><?= h($user->role) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($user->id) ?></td>
+            <th scope="row"><?= __('Telephone') ?></th>
+            <td><?= h($user->telephone) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Age') ?></th>
-            <td><?= $this->Number->format($user->age) ?></td>
+            <th scope="row"><?= __('Id') ?></th>
+            <td><?= $this->Number->format($user->id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>
@@ -51,10 +51,6 @@
         <tr>
             <th scope="row"><?= __('Active') ?></th>
             <td><?= $user->active ? __('Yes') : __('No'); ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Telephone') ?></th>
-            <td><?= $user->telephone ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
 </div>
