@@ -1,7 +1,7 @@
         <!-- footer content -->
         <footer>
           <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+            WBS By<a href="https://c4-technologies.com/"> C4-Technologies</a>
           </div>
           <div class="clearfix"></div>
         </footer>

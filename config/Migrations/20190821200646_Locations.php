@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class Users extends AbstractMigration
+class Locations extends AbstractMigration
 {
     /**
      * Change Method.
@@ -12,34 +12,31 @@ class Users extends AbstractMigration
      */
     public function change()
     {
-        $table=$this->table('users');
-        $table->addColumn('username','string',[
+        $table=$this->table('locations');
+        $table->addColumn('name','string',[
             'default' => null,
-            'limit' => 50,
+            'limit' => 60,
             'null' => false
-        ])->addColumn('email','string',[
+        ])->addColumn('address','string',[
             'default' => null,
-            'limit' => 50,
+            'limit' => 80,
             'null' => false
-        ])->addColumn('avatar','string',[
+        ])->addColumn('lat','float',[
             'default' => null,
             'limit' => 100,
-            'null' => true
-        ])->addColumn('password','string',[
+            'null' => false,
+            'precision' => 10,
+            'scale'=>6
+        ])->addColumn('lng','float',[
             'default' => null,
-            'limit' => 225,
-            'null' => false
-        ])->addColumn('role','string',[
-            'default' => 'participant',
-            'limit'=>15,
-            'null' => false
-        ])->addColumn('active','boolean',[
-            'default' => '0',
-            'null' => true
-        ])->addColumn('telephone','string',[
+            'limit' => 100,
+            'null' => false,
+            'precision' => 10,
+            'scale'=>6
+        ])->addColumn('type','string',[
             'default' => null,
-            'limit' => 20,
-            'null' => true
+            'limit' => 30,
+            'null' => false
         ])->addColumn('created','timestamp',[
             'default' => 'CURRENT_TIMESTAMP',
             'limit' => null,
@@ -52,6 +49,6 @@ class Users extends AbstractMigration
     }
     public function down()
     {
-        $this->dropTable('users');
+        $this->dropTable('locations');
     }
 }

@@ -20,6 +20,18 @@ class Leagues extends AbstractMigration
         ])->addColumn('season','integer',[
             'default' => null,
             'null' => false
+        ])->addColumn('facebookSocial','string',[
+            'default' => null,
+            'null' => false,
+            'limit' => 225
+        ])->addColumn('twitterSocial','string',[
+            'default' => null,
+            'null' => false,
+            'limit' => 225
+        ])->addColumn('instagramSocial','string',[
+            'default' => null,
+            'null' => false,
+            'limit' => 225
         ])->addColumn('active','boolean',[
             'default' => '1',
             'null' => true

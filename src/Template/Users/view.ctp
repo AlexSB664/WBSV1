@@ -25,6 +25,10 @@
             <td><?= h($user->email) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Avatar') ?></th>
+            <td><?= h($user->avatar) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Password') ?></th>
             <td><?= h($user->password) ?></td>
         </tr>

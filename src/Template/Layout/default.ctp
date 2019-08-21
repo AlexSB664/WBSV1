@@ -17,23 +17,15 @@
 $cakeDescription = 'CakePHP: the rapid development php framework';
 ?>
 <!DOCTYPE html>
-<html>
-
+<html lang="en" class=" ">
 <head>
-    <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?= $cakeDescription ?>:
-        <?= $this->fetch('title') ?>
-    </title>
-    <?= $this->Html->meta('icon') ?>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('style.css') ?>
-
-    <?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
+    <title>WBS | </title>
 
     <!-- Bootstrap -->
     <link href="<?php echo $this->request->webroot;  ?>vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -41,27 +33,20 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <link href="<?php echo $this->request->webroot;  ?>vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
     <link href="<?php echo $this->request->webroot;  ?>vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- iCheck -->
-    <link href="<?php echo $this->request->webroot;  ?>vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-wysiwyg -->
+    <link href="<?php echo $this->request->webroot;  ?>vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
 
-    <!-- bootstrap-progressbar -->
-    <link href="<?php echo $this->request->webroot;  ?>vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-    <!-- JQVMap -->
-    <link href="<?php echo $this->request->webroot;  ?>vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
-    <!-- bootstrap-daterangepicker -->
-    <link href="<?php echo $this->request->webroot;  ?>vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
-    <!-- Custom Theme Style -->
+    <!-- Custom styling plus plugins -->
     <link href="<?php echo $this->request->webroot;  ?>build/css/custom.min.css" rel="stylesheet">
 </head>
 
 <body class="nav-md">
     <div class="container body">
         <div class="main_container">
-            <?php  echo $this->element('sidebar') ?>
-            <?php  echo $this->element('top_bar') ?>
-            <?php  echo $this->element('content') ?>
-            <?php  echo $this->element('footer') ?>
+            <?php echo $this->element('sidebar') ?>
+            <?php echo $this->element('top_bar') ?>
+            <?php echo $this->element('content') ?>
+            <?php echo $this->element('footer') ?>
         </div>
     </div>
 
