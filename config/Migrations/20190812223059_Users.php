@@ -17,14 +17,22 @@ class Users extends AbstractMigration
             'default' => null,
             'limit' => 50,
             'null' => false
+        ])->addColumn('fullname','string',[
+            'default' => null,
+            'limit' => 200,
+            'null'=>false
+        ])->addColumn('aka','string',[
+            'default' => null,
+            'limit' => 50,
+            'null' => true
+        ])->addColumn('crew_id','integer',[
+            'default' => null,
+            'limit' => 11,
+            'null' => false
         ])->addColumn('email','string',[
             'default' => null,
             'limit' => 50,
             'null' => false
-        ])->addColumn('avatar','string',[
-            'default' => null,
-            'limit' => 100,
-            'null' => true
         ])->addColumn('password','string',[
             'default' => null,
             'limit' => 225,
@@ -33,12 +41,16 @@ class Users extends AbstractMigration
             'default' => 'participant',
             'limit'=>15,
             'null' => false
-        ])->addColumn('active','boolean',[
+        ])->addColumn('status','boolean',[
             'default' => '0',
             'null' => true
         ])->addColumn('telephone','string',[
             'default' => null,
             'limit' => 20,
+            'null' => true
+        ])->addColumn('avatar','string',[
+            'default' => null,
+            'limit' => 100,
             'null' => true
         ])->addColumn('created','timestamp',[
             'default' => 'CURRENT_TIMESTAMP',

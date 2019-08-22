@@ -17,24 +17,42 @@ class Leagues extends AbstractMigration
             'default' => 'CURRENT_TIMESTAMP',
             'limit' => null,
             'null' => false
-        ])->addColumn('season','integer',[
+        ])->addColumn('name','string',[
             'default' => null,
+            'limit' => 50,
             'null' => false
-        ])->addColumn('facebookSocial','string',[
+        ])->addColumn('description','string',[
+            'default' => null,
+            'limit' => 200,
+            'null' => false
+        ])->addColumn('social_facebook','string',[
             'default' => null,
             'null' => false,
             'limit' => 225
-        ])->addColumn('twitterSocial','string',[
+        ])->addColumn('social_twitter','string',[
             'default' => null,
             'null' => false,
             'limit' => 225
-        ])->addColumn('instagramSocial','string',[
+        ])->addColumn('social_instagram','string',[
             'default' => null,
             'null' => false,
             'limit' => 225
-        ])->addColumn('active','boolean',[
-            'default' => '1',
-            'null' => true
+        ])->addColumn('social_youtube','string',[
+            'default' => null,
+            'null' => false,
+            'limit' => 225
+        ])->addColumn('social_website','string',[
+            'default' => null,
+            'null' => false,
+            'limit' => 225
+        ])->addColumn('contact_phone','string',[
+            'default' => null,
+            'null' => false,
+            'limit' => 20
+        ])->addColumn('contact_email','string',[
+            'default' => null,
+            'null' => false,
+            'limit' => 50
         ])->create();
     }
     public function down()

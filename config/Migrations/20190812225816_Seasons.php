@@ -14,25 +14,26 @@ class Seasons extends AbstractMigration
     {
         $table=$this->table('seasons');
         $table->addColumn('name','string',[
-            'default' => 'Sin nombre',
+            'default' => 'null',
             'limit' => 50,
             'null' => false
+        ])->addColumn('description','string',[
+            'default' =>'null',
+            'limit' => 200,
+            'null' => false
+        ])->addColumn('league_id','integer',[
+            'default' => null,
+            'limit'=>11,
+            'null' => false
+        ])->addColumn('status','boolean',[
+            'default' => '1',
+            'null' => true
         ])->addColumn('date_start','timestamp',[
             'default' => 'CURRENT_TIMESTAMP',
             'limit' => null,
             'null' => false
         ])->addColumn('date_end','timestamp',[
             'default' => null,
-            'null' => true
-        ])->addColumn('leagues','integer',[
-            'default' => null,
-            'limit'=>11,
-            'null' => false
-        ])->addColumn('champion','integer',[
-            'default' => 0,
-            'null' => true
-        ])->addColumn('active','boolean',[
-            'default' => '1',
             'null' => true
         ])->create();
     }

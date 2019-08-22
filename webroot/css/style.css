@@ -18,7 +18,6 @@ a {
 .side-nav li a:not(.button):hover {
     color: #15848F;
 }
-
 header {
     background-color: #D33C44;
     color: #ffffff;
@@ -28,7 +27,6 @@ header {
     padding: 16px 0px;
     box-shadow: 0px 1px rgba(0, 0, 0, 0.24);
 }
-
 header .header-title {
     padding-left:80px
 }
@@ -51,7 +49,6 @@ legend {
 .actions.columns h3 {
     color:#15848F;
 }
-
 .related table {
     border: 0;
     width: 100%;
@@ -60,6 +57,12 @@ legend {
 
 .index table thead {
     height: 3.5rem;
+}
+.fa fa-bars{
+    color: #000;
+}
+.nav-menu{
+    color: #000;
 }
 
 .header-help {
