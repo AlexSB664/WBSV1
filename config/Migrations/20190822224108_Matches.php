@@ -13,13 +13,13 @@ class Matches extends AbstractMigration
     public function change()
     {
         $table=$this->table('matches');
-        $table->addColumn('competition_id','string',[
+        $table->addColumn('competition_id','integer',[
             'default' => null,
-            'limit' => 50,
-            'null' => false
-        ])->addColumn('stage','integer',[
-            'default' => '0',
             'limit' => 11,
+            'null' => false
+        ])->addColumn('stage','string',[
+            'default' => '0',
+            'limit' => 50,
             'null' => true
         ])->addColumn('points','integer',[
             'default' => '0',
