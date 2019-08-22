@@ -21,12 +21,16 @@
             <td><?= h($user->username) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Email') ?></th>
-            <td><?= h($user->email) ?></td>
+            <th scope="row"><?= __('Fullname') ?></th>
+            <td><?= h($user->fullname) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Avatar') ?></th>
-            <td><?= h($user->avatar) ?></td>
+            <th scope="row"><?= __('Aka') ?></th>
+            <td><?= h($user->aka) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Email') ?></th>
+            <td><?= h($user->email) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Password') ?></th>
@@ -41,8 +45,16 @@
             <td><?= h($user->telephone) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Avatar') ?></th>
+            <td><?= h($user->avatar) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($user->id) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Crew Id') ?></th>
+            <td><?= $this->Number->format($user->crew_id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>
@@ -53,8 +65,8 @@
             <td><?= h($user->modified) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Active') ?></th>
-            <td><?= $user->active ? __('Yes') : __('No'); ?></td>
+            <th scope="row"><?= __('Status') ?></th>
+            <td><?= $user->status ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
 </div>

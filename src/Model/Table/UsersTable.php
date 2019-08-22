@@ -9,6 +9,9 @@ use Cake\Validation\Validator;
 /**
  * Users Model
  *
+ * @property &\Cake\ORM\Association\BelongsTo $Crews
+ * @property &\Cake\ORM\Association\BelongsToMany $Matches
+ *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\User[] newEntities(array $data, array $options = [])
@@ -37,6 +40,16 @@ class UsersTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->belongsTo('Crews', [
+            'foreignKey' => 'crew_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->belongsToMany('Matches', [
+            'foreignKey' => 'user_id',
+            'targetForeignKey' => 'match_id',
+            'joinTable' => 'matches_users'
+        ]);
     }
 
     /**
@@ -58,14 +71,20 @@ class UsersTable extends Table
             ->notEmptyString('username');
 
         $validator
+            ->scalar('fullname')
+            ->maxLength('fullname', 200)
+            ->requirePresence('fullname', 'create')
+            ->notEmptyString('fullname');
+
+        $validator
+            ->scalar('aka')
+            ->maxLength('aka', 50)
+            ->allowEmptyString('aka');
+
+        $validator
             ->email('email')
             ->requirePresence('email', 'create')
             ->notEmptyString('email');
-
-        $validator
-            ->scalar('avatar')
-            ->maxLength('avatar', 100)
-            ->allowEmptyString('avatar');
 
         $validator
             ->scalar('password')
@@ -79,13 +98,18 @@ class UsersTable extends Table
             ->notEmptyString('role');
 
         $validator
-            ->boolean('active')
-            ->allowEmptyString('active');
+            ->boolean('status')
+            ->allowEmptyString('status');
 
         $validator
             ->scalar('telephone')
             ->maxLength('telephone', 20)
             ->allowEmptyString('telephone');
+
+        $validator
+            ->scalar('avatar')
+            ->maxLength('avatar', 100)
+            ->allowEmptyString('avatar');
 
         return $validator;
     }
@@ -101,6 +125,7 @@ class UsersTable extends Table
     {
         $rules->add($rules->isUnique(['username']));
         $rules->add($rules->isUnique(['email']));
+        $rules->add($rules->existsIn(['crew_id'], 'Crews'));
 
         return $rules;
     }

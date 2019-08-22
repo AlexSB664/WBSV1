@@ -8,12 +8,15 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $username
+ * @property string $fullname
+ * @property string|null $aka
+ * @property int $crew_id
  * @property string $email
- * @property string|null $avatar
  * @property string $password
  * @property string $role
- * @property bool|null $active
+ * @property bool|null $status
  * @property string|null $telephone
+ * @property string|null $avatar
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime|null $modified
  */
@@ -30,12 +33,15 @@ class User extends Entity
      */
     protected $_accessible = [
         'username' => true,
+        'fullname' => true,
+        'aka' => true,
+        'crew_id' => true,
         'email' => true,
-        'avatar' => true,
         'password' => true,
         'role' => true,
-        'active' => true,
+        'status' => true,
         'telephone' => true,
+        'avatar' => true,
         'created' => true,
         'modified' => true
     ];

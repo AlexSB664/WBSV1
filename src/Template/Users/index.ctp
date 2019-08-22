@@ -17,12 +17,15 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('username') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('fullname') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('aka') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('crew_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('email') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('avatar') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('password') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('role') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('active') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('status') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('telephone') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('avatar') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -33,12 +36,15 @@
             <tr>
                 <td><?= $this->Number->format($user->id) ?></td>
                 <td><?= h($user->username) ?></td>
+                <td><?= h($user->fullname) ?></td>
+                <td><?= h($user->aka) ?></td>
+                <td><?= $this->Number->format($user->crew_id) ?></td>
                 <td><?= h($user->email) ?></td>
-                <td><?= h($user->avatar) ?></td>
                 <td><?= h($user->password) ?></td>
                 <td><?= h($user->role) ?></td>
-                <td><?= h($user->active) ?></td>
+                <td><?= h($user->status) ?></td>
                 <td><?= h($user->telephone) ?></td>
+                <td><?= h($user->avatar) ?></td>
                 <td><?= h($user->created) ?></td>
                 <td><?= h($user->modified) ?></td>
                 <td class="actions">

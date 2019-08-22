@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class Crew extends AbstractMigration
+class Crews extends AbstractMigration
 {
     /**
      * Change Method.
