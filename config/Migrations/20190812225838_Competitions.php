@@ -13,21 +13,24 @@ class Competitions extends AbstractMigration
     public function change()
     {
         $table=$this->table('competitions_users');
-        $table->
-        ])->addColumn('date','timestamp',[
+        $table->addColumn('date','timestamp',[
             'default' => 'CURRENT_TIMESTAMP',
             'limit' => null,
             'null' => false
-        ])->addColumn('competition_id','integer',[
+        ])->addColumn('season_id','integer',[
             'default' => null,
             'null' => false
         ])->addColumn('status','boolean',[
             'default' => '1',
             'null' => true
+        ])->addColumn('localitation_id','integer',[
+            'default' => null,
+            'limit' => 11,
+            'null' => false
         ])->create();
     }
     public function down()
     {
-        $this->dropTable('competitions');
+        $this->dropTable('competitions_users');
     }
 }
