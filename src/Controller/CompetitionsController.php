@@ -20,7 +20,7 @@ class CompetitionsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Seasons', 'Localitations']
+            'contain' => ['Seasons', 'Locations']
         ];
         $competitions = $this->paginate($this->Competitions);
 
@@ -37,7 +37,7 @@ class CompetitionsController extends AppController
     public function view($id = null)
     {
         $competition = $this->Competitions->get($id, [
-            'contain' => ['Seasons', 'Localitations', 'Matches']
+            'contain' => ['Seasons', 'Locations', 'Matches']
         ]);
 
         $this->set('competition', $competition);
@@ -61,8 +61,8 @@ class CompetitionsController extends AppController
             $this->Flash->error(__('The competition could not be saved. Please, try again.'));
         }
         $seasons = $this->Competitions->Seasons->find('list', ['limit' => 200]);
-        $localitations = $this->Competitions->Localitations->find('list', ['limit' => 200]);
-        $this->set(compact('competition', 'seasons', 'localitations'));
+        $locations = $this->Competitions->Locations->find('list', ['limit' => 200]);
+        $this->set(compact('competition', 'seasons', 'locations'));
     }
 
     /**
@@ -87,8 +87,8 @@ class CompetitionsController extends AppController
             $this->Flash->error(__('The competition could not be saved. Please, try again.'));
         }
         $seasons = $this->Competitions->Seasons->find('list', ['limit' => 200]);
-        $localitations = $this->Competitions->Localitations->find('list', ['limit' => 200]);
-        $this->set(compact('competition', 'seasons', 'localitations'));
+        $locations = $this->Competitions->Locations->find('list', ['limit' => 200]);
+        $this->set(compact('competition', 'seasons', 'locations'));
     }
 
     /**

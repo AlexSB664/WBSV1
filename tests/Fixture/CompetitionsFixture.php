@@ -19,7 +19,7 @@ class CompetitionsFixture extends TestFixture
         'date' => ['type' => 'timestamp', 'length' => null, 'null' => false, 'default' => 'CURRENT_TIMESTAMP', 'comment' => '', 'precision' => null],
         'season_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'status' => ['type' => 'boolean', 'length' => null, 'null' => true, 'default' => '1', 'comment' => '', 'precision' => null],
-        'localitation_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
+        'location_id' => ['type' => 'integer', 'length' => 11, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'created' => ['type' => 'timestamp', 'length' => null, 'null' => false, 'default' => 'CURRENT_TIMESTAMP', 'comment' => '', 'precision' => null],
         'modified' => ['type' => 'timestamp', 'length' => null, 'null' => true, 'default' => null, 'comment' => '', 'precision' => null],
         '_constraints' => [
@@ -41,12 +41,12 @@ class CompetitionsFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'date' => 1566595606,
+                'date' => 1566596333,
                 'season_id' => 1,
                 'status' => 1,
-                'localitation_id' => 1,
-                'created' => 1566595606,
-                'modified' => 1566595606
+                'location_id' => 1,
+                'created' => 1566596333,
+                'modified' => 1566596333
             ],
         ];
         parent::init();

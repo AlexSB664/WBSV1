@@ -22,7 +22,7 @@ class CompetitionsControllerTest extends TestCase
     public $fixtures = [
         'app.Competitions',
         'app.Seasons',
-        'app.Localitations',
+        'app.Locations',
         'app.Matches'
     ];
 

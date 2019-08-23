@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
  * Competitions Model
  *
  * @property \App\Model\Table\SeasonsTable&\Cake\ORM\Association\BelongsTo $Seasons
- * @property \App\Model\Table\LocalitationsTable&\Cake\ORM\Association\BelongsTo $Localitations
+ * @property \App\Model\Table\LocationsTable&\Cake\ORM\Association\BelongsTo $Locations
  * @property \App\Model\Table\MatchesTable&\Cake\ORM\Association\HasMany $Matches
  *
  * @method \App\Model\Entity\Competition get($primaryKey, $options = [])
@@ -46,8 +46,8 @@ class CompetitionsTable extends Table
             'foreignKey' => 'season_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Localitations', [
-            'foreignKey' => 'localitation_id',
+        $this->belongsTo('Locations', [
+            'foreignKey' => 'location_id',
             'joinType' => 'INNER'
         ]);
         $this->hasMany('Matches', [
@@ -88,7 +88,7 @@ class CompetitionsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['season_id'], 'Seasons'));
-        $rules->add($rules->existsIn(['localitation_id'], 'Localitations'));
+        $rules->add($rules->existsIn(['location_id'], 'Locations'));
 
         return $rules;
     }

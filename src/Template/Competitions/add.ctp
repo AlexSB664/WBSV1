@@ -10,6 +10,8 @@
         <li><?= $this->Html->link(__('List Competitions'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Seasons'), ['controller' => 'Seasons', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Season'), ['controller' => 'Seasons', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Locations'), ['controller' => 'Locations', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Location'), ['controller' => 'Locations', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Matches'), ['controller' => 'Matches', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Match'), ['controller' => 'Matches', 'action' => 'add']) ?></li>
     </ul>
@@ -22,7 +24,7 @@
             echo $this->Form->control('date');
             echo $this->Form->control('season_id', ['options' => $seasons]);
             echo $this->Form->control('status');
-            echo $this->Form->control('localitation_id');
+            echo $this->Form->control('location_id', ['options' => $locations]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

@@ -10,12 +10,12 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\FrozenTime $date
  * @property int $season_id
  * @property bool|null $status
- * @property int $localitation_id
+ * @property int $location_id
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime|null $modified
  *
  * @property \App\Model\Entity\Season $season
- * @property \App\Model\Entity\Localitation $localitation
+ * @property \App\Model\Entity\Location $location
  * @property \App\Model\Entity\Match[] $matches
  */
 class Competition extends Entity
@@ -33,11 +33,11 @@ class Competition extends Entity
         'date' => true,
         'season_id' => true,
         'status' => true,
-        'localitation_id' => true,
+        'location_id' => true,
         'created' => true,
         'modified' => true,
         'season' => true,
-        'localitation' => true,
+        'location' => true,
         'matches' => true
     ];
 }

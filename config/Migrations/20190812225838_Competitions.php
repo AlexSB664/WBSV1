@@ -23,7 +23,7 @@ class Competitions extends AbstractMigration
         ])->addColumn('status','boolean',[
             'default' => '1',
             'null' => true
-        ])->addColumn('localitation_id','integer',[
+        ])->addColumn('location_id','integer',[
             'default' => null,
             'limit' => 11,
             'null' => false
