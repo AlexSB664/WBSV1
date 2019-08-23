@@ -21,7 +21,7 @@
 
         <div class="clearfix"></div>
         <div class="row">
-            <?php $this->fetch('content') ?>
+            <!-- <?php $this->fetch('content') ?> -->
         </div>
     </div>
 </div>
