@@ -9,8 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Users Model
  *
- * @property &\Cake\ORM\Association\BelongsTo $Crews
- * @property &\Cake\ORM\Association\BelongsToMany $Matches
+ * @property \App\Model\Table\CrewsTable&\Cake\ORM\Association\BelongsTo $Crews
+ * @property \App\Model\Table\MatchesTable&\Cake\ORM\Association\BelongsToMany $Matches
  *
  * @method \App\Model\Entity\User get($primaryKey, $options = [])
  * @method \App\Model\Entity\User newEntity($data = null, array $options = [])

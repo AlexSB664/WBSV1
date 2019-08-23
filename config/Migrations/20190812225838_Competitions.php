@@ -12,7 +12,7 @@ class Competitions extends AbstractMigration
      */
     public function change()
     {
-        $table=$this->table('competitions_users');
+        $table=$this->table('competitions');
         $table->addColumn('date','timestamp',[
             'default' => 'CURRENT_TIMESTAMP',
             'limit' => null,
@@ -27,10 +27,18 @@ class Competitions extends AbstractMigration
             'default' => null,
             'limit' => 11,
             'null' => false
+        ])->addColumn('created','timestamp',[
+            'default' => 'CURRENT_TIMESTAMP',
+            'limit' => null,
+            'null' => false
+        ])->addColumn('modified','timestamp',[
+            'default' => null,
+            'limit' => null,
+            'null' => true
         ])->create();
     }
     public function down()
     {
-        $this->dropTable('competitions_users');
+        $this->dropTable('competitions');
     }
 }

@@ -8,6 +8,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Match'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Competitions'), ['controller' => 'Competitions', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Competition'), ['controller' => 'Competitions', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
     </ul>
@@ -30,7 +32,7 @@
             <?php foreach ($matches as $match): ?>
             <tr>
                 <td><?= $this->Number->format($match->id) ?></td>
-                <td><?= $this->Number->format($match->competition_id) ?></td>
+                <td><?= $match->has('competition') ? $this->Html->link($match->competition->id, ['controller' => 'Competitions', 'action' => 'view', $match->competition->id]) : '' ?></td>
                 <td><?= h($match->stage) ?></td>
                 <td><?= $this->Number->format($match->points) ?></td>
                 <td><?= h($match->created) ?></td>

@@ -25,7 +25,7 @@ class MatchesUsersFixture extends TestFixture
         ],
         '_options' => [
             'engine' => 'InnoDB',
-            'collation' => 'utf8mb4_general_ci'
+            'collation' => 'latin1_swedish_ci'
         ],
     ];
     // @codingStandardsIgnoreEnd
@@ -41,8 +41,8 @@ class MatchesUsersFixture extends TestFixture
                 'id' => 1,
                 'matches_id' => 1,
                 'user_id' => 1,
-                'created' => 1566517283,
-                'modified' => 1566517283
+                'created' => 1566595609,
+                'modified' => 1566595609
             ],
         ];
         parent::init();

@@ -20,6 +20,8 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\League patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\League[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\League findOrCreate($search, callable $callback = null, $options = [])
+ *
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class LeaguesTable extends Table
 {
@@ -36,6 +38,8 @@ class LeaguesTable extends Table
         $this->setTable('leagues');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
+
+        $this->addBehavior('Timestamp');
 
         $this->hasMany('Schemes', [
             'foreignKey' => 'league_id'
@@ -56,10 +60,6 @@ class LeaguesTable extends Table
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
-
-        $validator
-            ->dateTime('date')
-            ->notEmptyDateTime('date');
 
         $validator
             ->scalar('name')

@@ -8,6 +8,10 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Crews'), ['controller' => 'Crews', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Crew'), ['controller' => 'Crews', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Matches'), ['controller' => 'Matches', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Match'), ['controller' => 'Matches', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="users index large-9 medium-8 columns content">
@@ -38,7 +42,7 @@
                 <td><?= h($user->username) ?></td>
                 <td><?= h($user->fullname) ?></td>
                 <td><?= h($user->aka) ?></td>
-                <td><?= $this->Number->format($user->crew_id) ?></td>
+                <td><?= $user->has('crew') ? $this->Html->link($user->crew->name, ['controller' => 'Crews', 'action' => 'view', $user->crew->id]) : '' ?></td>
                 <td><?= h($user->email) ?></td>
                 <td><?= h($user->password) ?></td>
                 <td><?= h($user->role) ?></td>

@@ -7,7 +7,6 @@ use Cake\ORM\Entity;
  * League Entity
  *
  * @property int $id
- * @property \Cake\I18n\FrozenTime $date
  * @property string $name
  * @property string $description
  * @property string $social_facebook
@@ -17,6 +16,8 @@ use Cake\ORM\Entity;
  * @property string $social_website
  * @property string $contact_phone
  * @property string $contact_email
+ * @property \Cake\I18n\FrozenTime $created
+ * @property \Cake\I18n\FrozenTime|null $modified
  *
  * @property \App\Model\Entity\Scheme[] $schemes
  * @property \App\Model\Entity\Season[] $seasons
@@ -33,7 +34,6 @@ class League extends Entity
      * @var array
      */
     protected $_accessible = [
-        'date' => true,
         'name' => true,
         'description' => true,
         'social_facebook' => true,
@@ -43,6 +43,8 @@ class League extends Entity
         'social_website' => true,
         'contact_phone' => true,
         'contact_email' => true,
+        'created' => true,
+        'modified' => true,
         'schemes' => true,
         'seasons' => true
     ];

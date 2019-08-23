@@ -13,11 +13,7 @@ class Points extends AbstractMigration
     public function change()
     {
         $table=$this->table('points');
-        $table->addColumn('date','timestamp',[
-            'default' => 'CURRENT_TIMESTAMP',
-            'limit' => null,
-            'null' => false
-        ])->addColumn('points','integer',[
+        $table->addColumn('points','integer',[
             'default' => 0,
             'null' => false
         ])->addColumn('comp_user_id','integer',[
@@ -28,6 +24,14 @@ class Points extends AbstractMigration
             'default' => null,
             'limit' => 30,
             'null' => false
+        ])->addColumn('created','timestamp',[
+            'default' => 'CURRENT_TIMESTAMP',
+            'limit' => null,
+            'null' => false
+        ])->addColumn('modified','timestamp',[
+            'default' => null,
+            'limit' => null,
+            'null' => true
         ])->create();
     }
     public function down()

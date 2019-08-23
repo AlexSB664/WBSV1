@@ -16,10 +16,11 @@
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('date') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('points') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('comp_user_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('stage') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -27,10 +28,11 @@
             <?php foreach ($points as $point): ?>
             <tr>
                 <td><?= $this->Number->format($point->id) ?></td>
-                <td><?= h($point->date) ?></td>
                 <td><?= $this->Number->format($point->points) ?></td>
                 <td><?= $this->Number->format($point->comp_user_id) ?></td>
                 <td><?= h($point->stage) ?></td>
+                <td><?= h($point->created) ?></td>
+                <td><?= h($point->modified) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $point->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $point->id]) ?>

@@ -25,7 +25,6 @@
     <fieldset>
         <legend><?= __('Edit League') ?></legend>
         <?php
-            echo $this->Form->control('date');
             echo $this->Form->control('name');
             echo $this->Form->control('description');
             echo $this->Form->control('social_facebook');

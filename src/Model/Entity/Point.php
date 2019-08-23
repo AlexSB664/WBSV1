@@ -7,10 +7,11 @@ use Cake\ORM\Entity;
  * Point Entity
  *
  * @property int $id
- * @property \Cake\I18n\FrozenTime $date
  * @property int $points
  * @property int|null $comp_user_id
  * @property string $stage
+ * @property \Cake\I18n\FrozenTime $created
+ * @property \Cake\I18n\FrozenTime|null $modified
  *
  * @property \App\Model\Entity\CompUser $comp_user
  */
@@ -26,10 +27,11 @@ class Point extends Entity
      * @var array
      */
     protected $_accessible = [
-        'date' => true,
         'points' => true,
         'comp_user_id' => true,
         'stage' => true,
+        'created' => true,
+        'modified' => true,
         'comp_user' => true
     ];
 }

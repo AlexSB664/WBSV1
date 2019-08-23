@@ -10,7 +10,7 @@ use Cake\Validation\Validator;
  * Seasons Model
  *
  * @property \App\Model\Table\LeaguesTable&\Cake\ORM\Association\BelongsTo $Leagues
- * @property \App\Model\Table\CompetitionsUsersTable&\Cake\ORM\Association\HasMany $CompetitionsUsers
+ * @property \App\Model\Table\CompetitionsTable&\Cake\ORM\Association\HasMany $Competitions
  *
  * @method \App\Model\Entity\Season get($primaryKey, $options = [])
  * @method \App\Model\Entity\Season newEntity($data = null, array $options = [])
@@ -20,6 +20,8 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Season patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Season[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Season findOrCreate($search, callable $callback = null, $options = [])
+ *
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class SeasonsTable extends Table
 {
@@ -37,11 +39,13 @@ class SeasonsTable extends Table
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
+        $this->addBehavior('Timestamp');
+
         $this->belongsTo('Leagues', [
             'foreignKey' => 'league_id',
             'joinType' => 'INNER'
         ]);
-        $this->hasMany('CompetitionsUsers', [
+        $this->hasMany('Competitions', [
             'foreignKey' => 'season_id'
         ]);
     }

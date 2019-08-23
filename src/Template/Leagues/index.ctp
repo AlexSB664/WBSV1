@@ -20,7 +20,6 @@
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('date') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('description') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('social_facebook') ?></th>
@@ -30,6 +29,8 @@
                 <th scope="col"><?= $this->Paginator->sort('social_website') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('contact_phone') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('contact_email') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -37,7 +38,6 @@
             <?php foreach ($leagues as $league): ?>
             <tr>
                 <td><?= $this->Number->format($league->id) ?></td>
-                <td><?= h($league->date) ?></td>
                 <td><?= h($league->name) ?></td>
                 <td><?= h($league->description) ?></td>
                 <td><?= h($league->social_facebook) ?></td>
@@ -47,6 +47,8 @@
                 <td><?= h($league->social_website) ?></td>
                 <td><?= h($league->contact_phone) ?></td>
                 <td><?= h($league->contact_email) ?></td>
+                <td><?= h($league->created) ?></td>
+                <td><?= h($league->modified) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $league->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $league->id]) ?>

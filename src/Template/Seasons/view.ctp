@@ -13,8 +13,8 @@
         <li><?= $this->Html->link(__('New Season'), ['action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Leagues'), ['controller' => 'Leagues', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New League'), ['controller' => 'Leagues', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Competitions Users'), ['controller' => 'CompetitionsUsers', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Competitions User'), ['controller' => 'CompetitionsUsers', 'action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Competitions'), ['controller' => 'Competitions', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Competition'), ['controller' => 'Competitions', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="seasons view large-9 medium-8 columns content">
@@ -45,13 +45,21 @@
             <td><?= h($season->date_end) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Created') ?></th>
+            <td><?= h($season->created) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Modified') ?></th>
+            <td><?= h($season->modified) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Status') ?></th>
             <td><?= $season->status ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
     <div class="related">
-        <h4><?= __('Related Competitions Users') ?></h4>
-        <?php if (!empty($season->competitions_users)): ?>
+        <h4><?= __('Related Competitions') ?></h4>
+        <?php if (!empty($season->competitions)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
@@ -59,19 +67,23 @@
                 <th scope="col"><?= __('Season Id') ?></th>
                 <th scope="col"><?= __('Status') ?></th>
                 <th scope="col"><?= __('Localitation Id') ?></th>
+                <th scope="col"><?= __('Created') ?></th>
+                <th scope="col"><?= __('Modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
-            <?php foreach ($season->competitions_users as $competitionsUsers): ?>
+            <?php foreach ($season->competitions as $competitions): ?>
             <tr>
-                <td><?= h($competitionsUsers->id) ?></td>
-                <td><?= h($competitionsUsers->date) ?></td>
-                <td><?= h($competitionsUsers->season_id) ?></td>
-                <td><?= h($competitionsUsers->status) ?></td>
-                <td><?= h($competitionsUsers->localitation_id) ?></td>
+                <td><?= h($competitions->id) ?></td>
+                <td><?= h($competitions->date) ?></td>
+                <td><?= h($competitions->season_id) ?></td>
+                <td><?= h($competitions->status) ?></td>
+                <td><?= h($competitions->localitation_id) ?></td>
+                <td><?= h($competitions->created) ?></td>
+                <td><?= h($competitions->modified) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'CompetitionsUsers', 'action' => 'view', $competitionsUsers->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'CompetitionsUsers', 'action' => 'edit', $competitionsUsers->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'CompetitionsUsers', 'action' => 'delete', $competitionsUsers->id], ['confirm' => __('Are you sure you want to delete # {0}?', $competitionsUsers->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['controller' => 'Competitions', 'action' => 'view', $competitions->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Competitions', 'action' => 'edit', $competitions->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Competitions', 'action' => 'delete', $competitions->id], ['confirm' => __('Are you sure you want to delete # {0}?', $competitions->id)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

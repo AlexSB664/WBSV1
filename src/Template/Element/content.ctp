@@ -4,7 +4,7 @@
 
         <div class="page-title">
             <div class="title_left">
-                <h3>Bienvenido, John</h3>
+                <h3>Inbox Design <small>Some examples to get you started</small></h3>
             </div>
 
             <div class="title_right">
@@ -21,7 +21,7 @@
 
         <div class="clearfix"></div>
         <div class="row">
-            <!-- <?php $this->fetch('content') ?> -->
+            <?= $this->fetch('content') ?>
         </div>
     </div>
 </div>

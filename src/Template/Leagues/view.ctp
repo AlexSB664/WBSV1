@@ -61,8 +61,12 @@
             <td><?= $this->Number->format($league->id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Date') ?></th>
-            <td><?= h($league->date) ?></td>
+            <th scope="row"><?= __('Created') ?></th>
+            <td><?= h($league->created) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Modified') ?></th>
+            <td><?= h($league->modified) ?></td>
         </tr>
     </table>
     <div class="related">
@@ -108,6 +112,8 @@
                 <th scope="col"><?= __('Status') ?></th>
                 <th scope="col"><?= __('Date Start') ?></th>
                 <th scope="col"><?= __('Date End') ?></th>
+                <th scope="col"><?= __('Created') ?></th>
+                <th scope="col"><?= __('Modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($league->seasons as $seasons): ?>
@@ -119,6 +125,8 @@
                 <td><?= h($seasons->status) ?></td>
                 <td><?= h($seasons->date_start) ?></td>
                 <td><?= h($seasons->date_end) ?></td>
+                <td><?= h($seasons->created) ?></td>
+                <td><?= h($seasons->modified) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Seasons', 'action' => 'view', $seasons->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Seasons', 'action' => 'edit', $seasons->id]) ?>

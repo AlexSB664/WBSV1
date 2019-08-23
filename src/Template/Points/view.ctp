@@ -33,8 +33,12 @@
             <td><?= $this->Number->format($point->comp_user_id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Date') ?></th>
-            <td><?= h($point->date) ?></td>
+            <th scope="row"><?= __('Created') ?></th>
+            <td><?= h($point->created) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Modified') ?></th>
+            <td><?= h($point->modified) ?></td>
         </tr>
     </table>
 </div>

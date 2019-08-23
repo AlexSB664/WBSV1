@@ -19,6 +19,8 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Point patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Point[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Point findOrCreate($search, callable $callback = null, $options = [])
+ *
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class PointsTable extends Table
 {
@@ -36,6 +38,8 @@ class PointsTable extends Table
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
+        $this->addBehavior('Timestamp');
+
         $this->belongsTo('CompUsers', [
             'foreignKey' => 'comp_user_id'
         ]);
@@ -52,10 +56,6 @@ class PointsTable extends Table
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
-
-        $validator
-            ->dateTime('date')
-            ->notEmptyDateTime('date');
 
         $validator
             ->integer('points')

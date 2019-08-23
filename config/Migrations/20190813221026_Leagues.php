@@ -13,11 +13,7 @@ class Leagues extends AbstractMigration
     public function change()
     {
         $table=$this->table('leagues');
-        $table->addColumn('date','timestamp',[
-            'default' => 'CURRENT_TIMESTAMP',
-            'limit' => null,
-            'null' => false
-        ])->addColumn('name','string',[
+        $table->addColumn('name','string',[
             'default' => null,
             'limit' => 50,
             'null' => false
@@ -53,8 +49,15 @@ class Leagues extends AbstractMigration
             'default' => null,
             'null' => false,
             'limit' => 50
-        ])->create();
-    }
+        ])->addColumn('created','timestamp',[
+            'default' => 'CURRENT_TIMESTAMP',
+            'limit' => null,
+            'null' => false
+        ])->addColumn('modified','timestamp',[
+            'default' => null,
+            'limit' => null,
+            'null' => true
+        ])->create();    }
     public function down()
     {
         $this->dropTable('leagues');

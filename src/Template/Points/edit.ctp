@@ -21,7 +21,6 @@
     <fieldset>
         <legend><?= __('Edit Point') ?></legend>
         <?php
-            echo $this->Form->control('date');
             echo $this->Form->control('points');
             echo $this->Form->control('comp_user_id');
             echo $this->Form->control('stage');

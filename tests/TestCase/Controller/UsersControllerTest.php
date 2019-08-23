@@ -20,7 +20,10 @@ class UsersControllerTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.Users'
+        'app.Users',
+        'app.Crews',
+        'app.Matches',
+        'app.MatchesUsers'
     ];
 
     /**

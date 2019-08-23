@@ -11,6 +11,8 @@
         <li><?= $this->Form->postLink(__('Delete Match'), ['action' => 'delete', $match->id], ['confirm' => __('Are you sure you want to delete # {0}?', $match->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Matches'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Match'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Competitions'), ['controller' => 'Competitions', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Competition'), ['controller' => 'Competitions', 'action' => 'add']) ?> </li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
     </ul>
@@ -19,16 +21,16 @@
     <h3><?= h($match->id) ?></h3>
     <table class="vertical-table">
         <tr>
+            <th scope="row"><?= __('Competition') ?></th>
+            <td><?= $match->has('competition') ? $this->Html->link($match->competition->id, ['controller' => 'Competitions', 'action' => 'view', $match->competition->id]) : '' ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Stage') ?></th>
             <td><?= h($match->stage) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($match->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Competition Id') ?></th>
-            <td><?= $this->Number->format($match->competition_id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Points') ?></th>

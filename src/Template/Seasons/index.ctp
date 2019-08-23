@@ -10,8 +10,8 @@
         <li><?= $this->Html->link(__('New Season'), ['action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Leagues'), ['controller' => 'Leagues', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New League'), ['controller' => 'Leagues', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Competitions Users'), ['controller' => 'CompetitionsUsers', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Competitions User'), ['controller' => 'CompetitionsUsers', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Competitions'), ['controller' => 'Competitions', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Competition'), ['controller' => 'Competitions', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="seasons index large-9 medium-8 columns content">
@@ -26,6 +26,8 @@
                 <th scope="col"><?= $this->Paginator->sort('status') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('date_start') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('date_end') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -39,6 +41,8 @@
                 <td><?= h($season->status) ?></td>
                 <td><?= h($season->date_start) ?></td>
                 <td><?= h($season->date_end) ?></td>
+                <td><?= h($season->created) ?></td>
+                <td><?= h($season->modified) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $season->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $season->id]) ?>

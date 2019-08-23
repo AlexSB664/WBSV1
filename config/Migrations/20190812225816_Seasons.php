@@ -35,6 +35,14 @@ class Seasons extends AbstractMigration
         ])->addColumn('date_end','timestamp',[
             'default' => null,
             'null' => true
+        ])->addColumn('created','timestamp',[
+            'default' => 'CURRENT_TIMESTAMP',
+            'limit' => null,
+            'null' => false
+        ])->addColumn('modified','timestamp',[
+            'default' => null,
+            'limit' => null,
+            'null' => true
         ])->create();
     }
     public function down()

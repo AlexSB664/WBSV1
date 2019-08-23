@@ -13,9 +13,11 @@ use Cake\ORM\Entity;
  * @property bool|null $status
  * @property \Cake\I18n\FrozenTime $date_start
  * @property \Cake\I18n\FrozenTime|null $date_end
+ * @property \Cake\I18n\FrozenTime $created
+ * @property \Cake\I18n\FrozenTime|null $modified
  *
  * @property \App\Model\Entity\League $league
- * @property \App\Model\Entity\CompetitionsUser[] $competitions_users
+ * @property \App\Model\Entity\Competition[] $competitions
  */
 class Season extends Entity
 {
@@ -35,7 +37,9 @@ class Season extends Entity
         'status' => true,
         'date_start' => true,
         'date_end' => true,
+        'created' => true,
+        'modified' => true,
         'league' => true,
-        'competitions_users' => true
+        'competitions' => true
     ];
 }

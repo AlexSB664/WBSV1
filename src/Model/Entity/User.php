@@ -19,6 +19,9 @@ use Cake\ORM\Entity;
  * @property string|null $avatar
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime|null $modified
+ *
+ * @property \App\Model\Entity\Crew $crew
+ * @property \App\Model\Entity\Match[] $matches
  */
 class User extends Entity
 {
@@ -43,7 +46,9 @@ class User extends Entity
         'telephone' => true,
         'avatar' => true,
         'created' => true,
-        'modified' => true
+        'modified' => true,
+        'crew' => true,
+        'matches' => true
     ];
 
     /**
