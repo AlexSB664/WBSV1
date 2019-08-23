@@ -28,7 +28,7 @@ class Users extends AbstractMigration
         ])->addColumn('crew_id','integer',[
             'default' => null,
             'limit' => 11,
-            'null' => false
+            'null' => true
         ])->addColumn('email','string',[
             'default' => null,
             'limit' => 50,

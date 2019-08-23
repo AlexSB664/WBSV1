@@ -42,8 +42,7 @@ class UsersTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Crews', [
-            'foreignKey' => 'crew_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'crew_id'
         ]);
         $this->belongsToMany('Matches', [
             'foreignKey' => 'user_id',

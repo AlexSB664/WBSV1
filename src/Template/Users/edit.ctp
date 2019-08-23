@@ -28,7 +28,7 @@
             echo $this->Form->control('username');
             echo $this->Form->control('fullname');
             echo $this->Form->control('aka');
-            echo $this->Form->control('crew_id', ['options' => $crews]);
+            echo $this->Form->control('crew_id', ['options' => $crews, 'empty' => true]);
             echo $this->Form->control('email');
             echo $this->Form->control('password');
             echo $this->Form->control('role');

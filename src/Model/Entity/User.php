@@ -10,7 +10,7 @@ use Cake\ORM\Entity;
  * @property string $username
  * @property string $fullname
  * @property string|null $aka
- * @property int $crew_id
+ * @property int|null $crew_id
  * @property string $email
  * @property string $password
  * @property string $role
