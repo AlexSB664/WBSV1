@@ -10,13 +10,24 @@ a:hover {
 a {
     color: #1798A5;
 }
-
+.side-na ul{
+    list-style-type: none;
+    text-align: center;
+}
 .side-nav li a:not(.button) {
     color: #15848F;
+    display: inline;
+   text-align: center;
+   margin: 0 10px 0 0;
+
 }
 
 .side-nav li a:not(.button):hover {
     color: #15848F;
+     padding: 2px 7px 2px 7px;
+   background-color: #eeeeee;
+   border: 1px solid #ccc;
+   text-decoration: none;
 }
 
 header {
@@ -339,8 +350,10 @@ pre {
     padding: 0.4375rem 0.875rem;
 }
 
-#actions-sidebar {
+#actions-sidebar ul {
     background: #fafafa;
+    list-style-type: none;
+   text-align: center;
 }
 
 .index table {
