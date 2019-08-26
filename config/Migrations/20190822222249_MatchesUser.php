@@ -13,7 +13,7 @@ class MatchesUser extends AbstractMigration
     public function change()
     {
         $table=$this->table('matches_users');
-        $table->addColumn('matches_id','integer',[
+        $table->addColumn('match_id','integer',[
             'default' => null,
             'limit' => 11,
             'null' => false

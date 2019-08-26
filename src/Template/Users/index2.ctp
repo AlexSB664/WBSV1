@@ -1,0 +1,97 @@
+<?php
+
+/**
+ * @var \App\View\AppView $this
+ * @var \App\Model\Entity\User[]|\Cake\Collection\CollectionInterface $users
+ */
+?>
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
+    <ul class="side-nav">
+        <li class="heading"><?= __('Actions') ?></li>
+        <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Crews'), ['controller' => 'Crews', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Crew'), ['controller' => 'Crews', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Matches'), ['controller' => 'Matches', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Match'), ['controller' => 'Matches', 'action' => 'add']) ?></li>
+    </ul>
+</nav>
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h3><?= __('Users') ?></h3>
+            <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#"></a>
+                        </li>
+                        <li><a href="#"></a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a class="close-link"><i class="fa fa-close"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col"><?= $this->Paginator->sort('username') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('fullname') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('aka') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('crew_id') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('email') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('role') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('status') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('telephone') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('avatar') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('created') ?></th>
+                        <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
+                        <th scope="col" class="actions"><?= __('Actions') ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($users as $user) : ?>
+                    <tr>
+                        <td><?= h($user->username) ?></td>
+                        <td><?= h($user->fullname) ?></td>
+                        <td><?= h($user->aka) ?></td>
+                        <td><?= $user->has('crew') ? $this->Html->link($user->crew->name, ['controller' => 'Crews', 'action' => 'view', $user->crew->id]) : '' ?></td>
+                        <td><?= h($user->email) ?></td>
+                        <td><?= h($user->role) ?></td>
+                        <td><?= h($user->status) ?></td>
+                        <td><?= h($user->telephone) ?></td>
+                        <td><?= h($user->avatar) ?></td>
+                        <td><?= h($user->created) ?></td>
+                        <td><?= h($user->modified) ?></td>
+                        <td class="actions">
+                            <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
+                            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
+                            <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+            <div class="paginator">
+        <ul class="pagination">
+            <?= $this->Paginator->first('<< ' . __('first')) ?>
+            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->numbers() ?>
+            <?= $this->Paginator->next(__('next') . ' >') ?>
+            <?= $this->Paginator->last(__('last') . ' >>') ?>
+        </ul>
+        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+        </div>
+
+        </div>
+    </div>
+</div>
