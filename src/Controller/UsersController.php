@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -111,22 +112,56 @@ class UsersController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function login(){
-    $this->viewBuilder()->layout(false);
-        if($this->request->is('post')){
+    public function login()
+    {
+        $this->viewBuilder()->layout(false);
+        if ($this->request->is('post')) {
             $user = $this->Auth->identify();
-            if($user){
+            if ($user) {
                 $this->Auth->setUser($user);
                 $this->Flash->success('Login successful');
                 $this->redirect($this->Auth->redirectUrl());
-            }else{
+            } else {
                 $this->Flash->error('Login failed');
             }
         }
     }
 
-    public function logout(){
+    public function logout()
+    {
         $this->Flash->success('Logout successful');
         $this->redirect($this->Auth->logout());
+    }
+
+    public function singup()
+    {
+        $this->viewBuilder()->layout(false);
+        $user = $this->Users->newEntity();
+
+        if ($this->request->is('post')) { 
+            // echo implode($this->request->data['avatar']);
+            // die();
+            if ($this->Users->addParticipan($this->Auth->user('id'), $this->request->data)) {
+                $this->Flash->success(__('The user has been saved.'));
+                return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            }
+        }
+
+        // if ($this->request->is('post')) {
+        //     $user = $this->Users->newEntity();
+        //     if ($this->Users->addParticipan($this->Auth->user('id'), $this->request->data)) {
+        //         $this->Flash->success(__('The user has been saved.'));
+        //         return $this->redirect(['action' => 'index']);
+        //     } else {
+        //         $this->Flash->error(__('The user could not be saved. Please, try again.'));
+        //     }
+        // }
+    }
+
+    public function beforeFilter(\Cake\Event\Event $event)
+    {
+        $this->Auth->allow(['singup']);
     }
 }

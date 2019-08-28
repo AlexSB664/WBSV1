@@ -23,7 +23,7 @@
     <link href="../build/css/custom.min.css" rel="stylesheet">
 </head>
 
-<body class="login" background="images/rappers-collage.jpg">
+<body class="login" background="">
     <div>
         <a class="hiddenanchor" id="signup"></a>
         <a class="hiddenanchor" id="signin"></a>
@@ -34,16 +34,20 @@
                         <h1>Login</h1>
                         <?= $this->Form->create(); ?>
                         <?= $this->Form->input('email',array(
+                            'class'=>'col-xs-6',
                             'type'=>'email',
                             'placeholder'=>'Correo',
                             'label' => false
                             ));?>
                         <?= $this->Form->input('password', array(
+                            'class'=>'col-xs-6',
                             'type' => 'password',
                             'placeholder'=>'Contraseña',
                             'label' => false
                         ));?>
-                        <?= $this->Form->submit('login', array('class' => 'btn btn-default btn-lg')); ?>
+                        <?= $this->Form->submit('login', array(
+                            'class' => 'btn btn-default btn-lg'
+                            ));?>
                         <?= $this->Form->end(); ?>
                         <div>
                             <a class="reset_pass" href="#">Olvidaste la contraseña?</a>

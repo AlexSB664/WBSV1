@@ -40,6 +40,7 @@ class UsersTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('File');
 
         $this->belongsTo('Crews', [
             'foreignKey' => 'crew_id'
@@ -127,5 +128,26 @@ class UsersTable extends Table
         $rules->add($rules->existsIn(['crew_id'], 'Crews'));
 
         return $rules;
+    }
+    public function addParticipan($user_id, $data = [])
+    {
+      if(empty($data)){
+        return false;
+      }
+
+      $user = $this->newEntity();
+
+      $user = $this->patchEntity($user,$data);
+      
+      $user->status = 1;
+      if($data['avatar'] == 0){
+       $file_name =  $this->uploadFiles($data['avatar'], 'img');
+       $user->avatar = $file_name;
+      }
+      
+      if(!$this->save($user)){
+          return false;
+      }
+      return true;
     }
 }
