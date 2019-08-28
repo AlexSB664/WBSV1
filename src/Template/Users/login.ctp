@@ -31,43 +31,47 @@
         <div class="login_wrapper">
             <div class="animate form login_form">
                 <section class="login_content">
-                        <h1>Login</h1>
-                        <?= $this->Form->create(); ?>
-                        <?= $this->Form->input('email',array(
-                            'class'=>'col-xs-6',
-                            'type'=>'email',
-                            'placeholder'=>'Correo',
-                            'label' => false
-                            ));?>
-                        <?= $this->Form->input('password', array(
-                            'class'=>'col-xs-6',
-                            'type' => 'password',
-                            'placeholder'=>'Contraseña',
-                            'label' => false
-                        ));?>
-                        <?= $this->Form->submit('login', array(
-                            'class' => 'btn btn-default btn-lg'
-                            ));?>
-                        <?= $this->Form->end(); ?>
-                        <div>
-                            <a class="reset_pass" href="#">Olvidaste la contraseña?</a>
-                        </div>
+                    <h1>Login</h1>
+                    <?= $this->Form->create(); ?>
+                    <?= $this->Form->input('email', array(
+                        'class' => 'col-xs-6',
+                        'type' => 'email',
+                        'placeholder' => 'Correo',
+                        'label' => false
+                    )); ?>
+                    <?= $this->Form->input('password', array(
+                        'class' => 'col-xs-6',
+                        'type' => 'password',
+                        'placeholder' => 'Contraseña',
+                        'label' => false
+                    )); ?>
+                    <?= $this->Form->submit('login', array(
+                        'class' => 'btn btn-default btn-lg'
+                    )); ?>
+                    <?= $this->Form->end(); ?>
+                    <div>
+                        <a class="reset_pass" href="#">Olvidaste la contraseña?</a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="separator">
+                        <p class="change_link">Eres nuevo?
+                            <a href="<?= $this->Url->build([
+                                            "controller" => "users",
+                                            "action" => "singup"
+                                        ]);
+                                        ?>" class="to_register"> Crear Cuenta </a>
+                        </p>
 
                         <div class="clearfix"></div>
+                        <br />
 
-                        <div class="separator">
-                            <p class="change_link">Eres nuevo?
-                                <a href="" class="to_register"> Crear Cuenta </a>
-                            </p>
-
-                            <div class="clearfix"></div>
-                            <br />
-
-                            <div>
-                                <h1><i class="fa fa-microphone"></i> WBS!</h1>
-                                <p>©2019 Todos los derechos reservados. Terminos de privacidad.</p>
-                            </div>
+                        <div>
+                            <h1><i class="fa fa-microphone"></i> WBS!</h1>
+                            <p>©2019 Todos los derechos reservados. Terminos de privacidad.</p>
                         </div>
+                    </div>
                 </section>
             </div>
         </div>
