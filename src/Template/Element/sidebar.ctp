@@ -1,14 +1,18 @@
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><img src="images/icon.png"  style="background-color:black;" width="34" height="34"> 
+            <a href="index.html" class="site_title"><img src="images/icon.png" style="background-color:black;" width="34" height="34">
                 <span>WBS</span></a>
         </div>
         <div class="clearfix"></div>
         <!-- menu profile quick info -->
         <div class="profile clearfix">
             <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                <?php if ($this->request->session()->read('Auth.User.avatar') == null || empty($this->request->session()->read('Auth.User.avatar'))) : ?>
+                <?= $this->Html->image('default.png', ['alt' => "default-avatar", 'class' => 'img-circle profile_img']); ?>
+                <?php else : ?>
+                <?= $this->Html->image($this->request->session()->read('Auth.User.avatar'), ['alt' => "default-avatar", 'class' => 'img-circle profile_img']); ?>
+                <?php endif ?>
             </div>
             <div class="profile_info">
                 <span>Welcome,</span>
@@ -33,7 +37,7 @@
                             <li><?= $this->Html->link(__('Nueva Competencia'), ['action' => 'add']) ?></li>
                             <li><?= $this->Html->link(__('Nueva Direccion'), ['controller' => 'Locations', 'action' => 'add']) ?></li>
                         </ul>
-                    </li>                  
+                    </li>
                 </ul>
             </div>
         </div>
