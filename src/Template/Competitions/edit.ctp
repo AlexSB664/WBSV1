@@ -13,13 +13,13 @@
                 ['confirm' => __('Are you sure you want to delete # {0}?', $competition->id)]
             )
         ?></li>
-        <li><?= $this->Html->link(__('List Competitions'), ['action' => 'index']) ?></li>
+    <!--    <li><?= $this->Html->link(__('List Competitions'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Seasons'), ['controller' => 'Seasons', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Season'), ['controller' => 'Seasons', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Locations'), ['controller' => 'Locations', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Location'), ['controller' => 'Locations', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Matches'), ['controller' => 'Matches', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Match'), ['controller' => 'Matches', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('New Match'), ['controller' => 'Matches', 'action' => 'add']) ?></li> -->
     </ul>
 </nav>
 <div class="competitions form large-9 medium-8 columns content">

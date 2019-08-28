@@ -4,7 +4,7 @@
  * @var \App\Model\Entity\Scheme[]|\Cake\Collection\CollectionInterface $schemes
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<!--<nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Scheme'), ['action' => 'add']) ?></li>
@@ -13,7 +13,7 @@
         <li><?= $this->Html->link(__('List Schemes Details'), ['controller' => 'SchemesDetails', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Schemes Detail'), ['controller' => 'SchemesDetails', 'action' => 'add']) ?></li>
     </ul>
-</nav>
+</nav> -->
 <div class="schemes index large-9 medium-8 columns content">
     <h3><?= __('Schemes') ?></h3>
     <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered dataTable no-footer">

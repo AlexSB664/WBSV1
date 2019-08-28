@@ -13,9 +13,9 @@
                 ['confirm' => __('Are you sure you want to delete # {0}?', $crew->id)]
             )
         ?></li>
-        <li><?= $this->Html->link(__('List Crews'), ['action' => 'index']) ?></li>
+     <!--   <li><?= $this->Html->link(__('List Crews'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li> -->
     </ul>
 </nav>
 <div class="crews form large-9 medium-8 columns content">

@@ -4,7 +4,7 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<!--<nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
@@ -13,25 +13,38 @@
         <li><?= $this->Html->link(__('List Matches'), ['controller' => 'Matches', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Match'), ['controller' => 'Matches', 'action' => 'add']) ?></li>
     </ul>
-</nav>
+</nav> -->
 <div class="users form large-9 medium-8 columns content">
     <?= $this->Form->create($user) ?>
     <fieldset>
         <legend><?= __('Add User') ?></legend>
-        <?php
-            echo $this->Form->control('username');
-            echo $this->Form->control('fullname');
-            echo $this->Form->control('aka');
-            echo $this->Form->control('crew_id', ['options' => $crews, 'empty' => true]);
-            echo $this->Form->control('email');
-            echo $this->Form->control('password');
-            echo $this->Form->control('role');
-            echo $this->Form->control('status');
-            echo $this->Form->control('telephone');
-            echo $this->Form->control('avatar');
-            echo $this->Form->control('matches._ids', ['options' => $matches]);
-        ?>
+        <div class="form-row">
+            <div class="col">
+                <?= $this->Form->label('Username', array('class'=> 'Username: ')); ?>
+                <?= $this->Form->input('Username', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->label('Nombre Completo', array('class'=> 'Nombre Completo: ')); ?>
+                <?= $this->Form->input('Nombre Completo', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12'));?>
+                <?= $this->Form->label('Aka', array('class'=> 'Aka: ')); ?>
+                <?= $this->Form->input('Aka', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->input('Crew', ['options' => $crews, 'empty' => true], array('class'=>'form-control')); ?>
+                <?= $this->Form->label('Email', array('class'=> 'Email: ')); ?>
+                <?= $this->Form->input('Email', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->label('contraseña', array('class'=> 'contraseña: ')); ?>
+                <?= $this->Form->input('contraseña', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
+            </div>
+            <div class="col">
+                <?= $this->Form->label('Rol', array('class'=> 'Rol: ')); ?>
+                <?= $this->Form->input('Rol', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->label('Estatus', array('class'=> 'Estatus: ')); ?>
+                <?= $this->Form->input('Estatus', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->label('Telefono', array('class'=> 'Telefono: ')); ?>
+                <?= $this->Form->input('Telefono', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->label('Avatar', array('class'=> 'Avatar: ')); ?>
+                <?= $this->Form->input('Avatar', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->input('Combates', ['options' => $matches], array('class'=>'form-control')); ?>
+            </div>
+        </div>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Enviar'), array('class'=>'btn btn-default btn-lg')) ?>
     <?= $this->Form->end() ?>
 </div>

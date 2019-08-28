@@ -13,22 +13,24 @@
                 ['confirm' => __('Are you sure you want to delete # {0}?', $matchesUser->id)]
             )
         ?></li>
-        <li><?= $this->Html->link(__('List Matches Users'), ['action' => 'index']) ?></li>
+     <!--   <li><?= $this->Html->link(__('List Matches Users'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Matches'), ['controller' => 'Matches', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Match'), ['controller' => 'Matches', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li> -->
     </ul>
 </nav>
 <div class="matchesUsers form large-9 medium-8 columns content">
     <?= $this->Form->create($matchesUser) ?>
     <fieldset>
-        <legend><?= __('Edit Matches User') ?></legend>
-        <?php
-            echo $this->Form->control('matches_id', ['options' => $matches]);
-            echo $this->Form->control('user_id', ['options' => $users]);
-        ?>
+        <legend><?= __('Edita Versus') ?></legend>
+        <div class="form-row">
+            <div class="col">
+                <?= $this->Form->input('Emparejamiento: ', ['options' => $matches]); ?>
+                <?= $this->Form->input('Competidores: ', ['options' => $users]); ?>
+            </div>
+        </div>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Submit'), array('class'=>'btn btn-default btn-lg')) ?>
     <?= $this->Form->end() ?>
 </div>

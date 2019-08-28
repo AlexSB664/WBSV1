@@ -24,9 +24,14 @@
                 <ul class="nav side-menu">
                     <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><?= $this->Html->link(__('Ligas'), ['controller' => 'Leagues', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('Temporadas'), ['controller' => 'Seasons', 'action' => 'index']) ?></li>
-                            <li><?= $this->Html->link(__('Competencias'), ['controller' => 'Competitions', 'action' => 'index']) ?></li>
+                            <a> <span class="fa fa-chevron-down"><?= $this->Html->link(__('Ligas'), ['controller' => 'Leagues', 'action' => 'index']) ?></span></a>
+                            <li><?= $this->Html->link(__('Nueva Liga'), ['action' => 'add']) ?></li>
+                            <li><?= $this->Html->link(__('Nuevo Esquema'), ['controller' => 'Schemes', 'action' => 'add']) ?></li>
+                            <a><span class="fa fa-chevron-down"><?= $this->Html->link(__('Temporadas'), ['controller' => 'Seasons', 'action' => 'index']) ?></span></a>
+                            <li><?= $this->Html->link(__('Nueva Temporada'), ['action' => 'add']) ?></li>
+                            <a><span class="fa fa-chevron-down"><?= $this->Html->link(__('Competencias'), ['controller' => 'Competitions', 'action' => 'index']) ?></span></a>
+                            <li><?= $this->Html->link(__('Nueva Competencia'), ['action' => 'add']) ?></li>
+                            <li><?= $this->Html->link(__('Nueva Direccion'), ['controller' => 'Locations', 'action' => 'add']) ?></li>
                         </ul>
                     </li>                  
                 </ul>
