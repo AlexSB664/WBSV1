@@ -33,16 +33,22 @@ class FileBehavior extends Behavior
 
     public function uploadFile($file, $type = 'files', $deep_dir = null)
     {
-        $this->validateUpload($file, $type);
+        $this->validateUpload($file['name'], $type);
 
         $config = $this->config();
 
-        $new_name = Text::uuid() . '-' . $file;
+        $new_name = Text::uuid() . '-' . $file['name'];
 
         $dir = $config['dirs'][$type] . DS . $deep_dir;
-
-        move_uploaded_file($file, $dir . DS . $new_name);
-
+        // echo implode(";",$file);
+        // echo($file[0]);
+        // echo($file[1]);
+        // echo($file[2]);
+        // echo($file[3]);
+        // echo($file[4]);
+        // echo($file[5]);
+        // var_dump(array_keys($file));        
+        move_uploaded_file($file['tmp_name'], $dir . DS . $new_name);
         return $new_name;
     }
 
