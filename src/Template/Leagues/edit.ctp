@@ -47,6 +47,7 @@
             </div>
         </div>
     </fieldset>
+    <br>
     <?= $this->Form->button(__('Guardar'), array('class'=>'btn btn-default btn-lg')) ?>
     <?= $this->Form->end() ?>
 </div>
