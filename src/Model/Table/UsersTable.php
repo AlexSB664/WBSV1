@@ -138,15 +138,15 @@ class UsersTable extends Table
       $user = $this->newEntity();
 
       $user = $this->patchEntity($user,$data);
-      
       $user->status = 1;
-      if($data['avatar'] == 0){
-       $file_name =  $this->uploadFiles($data['avatar'], 'img');
-       $user->avatar = $file_name;
-      }
+
+      $file_name =  $this->uploadFile($data['avatar'], 'img');
+      $user->avatar = $file_name;
       
       if(!$this->save($user)){
-          return false;
+        debug($user->errors());
+        die();
+        return false;
       }
       return true;
     }

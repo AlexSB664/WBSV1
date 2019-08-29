@@ -139,12 +139,12 @@ class UsersController extends AppController
         $user = $this->Users->newEntity();
 
         if ($this->request->is('post')) { 
-            // echo implode($this->request->data['avatar']);
-            // die();
             if ($this->Users->addParticipan($this->Auth->user('id'), $this->request->data)) {
                 $this->Flash->success(__('The user has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
+                echo ("error alv");
+                die();
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
         }

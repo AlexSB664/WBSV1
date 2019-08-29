@@ -44,7 +44,7 @@
     <div class="login_wrapper">
       <div id="register" class="animate form">
         <section class="login_content">
-          <?= $this->Form->create(); ?>
+          <?= $this->Form->create(null, ['type' => 'file']); ?>
           <h1>Crear Cuenta</h1>
           <div>
             <?= $this->Form->input('username', array(
@@ -110,7 +110,7 @@
             )); ?>
           </div>
           <div>
-            <?= $this->Form->input('avatar', array(
+            <?= $this->Form->file('avatar', array(
               'type' => 'file',
               'accept' => 'image/*',
               'onchange' => 'loadFile(event)'
@@ -134,7 +134,11 @@
 
           <div class="separator">
             <p class="change_link">Ya eres miembro ?
-              <a href="#signin" class="to_register"> Log in </a>
+              <a href="<?= $this->Url->build([
+                          "controller" => "users",
+                          "action" => "login"
+                        ]);
+                        ?>" class="to_register"> Login </a>
             </p>
 
             <div class="clearfix"></div>
