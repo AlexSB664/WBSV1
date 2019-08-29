@@ -22,12 +22,13 @@
             <div class="col">
                 <?= $this->Form->label('Nombre', array('class'=> 'Nombre: ')); ?>
                 <?= $this->Form->input('Nombre', array('label'=> false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
-                <?= $this->Form->input('Liga', ['options' => $leagues],array('class'=> 'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->input('Liga', ['options' => $leagues,'class'=>'form-control']); ?>
                 <?= $this->Form->label('Valor Predeterminado', array('class'=> 'Valor Predeterminado: ')); ?>
                 <?= $this->Form->input('Valor Predeterminado',array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
             </div>
         </div>
+        <br>
     </fieldset>
-    <?= $this->Form->button(__('Enviar'), array('class'=>'btn btn-default btn-lg')) ?>
+    <?= $this->Form->button(__('Agregar'), array('class'=>'btn btn-default btn-lg')) ?>
     <?= $this->Form->end() ?>
 </div>

@@ -162,6 +162,6 @@ class UsersController extends AppController
 
     public function beforeFilter(\Cake\Event\Event $event)
     {
-        $this->Auth->allow(['singup']);
+        $this->Auth->allow(['singup','add']);
     }
 }

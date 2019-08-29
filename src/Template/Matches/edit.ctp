@@ -26,15 +26,15 @@
         <legend><?= __('Edita Versus') ?></legend>
         <div class="form-row">
             <div class="col">
-                <?= $this->Form->input('Competencia', ['options' => $competitions], array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->input('Competencia', ['options' => $competitions, 'class'=>'form-control']); ?>
                 <?= $this->Form->label('Nivel', array('class'=> 'Nivel: ')); ?>
                 <?= $this->Form->input('Nivel', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
                 <?= $this->Form->label('Puntos', array('class'=> 'Puntos: ')); ?>
                 <?= $this->Form->input('Puntos', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
-                <?= $this->Form->label('Competidores', array('class'=> 'Competidores: ')); ?>
-                <?= $this->Form->input('users._ids', ['options' => $users], array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->input('Competidores: ', ['options' => $users,'class'=>'form-control']); ?>
             </div>
         </div>
+        <br>
     </fieldset>
     <?= $this->Form->button(__('Guardar'), array('class'=>'btn btn-default btn-lg')) ?>
     <?= $this->Form->end() ?>

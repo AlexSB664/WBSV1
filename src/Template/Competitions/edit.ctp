@@ -26,12 +26,17 @@
     <?= $this->Form->create($competition) ?>
     <fieldset>
         <legend><?= __('Edit Competition') ?></legend>
-        <?php
-            echo $this->Form->control('date');
-            echo $this->Form->control('season_id', ['options' => $seasons]);
-            echo $this->Form->control('status');
-            echo $this->Form->control('location_id', ['options' => $locations]);
-        ?>
+        <div class="form-row">
+            <div class="col">
+                <?= $this->Form->label('Fecha', array('class'=> 'Fecha: ')); ?>
+                <?= $this->Form->control('Fecha',array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->label('Hora', array('class'=> 'Hora: ')); ?>
+                <?= $this->Form->div('Hora', array('label'=>false,'type'=>'time', 'name'=>'appt', 'class'=>'input-group date')); ?>
+                <?= $this->Form->input('Temporada:',['options' => $seasons,'class'=>'form-control']); ?>
+                <?= $this->Form->input('Localizacion', ['options'=> $locations,'class'=>'form-control']); ?>
+            </div>
+        </div>
+        <br>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
