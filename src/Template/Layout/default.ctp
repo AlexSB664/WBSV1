@@ -47,6 +47,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <?php if($this->request->session()->read('Auth.User.username')): ?>
                     <?php echo $this->element('top_bar') ?>
             <?php endif; ?>
+            <!-- contenido -->
             <?php echo $this->element('content') ?>
             <?php echo $this->element('footer') ?>
         </div>

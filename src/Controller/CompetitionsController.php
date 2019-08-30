@@ -19,6 +19,19 @@ class CompetitionsController extends AppController
      */
     public function index()
     {
+        if($this->Auth->user('role')=="participant"){
+            return $this->redirect(['action' => 'join']);
+        }
+        $this->paginate = [
+            'contain' => ['Seasons', 'Locations']
+        ];
+        $competitions = $this->paginate($this->Competitions);
+
+        $this->set(compact('competitions'));
+    }
+
+    public function join()
+    {
         $this->paginate = [
             'contain' => ['Seasons', 'Locations']
         ];
