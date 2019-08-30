@@ -30,7 +30,7 @@
                 <?= $this->Form->input('Nombre', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
                 <?= $this->Form->label('Descripcion', array('class'=> 'Descripcion: ')); ?>
                 <?= $this->Form->input('Descripcion', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
-                <?= $this->Form->input('Liga', ['options' => $leagues], array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->input('Liga', ['options' => $leagues,'class'=>'form-control']); ?>
                 <?= $this->Form->label('Estatus', array('class'=> 'Estatus: ')); ?>
                 <?= $this->Form->input('Estatus', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
                 <?= $this->Form->label('Fecha de Inicio', array('class'=> 'Fecha de Inicio: ')); ?>
@@ -39,6 +39,7 @@
                 <?= $this->Form->input('Fecha Fin', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
             </div>
         </div>
+        <br>
     </fieldset>
     <?= $this->Form->button(__('Enviar'), array('class'=>'btn btn-default btn-lg')) ?>
     <?= $this->Form->end() ?>

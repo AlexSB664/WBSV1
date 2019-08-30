@@ -26,11 +26,12 @@
         <legend><?= __('Edita Versus') ?></legend>
         <div class="form-row">
             <div class="col">
-                <?= $this->Form->input('Emparejamiento: ', ['options' => $matches]); ?>
-                <?= $this->Form->input('Competidores: ', ['options' => $users]); ?>
+                <?= $this->Form->input('Competidor 1: ', ['options' => $matches,'class'=>'form-control']); ?>
+                <?= $this->Form->input('Competidor 2: ', ['options' => $users,'class'=>'form-control']); ?>
             </div>
         </div>
+        <br>
     </fieldset>
-    <?= $this->Form->button(__('Submit'), array('class'=>'btn btn-default btn-lg')) ?>
+    <?= $this->Form->button(__('Guardar'), array('class'=>'btn btn-default btn-lg')) ?>
     <?= $this->Form->end() ?>
 </div>
