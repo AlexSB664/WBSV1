@@ -60,7 +60,12 @@
                                     $competition->id
                                   ]); ?>">
                       <i class="fa fa-info-circle"></i></a></td>
-                  <td><button type="button" class="btn btn-success">Asistir</button></td>
+                  <td>
+                    <!-- form to join user to competition -->
+                    <form action="" method="POST">
+                    </form>
+                    <!--  -->
+                  </td>
                 </tr>
               <?php endforeach; ?>
             </tbody>
