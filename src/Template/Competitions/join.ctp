@@ -37,6 +37,7 @@
           <table class="table table-striped">
             <thead>
               <tr>
+                <th>#</th>
                 <th scope="col"><?= $this->Paginator->sort('date and hour') ?></th>
                 <th>Competencia</th>
                 <th scope="col"><?= $this->Paginator->sort('season_id') ?></th>
@@ -47,8 +48,10 @@
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($competitions as $competition) : ?>
+
+              <?php foreach ($competitionsIn as $competition) : ?>
                 <tr>
+                  <td> <?= $competition->id ?></td>
                   <td scope="row"><?= h($competition->date) ?></td>
                   <td>Competencia asd</td>
                   <td><?= $competition->has('season') ? $this->Html->link($competition->season->name, ['controller' => 'Seasons', 'action' => 'view', $competition->season->id]) : '' ?></td>
@@ -61,13 +64,45 @@
                                   ]); ?>">
                       <i class="fa fa-info-circle"></i></a></td>
                   <td>
-                    <!-- form to join user to competition -->
-                    <form action="" method="POST">
+                    <form action="<?= $this->Url->build([
+                                      'controller' => 'competitions_users',
+                                      'action' => 'unjoin',
+                                      $competition->id
+                                    ]); ?>">
+                      <input type="submit" class="btn btn-danger" value="Salir" />
                     </form>
-                    <!--  -->
+
                   </td>
                 </tr>
               <?php endforeach; ?>
+
+              <?php foreach ($competitions as $competition) : ?>
+                <tr>
+                  <td> <?= $competition->id ?></td>
+                  <td scope="row"><?= h($competition->date) ?></td>
+                  <td>Competencia asd</td>
+                  <td><?= $competition->has('season') ? $this->Html->link($competition->season->name, ['controller' => 'Seasons', 'action' => 'view', $competition->season->id]) : '' ?></td>
+                  <td>xD</td>
+                  <td><i class="fa fa-map-marker"></i><?= $competition->has('location') ? $this->Html->link($competition->location->name, ['controller' => 'Locations', 'action' => 'view', $competition->location->id]) : '' ?></td>
+                  <td><a href="<?= $this->Url->build([
+                                    'controller' => 'competitions',
+                                    'action' => 'view',
+                                    $competition->id
+                                  ]); ?>">
+                      <i class="fa fa-info-circle"></i></a></td>
+                  <td>
+                    <form action="<?= $this->Url->build([
+                                      'controller' => 'competitions_users',
+                                      'action' => 'join',
+                                      $competition->id
+                                    ]); ?>">
+                      <input type="submit" class="btn btn-primary" value="Unirme" />
+                    </form>
+
+                  </td>
+                </tr>
+              <?php endforeach; ?>
+
             </tbody>
           </table>
         </div>

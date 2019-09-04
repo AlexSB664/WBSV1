@@ -53,6 +53,11 @@ class CompetitionsTable extends Table
         $this->hasMany('Matches', [
             'foreignKey' => 'competition_id'
         ]);
+
+        $this->belongsTo('CompetitionsUsers', [
+            'foreignKey' => 'id',
+            'joinType' => 'LEFT'
+        ]);
     }
 
     /**

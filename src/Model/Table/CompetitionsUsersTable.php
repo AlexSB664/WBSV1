@@ -84,4 +84,15 @@ class CompetitionsUsersTable extends Table
 
         return $rules;
     }
+
+    public function getJoined($user_id){
+        $competitions_id = [];
+        $cmpTmp = $this->find('all',['contain' =>['Users']])
+        ->where(['users_id'=>$user_id]);
+        foreach ($cmpTmp as $cmp) {
+            $competitions_id[] = $cmp->competitions_id;
+        }
+        return $competitions_id;
+    }
+
 }

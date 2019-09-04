@@ -1,7 +1,10 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
+use Competitions;
 
 /**
  * Competitions Controller
@@ -25,7 +28,7 @@ class CompetitionsController extends AppController
      */
     public function index()
     {
-        if($this->Auth->user('role')=="participant"){
+        if ($this->Auth->user('role') == "participant") {
             return $this->redirect(['action' => 'join']);
         }
         $this->paginate = [
@@ -36,30 +39,50 @@ class CompetitionsController extends AppController
         $this->set(compact('competitions'));
     }
 
-    public function join()
+    public function join2()
     {
-        $competitionsUser = $this->CompetitionsUsers->newEntity();
-        $this->paginate = [
-            'contain' => ['Seasons', 'Locations']
-        ];
-        $competitions = $this->paginate($this->Competitions);
+        $this->paginate = array(
+            'contain' => ['Seasons', 'Locations', 'CompetitionsUsers']
+        );
+        $competitions2 = $this->paginate($this->Competitions);
 
+        $options['conditions'] = array(
+            'competitions_users.users_id ' => 21
+        );
+
+        $options['joins'] = array(
+            array(
+                'table' => 'competitions',
+                'type' => 'LEFT',
+                'conditions' => array(
+                    'competitions_users.competitions_id = competitions.id'
+                )
+            )
+        );
+
+        //$competitions = $this->paginate($this->Competitions->find('all',$options));
+        $competitions = $this->paginate($this->Competitions->CompetitionsUsers->get(9));
+        
+        dd($this->CompetitionsUsers->Competitions);
+        die();
+        //$competitions =array_merge($competitions2, $competitions3);
         $this->set(compact('competitions'));
-        //xdxdxdxdxdxd
-        $competition = $this->Competitions->newEntity();
-        if ($this->request->is('post')) {
-            $competition = $this->Competitions->patchEntity($competition, $this->request->getData());
-            if ($this->Competitions->save($competition)) {
-                $this->Flash->success(__('The competition has been saved.'));
+    }
 
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The competition could not be saved. Please, try again.'));
+    public function join(){
+        $this->paginate = array(
+            'contain' => ['Seasons', 'Locations', 'CompetitionsUsers']
+        );
+        $ids = $this->CompetitionsUsers->getJoined($this->Auth->user('id'));
+        if($ids){
+            $competitions = $this->paginate($this->Competitions->find()->where(['Competitions.id NOT IN' => $ids])); 
+        }else{
+            $ids= ""; 
+            $competitions = $this->paginate($this->Competitions); 
         }
-        $seasons = $this->Competitions->Seasons->find('list', ['limit' => 200]);
-        $locations = $this->Competitions->Locations->find('list', ['limit' => 200]);
-        $this->set(compact('competition', 'seasons', 'locations'));
-
+        $competitionsIn = $this->paginate($this->Competitions->find()->where(['Competitions.id IN' => $ids]));
+        $this->set(compact('competitions'));
+        $this->set(compact('competitionsIn'));
     }
 
     /**

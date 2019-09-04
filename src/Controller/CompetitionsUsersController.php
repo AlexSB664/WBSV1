@@ -39,9 +39,26 @@ class CompetitionsUsersController extends AppController
         $competitionUser->competitions_id = $id;
 
         if ($competitionsUserTable->save($competitionUser)) {
-            $this->Flash->success(__('The competition user has been saved.'));
+            $this->redirect($this->referer());
         }
-        $this->Flash->error(__('The competition user could not be saved. Please, try again.'));    
+        $this->redirect($this->referer());
+    }
+
+    public function unjoin($id = null)
+    {
+        $competitionsUser = $this->CompetitionsUsers->find()->where([
+            'competitions_id' => $id
+        ])->first();
+        if ($this->CompetitionsUsers->delete($competitionsUser)) {
+            $this->Flash->success(__('The competitions user has been deleted.'));
+            $this->redirect($this->referer());
+
+        } else {
+            $this->Flash->error(__('The competitions user could not be deleted. Please, try again.'));
+            $this->redirect($this->referer());
+
+        }
+        $this->redirect($this->referer());
     }
 
 
