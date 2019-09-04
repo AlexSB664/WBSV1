@@ -35,7 +35,7 @@
                 <td id="tdavatar"><?= $competitionUser->user->avatar ?> </td>
                 <td id="tdassistance"><?= $this->Form->button(__('Asistir'),array('class'=>'btn btn-default btn-lg', 'id'=>'assistance')); ?></td>
                 <td class="actions">
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $competitionUser->id], ['confirm' => __('Are you sure you want to delete # {0}?', $competitionUser->id)]); ?>
+                    <?= $this->Form->button(__('Delete'), ['action' => 'delete', $competitionUser->id], ['confirm' => __('Are you sure you want to delete # {0}?', $competitionUser->id)]); ?>
                 </td>
             </tr> 
             <?php endforeach; ?>
