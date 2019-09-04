@@ -19,16 +19,32 @@ class CompetitionUsersController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function index()
+    public function inicialize()
     {
-        $this->paginate = [
-            'contain' => ['Competitions', 'Users']
-        ];
-        $competitionUsers = $this->paginate($this->CompetitionUsers);
-
-        $this->set(compact('competitionUsers'));
+        parent::initialize();
+        $this->loadModel('Users');  
+        $this->loadModel('Competitions');
     }
-
+    
+    public function index($id=0)
+    {
+        $this->paginate = ['contain' => ['Users']];
+        $competitionsUser = $this->CompetitionUsers->newEntity();
+        if ($this->request->is(['patch', 'post', 'put'])) 
+        {
+            $competitionsUser = $this->CompetitionUsers->patchEntity($competitionsUser, $this->request->getData());
+            $assistance=$_POST['assistance'];
+            var_dump($assistance);
+            die();
+            if ($this->CompetitionUsers->save($competitionsUser)) 
+            {
+                $this->Flash->success(__('The wing has been saved.'));
+            } 
+        }
+        $this->Flash->error(__('The competition user could not be saved. Please, try again.'));   
+        $competitionsUser=$this->paginate($this->CompetitionUsers->find()->where(['competitions_id'=>$id]));
+        $this->set(compact('competitionsUser')); 
+    }
     /**
      * View method
      *
@@ -44,7 +60,6 @@ class CompetitionUsersController extends AppController
 
         $this->set('competitionUser', $competitionUser);
     }
-
     /**
      * Add method
      *
@@ -66,7 +81,6 @@ class CompetitionUsersController extends AppController
         $users = $this->CompetitionUsers->Users->find('list', ['limit' => 200]);
         $this->set(compact('competitionUser', 'competitions', 'users'));
     }
-
     /**
      * Edit method
      *
@@ -76,9 +90,9 @@ class CompetitionUsersController extends AppController
      */
     public function edit($id = null)
     {
-        $competitionUser = $this->CompetitionUsers->get($id, [
-            'contain' => []
-        ]);
+        $competitionUser = [
+            'contain' => ['Users']
+        ];
         if ($this->request->is(['patch', 'post', 'put'])) {
             $competitionUser = $this->CompetitionUsers->patchEntity($competitionUser, $this->request->getData());
             if ($this->CompetitionUsers->save($competitionUser)) {
