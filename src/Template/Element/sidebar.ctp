@@ -32,9 +32,9 @@
                             <li><?= $this->Html->link(__('Nueva Liga'), ['action' => 'add']) ?></li>
                             <li><?= $this->Html->link(__('Nuevo Esquema'), ['controller' => 'Schemes', 'action' => 'add']) ?></li>
                             <a><span class="fa fa-chevron-down"><?= $this->Html->link(__('Temporadas'), ['controller' => 'Seasons', 'action' => 'index']) ?></span></a>
-                            <li><?= $this->Html->link(__('Nueva Temporada'), ['action' => 'add']) ?></li>
+                            <li><?= $this->Html->link(__('Nueva Temporada'), ['controller'=>'Seasons', 'action' => 'add']) ?></li>
                             <a><span class="fa fa-chevron-down"><?= $this->Html->link(__('Competencias'), ['controller' => 'Competitions', 'action' => 'index']) ?></span></a>
-                            <li><?= $this->Html->link(__('Asistencia'), ['controller' => 'CompetitionUsers','action' => 'add']) ?></li>
+                            <li><?= $this->Html->link(__('Asistencia'), ['controller' => 'CompetitionUsers','action' => 'index']) ?></li>
                             <li><?= $this->Html->link(__('Nueva Competencia'), ['controller' => 'Competitions','action' => 'add']) ?></li>
                             <li><?= $this->Html->link(__('Nueva Direccion'), ['controller' => 'Locations', 'action' => 'add']) ?></li>
                         </ul>
