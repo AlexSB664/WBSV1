@@ -33,11 +33,33 @@
                 <td id="tdaka"><?= $competitionUser->user->aka ?> </td>
                 <td id="tdfullname"><?= $competitionUser->user->fullname ?> </td>
                 <td id="tdavatar"><?= $competitionUser->user->avatar ?> </td>
-                <td id="tdassistance"><?= $this->Form->button(__('Asistir'),array('class'=>'btn btn-default btn-lg', 'id'=>'assistance')); ?></td>
+                <td id="tdassistance"> 
+                    <form action="<?= $this->Url->build([
+                        'controller' => 'competitions_users',
+                        'action' => 'unjoin', $competitionUser->id]); ?>">
+                        <input type="submit" class="btn btn-danger" value="No asistio" />
+                    </form>
+                </td>
                 <td class="actions">
-                    <?= $this->Form->button(__('Delete'), ['action' => 'delete', $competitionUser->id], ['confirm' => __('Are you sure you want to delete # {0}?', $competitionUser->id)]); ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $competitionUser->id], ['confirm' => __('Are you sure you want to delete # {0}?', $competitionUser->id)]); ?>
                 </td>
             </tr> 
+            <?php endforeach; ?>
+            <?php foreach ($competitionsUser as $competitionUser) : ?>
+            <tr>
+                <td id="tdaka"><?= $competitionUser->user->aka ?> </td>
+                <td id="tdfullname"><?= $competitionUser->user->fullname ?> </td>
+                <td>Competencia asd</td>
+                <td id="tdavatar"><?= $competitionUser->user->avatar ?> </td>
+                <td id="tdassistance"> 
+                    <form action="<?= $this->Url->build([
+                                      'controller' => 'competitions_users',
+                                      'action' => 'join',
+                                      $competitionUser->id]); ?>">
+                      <input type="submit" class="btn btn-primary" value="Asitio" />
+                    </form>
+                </td>
+            </tr>
             <?php endforeach; ?>
         </tbody>
     </table>

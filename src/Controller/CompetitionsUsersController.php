@@ -19,16 +19,19 @@ class CompetitionsUsersController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function index()
+    public function inicialize()
     {
-        $this->paginate = [
-            'contain' => ['Competitions', 'Users']
-        ];
-        $competitionsUsers = $this->paginate($this->CompetitionsUsers);
+        parent::initialize();
+        $this->loadModel('Users');  
+        $this->loadModel('Competitions');
+    }
+    public function index($id=null)
+    {
+        $this->paginate = ['contain' => ['Users']];
+        $competitionsUsers = $this->paginate($this->CompetitionsUsers->find()->where(['competitions_id'=>$id]));
 
         $this->set(compact('competitionsUsers'));
     }
-
     public function join($id = null)
     {
         $this->autoRender = false;
@@ -60,8 +63,25 @@ class CompetitionsUsersController extends AppController
         }
         $this->redirect($this->referer());
     }
-
-
+    public function Assistance($id=null)
+    {
+        $this->autoRender=false;
+        $competitionsUserTable = TableRegistry::get('CompetitionsUsers');
+        $competitionsUserTable = TableRegistry::getTableLocator()->get('CompetitionsUsers');
+        $competitionsUser = $competitionsUserTable->get($id);
+        if( $competitionsUser->assistance == 1)
+        {
+            $competitionsUser->assistance = 0; 
+        }
+        else
+        {
+            $competitionsUser->assistance = 1; 
+        } 
+        if ($competitionsUserTable->save($competitionsUser)) {
+            $this->redirect($this->referer());
+        }
+        $this->redirect($this->referer());
+    }
     /**
      * View method
      *
@@ -77,7 +97,6 @@ class CompetitionsUsersController extends AppController
 
         $this->set('competitionsUser', $competitionsUser);
     }
-
     /**
      * Add method
      *
@@ -99,7 +118,6 @@ class CompetitionsUsersController extends AppController
         $users = $this->CompetitionsUsers->Users->find('list', ['limit' => 200]);
         $this->set(compact('competitionsUser', 'competitions', 'users'));
     }
-
     /**
      * Edit method
      *
@@ -125,7 +143,6 @@ class CompetitionsUsersController extends AppController
         $users = $this->CompetitionsUsers->Users->find('list', ['limit' => 200]);
         $this->set(compact('competitionsUser', 'competitions', 'users'));
     }
-
     /**
      * Delete method
      *

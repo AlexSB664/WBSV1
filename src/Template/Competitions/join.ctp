@@ -71,7 +71,6 @@
                                     ]); ?>">
                       <input type="submit" class="btn btn-danger" value="Salir" />
                     </form>
-
                   </td>
                 </tr>
               <?php endforeach; ?>
