@@ -12,7 +12,7 @@ class CompetitionsUsers extends AbstractMigration
      */
     public function change()
     {
-         $table=$this->table('competition_users');
+         $table=$this->table('competitions_users');
         $table->addColumn('competitions_id','integer',[
             'default' => null,
             'limit' => 11,
@@ -34,6 +34,6 @@ class CompetitionsUsers extends AbstractMigration
     }
     public function down()
     {
-        $this->dropTable('competition_users');
+        $this->dropTable('competitions_users');
     }
 }

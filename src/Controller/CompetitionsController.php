@@ -12,6 +12,12 @@ use App\Controller\AppController;
  */
 class CompetitionsController extends AppController
 {
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadModel('CompetitionsUsers');
+    }
+
     /**
      * Index method
      *
@@ -19,12 +25,41 @@ class CompetitionsController extends AppController
      */
     public function index()
     {
+        if($this->Auth->user('role')=="participant"){
+            return $this->redirect(['action' => 'join']);
+        }
         $this->paginate = [
             'contain' => ['Seasons', 'Locations']
         ];
         $competitions = $this->paginate($this->Competitions);
 
         $this->set(compact('competitions'));
+    }
+
+    public function join()
+    {
+        $competitionsUser = $this->CompetitionsUsers->newEntity();
+        $this->paginate = [
+            'contain' => ['Seasons', 'Locations']
+        ];
+        $competitions = $this->paginate($this->Competitions);
+
+        $this->set(compact('competitions'));
+        //xdxdxdxdxdxd
+        $competition = $this->Competitions->newEntity();
+        if ($this->request->is('post')) {
+            $competition = $this->Competitions->patchEntity($competition, $this->request->getData());
+            if ($this->Competitions->save($competition)) {
+                $this->Flash->success(__('The competition has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The competition could not be saved. Please, try again.'));
+        }
+        $seasons = $this->Competitions->Seasons->find('list', ['limit' => 200]);
+        $locations = $this->Competitions->Locations->find('list', ['limit' => 200]);
+        $this->set(compact('competition', 'seasons', 'locations'));
+
     }
 
     /**
