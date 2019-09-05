@@ -25,7 +25,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>WBS | </title>
+    <title>Coliseum | Web Battle System </title>
 
     <!-- Bootstrap -->
     <link href="<?php echo $this->request->webroot;  ?>vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
