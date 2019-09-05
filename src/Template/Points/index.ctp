@@ -4,20 +4,20 @@
  * @var \App\Model\Entity\Point[]|\Cake\Collection\CollectionInterface $points
  */
 ?>
-<!--<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Point'), ['action' => 'add']) ?></li>
     </ul>
-</nav> -->
+</nav>
 <div class="points index large-9 medium-8 columns content">
     <h3><?= __('Points') ?></h3>
-    <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered dataTable no-footer">
+    <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('points') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('comp_user_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('competitions_users_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('stage') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
@@ -29,7 +29,7 @@
             <tr>
                 <td><?= $this->Number->format($point->id) ?></td>
                 <td><?= $this->Number->format($point->points) ?></td>
-                <td><?= $this->Number->format($point->comp_user_id) ?></td>
+                <td><?= $this->Number->format($point->competitions_users_id) ?></td>
                 <td><?= h($point->stage) ?></td>
                 <td><?= h($point->created) ?></td>
                 <td><?= h($point->modified) ?></td>

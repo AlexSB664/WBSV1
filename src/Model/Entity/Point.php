@@ -8,12 +8,12 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $points
- * @property int|null $comp_user_id
+ * @property int|null $competitions_users_id
  * @property string $stage
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime|null $modified
  *
- * @property \App\Model\Entity\CompUser $comp_user
+ * @property \App\Model\Entity\CompetititonsUser $competititons_user
  */
 class Point extends Entity
 {
@@ -28,10 +28,10 @@ class Point extends Entity
      */
     protected $_accessible = [
         'points' => true,
-        'comp_user_id' => true,
+        'competitions_users_id' => true,
         'stage' => true,
         'created' => true,
         'modified' => true,
-        'comp_user' => true
+        'competititons_user' => true
     ];
 }

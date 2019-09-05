@@ -20,7 +20,7 @@ class PointsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['CompUsers']
+            'contain' => ['CompetitionsUsers']
         ];
         $points = $this->paginate($this->Points);
 
@@ -37,7 +37,7 @@ class PointsController extends AppController
     public function view($id = null)
     {
         $point = $this->Points->get($id, [
-            'contain' => ['CompUsers']
+            'contain' => ['CompetitionsUsers']
         ]);
 
         $this->set('point', $point);
@@ -60,8 +60,8 @@ class PointsController extends AppController
             }
             $this->Flash->error(__('The point could not be saved. Please, try again.'));
         }
-        $compUsers = $this->Points->CompUsers->find('list', ['limit' => 200]);
-        $this->set(compact('point', 'compUsers'));
+        $competititonsUsers = $this->Points->CompetititonsUsers->find('list', ['limit' => 200]);
+        $this->set(compact('point', 'competititonsUsers'));
     }
 
     /**
@@ -85,8 +85,8 @@ class PointsController extends AppController
             }
             $this->Flash->error(__('The point could not be saved. Please, try again.'));
         }
-        $compUsers = $this->Points->CompUsers->find('list', ['limit' => 200]);
-        $this->set(compact('point', 'compUsers'));
+        $competititonsUsers = $this->Points->CompetititonsUsers->find('list', ['limit' => 200]);
+        $this->set(compact('point', 'competititonsUsers'));
     }
 
     /**

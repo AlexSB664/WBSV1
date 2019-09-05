@@ -29,8 +29,8 @@
             <td><?= $this->Number->format($point->points) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Comp User Id') ?></th>
-            <td><?= $this->Number->format($point->comp_user_id) ?></td>
+            <th scope="row"><?= __('Competitions Users Id') ?></th>
+            <td><?= $this->Number->format($point->competitions_users_id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>

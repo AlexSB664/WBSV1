@@ -16,7 +16,7 @@ class Points extends AbstractMigration
         $table->addColumn('points','integer',[
             'default' => 0,
             'null' => false
-        ])->addColumn('comp_user_id','integer',[
+        ])->addColumn('matches_user_id','integer',[
             'default' => null,
             'limit'=>11,
             'null' => true
