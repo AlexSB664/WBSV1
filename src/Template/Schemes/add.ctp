@@ -27,8 +27,8 @@
                 <?= $this->Form->input('Valor Predeterminado',array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
             </div>
         </div>
-        <br>
     </fieldset>
+    <br>
     <?= $this->Form->button(__('Agregar'), array('class'=>'btn btn-default btn-lg')) ?>
     <?= $this->Form->end() ?>
 </div>

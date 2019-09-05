@@ -28,6 +28,7 @@
             </div>
         </div>
     </fieldset>
+    <br>
     <?= $this->Form->button(__('Enviar'), array('class'=>'btn btn-default btn-lg')) ?>
     <?= $this->Form->end() ?>
 </div>
