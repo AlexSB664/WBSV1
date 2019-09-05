@@ -24,7 +24,7 @@ class PointsTableTest extends TestCase
      */
     public $fixtures = [
         'app.Points',
-        'app.CompetititonsUsers'
+        'app.CompetitionsUsers'
     ];
 
     /**

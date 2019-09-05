@@ -11,6 +11,8 @@
         <li><?= $this->Form->postLink(__('Delete Point'), ['action' => 'delete', $point->id], ['confirm' => __('Are you sure you want to delete # {0}?', $point->id)]) ?> </li>
         <li><?= $this->Html->link(__('List Points'), ['action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Point'), ['action' => 'add']) ?> </li>
+        <li><?= $this->Html->link(__('List Competitions Users'), ['controller' => 'CompetitionsUsers', 'action' => 'index']) ?> </li>
+        <li><?= $this->Html->link(__('New Competitions User'), ['controller' => 'CompetitionsUsers', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
 <div class="points view large-9 medium-8 columns content">
@@ -29,8 +31,8 @@
             <td><?= $this->Number->format($point->points) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Competitions Users Id') ?></th>
-            <td><?= $this->Number->format($point->competitions_users_id) ?></td>
+            <th scope="row"><?= __('Matches User Id') ?></th>
+            <td><?= $this->Number->format($point->matches_user_id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>

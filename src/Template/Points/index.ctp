@@ -8,6 +8,8 @@
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Point'), ['action' => 'add']) ?></li>
+        <li><?= $this->Html->link(__('List Competitions Users'), ['controller' => 'CompetitionsUsers', 'action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('New Competitions User'), ['controller' => 'CompetitionsUsers', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="points index large-9 medium-8 columns content">
@@ -17,7 +19,7 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('points') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('competitions_users_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('matches_user_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('stage') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
@@ -29,7 +31,7 @@
             <tr>
                 <td><?= $this->Number->format($point->id) ?></td>
                 <td><?= $this->Number->format($point->points) ?></td>
-                <td><?= $this->Number->format($point->competitions_users_id) ?></td>
+                <td><?= $this->Number->format($point->matches_user_id) ?></td>
                 <td><?= h($point->stage) ?></td>
                 <td><?= h($point->created) ?></td>
                 <td><?= h($point->modified) ?></td>

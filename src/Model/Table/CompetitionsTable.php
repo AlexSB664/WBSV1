@@ -11,7 +11,9 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\SeasonsTable&\Cake\ORM\Association\BelongsTo $Seasons
  * @property \App\Model\Table\LocationsTable&\Cake\ORM\Association\BelongsTo $Locations
+ * @property \App\Model\Table\SchemesTable&\Cake\ORM\Association\BelongsTo $Schemes
  * @property \App\Model\Table\MatchesTable&\Cake\ORM\Association\HasMany $Matches
+ * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsToMany $Users
  *
  * @method \App\Model\Entity\Competition get($primaryKey, $options = [])
  * @method \App\Model\Entity\Competition newEntity($data = null, array $options = [])
@@ -37,7 +39,7 @@ class CompetitionsTable extends Table
         parent::initialize($config);
 
         $this->setTable('competitions');
-        $this->setDisplayField('id');
+        $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
@@ -50,13 +52,11 @@ class CompetitionsTable extends Table
             'foreignKey' => 'location_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('Schemes', [
+            'foreignKey' => 'scheme_id'
+        ]);
         $this->hasMany('Matches', [
             'foreignKey' => 'competition_id'
-        ]);
-
-        $this->belongsTo('CompetitionsUsers', [
-            'foreignKey' => 'id',
-            'joinType' => 'LEFT'
         ]);
     }
 
@@ -80,6 +80,11 @@ class CompetitionsTable extends Table
             ->boolean('status')
             ->allowEmptyString('status');
 
+        $validator
+            ->scalar('name')
+            ->maxLength('name', 50)
+            ->notEmptyString('name');
+
         return $validator;
     }
 
@@ -94,6 +99,7 @@ class CompetitionsTable extends Table
     {
         $rules->add($rules->existsIn(['season_id'], 'Seasons'));
         $rules->add($rules->existsIn(['location_id'], 'Locations'));
+        $rules->add($rules->existsIn(['scheme_id'], 'Schemes'));
 
         return $rules;
     }

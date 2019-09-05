@@ -21,16 +21,16 @@
     <h3><?= h($matchesUser->id) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('Match') ?></th>
-            <td><?= $matchesUser->has('match') ? $this->Html->link($matchesUser->match->id, ['controller' => 'Matches', 'action' => 'view', $matchesUser->match->id]) : '' ?></td>
-        </tr>
-        <tr>
             <th scope="row"><?= __('User') ?></th>
             <td><?= $matchesUser->has('user') ? $this->Html->link($matchesUser->user->id, ['controller' => 'Users', 'action' => 'view', $matchesUser->user->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($matchesUser->id) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Match Id') ?></th>
+            <td><?= $this->Number->format($matchesUser->match_id) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>

@@ -66,7 +66,7 @@
                 <th scope="col"><?= __('Date') ?></th>
                 <th scope="col"><?= __('Season Id') ?></th>
                 <th scope="col"><?= __('Status') ?></th>
-                <th scope="col"><?= __('Localitation Id') ?></th>
+                <th scope="col"><?= __('Location Id') ?></th>
                 <th scope="col"><?= __('Created') ?></th>
                 <th scope="col"><?= __('Modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -77,7 +77,7 @@
                 <td><?= h($competitions->date) ?></td>
                 <td><?= h($competitions->season_id) ?></td>
                 <td><?= h($competitions->status) ?></td>
-                <td><?= h($competitions->localitation_id) ?></td>
+                <td><?= h($competitions->location_id) ?></td>
                 <td><?= h($competitions->created) ?></td>
                 <td><?= h($competitions->modified) ?></td>
                 <td class="actions">

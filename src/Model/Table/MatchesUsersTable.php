@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
  *
  * @property \App\Model\Table\MatchesTable&\Cake\ORM\Association\BelongsTo $Matches
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
+ * @property &\Cake\ORM\Association\HasMany $Points
  *
  * @method \App\Model\Entity\MatchesUser get($primaryKey, $options = [])
  * @method \App\Model\Entity\MatchesUser newEntity($data = null, array $options = [])
@@ -42,12 +43,15 @@ class MatchesUsersTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Matches', [
-            'foreignKey' => 'matches_id',
+            'foreignKey' => 'match_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
+        ]);
+        $this->hasMany('Points', [
+            'foreignKey' => 'matches_user_id'
         ]);
     }
 
@@ -75,7 +79,7 @@ class MatchesUsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['matches_id'], 'Matches'));
+        $rules->add($rules->existsIn(['match_id'], 'Matches'));
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;

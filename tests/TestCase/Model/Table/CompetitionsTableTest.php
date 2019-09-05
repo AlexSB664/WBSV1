@@ -26,7 +26,10 @@ class CompetitionsTableTest extends TestCase
         'app.Competitions',
         'app.Seasons',
         'app.Locations',
-        'app.Matches'
+        'app.Schemes',
+        'app.Matches',
+        'app.Users',
+        'app.CompetitionsUsers'
     ];
 
     /**

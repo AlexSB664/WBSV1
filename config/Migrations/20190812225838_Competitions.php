@@ -13,11 +13,18 @@ class Competitions extends AbstractMigration
     public function change()
     {
         $table=$this->table('competitions');
-        $table->addColumn('date','timestamp',[
+        $table->addColumn('name','string',[
+            'default' => 'null',
+            'limit' => 50,
+            'null' => false
+        ])->addColumn('date','timestamp',[
             'default' => 'CURRENT_TIMESTAMP',
             'limit' => null,
             'null' => false
         ])->addColumn('season_id','integer',[
+            'default' => null,
+            'null' => false
+        ])->addColumn('scheme_id','integer',[
             'default' => null,
             'null' => false
         ])->addColumn('status','boolean',[

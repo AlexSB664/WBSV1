@@ -4,7 +4,7 @@
  * @var \App\Model\Entity\MatchesUser[]|\Cake\Collection\CollectionInterface $matchesUsers
  */
 ?>
-<!--<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Matches User'), ['action' => 'add']) ?></li>
@@ -13,14 +13,14 @@
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
     </ul>
-</nav> -->
+</nav>
 <div class="matchesUsers index large-9 medium-8 columns content">
     <h3><?= __('Matches Users') ?></h3>
-    <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered dataTable no-footer">
+    <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('matches_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('match_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
@@ -31,7 +31,7 @@
             <?php foreach ($matchesUsers as $matchesUser): ?>
             <tr>
                 <td><?= $this->Number->format($matchesUser->id) ?></td>
-                <td><?= $matchesUser->has('match') ? $this->Html->link($matchesUser->match->id, ['controller' => 'Matches', 'action' => 'view', $matchesUser->match->id]) : '' ?></td>
+                <td><?= $this->Number->format($matchesUser->match_id) ?></td>
                 <td><?= $matchesUser->has('user') ? $this->Html->link($matchesUser->user->id, ['controller' => 'Users', 'action' => 'view', $matchesUser->user->id]) : '' ?></td>
                 <td><?= h($matchesUser->created) ?></td>
                 <td><?= h($matchesUser->modified) ?></td>

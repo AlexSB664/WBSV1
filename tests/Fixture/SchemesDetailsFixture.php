@@ -45,8 +45,8 @@ class SchemesDetailsFixture extends TestFixture
                 'position' => 'Lorem ipsum dolor sit amet',
                 'points' => 1,
                 'aditional_points' => 1,
-                'created' => 1566595609,
-                'modified' => 1566595609
+                'created' => 1567704460,
+                'modified' => 1567704460
             ],
         ];
         parent::init();

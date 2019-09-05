@@ -9,7 +9,7 @@ use Cake\Validation\Validator;
 /**
  * Points Model
  *
- * @property &\Cake\ORM\Association\BelongsTo $CompetitionsUsers
+ * @property &\Cake\ORM\Association\BelongsTo $MatchesUsers
  *
  * @method \App\Model\Entity\Point get($primaryKey, $options = [])
  * @method \App\Model\Entity\Point newEntity($data = null, array $options = [])
@@ -40,8 +40,8 @@ class PointsTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('CompetitionsUsers', [
-            'foreignKey' => 'competitions_users_id'
+        $this->belongsTo('MatchesUsers', [
+            'foreignKey' => 'matches_user_id'
         ]);
     }
 
@@ -79,7 +79,7 @@ class PointsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['competitions_users_id'], 'CompetitionsUsers'));
+        $rules->add($rules->existsIn(['matches_user_id'], 'MatchesUsers'));
 
         return $rules;
     }

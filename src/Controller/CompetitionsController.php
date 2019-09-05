@@ -28,11 +28,11 @@ class CompetitionsController extends AppController
      */
     public function index()
     {
-        if ($this->Auth->user('role') == "participant") {
-            return $this->redirect(['action' => 'join']);
-        }
+        // if ($this->Auth->user('role') == "participant") {
+        //     return $this->redirect(['action' => 'join']);
+        // }
         $this->paginate = [
-            'contain' => ['Seasons', 'Locations']
+            'contain' => ['Seasons', 'Locations','Schemes']
         ];
         $competitions = $this->paginate($this->Competitions);
 
@@ -95,7 +95,7 @@ class CompetitionsController extends AppController
     public function view($id = null)
     {
         $competition = $this->Competitions->get($id, [
-            'contain' => ['Seasons', 'Locations', 'Matches']
+            'contain' => ['Seasons', 'Locations', 'Matches','Schemes']
         ]);
 
         $this->set('competition', $competition);
@@ -120,7 +120,8 @@ class CompetitionsController extends AppController
         }
         $seasons = $this->Competitions->Seasons->find('list', ['limit' => 200]);
         $locations = $this->Competitions->Locations->find('list', ['limit' => 200]);
-        $this->set(compact('competition', 'seasons', 'locations'));
+        $schemes = $this->Competitions->Schemes->find('list',['limit'=>200]);
+        $this->set(compact('competition', 'seasons', 'locations','schemes'));
     }
 
     /**
@@ -146,7 +147,8 @@ class CompetitionsController extends AppController
         }
         $seasons = $this->Competitions->Seasons->find('list', ['limit' => 200]);
         $locations = $this->Competitions->Locations->find('list', ['limit' => 200]);
-        $this->set(compact('competition', 'seasons', 'locations'));
+        $schemes = $this->Competitions->Schemes->find('list',['limit'=>200]);
+        $this->set(compact('competition', 'seasons', 'locations','schemes'));
     }
 
     /**

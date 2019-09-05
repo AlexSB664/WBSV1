@@ -43,8 +43,8 @@ class SchemesFixture extends TestFixture
                 'name' => 'Lorem ipsum dolor sit amet',
                 'league_id' => 1,
                 'is_default' => 1,
-                'created' => 1566595609,
-                'modified' => 1566595609
+                'created' => 1567704432,
+                'modified' => 1567704432
             ],
         ];
         parent::init();

@@ -7,7 +7,7 @@ use Cake\ORM\Entity;
  * MatchesUser Entity
  *
  * @property int $id
- * @property int $matches_id
+ * @property int $match_id
  * @property int $user_id
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime|null $modified
@@ -27,7 +27,7 @@ class MatchesUser extends Entity
      * @var array
      */
     protected $_accessible = [
-        'matches_id' => true,
+        'match_id' => true,
         'user_id' => true,
         'created' => true,
         'modified' => true,

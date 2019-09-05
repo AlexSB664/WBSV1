@@ -43,8 +43,8 @@ class MatchesFixture extends TestFixture
                 'competition_id' => 1,
                 'stage' => 'Lorem ipsum dolor sit amet',
                 'points' => 1,
-                'created' => 1566595608,
-                'modified' => 1566595608
+                'created' => 1567713599,
+                'modified' => 1567713599
             ],
         ];
         parent::init();
