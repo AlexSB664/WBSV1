@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>WBS! | Login</title>
+    <title>ColiseumWBS | Login</title>
 
     <!-- Bootstrap -->
     <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -21,6 +21,18 @@
 
     <!-- Custom Theme Style -->
     <link href="../build/css/custom.min.css" rel="stylesheet">
+
+
+
+    <?= $this->Html->meta(
+    		'img/favicon-wbs.png',
+    		'/img/favicon-wbs.png',
+    		['type' => 'icon']
+    	); 
+    ?>
+
+
+
 </head>
 
 <body class="login" background="">

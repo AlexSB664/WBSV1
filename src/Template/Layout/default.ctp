@@ -38,6 +38,14 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 
     <!-- Custom styling plus plugins -->
     <link href="<?php echo $this->request->webroot;  ?>build/css/custom.min.css" rel="stylesheet">
+
+    <?= $this->Html->meta(
+                'img/favicon-wbs.png',
+                '/img/favicon-wbs.png',
+                ['type' => 'icon']
+        );
+    ?>
+
 </head>
 
 <body class="nav-md">

@@ -1,8 +1,8 @@
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><img src="images/icon.png" style="background-color:black;" width="34" height="34">
-                <span>WBS</span></a>
+            <a href="index.html" class="site_title"><img src="/img/logo-wbs.png" style="background-color:black;" width="60" height="60">
+                <span>ColiseumWBS</span></a>
         </div>
         <div class="clearfix"></div>
         <!-- menu profile quick info -->
