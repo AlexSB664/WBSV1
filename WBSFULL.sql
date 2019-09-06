@@ -16,34 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `competition_users`
---
-
-DROP TABLE IF EXISTS `competition_users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `competition_users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `competitions_id` int(11) NOT NULL,
-  `users_id` int(11) NOT NULL,
-  `assistance` tinyint(1) DEFAULT '1',
-  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `modified` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `competition_users`
---
-
-LOCK TABLES `competition_users` WRITE;
-/*!40000 ALTER TABLE `competition_users` DISABLE KEYS */;
-INSERT INTO `competition_users` VALUES (1,1,1,1,'2019-09-03 21:17:10','2019-09-03 21:17:10');
-/*!40000 ALTER TABLE `competition_users` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `competitions`
 --
 
@@ -58,8 +30,10 @@ CREATE TABLE `competitions` (
   `location_id` int(11) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` timestamp NULL DEFAULT NULL,
+  `scheme_id` int(11) DEFAULT NULL,
+  `name` varchar(50) NOT NULL DEFAULT 'NA',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,7 +42,7 @@ CREATE TABLE `competitions` (
 
 LOCK TABLES `competitions` WRITE;
 /*!40000 ALTER TABLE `competitions` DISABLE KEYS */;
-INSERT INTO `competitions` VALUES (1,'2019-11-01 07:00:00',1,1,1,'2008-01-01 08:00:01','2008-01-01 08:00:01'),(2,'2019-11-01 07:00:00',1,1,1,'2008-01-01 08:00:01','2008-01-01 08:00:01'),(3,'2019-11-01 07:00:00',1,1,1,'2008-01-01 08:00:01','2008-01-01 08:00:01'),(4,'2019-11-01 07:00:00',1,1,1,'2008-01-01 08:00:01','2008-01-01 08:00:01'),(5,'2019-11-01 07:00:00',1,1,1,'2008-01-01 08:00:01','2008-01-01 08:00:01'),(6,'2019-11-01 07:00:00',1,0,1,'2008-01-01 08:00:01','2008-01-01 08:00:01'),(7,'2019-11-01 07:00:00',1,1,1,'2008-01-01 08:00:01','2008-01-01 08:00:01');
+INSERT INTO `competitions` VALUES (1,'2019-08-01 18:23:00',1,1,1,'2019-09-05 18:24:24','2019-09-05 20:52:56',1,'1ra Jornada Agosto'),(2,'2019-08-08 18:23:00',1,1,1,'2019-09-05 18:25:02','2019-09-05 18:25:02',NULL,'NA'),(3,'2019-08-15 18:25:00',1,1,1,'2019-09-05 18:25:14','2019-09-05 19:51:15',1,'NA'),(4,'2019-08-22 18:25:00',1,1,1,'2019-09-05 18:25:29','2019-09-05 18:25:29',NULL,'NA'),(5,'2019-08-29 18:25:00',1,1,1,'2019-09-05 18:25:41','2019-09-05 18:25:41',NULL,'NA'),(6,'2019-09-05 18:29:00',2,1,1,'2019-09-05 18:29:12','2019-09-05 18:29:12',NULL,'NA'),(7,'2019-09-05 19:48:00',1,1,1,'2019-09-05 19:48:14','2019-09-05 19:48:14',1,'NA'),(8,'2019-09-12 19:48:00',2,1,1,'2019-09-05 19:48:43','2019-09-05 19:48:43',1,'NA'),(9,'2019-09-19 20:33:00',2,1,1,'2019-09-05 20:34:21','2019-09-05 20:34:21',1,'NA'),(10,'2019-10-03 20:52:00',2,1,1,'2019-09-05 20:52:33','2019-09-05 20:52:33',1,'1ra Jornada Octubre');
 /*!40000 ALTER TABLE `competitions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -87,7 +61,7 @@ CREATE TABLE `competitions_users` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,7 +70,6 @@ CREATE TABLE `competitions_users` (
 
 LOCK TABLES `competitions_users` WRITE;
 /*!40000 ALTER TABLE `competitions_users` DISABLE KEYS */;
-INSERT INTO `competitions_users` VALUES (9,5,21,1,'2019-09-03 21:02:59','2019-09-03 21:02:59'),(10,1,21,1,'2019-09-04 16:22:31','2019-09-04 16:22:31'),(11,2,21,1,'2019-09-04 21:02:12','2019-09-04 21:02:12');
 /*!40000 ALTER TABLE `competitions_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -204,7 +177,7 @@ CREATE TABLE `matches` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -213,6 +186,7 @@ CREATE TABLE `matches` (
 
 LOCK TABLES `matches` WRITE;
 /*!40000 ALTER TABLE `matches` DISABLE KEYS */;
+INSERT INTO `matches` VALUES (1,1,'8vos de final',6,'2019-09-05 21:14:22','2019-09-05 21:14:22'),(2,1,'4tos de final',8,'2019-09-05 21:19:10','2019-09-05 21:19:10'),(3,1,'semi final',10,'2019-09-05 21:22:34','2019-09-05 21:22:34'),(4,1,'2do',12,'2019-09-05 21:23:21','2019-09-05 21:23:21'),(5,1,'1ro',15,'2019-09-05 21:24:01','2019-09-05 21:24:01');
 /*!40000 ALTER TABLE `matches` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,7 +204,7 @@ CREATE TABLE `matches_users` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -239,6 +213,7 @@ CREATE TABLE `matches_users` (
 
 LOCK TABLES `matches_users` WRITE;
 /*!40000 ALTER TABLE `matches_users` DISABLE KEYS */;
+INSERT INTO `matches_users` VALUES (1,1,3,'2019-09-05 21:14:23','2019-09-05 21:14:23'),(2,1,4,'2019-09-05 21:14:23','2019-09-05 21:14:23'),(3,1,6,'2019-09-05 21:14:23','2019-09-05 21:14:23'),(4,1,7,'2019-09-05 21:14:23','2019-09-05 21:14:23'),(5,1,8,'2019-09-05 21:14:23','2019-09-05 21:14:23'),(6,1,11,'2019-09-05 21:14:23','2019-09-05 21:14:23'),(7,1,12,'2019-09-05 21:14:23','2019-09-05 21:14:23'),(8,1,15,'2019-09-05 21:14:23','2019-09-05 21:14:23'),(9,1,17,'2019-09-05 21:14:23','2019-09-05 21:14:23'),(10,2,5,'2019-09-05 21:19:11','2019-09-05 21:19:11'),(11,2,9,'2019-09-05 21:19:11','2019-09-05 21:19:11'),(12,2,13,'2019-09-05 21:19:11','2019-09-05 21:19:11'),(13,2,16,'2019-09-05 21:19:11','2019-09-05 21:19:11'),(14,3,7,'2019-09-05 21:22:34','2019-09-05 21:22:34'),(15,3,14,'2019-09-05 21:22:34','2019-09-05 21:22:34'),(16,4,10,'2019-09-05 21:23:21','2019-09-05 21:23:21'),(17,5,2,'2019-09-05 21:24:01','2019-09-05 21:24:01');
 /*!40000 ALTER TABLE `matches_users` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -265,7 +240,7 @@ CREATE TABLE `phinxlog` (
 
 LOCK TABLES `phinxlog` WRITE;
 /*!40000 ALTER TABLE `phinxlog` DISABLE KEYS */;
-INSERT INTO `phinxlog` VALUES (20190812223059,'Users','2019-08-29 05:20:21','2019-08-29 05:20:22',0),(20190812225816,'Seasons','2019-08-29 05:20:22','2019-08-29 05:20:23',0),(20190812225833,'Points','2019-08-29 05:20:23','2019-08-29 05:20:23',0),(20190812225838,'Competitions','2019-08-29 05:20:23','2019-08-29 05:20:24',0),(20190813221026,'Leagues','2019-08-29 05:20:24','2019-08-29 05:20:24',0),(20190821200646,'Locations','2019-08-29 05:20:24','2019-08-29 05:20:25',0),(20190822222032,'Schemes','2019-08-29 05:20:25','2019-08-29 05:20:26',0),(20190822222150,'SchemesDetails','2019-08-29 05:20:26','2019-08-29 05:20:26',0),(20190822222249,'MatchesUser','2019-08-29 05:20:26','2019-08-29 05:20:27',0),(20190822224108,'Matches','2019-08-29 05:20:27','2019-08-29 05:20:27',0),(20190822225846,'Crews','2019-08-29 05:20:27','2019-08-29 05:20:28',0),(20190829220803,'CompetitionsUsers','2019-08-31 04:20:52','2019-08-31 04:20:53',0);
+INSERT INTO `phinxlog` VALUES (20190812223059,'Users','2019-09-05 23:21:14','2019-09-05 23:21:15',0),(20190812225816,'Seasons','2019-09-05 23:21:15','2019-09-05 23:21:15',0),(20190812225833,'Points','2019-09-05 23:21:15','2019-09-05 23:21:16',0),(20190812225838,'Competitions','2019-09-05 23:21:16','2019-09-05 23:21:16',0),(20190813221026,'Leagues','2019-09-05 23:21:16','2019-09-05 23:21:16',0),(20190821200646,'Locations','2019-09-05 23:21:16','2019-09-05 23:21:17',0),(20190822222032,'Schemes','2019-09-05 23:21:17','2019-09-05 23:21:17',0),(20190822222150,'SchemesDetails','2019-09-05 23:21:17','2019-09-05 23:21:17',0),(20190822222249,'MatchesUser','2019-09-05 23:21:17','2019-09-05 23:21:17',0),(20190822224108,'Matches','2019-09-05 23:21:18','2019-09-05 23:21:18',0),(20190822225846,'Crews','2019-09-05 23:21:18','2019-09-05 23:21:18',0),(20190829220803,'CompetitionsUsers','2019-09-05 23:21:18','2019-09-05 23:21:18',0);
 /*!40000 ALTER TABLE `phinxlog` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -279,7 +254,7 @@ DROP TABLE IF EXISTS `points`;
 CREATE TABLE `points` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `points` int(11) NOT NULL DEFAULT '0',
-  `comp_user_id` int(11) DEFAULT NULL,
+  `matches_user_id` int(11) DEFAULT NULL,
   `stage` varchar(30) NOT NULL,
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` timestamp NULL DEFAULT NULL,
@@ -311,7 +286,7 @@ CREATE TABLE `schemes` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -320,6 +295,7 @@ CREATE TABLE `schemes` (
 
 LOCK TABLES `schemes` WRITE;
 /*!40000 ALTER TABLE `schemes` DISABLE KEYS */;
+INSERT INTO `schemes` VALUES (1,'Regular',1,1,'2019-09-05 17:28:43','2019-09-05 17:28:43');
 /*!40000 ALTER TABLE `schemes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -339,7 +315,7 @@ CREATE TABLE `schemes_details` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -348,6 +324,7 @@ CREATE TABLE `schemes_details` (
 
 LOCK TABLES `schemes_details` WRITE;
 /*!40000 ALTER TABLE `schemes_details` DISABLE KEYS */;
+INSERT INTO `schemes_details` VALUES (1,1,'1er Lugar',15,0,'2019-09-05 17:29:07','2019-09-05 17:29:07'),(2,1,'2do Lugar',13,0,'2019-09-05 17:31:28','2019-09-05 17:31:28'),(3,1,'semifinal',10,0,'2019-09-05 17:32:50','2019-09-05 17:32:50'),(4,1,'4tos de final',8,0,'2019-09-05 17:33:10','2019-09-05 17:33:10'),(5,1,'8tos de final',6,0,'2019-09-05 17:33:25','2019-09-05 17:33:25');
 /*!40000 ALTER TABLE `schemes_details` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -369,7 +346,7 @@ CREATE TABLE `seasons` (
   `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `modified` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -378,7 +355,7 @@ CREATE TABLE `seasons` (
 
 LOCK TABLES `seasons` WRITE;
 /*!40000 ALTER TABLE `seasons` DISABLE KEYS */;
-INSERT INTO `seasons` VALUES (1,'Agosto','ijosuchingadamadre',1,1,'2019-08-28 22:59:14',NULL,'2019-08-28 22:59:14',NULL);
+INSERT INTO `seasons` VALUES (1,'Agosto','ijosuchingadamadre',1,1,'2019-08-28 22:59:14',NULL,'2019-08-28 22:59:14',NULL),(2,'Septiembre','jornadas de septiembre',1,1,'2019-09-05 18:28:00','2019-09-05 18:28:00','2019-09-05 18:28:42','2019-09-05 18:28:42');
 /*!40000 ALTER TABLE `seasons` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -426,4 +403,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-04 14:08:30
+-- Dump completed on 2019-09-06 11:40:19
