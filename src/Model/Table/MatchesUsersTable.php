@@ -84,4 +84,24 @@ class MatchesUsersTable extends Table
 
         return $rules;
     }
+
+    public function getUsersByMatches($match_id)
+    {
+        $users_id = [];
+        $mtchsTmp = $this->find()
+        ->where(['match_id'=>$match_id]);
+        foreach ($mtchsTmp as $mtchs) {
+            $users_id[] = $mtchs->user_id;
+        }
+        return $users_id;
+    }
+
+    public function getIdUsers($query){
+        $ids = [];
+        foreach($query as $record){
+            $ids[]=$record->user_id;
+        }
+        return $ids;
+    }
+
 }

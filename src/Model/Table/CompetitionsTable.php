@@ -103,4 +103,22 @@ class CompetitionsTable extends Table
 
         return $rules;
     }
+
+    public function getCompetitionsBySeason($season_id){
+        $competitions_id = [];
+        $comptTmp = $this->find()
+        ->where(['season_id'=>$season_id]);
+        foreach ($comptTmp as $cmpt) {
+            $competitions_id[] = $cmpt->id;
+        }
+        return $competitions_id;
+    }
+
+    public function getId($query){
+        $ids = [];
+        foreach($query as $record){
+            $ids[]=$record->id;
+        }
+        return $ids;
+    }
 }
