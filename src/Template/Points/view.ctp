@@ -3,7 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Point $point
  */
-?>
+?><!--
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -14,9 +14,9 @@
         <li><?= $this->Html->link(__('List Competitions Users'), ['controller' => 'CompetitionsUsers', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Competitions User'), ['controller' => 'CompetitionsUsers', 'action' => 'add']) ?> </li>
     </ul>
-</nav>
+</nav>-->
 <div class="points view large-9 medium-8 columns content">
-    <h3><?= h($point->id) ?></h3>
+    <h3>Puntaje <?= h($point->id) ?></h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Stage') ?></th>

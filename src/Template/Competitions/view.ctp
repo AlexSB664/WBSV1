@@ -4,6 +4,7 @@
  * @var \App\Model\Entity\Competition $competition
  */
 ?>
+<!--
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -24,12 +25,12 @@
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
     </ul>
-</nav>
+</nav> -->
 <div class="competitions view large-9 medium-8 columns content">
-    <h3><?= h($competition->id) ?></h3>
+    <h3>Competencia: <?= h($competition->id) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('Competitions User') ?></th>
+            <th scope="row"><?= __('Información de competencia') ?></th>
             <td><?= $competition->has('competitions_user') ? $this->Html->link($competition->competitions_user->id, ['controller' => 'CompetitionsUsers', 'action' => 'view', $competition->competitions_user->id]) : '' ?></td>
         </tr>
         <tr>
@@ -65,10 +66,10 @@
             <td><?= $competition->status ? __('Yes') : __('No'); ?></td>
         </tr>
     </table>
-    <div class="related">
-        <h4><?= __('Related Users') ?></h4>
+    <div class="related" >
+        <h4><?= __('Relación de Usuarios') ?></h4>
         <?php if (!empty($competition->users)): ?>
-        <table cellpadding="0" cellspacing="0">
+        <table cellpadding="0" cellspacing="0" class="table">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Username') ?></th>
@@ -111,9 +112,9 @@
         <?php endif; ?>
     </div>
     <div class="related">
-        <h4><?= __('Related Matches') ?></h4>
+        <h4><?= __('Relación de Combates') ?></h4>
         <?php if (!empty($competition->matches)): ?>
-        <table cellpadding="0" cellspacing="0">
+        <table cellpadding="0" cellspacing="0" class="table">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Competition Id') ?></th>

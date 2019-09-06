@@ -14,7 +14,7 @@
 </nav> -->
 <div class="crews index large-9 medium-8 columns content">
     <h3><?= __('Crews') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+    <table cellpadding="0" cellspacing="0" class="table">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>

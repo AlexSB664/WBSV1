@@ -3,7 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Season[]|\Cake\Collection\CollectionInterface $seasons
  */
-?>
+?><!--
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -13,10 +13,10 @@
         <li><?= $this->Html->link(__('List Competitions'), ['controller' => 'Competitions', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Competition'), ['controller' => 'Competitions', 'action' => 'add']) ?></li>
     </ul>
-</nav>
+</nav>-->
 <div class="seasons index large-9 medium-8 columns content">
-    <h3><?= __('Seasons') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+    <h3><?= __('Temporadas') ?></h3>
+    <table cellpadding="0" cellspacing="0" class="table">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>

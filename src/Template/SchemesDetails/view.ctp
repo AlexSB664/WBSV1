@@ -3,7 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\SchemesDetail $schemesDetail
  */
-?>
+?> <!--
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -14,7 +14,7 @@
         <li><?= $this->Html->link(__('List Schemes'), ['controller' => 'Schemes', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Scheme'), ['controller' => 'Schemes', 'action' => 'add']) ?> </li>
     </ul>
-</nav>
+</nav> -->
 <div class="schemesDetails view large-9 medium-8 columns content">
     <h3><?= h($schemesDetail->id) ?></h3>
     <table class="vertical-table">

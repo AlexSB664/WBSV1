@@ -37,7 +37,7 @@
                             <li><?= $this->Html->link(__('Asistencia'), ['controller' => 'CompetitionsUsers','action' => 'index']) ?></li>
                             <li><?= $this->Html->link(__('Nueva Competencia'), ['controller' => 'Competitions','action' => 'add']) ?></li>
                             <li><?= $this->Html->link(__('Nueva Direccion'), ['controller' => 'Locations', 'action' => 'add']) ?></li>
-                            <li><?= $this->Html->link(__('New Match'), ['controller' => 'Matches', 'action' => 'add']) ?></li>
+                            <li><?= $this->Html->link(__('Nuevo Enfrentamiento'), ['controller' => 'Matches', 'action' => 'add']) ?></li>
                             
                         </ul>
                     </li>

@@ -21,14 +21,16 @@
 <div class="schemesDetails form large-9 medium-8 columns content">
     <?= $this->Form->create($schemesDetail) ?>
     <fieldset>
-        <legend><?= __('Edit Schemes Detail') ?></legend>
-        <?php
-            echo $this->Form->control('scheme_id', ['options' => $schemes]);
-            echo $this->Form->control('position');
-            echo $this->Form->control('points');
-            echo $this->Form->control('aditional_points');
-        ?>
+        <legend><?= __('Editar Detalles de Esquema') ?></legend>
+            <?= $this->Form->label('Esquema', array('class'=> 'Esquema: ')); ?>
+            <?= $this->Form->control('scheme_id', ['options' => $schemes,'label'=>false ,'class'=>'form-control col-md-7 col-xs-12']); ?>
+            <?= $this->Form->label('posicion', array('class'=> 'Posicion: ')); ?>
+            <?= $this->Form->control('position',array('label'=>false,'class'=>'form-control col-md-7 col-xs-12')); ?>
+            <?= $this->Form->label('puntos', array('class'=> 'Puntos: ')); ?>
+            <?= $this->Form->control('points',array('label'=>false,'class'=>'form-control col-md-7 col-xs-12')); ?>
+            <?= $this->Form->label('puntosAdicionales', array('class'=> 'Puntos Adicionales: ')); ?>
+            <?= $this->Form->control('aditional_points'array('label'=>false,'class'=>'form-control col-md-7 col-xs-12')); ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Guardar'), array('class'=>'btn btn-default btn-lg')) ?>
     <?= $this->Form->end() ?>
 </div>

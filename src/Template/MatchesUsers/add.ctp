@@ -17,12 +17,12 @@
 <div class="matchesUsers form large-9 medium-8 columns content">
     <?= $this->Form->create($matchesUser) ?>
     <fieldset>
-        <legend><?= __('Add Matches User') ?></legend>
-        <?php
-            echo $this->Form->control('match_id');
-            echo $this->Form->control('user_id', ['options' => $users]);
-        ?>
+        <legend><?= __('Agregar Combate') ?></legend>
+        <?= $this->Form->label('combate', array('class'=> 'Combate: ')); ?>
+            <?= $this->Form->control('match_id'); ?>
+            <?= $this->Form->label('participante', array('class'=> 'Participante: ')); ?>
+            <?= $this->Form->control('user_id', ['options' => $users,array('label'=>false,'class'=>'form-control col-md-7 col-xs-12')]); ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Guardar'), array('class'=>'btn btn-default btn-lg')) ?>
     <?= $this->Form->end() ?>
 </div>

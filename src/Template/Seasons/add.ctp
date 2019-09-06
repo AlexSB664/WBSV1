@@ -3,7 +3,7 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Season $season
  */
-?>
+?> <!--
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -13,20 +13,24 @@
         <li><?= $this->Html->link(__('List Competitions'), ['controller' => 'Competitions', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Competition'), ['controller' => 'Competitions', 'action' => 'add']) ?></li>
     </ul>
-</nav>
+</nav> -->
 <div class="seasons form large-9 medium-8 columns content">
     <?= $this->Form->create($season) ?>
     <fieldset>
-        <legend><?= __('Add Season') ?></legend>
-        <?php
-            echo $this->Form->control('name');
-            echo $this->Form->control('description');
-            echo $this->Form->control('league_id', ['options' => $leagues]);
-            echo $this->Form->control('status');
-            echo $this->Form->control('date_start');
-            echo $this->Form->control('date_end');
-        ?>
+        <legend><?= __('Agrega Temporada') ?></legend>
+            <?= $this->Form->label('nombre', array('class'=>'Nombre: ')); ?>
+            <?= $this->Form->control('name', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
+            <?= $this->Form->label('descripcion', array('class'=>'Descripcion: ')); ?>
+            <?= $this->Form->control('description', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
+            <?= $this->Form->label('liga', array('class'=>'Liga: ')); ?>
+            <?= $this->Form->control('league_id', ['options' => $leagues, 'label'=> false, 'class'=>'form-control col-md-7 col-xs-12']); ?>
+            <?= $this->Form->control('status'); ?>
+            <?= $this->Form->label('inicio', array('class'=>'Inicio: ')); ?>
+            <?= $this->Form->control('date_start', array('label'=>false)); ?>
+            <?= $this->Form->label('fin', array('class'=>'Fin: ')); ?>
+            <?= $this->Form->control('date_end', array('label'=>false)); ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <br>
+    <?= $this->Form->button(__('Agregar'), array('class'=>'btn btn-default btn-lg')) ?>
     <?= $this->Form->end() ?>
 </div>

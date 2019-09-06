@@ -16,19 +16,20 @@
         <legend><?= __('Agregar Dirección') ?></legend>
         <div class="form-row">
             <div class="col">
-                <?= $this->Form->label('Nombre', array('class'=> 'Nombre: ')); ?>
-                <?= $this->Form->input('Nombre', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
-                <?= $this->Form->label('Dirección', array('class'=> 'Dirección: ')); ?>
-                <?= $this->Form->input('Dirección', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
-                <?= $this->Form->label('Latitud', array('class'=> 'Latitud: ')); ?>
-                <?= $this->Form->input('Latitud', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
-                <?= $this->Form->label('Longitud', array('class'=> 'Longitud: ')); ?>
+                <?= $this->Form->label('nombre', array('class'=> 'Nombre: ')); ?>
+                <?= $this->Form->input('name', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->label('dirección', array('class'=> 'Dirección: ')); ?>
+                <?= $this->Form->input('direction', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->label('latitud', array('class'=> 'Latitud: ')); ?>
+                <?= $this->Form->input('latitude', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->label('longitud', array('class'=> 'Longitud: ')); ?>
                 <?= $this->Form->input('Longitud', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
-                <?= $this->Form->label('Tipo', array('class'=> 'Tipo: ')); ?>
-                <?= $this->Form->input('Tipo', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->label('tipo', array('class'=> 'Tipo: ')); ?>
+                <?= $this->Form->input('type', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
             </div>
         </div>
     </fieldset>
+    <br>
     <?= $this->Form->button(__('Agregar'), array('class'=>'btn btn-default btn-lg')) ?>
     <?= $this->Form->end() ?>
 </div>

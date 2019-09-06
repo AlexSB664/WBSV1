@@ -4,6 +4,7 @@
  * @var \App\Model\Entity\Competition $competition
  */
 ?>
+<!--
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -21,20 +22,24 @@
         <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
     </ul>
-</nav>
+</nav> -->
 <div class="competitions form large-9 medium-8 columns content">
     <?= $this->Form->create($competition) ?>
     <fieldset>
-        <legend><?= __('Add Competition') ?></legend>
-        <?php
-            echo $this->Form->input('name');
-            echo $this->Form->control('date');
-            echo $this->Form->control('season_id', ['options' => $seasons]);
-            echo $this->Form->control('status');
-            echo $this->Form->control('location_id', ['options' => $locations]);
-            echo $this->Form->control('scheme_id', ['options' => $schemes, 'empty' => true]);
-            ?>
+        <legend><?= __('Agregar Competencia') ?></legend>
+            <?= $this->Form->label('nombre', array('class'=> 'Nombre: ')); ?>
+            <?= $this->Form->input('name', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
+            <?= $this->Form->label('fecha', array('class'=> 'Fecha: ')); ?>
+            <?= $this->Form->control('date', array('label'=>false)); ?>
+            <?= $this->Form->label('temporada', array('class'=> 'Temporada: ')); ?>
+            <?= $this->Form->control('season_id', ['options' => $seasons,'class'=>'form-control col-md-7 col-xs-12', 'label'=>false]); ?>
+            <?= $this->Form->control('status'); ?>
+            <?= $this->Form->label('localización', array('class'=> 'Localizacion: ')); ?>
+            <?= $this->Form->control('location_id', ['options' => $locations,'class'=>'form-control col-md-7 col-xs-12','label'=>false]); ?>
+            <?= $this->Form->label('esquema', array('class'=> 'Esquema: ')); ?>
+            <?= $this->Form->control('scheme_id', ['options' => $schemes, 'empty' => true,'class'=>'form-control col-md-7 col-xs-12','label'=>false]); ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <br>
+    <?= $this->Form->button(__('Agregar'), array('class'=>'btn btn-default btn-lg')) ?>
     <?= $this->Form->end() ?>
 </div>
