@@ -21,8 +21,11 @@ class SeasonsReportsController extends AppController
         $this->loadModel('Leagues');
         $this->loadModel('Users');
         $this->loadModel('CompetitionsUsers');
+        $this->loadModel('Matches');
         $this->competitionsTable = TableRegistry::get('competitions');
         $this->matchesTable = TableRegistry::get('matches');
+        $this->matches_usersTable = TableRegistry::get('matches_users');
+        $this->usersTable = TableRegistry::get('users');
     }
 
     public function byPoints($id = null)
@@ -30,39 +33,30 @@ class SeasonsReportsController extends AppController
         $this->paginate = [
             'contain' => ['Seasons']
         ];
-    
-        $this->competitions = TableRegistry::get('competitions');
         //primero obtenemos todas las competencias dentro de la temporada
-        $competitions = $this->competitionsTable->find()->where(['season_id' => $id]);
+        $competitions = $this->competitionsTable->find()->where(['season_id'=>$id]);
+        $competitionsid = $this->competitionsTable->getId($competitions);
         //una vez hecho con el id de las competencias traemos los matches
-        $matches = $this->paginate($this->matchesTable->find()->where(['Competitions.id IN' => $competitions]));
-
-
-        foreach($matches as $competition){
-            echo ($competition);
+        $matches = $this->matchesTable->find()->where(['competition_id IN'=>$competitionsid]);
+        $mtchs_points = $matches->select(['points']);
+        $matchesid = $this->matchesTable->getId($matches);
+        //una vez traemos los combates que tuvieron cada usuario
+        $matches_users = $this->matches_usersTable->find()->where(['match_id IN' => $matchesid]);
+        
+        foreach($mtchs_points as $points){
+            echo ($points->points.",");
         }
+        echo implode($mtchs_points->toArray());
+
         die();
-        //ahora conseguimos los combatientes por temporada
-        //$compTmp = $competitions->first()->season_id;
-    
-        $competitions = $this->paginate($this->competitions);
-        //$leagues = $this->Leagues->get($competitions->first->competition_id);
-        $this->set(compact('competitions'));
-    }
+        $idUsers = $this->matches_usersTable->getIdUsers($matches_users);
+        //traemos cada usuario
+        $users = $this->usersTable->find()->where(['id IN' => $idUsers]);
 
-    public function join(){
-        $this->paginate = array(
-            'contain' => ['Seasons', 'Locations', 'CompetitionsUsers']
-        );
-        $ids = $this->CompetitionsUsers->getJoined($this->Auth->user('id'));
-        if($ids){
-            $competitions = $this->paginate($this->Competitions->find()->where(['Competitions.id NOT IN' => $ids])); 
-        }else{
-            $ids= ""; 
-            $competitions = $this->paginate($this->Competitions); 
-        }
-        $competitionsIn = $this->paginate($this->Competitions->find()->where(['Competitions.id IN' => $ids]));
-        $this->set(compact('competitions'));
-        $this->set(compact('competitionsIn'));
+        $this->set(compact('competitions','users'));
+        //traer a todos los usuarios
+        
+        //$leagues = $this->Leagues->get($competitions->first->competition_id);
+        //$this->set(compact('competitions'));
     }
 }
