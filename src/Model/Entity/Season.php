@@ -7,6 +7,7 @@ use Cake\ORM\Entity;
  * Season Entity
  *
  * @property int $id
+ * @property string|null $flyer
  * @property string $name
  * @property string $description
  * @property int $league_id
@@ -31,6 +32,7 @@ class Season extends Entity
      * @var array
      */
     protected $_accessible = [
+        'flyer' => true,
         'name' => true,
         'description' => true,
         'league_id' => true,

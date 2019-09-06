@@ -52,8 +52,7 @@ class SeasonsController extends AppController
     {
         $season = $this->Seasons->newEntity();
         if ($this->request->is('post')) {
-            $season = $this->Seasons->patchEntity($season, $this->request->getData());
-            if ($this->Seasons->save($season)) {
+            if ($season = $this->Seasons->addSeason($this->request->getData())) {
                 $this->Flash->success(__('The season has been saved.'));
 
                 return $this->redirect(['action' => 'index']);

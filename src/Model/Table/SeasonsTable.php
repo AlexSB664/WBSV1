@@ -40,6 +40,7 @@ class SeasonsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('File');
 
         $this->belongsTo('Leagues', [
             'foreignKey' => 'league_id',
@@ -61,6 +62,11 @@ class SeasonsTable extends Table
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
+
+        $validator
+            ->scalar('flyer')
+            ->maxLength('flyer', 100)
+            ->allowEmptyString('flyer');
 
         $validator
             ->scalar('name')
@@ -99,5 +105,27 @@ class SeasonsTable extends Table
         $rules->add($rules->existsIn(['league_id'], 'Leagues'));
 
         return $rules;
+    }
+
+    public function addSeason($data = [])
+    {
+      if(empty($data)){
+        return false;
+      }
+
+      $ssn = $this->newEntity();
+
+      $ssn = $this->patchEntity($ssn,$data);
+
+      $file_name =  $this->uploadFile($data['flyer'], 'img','uploads/season/');
+      $ssn->flyer = $file_name;
+      
+      if(!$this->save($ssn)){
+          debug($ssn->errors());
+          echo($ssn->flyer);
+        die();
+        return false;
+      }
+      return true;
     }
 }

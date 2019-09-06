@@ -59,23 +59,6 @@ class LeaguesController extends AppController
         $this->set(compact('league'));
     }
 
-    public function singup()
-    {
-        $this->viewBuilder()->layout(false);
-        $user = $this->Users->newEntity();
-
-        if ($this->request->is('post')) { 
-            if ($this->Users->addLeague($this->request->data)) {
-                $this->Flash->success(__('The user has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                echo ("error alv");
-                die();
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
-            }
-        }
-    }
-
     /**
      * Edit method
      *

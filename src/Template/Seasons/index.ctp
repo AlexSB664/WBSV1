@@ -20,6 +20,7 @@
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('flyer') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('description') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('league_id') ?></th>
@@ -35,6 +36,7 @@
             <?php foreach ($seasons as $season): ?>
             <tr>
                 <td><?= $this->Number->format($season->id) ?></td>
+                <td><?= $this->Html->image($season->flyer?$season->flyer:'no', ['alt' => "default-avatar",'width'=>'65','height'=>'55']); ?></td>
                 <td><?= h($season->name) ?></td>
                 <td><?= h($season->description) ?></td>
                 <td><?= $season->has('league') ? $this->Html->link($season->league->name, ['controller' => 'Leagues', 'action' => 'view', $season->league->id]) : '' ?></td>
