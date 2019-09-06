@@ -49,8 +49,7 @@ class LeaguesController extends AppController
     {
         $league = $this->Leagues->newEntity();
         if ($this->request->is('post')) {
-            $league = $this->Leagues->patchEntity($league, $this->request->getData());
-            if ($this->Leagues->save($league)) {
+            if ($league = $this->Leagues->addLeague($this->request->getData())) {
                 $this->Flash->success(__('The league has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -58,6 +57,23 @@ class LeaguesController extends AppController
             $this->Flash->error(__('The league could not be saved. Please, try again.'));
         }
         $this->set(compact('league'));
+    }
+
+    public function singup()
+    {
+        $this->viewBuilder()->layout(false);
+        $user = $this->Users->newEntity();
+
+        if ($this->request->is('post')) { 
+            if ($this->Users->addLeague($this->request->data)) {
+                $this->Flash->success(__('The user has been saved.'));
+                return $this->redirect(['action' => 'index']);
+            } else {
+                echo ("error alv");
+                die();
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            }
+        }
     }
 
     /**

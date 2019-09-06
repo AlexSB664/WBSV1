@@ -13,7 +13,11 @@ class Seasons extends AbstractMigration
     public function change()
     {
         $table=$this->table('seasons');
-        $table->addColumn('name','string',[
+        $table->addColumn('flyer','string',[
+            'default' => null,
+            'limit' => 100,
+            'null' => true
+        ])->addColumn('name','string',[
             'default' => 'null',
             'limit' => 50,
             'null' => false

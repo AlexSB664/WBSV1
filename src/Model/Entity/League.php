@@ -7,6 +7,7 @@ use Cake\ORM\Entity;
  * League Entity
  *
  * @property int $id
+ * @property string|null $logo
  * @property string $name
  * @property string $description
  * @property string $social_facebook
@@ -34,6 +35,7 @@ class League extends Entity
      * @var array
      */
     protected $_accessible = [
+        'logo' => true,
         'name' => true,
         'description' => true,
         'social_facebook' => true,

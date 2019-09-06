@@ -37,8 +37,9 @@ class FileBehavior extends Behavior
 
         $config = $this->config();
 
+        
         $new_name = Text::uuid() . '-' . $file['name'];
-
+        
         $dir = $config['dirs'][$type] . DS . $deep_dir;
         // echo implode(";",$file);
         // echo($file[0]);
@@ -49,6 +50,9 @@ class FileBehavior extends Behavior
         // echo($file[5]);
         // var_dump(array_keys($file));        
         move_uploaded_file($file['tmp_name'], $dir . DS . $new_name);
+        if($deep_dir){
+            $new_name = $deep_dir . $new_name;
+        }
         return $new_name;
     }
 
