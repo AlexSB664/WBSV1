@@ -15,7 +15,7 @@
     </ul>
 </nav> -->
 <div class="schemes index large-9 medium-8 columns content">
-    <h3><?= __('Schemes') ?></h3>
+    <h3>Detalles de esquema <?= __('Schemes') ?></h3>
     <table cellpadding="0" cellspacing="0" class="table">
         <thead>
             <tr>

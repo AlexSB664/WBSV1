@@ -16,7 +16,7 @@
     </ul>
 </nav> -->
 <div class="schemesDetails view large-9 medium-8 columns content">
-    <h3><?= h($schemesDetail->id) ?></h3>
+    <h3>Detalles de esquema <?= h($schemesDetail->id) ?></h3>
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Scheme') ?></th>
