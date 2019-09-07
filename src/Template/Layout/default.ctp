@@ -24,9 +24,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Coliseum | Web Battle System </title>
-
     <!-- Bootstrap -->
     <link href="<?php echo $this->request->webroot;  ?>vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -35,10 +33,29 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <link href="<?php echo $this->request->webroot;  ?>vendors/nprogress/nprogress.css" rel="stylesheet">
     <!-- bootstrap-wysiwyg -->
     <link href="<?php echo $this->request->webroot;  ?>vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
-
     <!-- Custom styling plus plugins -->
     <link href="<?php echo $this->request->webroot;  ?>build/css/custom.min.css" rel="stylesheet">
-
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/animate/animate.css">
+    <!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/select2/select2.min.css">
+    <!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+    
     <?= $this->Html->meta(
                 'img/favicon-wbs.png',
                 '/img/favicon-wbs.png',
