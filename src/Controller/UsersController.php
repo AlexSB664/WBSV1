@@ -114,7 +114,7 @@ class UsersController extends AppController
 
     public function login()
     {
-        $this->viewBuilder()->layout(false);
+        $this->viewBuilder()->layout('login');
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
@@ -135,7 +135,7 @@ class UsersController extends AppController
 
     public function singup()
     {
-        $this->viewBuilder()->layout(false);
+        $this->viewBuilder()->layout('login');
         $user = $this->Users->newEntity();
 
         if ($this->request->is('post')) { 
