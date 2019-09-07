@@ -1,4 +1,4 @@
-<?= $this->Form->create(); ?>
+<?= $this->Form->create(null, ['type' => 'file']); ?>
 
 <span class="login100-form-logo">
 	<img src="/images/logo-wbs.png" alt="Colisem Web Battle System Logo" height="120" width="120">
