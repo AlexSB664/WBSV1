@@ -49,8 +49,7 @@ class LeaguesController extends AppController
     {
         $league = $this->Leagues->newEntity();
         if ($this->request->is('post')) {
-            $league = $this->Leagues->patchEntity($league, $this->request->getData());
-            if ($this->Leagues->save($league)) {
+            if ($league = $this->Leagues->addLeague($this->request->getData())) {
                 $this->Flash->success(__('The league has been saved.'));
 
                 return $this->redirect(['action' => 'index']);

@@ -4,7 +4,6 @@
  * @var \App\Model\Entity\League $league
  */
 ?>
-<!--
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -17,10 +16,14 @@
         <li><?= $this->Html->link(__('List Seasons'), ['controller' => 'Seasons', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Season'), ['controller' => 'Seasons', 'action' => 'add']) ?> </li>
     </ul>
-</nav> -->
+</nav>
 <div class="leagues view large-9 medium-8 columns content">
     <h3><?= h($league->name) ?></h3>
     <table class="vertical-table">
+        <tr>
+            <th scope="row"><?= __('Logo') ?></th>
+            <td><?= h($league->logo) ?></td>
+        </tr>
         <tr>
             <th scope="row"><?= __('Name') ?></th>
             <td><?= h($league->name) ?></td>
@@ -73,7 +76,7 @@
     <div class="related">
         <h4><?= __('Related Schemes') ?></h4>
         <?php if (!empty($league->schemes)): ?>
-        <table cellpadding="0" cellspacing="0" class="table">
+        <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Name') ?></th>
@@ -104,7 +107,7 @@
     <div class="related">
         <h4><?= __('Related Seasons') ?></h4>
         <?php if (!empty($league->seasons)): ?>
-        <table cellpadding="0" cellspacing="0" class="table">
+        <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Name') ?></th>

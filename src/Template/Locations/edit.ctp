@@ -23,15 +23,15 @@
         <div class="form-row">
             <div class="col">
                 <?= $this->Form->label('Nombre', array('class'=> 'Nombre: ')); ?>
-                <?= $this->Form->input('Nombre', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->input('name', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
                 <?= $this->Form->label('Dirección', array('class'=> 'Dirección: ')); ?>
-                <?= $this->Form->input('Dirección', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->input('address', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
                 <?= $this->Form->label('Latitud', array('class'=> 'Latitud: ')); ?>
-                <?= $this->Form->input('Latitud', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->input('lat', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
                 <?= $this->Form->label('Longitud', array('class'=> 'Longitud: ')); ?>
-                <?= $this->Form->input('Longitud', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->input('lng', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
                 <?= $this->Form->label('Tipo', array('class'=> 'Tipo: ')); ?>
-                <?= $this->Form->input('Tipo', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->input('type', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
             </div>
         </div>
     </fieldset>

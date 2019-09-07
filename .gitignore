@@ -39,3 +39,8 @@ nbproject/*
 .vscode
 # Sass preprocessor
 .sass-cache/
+#exclude files uploads
+webroot/img/uploads/users/*
+webroot/img/uploads/competitions/*
+webroot/img/uploads/leagues/*
+webroot/img/uploads/season/*

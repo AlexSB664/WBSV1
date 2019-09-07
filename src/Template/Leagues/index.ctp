@@ -4,7 +4,7 @@
  * @var \App\Model\Entity\League[]|\Cake\Collection\CollectionInterface $leagues
  */
 ?>
-<!--<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New League'), ['action' => 'add']) ?></li>
@@ -13,13 +13,14 @@
         <li><?= $this->Html->link(__('List Seasons'), ['controller' => 'Seasons', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Season'), ['controller' => 'Seasons', 'action' => 'add']) ?></li>
     </ul>
-</nav> -->
+</nav>
 <div class="leagues index large-9 medium-8 columns content">
-    <h3><?= __('Liga') ?></h3>
-    <table cellpadding="0" cellspacing="0" class="table">
+    <h3><?= __('Leagues') ?></h3>
+    <table class="table">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('logo') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('description') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('social_facebook') ?></th>
@@ -38,6 +39,7 @@
             <?php foreach ($leagues as $league): ?>
             <tr>
                 <td><?= $this->Number->format($league->id) ?></td>
+                <td><?= $this->Html->image($league->logo, ['alt' => "default-avatar",'width'=>'65','height'=>'55']); ?></td>
                 <td><?= h($league->name) ?></td>
                 <td><?= h($league->description) ?></td>
                 <td><?= h($league->social_facebook) ?></td>

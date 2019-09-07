@@ -1,6 +1,7 @@
 <?php
 namespace App\Model\Table;
 
+use App\Model\Entity\Point;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -116,14 +117,14 @@ class MatchesTable extends Table
         $this->matches_usersTable = TableRegistry::get('matches_users');
         $this->usersTable = TableRegistry::get('users');
 
-        $competitions = $this->competitionsTable->get($competition_id);
+        $this->matchesTable->find()->where([]);
         $users = $this->usersTable->get($user_id);
 
-
+        
 
         $matches = $this->matchesTable->find()->where(['competition_id'=>$competitions])->first();
-        $mtchs_points = $matches->select(['points']);
         $matchesid = $this->matchesTable->getId($matches);
+        $mtchs_points = $matches->select(['points']);
         //una vez traemos los combates que tuvieron cada usuario
         $matches_users = $this->matches_usersTable->find()->where(['match_id IN' => $matchesid]);
         
@@ -135,8 +136,9 @@ class MatchesTable extends Table
         return $pointsUsers;
     }
 
-    public function getPointsEach(){
-        return 0;
+    public function getPointsEach($user_id,$match_id){
+        $points = 0;
+        return points;;
     }
     public function cochinero(){
         $id = 0;

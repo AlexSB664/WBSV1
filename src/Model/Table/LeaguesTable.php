@@ -40,6 +40,7 @@ class LeaguesTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('File');
 
         $this->hasMany('Schemes', [
             'foreignKey' => 'league_id'
@@ -60,6 +61,11 @@ class LeaguesTable extends Table
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
+
+        $validator
+            ->scalar('logo')
+            ->maxLength('logo', 100)
+            ->allowEmptyString('logo');
 
         $validator
             ->scalar('name')
@@ -116,5 +122,26 @@ class LeaguesTable extends Table
             ->notEmptyString('contact_email');
 
         return $validator;
+    }
+
+    public function addLeague($data = [])
+    {
+      if(empty($data)){
+        return false;
+      }
+
+      $lgs = $this->newEntity();
+
+      $lgs = $this->patchEntity($lgs,$data);
+
+      $file_name =  $this->uploadFile($data['logo'], 'img','uploads/leagues/');
+      $lgs->logo = $file_name;
+      
+      if(!$this->save($lgs)){
+        debug($lgs->errors());
+        die();
+        return false;
+      }
+      return true;
     }
 }

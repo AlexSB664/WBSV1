@@ -24,7 +24,21 @@
     </ul>
 </nav> -->
 <div class="competitions form large-9 medium-8 columns content">
-    <?= $this->Form->create($competition) ?>
+    <?= $this->Form->create($competition, ['type' => 'file']); ?>
+    <fieldset>
+        <legend><?= __('Add League') ?></legend>
+        <?= $this->Form->file('flyer', array(
+            'type' => 'file',
+            'accept' => 'image/*',
+            'onchange' => 'loadFile(event)'
+        )); ?>
+        <img id="output" width="75" height="75" />
+        <script>
+            var loadFile = function(event) {
+                var output = document.getElementById('output');
+                output.src = URL.createObjectURL(event.target.files[0]);
+            };
+        </script>
     <fieldset>
         <legend><?= __('Agregar Competencia') ?></legend>
             <?= $this->Form->label('nombre', array('class'=> 'Nombre: ')); ?>

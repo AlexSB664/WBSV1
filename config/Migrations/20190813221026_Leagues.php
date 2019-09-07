@@ -13,7 +13,11 @@ class Leagues extends AbstractMigration
     public function change()
     {
         $table=$this->table('leagues');
-        $table->addColumn('name','string',[
+        $table->addColumn('logo','string',[
+            'default' => null,
+            'limit' => 100,
+            'null' => true
+        ])->addColumn('name','string',[
             'default' => null,
             'limit' => 50,
             'null' => false

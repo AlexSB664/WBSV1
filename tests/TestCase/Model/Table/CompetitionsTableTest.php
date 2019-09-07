@@ -25,11 +25,10 @@ class CompetitionsTableTest extends TestCase
     public $fixtures = [
         'app.Competitions',
         'app.Seasons',
-        'app.Locations',
         'app.Schemes',
+        'app.Locations',
         'app.Matches',
-        'app.Users',
-        'app.CompetitionsUsers'
+        'app.Users'
     ];
 
     /**

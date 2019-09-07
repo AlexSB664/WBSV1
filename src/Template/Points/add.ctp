@@ -16,7 +16,6 @@
     <?= $this->Form->create($point) ?>
     <fieldset>
         <legend><?= __('Agregar Puntos') ?></legend>
-        <?php
             <?= $this->Form->label('puntos', array('class'=> 'Puntos: ')); ?>
             <?= $this->Form->control('points', array('label'=>false,'class'=>'form-control col-md-7 col-xs-12')); ?>
             <?= $this->Form->label('participante', array('class'=> 'Participante: ')); ?>
