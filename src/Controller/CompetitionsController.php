@@ -80,8 +80,7 @@ class CompetitionsController extends AppController
     {
         $competition = $this->Competitions->newEntity();
         if ($this->request->is('post')) {
-            $competition = $this->Competitions->patchEntity($competition, $this->request->getData());
-            if ($this->Competitions->save($competition)) {
+            if ($competition = $this->Competitions->addCompetitions($this->request->getData())) {
                 $this->Flash->success(__('The competition has been saved.'));
 
                 return $this->redirect(['action' => 'index']);

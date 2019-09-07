@@ -29,6 +29,7 @@
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('flyer') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('date') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('season_id') ?></th>
@@ -44,6 +45,7 @@
             <?php foreach ($competitions as $competition): ?>
             <tr>
                 <td><?= h($competition->id) ?><?= $competition->has('competitions_user') ? $this->Html->link($competition->competitions_user->id, ['controller' => 'CompetitionsUsers', 'action' => 'view', $competition->competitions_user->id]) : '' ?></td>
+                <td><?= $this->Html->image($competition->flyer?$competition->flyer:'no', ['alt' => "default-avatar",'width'=>'65','height'=>'55']); ?></td>
                 <td><?= h($competition->name) ?></td>
                 <td><?= h($competition->date) ?></td>
                 <td><?= $competition->has('season') ? $this->Html->link($competition->season->name, ['controller' => 'Seasons', 'action' => 'view', $competition->season->id]) : '' ?></td>

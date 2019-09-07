@@ -10,8 +10,8 @@ use Cake\Validation\Validator;
  * Competitions Model
  *
  * @property \App\Model\Table\SeasonsTable&\Cake\ORM\Association\BelongsTo $Seasons
- * @property \App\Model\Table\SchemesTable&\Cake\ORM\Association\BelongsTo $Schemes
  * @property \App\Model\Table\LocationsTable&\Cake\ORM\Association\BelongsTo $Locations
+ * @property \App\Model\Table\SchemesTable&\Cake\ORM\Association\BelongsTo $Schemes
  * @property \App\Model\Table\MatchesTable&\Cake\ORM\Association\HasMany $Matches
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsToMany $Users
  *
@@ -43,7 +43,6 @@ class CompetitionsTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
-        $this->addBehavior('File');
 
         $this->belongsTo('Seasons', [
             'foreignKey' => 'season_id',
@@ -52,23 +51,12 @@ class CompetitionsTable extends Table
         $this->belongsTo('Locations', [
             'foreignKey' => 'location_id',
             'joinType' => 'INNER'
-            ]);
-            $this->belongsTo('Schemes', [
-                'foreignKey' => 'scheme_id',
-                'joinType' => 'INNER'
-            ]);
-            $this->hasMany('Matches', [
+        ]);
+        $this->belongsTo('Schemes', [
+            'foreignKey' => 'scheme_id'
+        ]);
+        $this->hasMany('Matches', [
             'foreignKey' => 'competition_id'
-        ]);
-        $this->belongsToMany('Users', [
-            'foreignKey' => 'competition_id',
-            'targetForeignKey' => 'user_id',
-            'joinTable' => 'competitions_users'
-        ]);
-
-        $this->belongsTo('CompetitionsUsers', [
-            'foreignKey' => 'id',
-            'joinType' => 'LEFT'
         ]);
     }
 
@@ -85,23 +73,17 @@ class CompetitionsTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->scalar('flyer')
-            ->maxLength('flyer', 100)
-            ->allowEmptyString('flyer');
-
-            
-            $validator
             ->dateTime('date')
             ->notEmptyDateTime('date');
-            
-            $validator
+
+        $validator
             ->boolean('status')
             ->allowEmptyString('status');
-            
-            $validator
-                ->scalar('name')
-                ->maxLength('name', 50)
-                ->notEmptyString('name');
+
+        $validator
+            ->scalar('name')
+            ->maxLength('name', 50)
+            ->notEmptyString('name');
 
         return $validator;
     }
@@ -118,7 +100,7 @@ class CompetitionsTable extends Table
         $rules->add($rules->existsIn(['season_id'], 'Seasons'));
         $rules->add($rules->existsIn(['location_id'], 'Locations'));
         $rules->add($rules->existsIn(['scheme_id'], 'Schemes'));
-        
+
         return $rules;
     }
 
@@ -138,26 +120,5 @@ class CompetitionsTable extends Table
             $ids[]=$record->id;
         }
         return $ids;
-    }
-
-    public function addCompetitions($data = [])
-    {
-      if(empty($data)){
-        return false;
-      }
-
-      $cmps = $this->newEntity();
-
-      $cmps = $this->patchEntity($cmps,$data);
-
-      $file_name =  $this->uploadFile($data['flyer'], 'img','uploads/competitions/');
-      $cmps->flyer = $file_name;
-      
-      if(!$this->save($cmps)){
-        debug($cmps->errors());
-        die();
-        return false;
-      }
-      return true;
     }
 }

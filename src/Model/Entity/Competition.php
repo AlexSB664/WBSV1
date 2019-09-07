@@ -7,21 +7,21 @@ use Cake\ORM\Entity;
  * Competition Entity
  *
  * @property int $id
+ * @property string|null $flyer
+ * @property string $name
  * @property \Cake\I18n\FrozenTime $date
  * @property int $season_id
+ * @property int $scheme_id
  * @property bool|null $status
  * @property int $location_id
  * @property \Cake\I18n\FrozenTime $created
  * @property \Cake\I18n\FrozenTime|null $modified
- * @property int|null $scheme_id
- * @property string $name
  *
  * @property \App\Model\Entity\Season $season
- * @property \App\Model\Entity\Location $location
  * @property \App\Model\Entity\Scheme $scheme
+ * @property \App\Model\Entity\Location $location
  * @property \App\Model\Entity\Match[] $matches
  * @property \App\Model\Entity\User[] $users
- * @property \App\Model\Entity\CompetitionsUser $competitions_user
  */
 class Competition extends Entity
 {
@@ -35,19 +35,19 @@ class Competition extends Entity
      * @var array
      */
     protected $_accessible = [
+        'flyer' => true,
+        'name' => true,
         'date' => true,
         'season_id' => true,
+        'scheme_id' => true,
         'status' => true,
         'location_id' => true,
         'created' => true,
         'modified' => true,
-        'scheme_id' => true,
-        'name' => true,
         'season' => true,
-        'location' => true,
         'scheme' => true,
+        'location' => true,
         'matches' => true,
-        'users' => true,
-        'competitions_user' => true
+        'users' => true
     ];
 }
