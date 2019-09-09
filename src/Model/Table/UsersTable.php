@@ -140,7 +140,7 @@ class UsersTable extends Table
       $user = $this->patchEntity($user,$data);
       $user->status = 1;
 
-      $file_name =  $this->uploadFile($data['avatar'], 'img','uploads/users/');
+      $file_name =  $this->uploadFile($data['avatar'], 'img','uploads/users');
       $user->avatar = $file_name;
       
       if(!$this->save($user)){

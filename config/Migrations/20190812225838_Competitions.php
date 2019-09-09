@@ -15,7 +15,7 @@ class Competitions extends AbstractMigration
         $table=$this->table('competitions');
         $table->addColumn('flyer','string',[
             'default' => null,
-            'limit' => 100,
+            'limit' => 250,
             'null' => true
         ])->addColumn('name','string',[
             'default' => 'null',

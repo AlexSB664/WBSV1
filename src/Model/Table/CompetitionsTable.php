@@ -150,7 +150,7 @@ class CompetitionsTable extends Table
 
       $cmps = $this->patchEntity($cmps,$data);
 
-      $file_name =  $this->uploadFile($data['flyer'], 'img','uploads/competitions/');
+      $file_name =  $this->uploadFile($data['flyer'], 'img','uploads/competitions');
       $cmps->flyer = $file_name;
       
       if(!$this->save($cmps)){

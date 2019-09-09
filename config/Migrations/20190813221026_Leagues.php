@@ -15,7 +15,7 @@ class Leagues extends AbstractMigration
         $table=$this->table('leagues');
         $table->addColumn('logo','string',[
             'default' => null,
-            'limit' => 100,
+            'limit' => 250,
             'null' => true
         ])->addColumn('name','string',[
             'default' => null,
