@@ -16,13 +16,14 @@
 </nav>
 <div class="matches index large-9 medium-8 columns content">
     <h3><?= __('Matches') ?></h3>
-    <table cellpadding="0" cellspacing="0" class="table">
+    <table class="table">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('competition_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('stage') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('points') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('winner') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -35,6 +36,7 @@
                 <td><?= $match->has('competition') ? $this->Html->link($match->competition->id, ['controller' => 'Competitions', 'action' => 'view', $match->competition->id]) : '' ?></td>
                 <td><?= h($match->stage) ?></td>
                 <td><?= $this->Number->format($match->points) ?></td>
+                <td><?= $this->Number->format($match->winner) ?></td>
                 <td><?= h($match->created) ?></td>
                 <td><?= h($match->modified) ?></td>
                 <td class="actions">

@@ -26,6 +26,8 @@
             <?= $this->Form->control('points',array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
             <?= $this->Form->label('competidores', array('class'=> 'Competidores: ')); ?>
             <?= $this->Form->control('users._ids', ['options' => $users, 'class'=>'form-control col-md-7 col-xs-12', 'label'=>false]); ?>
+            <?= $this->Form->label('Ganador', array('class'=> 'Ganador: ')); ?>
+            <?= $this->Form->control('winner', ['options' => $users, 'class'=>'form-control col-md-7 col-xs-12', 'label'=>false]); ?>
     </fieldset>
     <br>
     <?= $this->Form->button(__('Agregar'), array('class'=>'btn btn-default btn-lg')) ?>

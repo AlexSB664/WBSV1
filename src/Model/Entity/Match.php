@@ -34,6 +34,7 @@ class Match extends Entity
         'created' => true,
         'modified' => true,
         'competition' => true,
-        'users' => true
+        'users' => true,
+        'winner'=>true
     ];
 }

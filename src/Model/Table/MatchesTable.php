@@ -52,6 +52,11 @@ class MatchesTable extends Table
             'targetForeignKey' => 'user_id',
             'joinTable' => 'matches_users'
         ]);
+
+        $this->belongsTo('Users', [
+            'foreignKey' => 'winner',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
