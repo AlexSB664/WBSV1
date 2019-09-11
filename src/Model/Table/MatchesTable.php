@@ -1,17 +1,17 @@
 <?php
+
 namespace App\Model\Table;
 
-use App\Model\Entity\Point;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
-use Cake\ORM\TableRegistry;
 
 /**
  * Matches Model
  *
  * @property \App\Model\Table\CompetitionsTable&\Cake\ORM\Association\BelongsTo $Competitions
+ * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsTo $Users
  * @property \App\Model\Table\UsersTable&\Cake\ORM\Association\BelongsToMany $Users
  *
  * @method \App\Model\Entity\Match get($primaryKey, $options = [])
@@ -47,15 +47,13 @@ class MatchesTable extends Table
             'foreignKey' => 'competition_id',
             'joinType' => 'INNER'
         ]);
+        $this->belongsTo('Users', [
+            'foreignKey' => 'user_id'
+        ]);
         $this->belongsToMany('Users', [
             'foreignKey' => 'match_id',
             'targetForeignKey' => 'user_id',
             'joinTable' => 'matches_users'
-        ]);
-
-        $this->belongsTo('Users', [
-            'foreignKey' => 'winner',
-            'joinType' => 'INNER'
         ]);
     }
 
@@ -93,30 +91,33 @@ class MatchesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['competition_id'], 'Competitions'));
+        $rules->add($rules->existsIn(['user_id'], 'Users'));
 
         return $rules;
     }
-
-    public function getMatchesByCompetition($competition_id){
+    public function getMatchesByCompetition($competition_id)
+    {
         $matches_id = [];
         $mtchTmp = $this->find()
-        ->where(['competition_id IN'=>$competition_id]);
+            ->where(['competition_id IN' => $competition_id]);
         foreach ($mtchTmp as $mtch) {
             $matches_id[] = $mtch->id;
         }
         return $matches_id;
     }
 
-    public function getId($query){
+    public function getId($query)
+    {
         $ids = [];
-        foreach($query as $record){
-            $ids[]=$record->id;
+        foreach ($query as $record) {
+            $ids[] = $record->id;
         }
         return $ids;
     }
-    
-    public function getPonitsUsersByCompetition($user_id,$competition_id){
-        $pointsUsers = [];        
+
+    public function getPonitsUsersByCompetition($user_id, $competition_id)
+    {
+        $pointsUsers = [];
         $this->competitionsTable = TableRegistry::get('competitions');
         $this->matchesTable = TableRegistry::get('matches');
         $this->matches_usersTable = TableRegistry::get('matches_users');
@@ -125,41 +126,43 @@ class MatchesTable extends Table
         $this->matchesTable->find()->where([]);
         $users = $this->usersTable->get($user_id);
 
-        
 
-        $matches = $this->matchesTable->find()->where(['competition_id'=>$competitions])->first();
+
+        $matches = $this->matchesTable->find()->where(['competition_id' => $competition_id])->first();
         $matchesid = $this->matchesTable->getId($matches);
         $mtchs_points = $matches->select(['points']);
         //una vez traemos los combates que tuvieron cada usuario
         $matches_users = $this->matches_usersTable->find()->where(['match_id IN' => $matchesid]);
-        
-        foreach($mtchs_points as $points){
-            echo ($points->points.",");
+
+        foreach ($mtchs_points as $points) {
+            echo ($points->points . ",");
         }
 
 
         return $pointsUsers;
     }
 
-    public function getPointsEach($user_id,$match_id){
+    public function getPointsEach($user_id, $match_id)
+    {
         $points = 0;
         return points;;
     }
-    public function cochinero(){
+    public function cochinero()
+    {
         $id = 0;
         //primero obtenemos todas las competencias dentro de la temporada
-        $competitions = $this->competitionsTable->find()->where(['season_id'=>$id]);
+        $competitions = $this->competitionsTable->find()->where(['season_id' => $id]);
         $competitionsid = $this->competitionsTable->getId($competitions);
         //una vez hecho con el id de las competencias traemos los matches
-        $matches = $this->matchesTable->find()->where(['competition_id IN'=>$competitionsid]);
+        $matches = $this->matchesTable->find()->where(['competition_id IN' => $competitionsid]);
         $mtchs_points = $matches->select(['points']);
         $matchesid = $this->matchesTable->getId($matches);
         //una vez traemos los combates que tuvieron cada usuario
         $matches_users = $this->matches_usersTable->find()->where(['match_id IN' => $matchesid]);
 
-        
-        foreach($mtchs_points as $points){
-            echo ($points->points.",");
+
+        foreach ($mtchs_points as $points) {
+            echo ($points->points . ",");
         }
     }
 }
