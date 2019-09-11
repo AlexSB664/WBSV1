@@ -26,7 +26,7 @@
                 echo $this->Form->control('points');
                 echo $this->Form->label('winner');
                 echo $this->Form->control('user_id', ['label' => false]);
-                echo $this->Form->control('users._ids', ['options' => $users]);
+                echo $this->Form->control('users._ids', ['options' => $users,'multiple'=>'checkbox']);
                 ?>
         </fieldset>
         <?= $this->Form->button(__('Submit')) ?>

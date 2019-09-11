@@ -22,13 +22,13 @@ class CompetitionsUsersController extends AppController
     public function inicialize()
     {
         parent::initialize();
-        $this->loadModel('Users');  
+        $this->loadModel('Users');
         $this->loadModel('Competitions');
     }
-    public function index($id=null)
+    public function index($id = null)
     {
         $this->paginate = ['contain' => ['Users']];
-        $competitionsUsers = $this->paginate($this->CompetitionsUsers->find()->where(['competitions_id'=>$id]));
+        $competitionsUsers = $this->paginate($this->CompetitionsUsers->find()->where(['competitions_id' => $id]));
 
         $this->set(compact('competitionsUsers'));
     }
@@ -55,28 +55,23 @@ class CompetitionsUsersController extends AppController
         if ($this->CompetitionsUsers->delete($competitionsUser)) {
             $this->Flash->success(__('The competitions user has been deleted.'));
             $this->redirect($this->referer());
-
         } else {
             $this->Flash->error(__('The competitions user could not be deleted. Please, try again.'));
             $this->redirect($this->referer());
-
         }
         $this->redirect($this->referer());
     }
-    public function Assistance($id=null)
+    public function Assistance($id = null)
     {
-        $this->autoRender=false;
+        $this->autoRender = false;
         $competitionsUserTable = TableRegistry::get('CompetitionsUsers');
         $competitionsUserTable = TableRegistry::getTableLocator()->get('CompetitionsUsers');
         $competitionsUser = $competitionsUserTable->get($id);
-        if( $competitionsUser->assistance == 1)
-        {
-            $competitionsUser->assistance = 0; 
+        if ($competitionsUser->assistance == 1) {
+            $competitionsUser->assistance = 0;
+        } else {
+            $competitionsUser->assistance = 1;
         }
-        else
-        {
-            $competitionsUser->assistance = 1; 
-        } 
         if ($competitionsUserTable->save($competitionsUser)) {
             $this->redirect($this->referer());
         }
@@ -113,6 +108,34 @@ class CompetitionsUsersController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The competitions user could not be saved. Please, try again.'));
+        }
+        $competitions = $this->CompetitionsUsers->Competitions->find('list', ['limit' => 200]);
+        $users = $this->CompetitionsUsers->Users->find('list', ['limit' => 200]);
+        $this->set(compact('competitionsUser', 'competitions', 'users'));
+    }
+    /**
+     * Add  lazy method because QUE HUEVA!!!!
+     *
+     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+     */
+    public function lazyAdd()
+    {
+        $competitionsUser = $this->CompetitionsUsers->newEntity();
+        if ($this->request->is('post')) {
+            $data = $this->request->getData();
+            foreach ($data['users_id'] as $value) {
+                $dataTmp = [];
+                $dataTmp['competitions_id'] = $data['competitions_id'];
+                $dataTmp['users_id'] = $value;
+                $dataTmp['assistance'] = $data['assistance'];
+                $competitionsTmp = $this->CompetitionsUsers->newEntity();
+                $competitionsTmp = $this->CompetitionsUsers->patchEntity($competitionsTmp, $dataTmp);
+                if ($this->CompetitionsUsers->save($competitionsTmp)) {
+                    $this->Flash->success(__('The competitions user has been saved.'));
+                }
+                $this->Flash->error(__('The competitions user could not be saved. Please, try again.'));
+                return $this->redirect(['action' => 'index']);
+            }
         }
         $competitions = $this->CompetitionsUsers->Competitions->find('list', ['limit' => 200]);
         $users = $this->CompetitionsUsers->Users->find('list', ['limit' => 200]);
