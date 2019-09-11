@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\League $league
@@ -65,6 +66,14 @@
             <td><?= $this->Number->format($league->id) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Slug') ?></th>
+            <td><?= h($league->slug) ?></td>
+        </tr>
+        <tr>
+            <th scope="row"><?= __('Since') ?></th>
+            <td><?= h($league->since) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Created') ?></th>
             <td><?= h($league->created) ?></td>
         </tr>
@@ -75,70 +84,70 @@
     </table>
     <div class="related">
         <h4><?= __('Related Schemes') ?></h4>
-        <?php if (!empty($league->schemes)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('Name') ?></th>
-                <th scope="col"><?= __('League Id') ?></th>
-                <th scope="col"><?= __('Is Default') ?></th>
-                <th scope="col"><?= __('Created') ?></th>
-                <th scope="col"><?= __('Modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($league->schemes as $schemes): ?>
-            <tr>
-                <td><?= h($schemes->id) ?></td>
-                <td><?= h($schemes->name) ?></td>
-                <td><?= h($schemes->league_id) ?></td>
-                <td><?= h($schemes->is_default) ?></td>
-                <td><?= h($schemes->created) ?></td>
-                <td><?= h($schemes->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Schemes', 'action' => 'view', $schemes->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Schemes', 'action' => 'edit', $schemes->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Schemes', 'action' => 'delete', $schemes->id], ['confirm' => __('Are you sure you want to delete # {0}?', $schemes->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
+        <?php if (!empty($league->schemes)) : ?>
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <th scope="col"><?= __('Id') ?></th>
+                    <th scope="col"><?= __('Name') ?></th>
+                    <th scope="col"><?= __('League Id') ?></th>
+                    <th scope="col"><?= __('Is Default') ?></th>
+                    <th scope="col"><?= __('Created') ?></th>
+                    <th scope="col"><?= __('Modified') ?></th>
+                    <th scope="col" class="actions"><?= __('Actions') ?></th>
+                </tr>
+                <?php foreach ($league->schemes as $schemes) : ?>
+                    <tr>
+                        <td><?= h($schemes->id) ?></td>
+                        <td><?= h($schemes->name) ?></td>
+                        <td><?= h($schemes->league_id) ?></td>
+                        <td><?= h($schemes->is_default) ?></td>
+                        <td><?= h($schemes->created) ?></td>
+                        <td><?= h($schemes->modified) ?></td>
+                        <td class="actions">
+                            <?= $this->Html->link(__('View'), ['controller' => 'Schemes', 'action' => 'view', $schemes->id]) ?>
+                            <?= $this->Html->link(__('Edit'), ['controller' => 'Schemes', 'action' => 'edit', $schemes->id]) ?>
+                            <?= $this->Form->postLink(__('Delete'), ['controller' => 'Schemes', 'action' => 'delete', $schemes->id], ['confirm' => __('Are you sure you want to delete # {0}?', $schemes->id)]) ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
         <?php endif; ?>
     </div>
     <div class="related">
         <h4><?= __('Related Seasons') ?></h4>
-        <?php if (!empty($league->seasons)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('Name') ?></th>
-                <th scope="col"><?= __('Description') ?></th>
-                <th scope="col"><?= __('League Id') ?></th>
-                <th scope="col"><?= __('Status') ?></th>
-                <th scope="col"><?= __('Date Start') ?></th>
-                <th scope="col"><?= __('Date End') ?></th>
-                <th scope="col"><?= __('Created') ?></th>
-                <th scope="col"><?= __('Modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($league->seasons as $seasons): ?>
-            <tr>
-                <td><?= h($seasons->id) ?></td>
-                <td><?= h($seasons->name) ?></td>
-                <td><?= h($seasons->description) ?></td>
-                <td><?= h($seasons->league_id) ?></td>
-                <td><?= h($seasons->status) ?></td>
-                <td><?= h($seasons->date_start) ?></td>
-                <td><?= h($seasons->date_end) ?></td>
-                <td><?= h($seasons->created) ?></td>
-                <td><?= h($seasons->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Seasons', 'action' => 'view', $seasons->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Seasons', 'action' => 'edit', $seasons->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Seasons', 'action' => 'delete', $seasons->id], ['confirm' => __('Are you sure you want to delete # {0}?', $seasons->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
+        <?php if (!empty($league->seasons)) : ?>
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <th scope="col"><?= __('Id') ?></th>
+                    <th scope="col"><?= __('Name') ?></th>
+                    <th scope="col"><?= __('Description') ?></th>
+                    <th scope="col"><?= __('League Id') ?></th>
+                    <th scope="col"><?= __('Status') ?></th>
+                    <th scope="col"><?= __('Date Start') ?></th>
+                    <th scope="col"><?= __('Date End') ?></th>
+                    <th scope="col"><?= __('Created') ?></th>
+                    <th scope="col"><?= __('Modified') ?></th>
+                    <th scope="col" class="actions"><?= __('Actions') ?></th>
+                </tr>
+                <?php foreach ($league->seasons as $seasons) : ?>
+                    <tr>
+                        <td><?= h($seasons->id) ?></td>
+                        <td><?= h($seasons->name) ?></td>
+                        <td><?= h($seasons->description) ?></td>
+                        <td><?= h($seasons->league_id) ?></td>
+                        <td><?= h($seasons->status) ?></td>
+                        <td><?= h($seasons->date_start) ?></td>
+                        <td><?= h($seasons->date_end) ?></td>
+                        <td><?= h($seasons->created) ?></td>
+                        <td><?= h($seasons->modified) ?></td>
+                        <td class="actions">
+                            <?= $this->Html->link(__('View'), ['controller' => 'Seasons', 'action' => 'view', $seasons->id]) ?>
+                            <?= $this->Html->link(__('Edit'), ['controller' => 'Seasons', 'action' => 'edit', $seasons->id]) ?>
+                            <?= $this->Form->postLink(__('Delete'), ['controller' => 'Seasons', 'action' => 'delete', $seasons->id], ['confirm' => __('Are you sure you want to delete # {0}?', $seasons->id)]) ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
         <?php endif; ?>
     </div>
 </div>

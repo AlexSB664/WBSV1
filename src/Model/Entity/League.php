@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -48,6 +49,8 @@ class League extends Entity
         'created' => true,
         'modified' => true,
         'schemes' => true,
-        'seasons' => true
+        'seasons' => true,
+        'slug' => true,
+        'since' => true
     ];
 }

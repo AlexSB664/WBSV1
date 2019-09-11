@@ -35,6 +35,8 @@
             echo $this->Form->control('social_website');
             echo $this->Form->control('contact_phone');
             echo $this->Form->control('contact_email');
+            echo $this->Form->control('slug');
+            echo $this->Form->control('since');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

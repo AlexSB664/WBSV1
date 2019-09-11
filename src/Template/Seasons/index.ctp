@@ -16,7 +16,7 @@
 </nav>-->
 <div class="seasons index large-9 medium-8 columns content">
     <h3><?= __('Temporadas') ?></h3>
-    <table cellpadding="0" cellspacing="0" class="table">
+    <table class="table">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
@@ -25,6 +25,7 @@
                 <th scope="col"><?= $this->Paginator->sort('description') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('league_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('status') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('slug') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('date_start') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('date_end') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
@@ -41,6 +42,7 @@
                 <td><?= h($season->description) ?></td>
                 <td><?= $season->has('league') ? $this->Html->link($season->league->name, ['controller' => 'Leagues', 'action' => 'view', $season->league->id]) : '' ?></td>
                 <td><?= h($season->status) ?></td>
+                <td><?= h($season->slug) ?></td>
                 <td><?= h($season->date_start) ?></td>
                 <td><?= h($season->date_end) ?></td>
                 <td><?= h($season->created) ?></td>

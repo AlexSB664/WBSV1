@@ -30,6 +30,8 @@
                 <th scope="col"><?= $this->Paginator->sort('social_website') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('contact_phone') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('contact_email') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('slug') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('since') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -49,6 +51,8 @@
                 <td><?= h($league->social_website) ?></td>
                 <td><?= h($league->contact_phone) ?></td>
                 <td><?= h($league->contact_email) ?></td>
+                <td><?= h($league->slug) ?></td>
+                <td><?= h($league->since) ?></td>
                 <td><?= h($league->created) ?></td>
                 <td><?= h($league->modified) ?></td>
                 <td class="actions">

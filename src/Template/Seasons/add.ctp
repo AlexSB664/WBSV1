@@ -39,6 +39,7 @@
             <?= $this->Form->label('liga', array('class'=>'Liga: ')); ?>
             <?= $this->Form->control('league_id', ['options' => $leagues, 'label'=> false, 'class'=>'form-control col-md-7 col-xs-12']); ?>
             <?= $this->Form->control('status'); ?>
+            <?= $this->Form->control('slug'); ?>
             <?= $this->Form->label('inicio', array('class'=>'Inicio: ')); ?>
             <?= $this->Form->control('date_start', array('label'=>false)); ?>
             <?= $this->Form->label('fin', array('class'=>'Fin: ')); ?>

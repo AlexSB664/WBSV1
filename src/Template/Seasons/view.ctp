@@ -56,6 +56,10 @@
             <th scope="row"><?= __('Status') ?></th>
             <td><?= $season->status ? __('Yes') : __('No'); ?></td>
         </tr>
+        <tr>
+            <th scope="row"><?= __('Slug') ?></th>
+            <td><?= $season->slug ?></td>
+        </tr>
     </table>
     <div class="related">
         <h4><?= __('Relación de Competencias') ?></h4>

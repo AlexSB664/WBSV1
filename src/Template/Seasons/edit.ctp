@@ -25,13 +25,15 @@
     <fieldset>
         <legend><?= __('Editar Temporada') ?></legend>
             <?= $this->Form->label('nombre', array('class'=>'Nombre: ')); ?>
-            <?= $this->Form->control('name', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12'));
+            <?= $this->Form->control('name', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
             <?= $this->Form->label('descripcion', array('class'=>'Descripcion: ')); ?>
             <?= $this->Form->control('description', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
             <?= $this->Form->label('liga', array('class'=>'Liga: ')); ?>
-            <?= $this->Form->control('league_id', ['options' => $leagues]);
+            <?= $this->Form->control('league_id', ['options' => $leagues]); ?>
             <?= $this->Form->label('estatus', array('class'=>'Estatus: ')); ?>
             <?= $this->Form->control('status', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
+            <?= $this->Form->label('slug', array('class'=>'Slug: ')); ?>
+            <?= $this->Form->control('slug', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
             <?= $this->Form->label('inicio', array('class'=>'Inicio: ')); ?>
             <?= $this->Form->control('date_start'); ?>
             <?= $this->Form->label('fin', array('class'=>'Fin: ')); ?>

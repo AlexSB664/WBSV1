@@ -117,7 +117,7 @@ class SeasonsTable extends Table
 
       $ssn = $this->patchEntity($ssn,$data);
 
-      $file_name =  $this->uploadFile($data['flyer'], 'img','uploads/season/');
+      $file_name =  $this->uploadFile($data['flyer'], 'img','uploads/seasons/');
       $ssn->flyer = $file_name;
       
       if(!$this->save($ssn)){

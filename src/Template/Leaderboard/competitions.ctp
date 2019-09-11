@@ -10,14 +10,12 @@
 
 
 
-    <?php foreach ($competitions as $competition) : ?>
-        <tr>
-            <td><?= $this->Html->image($competition->flyer ? $competition->flyer : 'no', ['alt' => "default-avatar", 'width' => '65', 'height' => '55']); ?></td>
-            <td><?= h($competition->name) ?></td>
-            <td><?= h($competition->date) ?></td>
-        <?php endforeach; ?>
-        <div class="competitions index large-9 medium-8 columns content">
-            <h3><?= __('Competencia') ?></h3>
+    <div>
+        <h3><?= __('Competencia') ?></h3>
+        <br>
+        <?php foreach ($competitions as $competition) : ?>
+                <h3><?= ($competition->id) ?></h3>
+            <?php endforeach; ?>
             <table class="table striped">
                 <thead>
                     <tr>

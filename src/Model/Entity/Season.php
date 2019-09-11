@@ -42,6 +42,7 @@ class Season extends Entity
         'created' => true,
         'modified' => true,
         'league' => true,
-        'competitions' => true
+        'competitions' => true,
+        'slug'=>true
     ];
 }
