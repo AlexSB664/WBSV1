@@ -37,12 +37,14 @@
         <thead>
             <tr>
                 <th> all competitions</th>
+                <th>tomar asistencia</th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($competitions as $competition) : ?>
                 <tr>
                     <td> + <?= $this->Html->link($competition->name, ['controller' => 'Matches', 'action' => 'lazyAdd', $competition->id]) ?></td>
+                    <td>+ <?= $this->Html->link( 'Asistencia de '.$competition->name, ['controller' => 'CompetitionsUsers', 'action' => 'index', $competition->id]) ?></td>
                 </tr>
             <?php endforeach ?>
         </tbody>
