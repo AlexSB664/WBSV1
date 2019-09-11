@@ -134,8 +134,8 @@ class CompetitionsUsersController extends AppController
                     $this->Flash->success(__('The competitions user has been saved.'));
                 }
                 $this->Flash->error(__('The competitions user could not be saved. Please, try again.'));
-                return $this->redirect(['action' => 'index']);
             }
+            return $this->redirect(['action' => 'index']);
         }
         $competitions = $this->CompetitionsUsers->Competitions->find('list', ['limit' => 200]);
         $users = $this->CompetitionsUsers->Users->find('list', ['limit' => 200]);
