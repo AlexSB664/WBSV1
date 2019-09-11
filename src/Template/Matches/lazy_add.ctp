@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Match $match
@@ -14,7 +15,7 @@
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
     </ul>
 </nav>
-<?php if(isset($competition)): ?>
+<?php if (isset($competition)) : ?>
     <div class="matches form large-9 medium-8 columns content">
         <?= $this->Form->create($match) ?>
         <fieldset>
@@ -23,17 +24,27 @@
                 echo $this->Form->control('competition_id', ['options' => $competition]);
                 echo $this->Form->control('stage');
                 echo $this->Form->control('points');
-                echo $this->Form->label('winner'); 
-                echo $this->Form->control('user_id',[ 'label'=>false]);
+                echo $this->Form->label('winner');
+                echo $this->Form->control('user_id', ['label' => false]);
                 echo $this->Form->control('users._ids', ['options' => $users]);
-            ?>
+                ?>
         </fieldset>
         <?= $this->Form->button(__('Submit')) ?>
         <?= $this->Form->end() ?>
     </div>
-<?php else: ?>
-<?php foreach ($competitions as $competition): ?>
-<?= $this->Html->link($competition->name, ['controller' => 'Matches', 'action' => 'lazyAdd', $competition->id]) ?>
-    
-<?php endforeach ?>
+<?php else : ?>
+    <table class="table">
+        <thead>
+            <tr>
+                <th> all competitions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($competitions as $competition) : ?>
+                <tr>
+                    <td> + <?= $this->Html->link($competition->name, ['controller' => 'Matches', 'action' => 'lazyAdd', $competition->id]) ?></td>
+                </tr>
+            <?php endforeach ?>
+        </tbody>
+    </table>
 <?php endif ?>
