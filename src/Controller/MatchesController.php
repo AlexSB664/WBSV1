@@ -1,6 +1,8 @@
 <?php
+
 namespace App\Controller;
 
+use Cake\ORM\TableRegistry;
 use App\Controller\AppController;
 
 /**
@@ -12,6 +14,11 @@ use App\Controller\AppController;
  */
 class MatchesController extends AppController
 {
+    public function initialize()
+    {
+        parent::initialize();
+        $this->CompetitionsUsers = TableRegistry::get('competitions_users');
+    }
     /**
      * Index method
      *
@@ -63,6 +70,31 @@ class MatchesController extends AppController
         $competitions = $this->Matches->Competitions->find('list', ['limit' => 200]);
         $users = $this->Matches->Users->find('list', ['limit' => 200]);
         $this->set(compact('match', 'competitions', 'users'));
+    }
+
+    public function lazyAdd($competition_id = null)
+    {
+        if ($competition_id) {
+            $match = $this->Matches->newEntity();
+            if ($this->request->is('post')) {
+                $match = $this->Matches->patchEntity($match, $this->request->getData());
+                if ($this->Matches->save($match)) {
+                    $this->Flash->success(__('The match has been saved.'));
+
+                    return $this->redirect(['action' => 'index']);
+                }
+                $this->Flash->error(__('The match could not be saved. Please, try again.'));
+            }
+            $competition = $this->Matches->Competitions->find('list')->where(['id' => $competition_id]);
+
+            $usr_id = $this->CompetitionsUsers->getUsersIdByCompetition($competition_id);
+
+            $users = $this->Matches->Users->find('list', ['limit' => 200])->where(['id IN'=>$usr_id]);
+            $this->set(compact('match', 'competition', 'users'));
+        } else {
+            $competitions = $this->Matches->Competitions->find();
+            $this->set(compact('competitions'));
+        }
     }
 
     /**

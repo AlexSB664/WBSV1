@@ -94,5 +94,14 @@ class CompetitionsUsersTable extends Table
         }
         return $competitions_id;
     }
+    public function getUsersIdByCompetition($comptetition_id){
+        $users_id = [];
+        $cmpTmp = $this->find('all',['contain' =>['Users']])
+        ->where(['competitions_id'=>$comptetition_id]);
+        foreach ($cmpTmp as $cmp) {
+            $users_id[] = $cmp->users_id;
+        }
+        return $users_id;
+    }
 
 }
