@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Competitions;
-
+use App\Controller\Component\LeaderboardRanking;
 /**
  * SeasonsReports Controller
  *
@@ -17,11 +17,6 @@ class LeaderboardController extends AppController
     public function initialize()
     {
         parent::initialize();
-        // $this->loadModel('Competitions');
-        // $this->loadModel('Leagues');
-        // $this->loadModel('Users');
-        // $this->loadModel('CompetitionsUsers');
-        // $this->loadModel('Matches');
         $this->leaguesTable = TableRegistry::get('leagues');
         $this->seasonsTable = TableRegistry::get('seasons');
         $this->competitionsTable = TableRegistry::get('competitions');
@@ -30,12 +25,12 @@ class LeaderboardController extends AppController
         $this->usersTable = TableRegistry::get('users');
     }
 
-    public function index($league=null, $season=null, $competition=null )
+    public function index($league = null, $season = null, $competition = null)
     {
         $this->viewBuilder()->layout('public');
 
-	$leagues = $this->leaguesTable->find('all')
-			->where(['leagues.name' => $league ]);
+        $leagues = $this->leaguesTable->find('all')
+            ->where(['leagues.name' => $league]);
 
         $leagues = $this->paginate($leagues);
 
@@ -82,6 +77,7 @@ class LeaderboardController extends AppController
                 } else {
                     //reporte por competencia
                     $competitions = $this->competitionsTable->find()->where(['slug' => $competition_slug])->first();
+                    (new LeaderboardRanking(['season'=>$seasons->slug, 'competition'=>$competitions->slug]))->make();
                 }
                 $this->set(compact('competitions'));
                 $this->set(compact('leagues'));
