@@ -29,7 +29,6 @@ class CompetitionsUsersController extends AppController
     {
         $this->paginate = ['contain' => ['Users']];
         $competitionsUsers = $this->paginate($this->CompetitionsUsers->find()->where(['competitions_id' => $id]));
-
         $this->set(compact('competitionsUsers'));
     }
     public function join($id = null)
