@@ -69,6 +69,9 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
+    $routes->connect('/liga/*', ['controller' => 'Leagues', 'action' => 'view']);
+    $routes->connect('/ligas/*', ['controller' => 'Leagues', 'action' => 'index']);
+
     /**
      * Connect catchall routes for all controllers.
      *

@@ -19,10 +19,25 @@ class LeaguesController extends AppController
      */
     public function index()
     {
-        $leagues = $this->paginate($this->Leagues);
+	$this->viewBuilder()->layout('deejee');
+
+        $leagues = $this->Leagues->find('all', [
+				'order' => ['Leagues.name' => 'ASC']
+	]);
 
         $this->set(compact('leagues'));
     }
+    /**
+     * Manage method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function manage()
+    {
+        $leagues = $this->paginate($this->Leagues);
+        $this->set(compact('leagues'));
+    }
+
 
     /**
      * View method
@@ -31,12 +46,14 @@ class LeaguesController extends AppController
      * @return \Cake\Http\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($slug = null)
     {
-        $league = $this->Leagues->get($id, [
-            'contain' => ['Schemes', 'Seasons']
-        ]);
+        $this->viewBuilder()->layout('login');
 
+	$leagues = $this->Leagues->find('all')
+		->where(['Leagues.slug' => $slug ])
+            	->contain(['Schemes', 'Seasons']);
+	$league = $leagues->first();
         $this->set('league', $league);
     }
 
@@ -76,7 +93,7 @@ class LeaguesController extends AppController
             if ($this->Leagues->save($league)) {
                 $this->Flash->success(__('The league has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'manage']);
             }
             $this->Flash->error(__('The league could not be saved. Please, try again.'));
         }
@@ -102,4 +119,10 @@ class LeaguesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function beforeFilter(\Cake\Event\Event $event)
+    {
+        $this->Auth->allow(['index','view']);
+    }
+
 }
