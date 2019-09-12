@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Deejee &mdash; Colorlib Website Template</title>
+  <title>Coliseum WBS</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -28,10 +28,9 @@
 
 <body>
   <div class="site-wrap">
-
-                <?php echo $this->element('header_deejee') ?>
-                <?= $this->fetch('content') ?>
-		<?php echo $this->element('footer_deejee') ?>
+      <?php echo $this->element('header_deejee') ?>
+      <?= $this->fetch('content') ?>
+      <?php echo $this->element('footer_deejee') ?>
   </div>
   <script src="/js/deejee//jquery-3.3.1.min.js"></script>
   <script src="/js/deejee//jquery-migrate-3.0.1.min.js"></script>
