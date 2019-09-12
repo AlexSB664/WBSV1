@@ -144,4 +144,8 @@ class LeaguesTable extends Table
       }
       return true;
     }
+    public function  getIdBySlug($leagues_slug){
+        $lgs = $this->find()->where(['slug'=>$leagues_slug])->first();
+        return $lgs->id;
+    }
 }
