@@ -20,6 +20,7 @@
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('avatar') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('username') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('fullname') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('aka') ?></th>
@@ -29,7 +30,6 @@
                 <th scope="col"><?= $this->Paginator->sort('role') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('status') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('telephone') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('avatar') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -39,6 +39,7 @@
             <?php foreach ($users as $user): ?>
             <tr>
                 <td><?= $this->Number->format($user->id) ?></td>
+                <td><?= $this->Html->image($user->avatar, ['alt' => "default-avatar",'width'=>'65','height'=>'55']); ?></td>
                 <td><?= h($user->username) ?></td>
                 <td><?= h($user->fullname) ?></td>
                 <td><?= h($user->aka) ?></td>
@@ -48,7 +49,6 @@
                 <td><?= h($user->role) ?></td>
                 <td><?= h($user->status) ?></td>
                 <td><?= h($user->telephone) ?></td>
-                <td><?= h($user->avatar) ?></td>
                 <td><?= h($user->created) ?></td>
                 <td><?= h($user->modified) ?></td>
                 <td class="actions">
