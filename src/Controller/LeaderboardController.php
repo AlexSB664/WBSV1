@@ -30,11 +30,12 @@ class LeaderboardController extends AppController
         $this->usersTable = TableRegistry::get('users');
     }
 
-    public function index()
+    public function index($league=null, $season=null, $competition=null )
     {
         $this->viewBuilder()->layout('public');
 
-        $leagues = $this->leaguesTable->find();
+	$leagues = $this->leaguesTable->find('all')
+			->where(['leagues.name' => $league ]);
 
         $leagues = $this->paginate($leagues);
 

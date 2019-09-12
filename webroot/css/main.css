@@ -42,6 +42,11 @@ body, html {
 	font-family: Poppins-Regular, sans-serif;
 }
 
+.social li a
+{
+	font-size: 50px;
+}
+
 /*---------------------------------------------*/
 a {
 	font-family: Poppins-Regular;
