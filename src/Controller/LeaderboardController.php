@@ -17,11 +17,6 @@ class LeaderboardController extends AppController
     public function initialize()
     {
         parent::initialize();
-        // $this->loadModel('Competitions');
-        // $this->loadModel('Leagues');
-        // $this->loadModel('Users');
-        // $this->loadModel('CompetitionsUsers');
-        // $this->loadModel('Matches');
         $this->leaguesTable = TableRegistry::get('leagues');
         $this->seasonsTable = TableRegistry::get('seasons');
         $this->competitionsTable = TableRegistry::get('competitions');
