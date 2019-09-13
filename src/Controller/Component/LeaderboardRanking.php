@@ -25,7 +25,8 @@ class LeaderboardRanking
     public $season_id;
     public $competition_id;
     public $matches_list;
-    public $matches_data=[];
+    public $usersId_list = [];
+    public $users_list = [];
     public $accounts_period;
     public $current_period;
     public $monthly_payments;
@@ -33,14 +34,12 @@ class LeaderboardRanking
     public $start_date;
     public $end_date;
 
-
     public function __construct($data = [])
     {
         $this->Seasons =  TableRegistry::get('Seasons');
         $this->Competitions =  TableRegistry::get('Competitions');
         $this->Matches =  TableRegistry::get('Matches');
         $this->MatchesUsers = TableRegistry::get('MatchesUsers');
-        $this->Users = TableRegistry::get('Users');
         $this->validateArgs($data);
 
         $this->season = $data['season'];
@@ -51,18 +50,15 @@ class LeaderboardRanking
     {
         $this->setUpData();
         $row = 0;
-        foreach ($this->matches_data as $match) {
-            foreach ($match as $attrib) {
-                echo ($attrib);
-                echo (',');
-            }
-            echo ('<br>');
-        }
-        debug($this->matches_data);
-        die();
+        //test    
         foreach ($this->matches_list as $match) {
             $colum = 0;
-            echo $match;
+            echo $match->id;
+            echo (',');
+            echo $match->points;
+            echo (',');
+            echo $match->stage;
+            echo ('<br>');
             $row++;
         }
 
@@ -74,13 +70,44 @@ class LeaderboardRanking
         $this->season_id = $this->Seasons->find()->where(['slug' => $this->season])->first();
         $this->competition_id = $this->Competitions->find()->where(['slug' => $this->competition])->first();
         $this->matches_list = $this->getMatches($this->competition_id->id);
-        $this->matches_data = $this->getIdsMatchesAndPoints($this->matches_list);
+        foreach ($this->matches_list as $match) {
+            $this->getUsersIdsByMatches($match->id);
+        }
+        //limpiando ids de usuarios
+        $this->usersId_list = array_unique($this->usersId_list);
+        $this->usersId_list= array_diff($this->usersId_list, ['']); 
+        $this->getUsers($this->usersId_list);
+        //show ids from users
+        echo implode(',',$this->usersId_list);
+        echo('<br>');
+        foreach ($this->usersId_list as $users) {
+            echo($users);
+            echo('<br>');
+        }
 
     }
 
     private function getMatches($competition_id)
     {
         return $this->Matches->find()->where(['competition_id' => $competition_id]);
+    }
+
+    public function getUsersIdsByMatches($matches_id)
+    {
+        $users = $this->MatchesUsers->find()->where(['match_id'=>$matches_id]);
+        foreach ($users as $user) {
+            $this->usersId_list[]=$user->user_id;     
+        }
+    }
+
+    public function getUsers($usersId)
+    {
+        $users = $this->MatchesUsers->Users->find()->where(['id IN'=>$usersId]);
+        foreach ($users as $user) {
+            echo($user->aka);
+            $this->users_list[]=$user->user_id;     
+        }
+        die();
     }
 
     private function validateArgs($data = [])
@@ -90,17 +117,5 @@ class LeaderboardRanking
                 throw new \BadMethodCallException("Missing argument $arg of AccountMonthlyPaymentsReport");
             }
         }
-    }
-
-    private function getIdsMatchesAndPoints($matches)
-    {
-        $ids = [];
-        foreach ($matches as $match) {
-            $idsTmp['id'] = $match->id;
-            $idsTmp['stage'] = $match->stage;
-            $idsTmp['points'] = $match->points;
-            $ids[]=$idsTmp;
-        }
-        return $ids;
     }
 }
