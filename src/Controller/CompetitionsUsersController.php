@@ -20,7 +20,7 @@ class CompetitionsUsersController extends AppController
      * @return \Cake\Http\Response|null
      */
     public function inicialize()
-    {
+    { 
         parent::initialize();
         $this->loadModel('Users');
         $this->loadModel('Competitions');
