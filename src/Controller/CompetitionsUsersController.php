@@ -117,7 +117,7 @@ class CompetitionsUsersController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function lazyAdd()
+    public function lazyAdd($competition_id=null)
     {
         $competitionsUser = $this->CompetitionsUsers->newEntity();
         if ($this->request->is('post')) {
@@ -136,7 +136,7 @@ class CompetitionsUsersController extends AppController
             }
             return $this->redirect(['action' => 'index']);
         }
-        $competitions = $this->CompetitionsUsers->Competitions->find('list', ['limit' => 200]);
+        $competitions = $this->CompetitionsUsers->Competitions->find('list', ['limit' => 200])->where(['id'=>$competition_id]);
         $users = $this->CompetitionsUsers->Users->find('list', ['limit' => 200]);
         $this->set(compact('competitionsUser', 'competitions', 'users'));
     }
