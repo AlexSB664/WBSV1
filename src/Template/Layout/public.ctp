@@ -1,63 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ColiseumWBS | Login</title>
-    <link rel="stylesheet" type="text/css" href="/css/util.css">
-    <link rel="stylesheet" type="text/css" href="/css/main.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.css" rel="stylesheet"> 
-    <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- Animate.css -->
-    <link href="../vendors/animate.css/animate.min.css" rel="stylesheet">
-    <!-- Custom Theme Style -->
-    <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/bootstrap/dist/css/bootstrap.min.css">
-    <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/font-awesome-4.7.0/css/font-awesome.min.css">
-    <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/iconic/css/material-design-iconic-font.min.css">
-    <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/animate/animate.css">
-    <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/css-hamburgers/hamburgers.min.css">
-    <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/animsition/css/animsition.min.css">
-    <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/select2/select2.min.css">
-    <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/daterangepicker/daterangepicker.css">
-    <!--===============================================================================================-->
-    <?= $this->Html->meta(
-    		'img/favicon-wbs.png',
-    		'/img/favicon-wbs.png',
-    		['type' => 'icon']
-    	); 
-    ?>
+  <title>Coliseum WBS</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
+  <link rel="stylesheet" href="/css/icomoon.css">
+
+  <link rel="stylesheet" href="/css/deejee/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/deejee//magnific-popup.css">
+  <link rel="stylesheet" href="/css/deejee/jquery-ui.css">
+  <link rel="stylesheet" href="/css/deejee/owl.carousel.min.css">
+  <link rel="stylesheet" href="/css/deejee/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/css/deejee/bootstrap-datepicker.css">
+  <link rel="stylesheet" href="/css/deejee/mediaelementplayer.css">
+  <link rel="stylesheet" href="/css/deejee/animate.css">
+  <link rel="stylesheet" href="/css/flaticon.css">
+  <link rel="stylesheet" href="/css/deejee/fl-bigmug-line.css">
+  <link rel="stylesheet" href="/css/deejee/leader.css">
+
+  <link rel="stylesheet" href="/css/deejee/aos.css">
+  <link rel="stylesheet" href="/css/deejee/style.css">
+
 </head>
-<?php echo $this->element('content') ?>            	
-<!--===============================================================================================-->
-	<script src="<?php echo $this->request->webroot; ?>vendors/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-	<script src="<?php echo $this->request->webroot; ?>vendors/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-	<script src="<?php echo $this->request->webroot; ?>vendors/bootstrap/js/popper.js"></script>
-	<script src="<?php echo $this->request->webroot; ?>vendors/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-	<script src="<?php echo $this->request->webroot; ?>vendors/select2/select2.min.js"></script>
-<!--===============================================================================================-->
-	<script src="<?php echo $this->request->webroot; ?>vendors/daterangepicker/moment.min.js"></script>
-	<script src="<?php echo $this->request->webroot; ?>vendors/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-	<script src="<?php echo $this->request->webroot; ?>vendors/countdowntime/countdowntime.js"></script>
-<!--===============================================================================================-->
+
+<body>
+  <div class="site-wrap">
+      <?= $this->fetch('content') ?>
+      <?php echo $this->element('footer_deejee') ?>
+  </div>
+  <script src="/js/deejee//jquery-3.3.1.min.js"></script>
+  <script src="/js/deejee//jquery-migrate-3.0.1.min.js"></script>
+  <script src="/js/deejee//jquery-ui.js"></script>
+  <script src="/js/deejee//popper.min.js"></script>
+  <script src="/js/deejee//bootstrap.min.js"></script>
+  <script src="/js/deejee//owl.carousel.min.js"></script>
+  <script src="/js/deejee//mediaelement-and-player.min.js"></script>
+  <script src="/js/deejee//jquery.stellar.min.js"></script>
+  <script src="/js/deejee//jquery.countdown.min.js"></script>
+  <script src="/js/deejee//jquery.magnific-popup.min.js"></script>
+  <script src="/js/deejee//bootstrap-datepicker.min.js"></script>
+  <script src="/js/deejee//aos.js"></script>
+
+  <script src="/js/deejee//main.js"></script>
+
 </body>
+
 </html>

@@ -25,8 +25,6 @@ class LeaderboardRanking
     public $season_id;
     public $competition_id;
     public $matches_list;
-    public $usersId_list = [];
-    public $usersId_list_index = [];
     public $users_list = [];
     public $position_count = 1;
 
@@ -46,20 +44,7 @@ class LeaderboardRanking
     public function make()
     {
         $this->setUpData();
-        $row = 0;
-        //test    
-        foreach ($this->matches_list as $match) {
-            $colum = 0;
-            echo $match->id;
-            echo (',');
-            echo $match->points;
-            echo (',');
-            echo $match->stage;
-            echo ('<br>');
-            $row++;
-        }
-
-        return $this;
+        return $this->users_list;
     }
 
     private function setUpData()
@@ -70,9 +55,6 @@ class LeaderboardRanking
         foreach ($this->matches_list as $match) {
             $this->getUsersIdsByMatches($match->id, $match->points);
         }
-        //limpiando ids de usuarios
-        $this->wipeUsersByPoints();
-        //work here
         $this->getData();
     }
 
@@ -85,40 +67,17 @@ class LeaderboardRanking
     {
         $users = $this->MatchesUsers->find()->where(['match_id' => $matches_id]);
         foreach ($users as $user) {
-            if (array_key_exists($points, $this->usersId_list)) {
-                $usersTmp = $this->usersId_list[$points];
-            }
-            $usersTmp[] =  $user->user_id;
-            $this->usersId_list[$points] = $usersTmp;
-        }
-        $this->usersId_list_index[] = $points;
-    }
-
-    public function wipeUsersByPoints()
-    {
-        ksort($this->usersId_list);
-        $this->usersId_list = array_reverse($this->usersId_list, true);
-        //wipe index by points, and order by more hit
-        $this->usersId_list_index = array_unique($this->usersId_list_index);
-        sort($this->usersId_list_index);
-        $this->usersId_list_index = array_reverse($this->usersId_list_index, true);
-
-        //wipe repety users by keys
-        $wipeTmp;
-        foreach ($this->usersId_list as $key => $value) {
-            if (empty($wipeTmp)) {
-                $wipeTmp  = $value;
+            if (array_key_exists($user->user_id, $this->users_list)) {
+                $this->users_list[$user->user_id]['points'] =  $this->users_list[$user->user_id]['points'] + $points;
             } else {
-                $tmp = $value;
-                $this->usersId_list[$key] = array_diff($value, $wipeTmp);
-                $wipeTmp  = $tmp;
+                $this->users_list[$user->user_id]['points'] =  $points;
             }
         }
     }
 
     public function getUser($users_id)
     {
-        $users = $this->MatchesUsers->Users->get()->where(['id IN' => $users_id]);
+        $users = $this->MatchesUsers->Users->get($users_id);
         return $users;
     }
     public function getCrew($crew_id)
@@ -127,43 +86,32 @@ class LeaderboardRanking
             $crew = $this->Crews->get($crew_id);
             return $crew->name;
         } else {
-            return null;
+            return 'NA';
         }
     }
 
     public function getData()
     {
-        //get data by keys
-        $dataTmp = [];
-        foreach ($this->usersId_list as $users_data) {
-            echo implode(',', $users_data);
-            echo ('<br>');
-        }
-        var_dump(array_keys($this->usersId_list));
-        die();
-        //i stop here
-        foreach ($this->usersId_list as $key => $values) {
-            echo ($values);
-            echo ($key);
-            foreach ($values as $value) { 
-                $this->data = $this->getRow($value,$key);
-            }
-        }
-    }
+        //order by points
+        arsort($this->users_list, false);
 
-    public function getRow($users_id, $points)
-    {
-        //Posicion Freestyler Avatar  Crew Puntos
-        $userTmp = getUser($users_id);
-        $crewTmp = getCrew($userTmp->crew_id);
-        $rowTmp = [];
-        $rowTmp['Position'] = $this->position_count;
-        $rowTmp['Aka'] = $userTmp->aka;
-        $rowTmp['Avatar'] = $userTmp->avatar;
-        $rowTmp['Crew'] = $crewTmp ? $crewTmp : 'NA';
-        $rowTmp['Points'] = $points;
-        $this->position_count++;
-        return $rowTmp;
+        foreach ($this->users_list as $key => $user) {
+            $userTmp = $this->getUser($key);
+            $this->users_list[$key]['aka'] = $userTmp->aka;
+            $this->users_list[$key]['avatar'] = $userTmp->avatar;
+            $this->users_list[$key]['crew'] = $this->getCrew($userTmp->crew);
+            $this->users_list[$key]['position'] = $this->position_count;
+            $this->position_count++;
+        }
+        // foreach ($this->users_list as $key => $user) {
+        //     echo ($key . ':');
+        //     echo ($user['points'] . ' : ');
+        //     echo ($user['position'] . ' : ');
+        //     echo ($user['aka'] . ' : ');
+        //     echo ($user['avatar'] . ' : ');
+        //     echo ($user['crew'] . ' : ');
+        //     echo ('<br>');
+        // }
     }
 
     private function validateArgs($data = [])
