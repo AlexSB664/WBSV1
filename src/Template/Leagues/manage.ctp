@@ -41,7 +41,7 @@
             <?php foreach ($leagues as $league): ?>
             <tr>
                 <td><?= $this->Number->format($league->id) ?></td>
-                <td><?= $this->Html->image($league->logo, ['alt' => "default-avatar",'width'=>'65','height'=>'55']); ?></td>
+                <td><?= $this->Html->image($league->logo, ['alt' => "default-avatar",'width'=>'65','height'=>'65']); ?></td>
                 <td><?= h($league->name) ?></td>
                 <td><?= h($league->description) ?></td>
                 <td><?= h($league->social_facebook) ?></td>

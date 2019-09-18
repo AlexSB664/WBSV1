@@ -3,7 +3,7 @@
         <div class="row align-items-center">
             <div class="col-8 col-md-8 col-lg-4">
                 <h1 class="mb-0">
-                <a href="index.html" class="text-white h2 mb-0">
+                <a href="https://coliseumwbs.com/" class="text-white h2 mb-0">
                         <img src="/img/logo-wbs-horizontal.png"  height="70" width="148"/>
                 </a>
             </h1>
@@ -15,12 +15,14 @@
 
                     <ul class="site-menu js-clone-nav d-none d-lg-block">
                         <li>
-                            <a href="index.html">Inicio</a>
+                            <a href="https://coliseumwbs.com/">Inicio</a>
                         </li>
-                        <li class="active"><a href="dj.html">Ligas</a></li>
-                        <li><a href="events.html">Eventos</a></li>
-                        <li><a href="about.html">Freestylers</a></li>
-                        <li><a href="contact.html">Contacto</a></li>
+                        <li class="active"><a href="https://coliseumwbs.com/ligas">Ligas</a></li>
+                        <li><a href="https://coliseumwbs.com/eventos">Eventos</a></li>
+                        <li><a href="https://coliseumwbs.com/freestylers">Freestylers</a></li>
+                        <li><a href="https://coliseumwbs.com/contacto">Estadisticas</a></li>
+			<li><a href="https://coliseumwbs.com/contacto">Contacto</a></li>
+                        <li><a href="https://coliseumwbs.com/users/login">Login</a></li>
                     </ul>
                 </nav>
             </div>

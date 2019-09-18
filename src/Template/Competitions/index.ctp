@@ -4,73 +4,50 @@
  * @var \App\Model\Entity\Competition[]|\Cake\Collection\CollectionInterface $competitions
  */
 ?>
-<!--
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Competition'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Seasons'), ['controller' => 'Seasons', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Season'), ['controller' => 'Seasons', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Locations'), ['controller' => 'Locations', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Location'), ['controller' => 'Locations', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Schemes'), ['controller' => 'Schemes', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Scheme'), ['controller' => 'Schemes', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Competitions Users'), ['controller' => 'CompetitionsUsers', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Competitions User'), ['controller' => 'CompetitionsUsers', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Matches'), ['controller' => 'Matches', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Match'), ['controller' => 'Matches', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-    </ul>
-</nav> -->
-<div class="competitions index large-9 medium-8 columns content">
-    <h3><?= __('Competencia') ?></h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('flyer') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('date') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('season_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('status') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('location_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('scheme_id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($competitions as $competition): ?>
-            <tr>
-                <td><?= h($competition->id) ?><?= $competition->has('competitions_user') ? $this->Html->link($competition->competitions_user->id, ['controller' => 'CompetitionsUsers', 'action' => 'view', $competition->competitions_user->id]) : '' ?></td>
-                <td><?= $this->Html->image($competition->flyer?$competition->flyer:'no', ['alt' => "default-avatar",'width'=>'65','height'=>'55']); ?></td>
-                <td><?= h($competition->name) ?></td>
-                <td><?= h($competition->date) ?></td>
-                <td><?= $competition->has('season') ? $this->Html->link($competition->season->name, ['controller' => 'Seasons', 'action' => 'view', $competition->season->id]) : '' ?></td>
-                <td><?= h($competition->status) ?></td>
-                <td><?= $competition->has('location') ? $this->Html->link($competition->location->name, ['controller' => 'Locations', 'action' => 'view', $competition->location->id]) : '' ?></td>
-                <td><?= h($competition->created) ?></td>
-                <td><?= h($competition->modified) ?></td>
-                <td><?= $competition->has('scheme') ? $this->Html->link($competition->scheme->name, ['controller' => 'Schemes', 'action' => 'view', $competition->scheme->name]) : '' ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $competition->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $competition->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $competition->id], ['confirm' => __('Are you sure you want to delete # {0}?', $competition->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
+<div class="site-blocks-cover inner-page-cover overlay" style="background-image: url('/img/hero_bg_02.jpg');"
+    data-aos="fade" data-stellar-background-ratio="0.5" data-aos="fade">
+        <div class="container">
+                <div class="row align-items-center justify-content-center">
+                        <div class="col-md-7 text-center" data-aos="fade-up" data-aos-delay="400">
+                                <h1 class="text-white">Eventos de Freestyle</h1>
+                                <p>Conoce los eventos de Freestyle en Baja California.</p>
+                        </div>
+                </div>
+        </div>
 </div>
+
+<div class="container">
+	<div class="row">
+		<?php foreach ($competitions as $competition): ?>
+		<div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
+			<a href="/events/<?= $competition->slug; ?>">
+				<img src="/img/<?= $competition->flyer; ?>" 
+		     			alt="<?= $competition->season->league->name ?> - <?= $competition->season->name ?> - <?= $competition->name ?>" 
+		     			class="img-fluid">
+	    		</a>
+                	<div class="p-4 bg-white">
+			<span class="d-block text-secondary small text-uppercase"><?= date("F jS, Y", strtotime($competition->date)) ?> </span>
+                    		<h2 class="h5 text-black mb-3">
+                			<a href="/events/<?= $competition->slug; ?>"> 
+						<?= $competition->season->league->name ?> - <?= $competition->season->name ?> - <?= $competition->name ?>
+                			</a>
+                    		</h2>
+                	</div>
+            	</div>
+            	<?php endforeach; ?>
+    	</div>
+
+<div class="container mt-5" data-aos="fade-up">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <div class="site-block-27">
+            <ul>
+            <?= $this->Paginator->numbers() ?>
+	    </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+        <p><?= $this->Paginator->counter(['format' => __('Pagina {{page}} de {{pages}}, mostrando {{current}} eventos de {{count}} en total')]) ?></p>
+</div>
+

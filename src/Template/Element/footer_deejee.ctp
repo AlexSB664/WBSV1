@@ -1,13 +1,13 @@
 <div class="bg-primary" data-aos="fade">
     <div class="container">
         <div class="row">
-            <a href="#" class="col-4 text-center py-4 social-icon d-block">
+            <a href="https://www.facebook.com/coliseumwbs/" class="col-4 text-center py-4 social-icon d-block">
                 <span class="icon-facebook text-white"></span>
             </a>
-            <a href="#" class="col-4 text-center py-4 social-icon d-block">
+            <a href="https://twitter.com/ColiseumWbs" class="col-4 text-center py-4 social-icon d-block">
                 <span class="icon-twitter text-white"></span>
             </a>
-            <a href="#" class="col-4 text-center py-4 social-icon d-block">
+            <a href="https://www.facebook.com/coliseumwbs/" class="col-4 text-center py-4 social-icon d-block">
                 <span class="icon-instagram text-white"></span>
             </a>
         </div>
@@ -33,18 +33,18 @@
                     </div>
                     <div class="col-md-6 col-lg-6">
                         <ul class="list-unstyled">
-                            <li><a href="#">Inicio</a></li>
-                            <li><a href="#">Ligas</a></li>
-                            <li><a href="#">Eventos</a></li>
-                            <li><a href="#">Estadisticasi</a></li>
+                            <li><a href="https://coliseumwbs.com/">Inicio</a></li>
+                            <li><a href="https://coliseumwbs.com/ligas">Ligas</a></li>
+                            <li><a href="https://coliseumwbs.com/eventos">Eventos</a></li>
+                            <li><a href="https://coliseumwbs.com/stats">Estadisticas</a></li>
                         </ul>
                     </div>
                     <div class="col-md-6 col-lg-6">
                         <ul class="list-unstyled">
-                            <li><a href="#">Freestylers</a></li>
-                            <li><a href="#">Aceerca de Nosotros</a></li>
-                            <li><a href="#">Contacto</a></li>
-                            <li><a href="#">Login</a></li>
+                            <li><a href="https://coliseumwbs.com/freestylers">Freestylers</a></li>
+                            <li><a href="https://coliseumwbs.com/nosotros">Aceerca de Nosotros</a></li>
+                            <li><a href="https://coliseumwbs.com/contacto">Contacto</a></li>
+                            <li><a href="https://coliseumwbs.com/users/login">Login</a></li>
                         </ul>
                     </div>
                 </div>
