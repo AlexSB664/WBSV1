@@ -98,6 +98,6 @@ class LeaderboardController extends AppController
 
     public function beforeFilter(\Cake\Event\Event $event)
     {
-        $this->Auth->allow(['index', 'seasons', 'competitions']);
+        $this->Auth->allow(['index', 'seasons', 'competitions','board']);
     }
 }
