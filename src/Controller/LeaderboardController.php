@@ -6,6 +6,7 @@ use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Competitions;
 use App\Controller\Component\LeaderboardRanking;
+
 /**
  * SeasonsReports Controller
  *
@@ -62,6 +63,32 @@ class LeaderboardController extends AppController
     public function board($leagues_slug = null, $seasons_slug = null, $competition_slug = null)
     {
         $this->viewBuilder()->layout('public');
+        $board = $this->leaguesTable->find();
+        if ($leagues_slug) {
+
+            $leagues = $this->leaguesTable->getIdBySlug($leagues_slug);
+            $board = $this->seasonsTable->find()->where(['league_id' => $leagues->id]);
+            $this->set(compact('leagues'));
+            if ($seasons_slug) {
+                $seasons = $this->seasonsTable->find()->where(['slug' => $seasons_slug])->first();
+                $competitions = $this->competitionsTable->find()->where(['season_id' => $seasons->id]);
+
+                if ($competition_slug === "all") {
+                    $board = (new LeaderboardRanking(['season' => $seasons_slug, 'competition' => $competition_slug]))->makeGeneral();
+                } else {
+                    $board = (new LeaderboardRanking(['season' => $seasons->slug, 'competition' => $competition_slug]))->make();
+                 }
+                 $this->set(compact('seasons_slug'));
+                $this->set(compact('competitions'));
+                $this->set(compact('competition_slug'));
+            }
+        }
+        $this->set(compact('board'));
+    }
+
+    public function board2($leagues_slug = null, $seasons_slug = null, $competition_slug = null)
+    {
+        $this->viewBuilder()->layout('public');
         $leagues = $this->leaguesTable->find();
         if ($leagues_slug) {
 
@@ -74,11 +101,13 @@ class LeaderboardController extends AppController
                     //mega reporte bien mamalon alv fierro pariente alterado arremangado ya dije alv?
                     $competitions = $this->competitionsTable->find()->where(['season_id' => $seasons->id]);
                     $general = true;
+                    $board = (new LeaderboardRanking(['season' => $seasons->slug, 'competition' => $competition_slug]))->makeGeneral();
                 } else {
                     //reporte por competencia
                     $competitions = $this->competitionsTable->find()->where(['slug' => $competition_slug])->first();
-                    $board = (new LeaderboardRanking(['season'=>$seasons->slug, 'competition'=>$competitions->slug]))->make();
+                    $board = (new LeaderboardRanking(['season' => $seasons->slug, 'competition' => $competitions->slug]))->make();
                 }
+                $this->set(compact('competition_slug'));
                 $this->set(compact('board'));
                 $this->set(compact('competitions'));
                 $this->set(compact('leagues'));
@@ -98,6 +127,6 @@ class LeaderboardController extends AppController
 
     public function beforeFilter(\Cake\Event\Event $event)
     {
-        $this->Auth->allow(['index', 'seasons', 'competitions','board']);
+        $this->Auth->allow(['index', 'seasons', 'competitions', 'board']);
     }
 }

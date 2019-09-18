@@ -47,11 +47,22 @@ class LeaderboardRanking
         return $this->users_list;
     }
 
+    public function makeGeneral()
+    {
+        $this->setUpData();
+        return $this->users_list;
+    }
+
     private function setUpData()
     {
         $this->season_id = $this->Seasons->find()->where(['slug' => $this->season])->first();
-        $this->competition_id = $this->Competitions->find()->where(['slug' => $this->competition])->first();
-        $this->matches_list = $this->getMatches($this->competition_id->id);
+        if( $this->competition != 'all'){
+            $this->competition_id = $this->Competitions->find()->where(['slug' => $this->competition])->first();
+            $this->matches_list = $this->getMatches($this->competition_id->id);
+        }else{
+            $this->competition_id = $this->Competitions->getCompetitionsBySeason($this->season_id->id);
+            $this->matches_list = $this->getMatchesByMultipleCompetitions($this->competition_id);
+        }
         foreach ($this->matches_list as $match) {
             $this->getUsersIdsByMatches($match->id, $match->points);
         }
@@ -61,6 +72,11 @@ class LeaderboardRanking
     private function getMatches($competition_id)
     {
         return $this->Matches->find()->where(['competition_id' => $competition_id]);
+    }
+
+    private function getMatchesByMultipleCompetitions($competitions_id)
+    {
+        return $this->Matches->find()->where(['competition_id IN' => $competitions_id]);
     }
 
     public function getUsersIdsByMatches($matches_id, $points)
