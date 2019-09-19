@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -131,45 +132,83 @@ class UsersTable extends Table
     }
     public function addParticipan($user_id, $data = [])
     {
-      if(empty($data)){
-        return false;
-      }
+        if (empty($data)) {
+            return false;
+        }
 
-      $user = $this->newEntity();
+        $user = $this->newEntity();
 
-      $user = $this->patchEntity($user,$data);
-      $user->status = 1;
+        $user = $this->patchEntity($user, $data);
+        $user->status = 1;
 
-      $file_name =  $this->uploadFile($data['avatar'], 'img','uploads/users/');
-      $user->avatar = $file_name;
-      
-      if(!$this->save($user)){
-        debug($user->errors());
-        die();
-        return false;
-      }
-      return true;
+        $file_name =  $this->uploadFile($data['avatar'], 'img', 'uploads/users/');
+        $user->avatar = $file_name;
+
+        if (!$this->save($user)) {
+            debug($user->errors());
+            die();
+            return false;
+        }
+        return true;
     }
 
-    public function editParticipan($user=null,$data = [])
+    public function editParticipan($user = null, $data = [])
     {
-      if(empty($data)){
-        return false;
-      }
-      $this->deleteFile($user->avatar,'img');
-      $this->deleteFile($user->head_bg,'img');
-      $user = $this->patchEntity($user,$data);
+        if (empty($data)) {
+            return false;
+        }
+        $tmpAvatar = $user->avatar;
+        $tmpHeadBG = $user->head_bg;
 
-      $file_name =  $this->uploadFile($data['avatar'], 'img','uploads/users/');
-      $user->avatar = $file_name;
-      $file_name =  $this->uploadFile($data['head_bg'], 'img','uploads/users/');
-      $user->head_bg = $file_name;
-      
-      if(!$this->save($user)){
-        debug($user->errors());
-        die();
-        return false;
-      }
-      return true;
+        $user = $this->patchEntity($user, $data);
+
+
+        if (empty($data['avatar']['tmp_name']) & $data['avatar']['error'] === 4 & empty($data['avatar']['name']) &  empty($data['avatar']['type']) & empty($data['avatar']['size'])) {
+            $user->avatar = $tmpAvatar;
+        } else {
+            $this->deleteFile($tmpAvatar, 'img');
+            $file_name =  $this->uploadFile($data['avatar'], 'img', 'uploads/users/');
+            $user->avatar = $file_name;
+        }
+        if (empty($data['head_bg']['tmp_name']) & $data['head_bg']['error'] === 4 & empty($data['head_bg']['name']) &  empty($data['head_bg']['type']) & empty($data['head_bg']['size'])) {
+            $user->head_bg = $tmpHeadBG;
+        } else {
+            $this->deleteFile($tmpHeadBG, 'img');
+            $file_name =  $this->uploadFile($data['head_bg'], 'img', 'uploads/users/');
+            $user->head_bg = $file_name;
+        }
+
+
+        if (!$this->save($user)) {
+            debug($user->errors());
+            die();
+            return false;
+        }
+        return true;
+    }
+
+    public function editLeague($leaguaje = null, $data = [])
+    {
+        if (empty($data)) {
+            return false;
+        }
+        $tmpLogo = $leaguaje->logo;
+
+        $lgs = $this->patchEntity($leaguaje, $data);
+
+        if (empty($data['logo']['tmp_name']) & $data['logo']['error'] === 4 & empty($data['logo']['name']) &  empty($data['logo']['type']) & empty($data['logo']['size'])) {
+            $lgs->logo = $tmpLogo;
+        } else {
+            $this->deleteFile($tmpLogo, 'img');
+            $file_name =  $this->uploadFile($data['logo'], 'img', 'uploads/leagues/');
+            $lgs->logo = $file_name;
+        }
+
+        if (!$this->save($lgs)) {
+            debug($lgs->errors());
+            die();
+            return false;
+        }
+        return true;
     }
 }

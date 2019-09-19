@@ -31,8 +31,6 @@
             'accept' => 'image/*',
             'onchange' => 'loadFile(event)',
             'class' => 'form-control',
-            'value' => $league->logo,
-            'src' => $league->logo
         )); ?>
         <?= $this->Html->image($league->logo, ['id' => 'output', 'width' => '75', 'height' => '75']); ?>
 
