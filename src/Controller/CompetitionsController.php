@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
 use Competitions;
 
@@ -31,10 +32,16 @@ class CompetitionsController extends AppController
     	$this->viewBuilder()->layout('deejee');
 
 	$this->paginate = [
-            'contain' => ['Seasons.Leagues', 'Locations','Schemes']
-        ];
-        $competitions = $this->paginate($this->Competitions);
+		'contain' => ['Seasons.Leagues', 'Locations','Schemes'],
+		'order' => ['date' => 'ASC']
+	];
 
+	$activeEvents = $this->Competitions->find('all')->
+                                where(['Competitions.status' => '1']);
+
+
+        $competitions = $this->paginate($activeEvents);
+	Time::setDefaultLocale('es-MX');
         $this->set(compact('competitions'));
     }
 
