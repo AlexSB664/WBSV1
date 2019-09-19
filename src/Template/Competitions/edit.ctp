@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Competition $competition
@@ -13,7 +14,7 @@
                 ['action' => 'delete', $competition->id],
                 ['confirm' => __('Are you sure you want to delete # {0}?', $competition->id)]
             )
-        ?></li>
+            ?></li>
         <li><?= $this->Html->link(__('List Competitions'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Seasons'), ['controller' => 'Seasons', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Season'), ['controller' => 'Seasons', 'action' => 'add']) ?></li>
@@ -30,22 +31,27 @@
     </ul>
 </nav> -->
 <div class="competitions form large-9 medium-8 columns content">
-    <?= $this->Form->create($competition) ?>
+    <?= $this->Form->create($competition,['type' => 'file']) ?>
     <fieldset>
         <legend><?= __('Editar Competencia') ?></legend>
-            <?= $this->Form->label('fecha', array('class'=> 'Fecha: ')); ?>
-            <?= $this->Form->control('date', array('label'=>false)); ?>
-            <?= $this->Form->label('temporada', array('class'=> 'Temporada: ')); ?>
-            <?= $this->Form->control('season_id', ['options' => $seasons, 'class'=>'form-control col-md-7 col-xs-12','label'=>false]); ?>
-            <?= $this->Form->control('status'); ?>
-            <?= $this->Form->label('localización', array('class'=> 'Localizacion: ')); ?>
-            <?= $this->Form->control('location_id', ['options' => $locations, 'class'=>'form-control col-md-7 col-xs-12','label'=>false]); ?>
-            <?= $this->Form->label('esquema', array('class'=> 'Esquema: ')); ?>
-            <?= $this->Form->control('scheme_id', ['options' => $schemes, 'empty' => true, 'class'=>'form-control col-md-7 col-xs-12','label'=>false]); ?>
-            <?= $this->Form->label('nombre', array('class'=> 'nombre: ')); ?>
-            <?= $this->Form->control('name', array('label'=>false,'class'=>'form-control col-md-7 col-xs-12')); ?>
+        <?= $this->Form->label('Nombre: '); ?>
+        <?= $this->Form->control('name', array('label' => false, 'class' => 'form-control')); ?>
+        <?= $this->Form->label('Flyer: '); ?>
+        <?= $this->Form->file('flyer', array('label' => false, 'class' => 'form-control')); ?>
+        <?= $this->Form->label('Slug: '); ?>
+        <?= $this->Form->control('slug', array('label' => false, 'class' => 'form-control')); ?>
+        <?= $this->Form->label('Fecha: '); ?>
+        <?= $this->Form->control('date', ['class' => 'form-control', 'label' => false]); ?>
+        <?= $this->Form->label('Temporada: '); ?>
+        <?= $this->Form->control('season_id', ['options' => $seasons, 'class' => 'form-control', 'label' => false]); ?>
+        <?= $this->Form->label('Activo: '); ?>
+        <?= $this->Form->control('status', ['class' => 'form-control', 'label' => false]); ?>
+        <?= $this->Form->label('Localización: '); ?>
+        <?= $this->Form->control('location_id', ['options' => $locations, 'class' => 'form-control', 'label' => false]); ?>
+        <?= $this->Form->label('Esquema: '); ?>
+        <?= $this->Form->control('scheme_id', ['options' => $schemes, 'empty' => true, 'class' => 'form-control', 'label' => false]); ?>
     </fieldset>
     <br>
-    <?= $this->Form->button(__('Guardar'), array('class'=>'btn btn-default btn-lg')) ?>
+    <?= $this->Form->button(__('Guardar'), array('class' => 'btn btn-default btn-lg')) ?>
     <?= $this->Form->end() ?>
 </div>

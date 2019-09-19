@@ -29,7 +29,7 @@ class CompetitionsController extends AppController
      */
     public function index()
     {
-    	$this->viewBuilder()->layout('deejee');
+        $this->viewBuilder()->layout('deejee');
 
 	$this->paginate = [
 		'contain' => ['Seasons.Leagues', 'Locations','Schemes'],
@@ -45,16 +45,17 @@ class CompetitionsController extends AppController
         $this->set(compact('competitions'));
     }
 
-    public function join(){
+    public function join()
+    {
         $this->paginate = array(
             'contain' => ['Seasons', 'Locations', 'CompetitionsUsers']
         );
         $ids = $this->CompetitionsUsers->getJoined($this->Auth->user('id'));
-        if($ids){
-            $competitions = $this->paginate($this->Competitions->find()->where(['Competitions.id NOT IN' => $ids])); 
-        }else{
-            $ids= ""; 
-            $competitions = $this->paginate($this->Competitions); 
+        if ($ids) {
+            $competitions = $this->paginate($this->Competitions->find()->where(['Competitions.id NOT IN' => $ids]));
+        } else {
+            $ids = "";
+            $competitions = $this->paginate($this->Competitions);
         }
         $competitionsIn = $this->paginate($this->Competitions->find()->where(['Competitions.id IN' => $ids]));
         $this->set(compact('competitions'));
@@ -71,7 +72,7 @@ class CompetitionsController extends AppController
     public function view($id = null)
     {
         $competition = $this->Competitions->get($id, [
-            'contain' => ['Seasons', 'Locations', 'Matches','Schemes']
+            'contain' => ['Seasons', 'Locations', 'Matches', 'Schemes']
         ]);
 
         $this->set('competition', $competition);
@@ -95,8 +96,8 @@ class CompetitionsController extends AppController
         }
         $seasons = $this->Competitions->Seasons->find('list', ['limit' => 200]);
         $locations = $this->Competitions->Locations->find('list', ['limit' => 200]);
-        $schemes = $this->Competitions->Schemes->find('list',['limit'=>200]);
-        $this->set(compact('competition', 'seasons', 'locations','schemes'));
+        $schemes = $this->Competitions->Schemes->find('list', ['limit' => 200]);
+        $this->set(compact('competition', 'seasons', 'locations', 'schemes'));
     }
 
     /**
@@ -112,8 +113,7 @@ class CompetitionsController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $competition = $this->Competitions->patchEntity($competition, $this->request->getData());
-            if ($this->Competitions->save($competition)) {
+            if ($this->Competitions->editCompetitions($competition, $this->request->data)) {
                 $this->Flash->success(__('The competition has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -122,8 +122,8 @@ class CompetitionsController extends AppController
         }
         $seasons = $this->Competitions->Seasons->find('list', ['limit' => 200]);
         $locations = $this->Competitions->Locations->find('list', ['limit' => 200]);
-        $schemes = $this->Competitions->Schemes->find('list',['limit'=>200]);
-        $this->set(compact('competition', 'seasons', 'locations','schemes'));
+        $schemes = $this->Competitions->Schemes->find('list', ['limit' => 200]);
+        $this->set(compact('competition', 'seasons', 'locations', 'schemes'));
     }
 
     /**

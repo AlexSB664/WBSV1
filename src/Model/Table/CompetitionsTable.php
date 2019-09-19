@@ -160,4 +160,24 @@ class CompetitionsTable extends Table
       }
       return true;
     }
+
+    public function editCompetitions($competition = null,$data = [])
+    {
+      if(empty($data)){
+        return false;
+      }
+      $this->deleteFile($competition->flyer,'img');
+      $cmps = $this->patchEntity($competition,$data);
+
+      $file_name =  $this->uploadFile($data['flyer'], 'img','uploads/competitions/');
+      $cmps->flyer = $file_name;
+      
+      if(!$this->save($cmps)){
+        debug($cmps->errors());
+        die();
+        return false;
+      }
+      return true;
+    }
+
 }

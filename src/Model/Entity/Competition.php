@@ -48,6 +48,7 @@ class Competition extends Entity
         'scheme' => true,
         'location' => true,
         'matches' => true,
-        'users' => true
+        'users' => true,
+        'slug' => true
     ];
 }

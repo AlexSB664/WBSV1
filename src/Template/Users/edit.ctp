@@ -13,45 +13,31 @@
                 ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]
             )
         ?></li>
-     <!--   <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Crews'), ['controller' => 'Crews', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Crew'), ['controller' => 'Crews', 'action' => 'add']) ?></li>
         <li><?= $this->Html->link(__('List Matches'), ['controller' => 'Matches', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Match'), ['controller' => 'Matches', 'action' => 'add']) ?></li> -->
+        <li><?= $this->Html->link(__('New Match'), ['controller' => 'Matches', 'action' => 'add']) ?></li>
     </ul>
 </nav>
 <div class="users form large-9 medium-8 columns content">
-    <?= $this->Form->create($user) ?>
+    <?= $this->Form->create($user, ['type' => 'file']); ?>
     <fieldset>
         <legend><?= __('Edit User') ?></legend>
-        <div class="form-row">
-            <div class="col">
-                <?= $this->Form->label('Username', array('class'=> 'Username: ')); ?>
-                <?= $this->Form->input('Username', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
-                <?= $this->Form->label('Nombre Completo', array('class'=> 'Nombre Completo: ')); ?>
-                <?= $this->Form->input('Nombre Completo', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12'));?>
-                <?= $this->Form->label('Aka', array('class'=> 'Aka: ')); ?>
-                <?= $this->Form->input('Aka', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
-                <?= $this->Form->input('Crew', ['options' => $crews, 'empty' => true,'class'=>'form-control']); ?>
-                <?= $this->Form->label('Email', array('class'=> 'Email: ')); ?>
-                <?= $this->Form->input('Email', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
-                <?= $this->Form->label('contraseña', array('class'=> 'contraseña: ')); ?>
-                <?= $this->Form->input('contraseña', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
-            </div>
-            <div class="col">
-                <?= $this->Form->label('Rol', array('class'=> 'Rol: ')); ?>
-                <?= $this->Form->input('Rol', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
-                <?= $this->Form->label('Estatus', array('class'=> 'Estatus: ')); ?>
-                <?= $this->Form->input('Estatus', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
-                <?= $this->Form->label('Telefono', array('class'=> 'Telefono: ')); ?>
-                <?= $this->Form->input('Telefono', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
-                <?= $this->Form->label('Avatar', array('class'=> 'Avatar: ')); ?>
-                <?= $this->Form->input('Avatar', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
-                <?= $this->Form->input('Combates', ['options' => $matches,'class'=>'form-control']); ?>
-            </div>
-        </div>
-        <br>
+        <?php
+            echo $this->Form->control('username',array( 'class'=>'form-control'));
+            echo $this->Form->control('fullname',array( 'class'=>'form-control'));
+            echo $this->Form->control('aka',array( 'class'=>'form-control'));
+            echo $this->Form->control('crew_id', ['options' => $crews, 'empty' => true,'class'=>'form-control']);
+            echo $this->Form->control('email',array( 'class'=>'form-control'));
+            echo $this->Form->control('password',array( 'class'=>'form-control'));
+            echo $this->Form->control('role',array( 'class'=>'form-control'));
+            echo $this->Form->control('status',array( 'class'=>'form-control'));
+            echo $this->Form->control('telephone',array( 'class'=>'form-control'));
+            echo $this->Form->control('avatar',['class'=>'form-control','type'=>'file']);
+            echo $this->Form->control('head_bg',['class'=>'form-control','type'=>'file']);
+        ?>
     </fieldset>
-    <?= $this->Form->button(__('Guardar'), array('class'=>'btn btn-default btn-lg')) ?>
+    <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>
