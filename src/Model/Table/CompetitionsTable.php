@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -52,12 +53,12 @@ class CompetitionsTable extends Table
         $this->belongsTo('Locations', [
             'foreignKey' => 'location_id',
             'joinType' => 'INNER'
-            ]);
-            $this->belongsTo('Schemes', [
-                'foreignKey' => 'scheme_id',
-                'joinType' => 'INNER'
-            ]);
-            $this->hasMany('Matches', [
+        ]);
+        $this->belongsTo('Schemes', [
+            'foreignKey' => 'scheme_id',
+            'joinType' => 'INNER'
+        ]);
+        $this->hasMany('Matches', [
             'foreignKey' => 'competition_id'
         ]);
         $this->belongsToMany('Users', [
@@ -89,19 +90,19 @@ class CompetitionsTable extends Table
             ->maxLength('flyer', 100)
             ->allowEmptyString('flyer');
 
-            
-            $validator
+
+        $validator
             ->dateTime('date')
             ->notEmptyDateTime('date');
-            
-            $validator
+
+        $validator
             ->boolean('status')
             ->allowEmptyString('status');
-            
-            $validator
-                ->scalar('name')
-                ->maxLength('name', 50)
-                ->notEmptyString('name');
+
+        $validator
+            ->scalar('name')
+            ->maxLength('name', 50)
+            ->notEmptyString('name');
 
         return $validator;
     }
@@ -118,66 +119,72 @@ class CompetitionsTable extends Table
         $rules->add($rules->existsIn(['season_id'], 'Seasons'));
         $rules->add($rules->existsIn(['location_id'], 'Locations'));
         $rules->add($rules->existsIn(['scheme_id'], 'Schemes'));
-        
+
         return $rules;
     }
 
-    public function getCompetitionsBySeason($season_id){
+    public function getCompetitionsBySeason($season_id)
+    {
         $competitions_id = [];
         $comptTmp = $this->find()
-        ->where(['season_id'=>$season_id]);
+            ->where(['season_id' => $season_id]);
         foreach ($comptTmp as $cmpt) {
             $competitions_id[] = $cmpt->id;
         }
         return $competitions_id;
     }
 
-    public function getId($query){
+    public function getId($query)
+    {
         $ids = [];
-        foreach($query as $record){
-            $ids[]=$record->id;
+        foreach ($query as $record) {
+            $ids[] = $record->id;
         }
         return $ids;
     }
 
     public function addCompetitions($data = [])
     {
-      if(empty($data)){
-        return false;
-      }
+        if (empty($data)) {
+            return false;
+        }
 
-      $cmps = $this->newEntity();
+        $cmps = $this->newEntity();
 
-      $cmps = $this->patchEntity($cmps,$data);
+        $cmps = $this->patchEntity($cmps, $data);
 
-      $file_name =  $this->uploadFile($data['flyer'], 'img','uploads/competitions/');
-      $cmps->flyer = $file_name;
-      
-      if(!$this->save($cmps)){
-        debug($cmps->errors());
-        die();
-        return false;
-      }
-      return true;
+        $file_name =  $this->uploadFile($data['flyer'], 'img', 'uploads/competitions/');
+        $cmps->flyer = $file_name;
+
+        if (!$this->save($cmps)) {
+            debug($cmps->errors());
+            die();
+            return false;
+        }
+        return true;
     }
 
-    public function editCompetitions($competition = null,$data = [])
+    public function editCompetitions($competition = null, $data = [])
     {
-      if(empty($data)){
-        return false;
-      }
-      $this->deleteFile($competition->flyer,'img');
-      $cmps = $this->patchEntity($competition,$data);
+        if (empty($data)) {
+            return false;
+        }
+        $tmpFlyer = $competition->flyer;
+        $cmps = $this->patchEntity($competition, $data);
 
-      $file_name =  $this->uploadFile($data['flyer'], 'img','uploads/competitions/');
-      $cmps->flyer = $file_name;
-      
-      if(!$this->save($cmps)){
-        debug($cmps->errors());
-        die();
-        return false;
-      }
-      return true;
+        if (empty($data['logo']['tmp_name']) & $data['logo']['error'] === 4 & empty($data['logo']['name']) &  empty($data['logo']['type']) & empty($data['logo']['size'])) {
+            $cmps->flyer = $tmpFlyer;
+        } else {
+            $this->deleteFile($tmpFlyer, 'img');
+            $file_name =  $this->uploadFile($data['flyer'], 'img', 'uploads/competitions/');
+            $cmps->flyer = $file_name;
+        }
+
+        if (!$this->save($cmps)) {
+            debug($cmps->errors());
+            die();
+            return false;
+        }
+        return true;
     }
-
 }
