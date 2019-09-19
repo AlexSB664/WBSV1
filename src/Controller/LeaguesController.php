@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -19,11 +20,11 @@ class LeaguesController extends AppController
      */
     public function index()
     {
-	$this->viewBuilder()->layout('deejee');
+        $this->viewBuilder()->layout('deejee');
 
         $leagues = $this->Leagues->find('all', [
-				'order' => ['Leagues.name' => 'ASC']
-	]);
+            'order' => ['Leagues.name' => 'ASC']
+        ]);
 
         $this->set(compact('leagues'));
     }
@@ -50,10 +51,10 @@ class LeaguesController extends AppController
     {
         $this->viewBuilder()->layout('deejee');
 
-	$leagues = $this->Leagues->find('all')
-		->where(['Leagues.slug' => $slug ])
-            	->contain(['Schemes', 'Seasons']);
-	$league = $leagues->first();
+        $leagues = $this->Leagues->find('all')
+            ->where(['Leagues.slug' => $slug])
+            ->contain(['Schemes', 'Seasons']);
+        $league = $leagues->first();
         $this->set('league', $league);
     }
 
@@ -122,7 +123,6 @@ class LeaguesController extends AppController
 
     public function beforeFilter(\Cake\Event\Event $event)
     {
-        $this->Auth->allow(['index','view']);
+        $this->Auth->allow(['index', 'view']);
     }
-
 }

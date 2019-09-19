@@ -31,7 +31,9 @@ class FileBehavior extends Behavior
         ]
     ];
     public $expections = [
-        'default.png'
+        'default.png',
+        'default_bg.jpg',
+        'hero_bg_02.jpg'
     ];
 
     public function uploadFile($file, $type = 'files', $deep_dir = null)
