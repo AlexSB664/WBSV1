@@ -79,13 +79,12 @@ class UsersController extends AppController
             'contain' => ['Matches']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
+            if ($this->Users->editParticipan($user, $this->request->data)) {
                 $this->Flash->success(__('The user has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
         }
         $crews = $this->Users->Crews->find('list', ['limit' => 200]);
         $matches = $this->Users->Matches->find('list', ['limit' => 200]);
@@ -138,30 +137,18 @@ class UsersController extends AppController
         $this->viewBuilder()->layout('login');
         $user = $this->Users->newEntity();
 
-        if ($this->request->is('post')) { 
+        if ($this->request->is('post')) {
             if ($this->Users->addParticipan($this->Auth->user('id'), $this->request->data)) {
                 $this->Flash->success(__('The user has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                echo ("error alv");
-                die();
                 $this->Flash->error(__('The user could not be saved. Please, try again.'));
             }
         }
-
-        // if ($this->request->is('post')) {
-        //     $user = $this->Users->newEntity();
-        //     if ($this->Users->addParticipan($this->Auth->user('id'), $this->request->data)) {
-        //         $this->Flash->success(__('The user has been saved.'));
-        //         return $this->redirect(['action' => 'index']);
-        //     } else {
-        //         $this->Flash->error(__('The user could not be saved. Please, try again.'));
-        //     }
-        // }
     }
 
     public function beforeFilter(\Cake\Event\Event $event)
     {
-        $this->Auth->allow(['singup','add']);
+        $this->Auth->allow(['singup', 'add']);
     }
 }

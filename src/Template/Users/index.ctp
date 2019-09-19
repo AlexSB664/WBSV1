@@ -16,7 +16,8 @@
 </nav> -->
 <div class="users index large-9 medium-8 columns content">
     <h3><?= __('Users') ?></h3>
-    <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered dataTable no-footer">
+    <div class="table-responsive">
+    <table class="table">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
@@ -26,12 +27,9 @@
                 <th scope="col"><?= $this->Paginator->sort('aka') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('crew_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('email') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('password') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('role') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('status') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('telephone') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -45,12 +43,9 @@
                 <td><?= h($user->aka) ?></td>
                 <td><?= $user->has('crew') ? $this->Html->link($user->crew->name, ['controller' => 'Crews', 'action' => 'view', $user->crew->id]) : '' ?></td>
                 <td><?= h($user->email) ?></td>
-                <td><?= h($user->password) ?></td>
                 <td><?= h($user->role) ?></td>
                 <td><?= h($user->status) ?></td>
                 <td><?= h($user->telephone) ?></td>
-                <td><?= h($user->created) ?></td>
-                <td><?= h($user->modified) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
@@ -60,6 +55,7 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+    </div>
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>

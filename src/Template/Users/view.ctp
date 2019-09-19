@@ -76,7 +76,8 @@
     <div class="related">
         <h4><?= __('Related Matches') ?></h4>
         <?php if (!empty($user->matches)): ?>
-        <table cellpadding="0" cellspacing="0">
+        <div class="table responsive">
+        <table class="table responsive">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Competition Id') ?></th>
@@ -102,6 +103,7 @@
             </tr>
             <?php endforeach; ?>
         </table>
+        </div>
         <?php endif; ?>
     </div>
 </div>

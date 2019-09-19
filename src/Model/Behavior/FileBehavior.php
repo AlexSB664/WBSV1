@@ -30,6 +30,9 @@ class FileBehavior extends Behavior
             'img' => ['jpg', 'png', 'jpeg', 'JPG']
         ]
     ];
+    public $expections = [
+        'default.png'
+    ];
 
     public function uploadFile($file, $type = 'files', $deep_dir = null)
     {
@@ -37,20 +40,14 @@ class FileBehavior extends Behavior
 
         $config = $this->config();
 
-        
+
         $new_name = Text::uuid() . '-' . $file['name'];
-        
+
         $dir = $config['dirs'][$type] . DS . $deep_dir;
         // echo implode(";",$file);
-        // echo($file[0]);
-        // echo($file[1]);
-        // echo($file[2]);
-        // echo($file[3]);
-        // echo($file[4]);
-        // echo($file[5]);
         // var_dump(array_keys($file));        
         move_uploaded_file($file['tmp_name'], $dir . DS . $new_name);
-        if($deep_dir){
+        if ($deep_dir) {
             $new_name = $deep_dir . $new_name;
         }
         return $new_name;
@@ -71,7 +68,25 @@ class FileBehavior extends Behavior
         return $new_name;
     }
 
-    public function deleteFile($file_name = null, $type = 'files', $deep_dir = null)
+    public function deleteFile($file_name, $type)
+    {
+        if ($file_name or in_array($file_name, $this->expections)) {
+            return false;
+        } else {
+
+            $config = $this->config();
+
+            $dir = $config['dirs'][$type] . DS;
+
+            $file = new  File($dir . DS . $file_name);
+
+            if ($file->delete()) {
+                return true;
+            }
+        }
+    }
+
+    public function deleteFiles($file_name = null, $type = 'files', $deep_dir = null)
     {
         if (!$file_name) {
             return false;
@@ -100,7 +115,6 @@ class FileBehavior extends Behavior
         if (!in_array($ext, $allowed)) {
             echo 'error';
         }
-
     }
 
     public function validateUploads($file, $type = 'files')

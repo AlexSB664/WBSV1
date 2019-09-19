@@ -150,4 +150,26 @@ class UsersTable extends Table
       }
       return true;
     }
+
+    public function editParticipan($user=null,$data = [])
+    {
+      if(empty($data)){
+        return false;
+      }
+      $this->deleteFile($user->avatar,'img');
+      $this->deleteFile($user->head_bg,'img');
+      $user = $this->patchEntity($user,$data);
+
+      $file_name =  $this->uploadFile($data['avatar'], 'img','uploads/users/');
+      $user->avatar = $file_name;
+      $file_name =  $this->uploadFile($data['head_bg'], 'img','uploads/users/');
+      $user->head_bg = $file_name;
+      
+      if(!$this->save($user)){
+        debug($user->errors());
+        die();
+        return false;
+      }
+      return true;
+    }
 }
