@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\League $league
@@ -12,7 +13,7 @@
                 ['action' => 'delete', $league->id],
                 ['confirm' => __('Are you sure you want to delete # {0}?', $league->id)]
             )
-        ?></li>
+            ?></li>
         <li><?= $this->Html->link(__('List Leagues'), ['action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('List Schemes'), ['controller' => 'Schemes', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Scheme'), ['controller' => 'Schemes', 'action' => 'add']) ?></li>
@@ -21,22 +22,38 @@
     </ul>
 </nav>
 <div class="leagues form large-9 medium-8 columns content">
-    <?= $this->Form->create($league) ?>
+    <?= $this->Form->create($league, ['type' => 'file']); ?>
     <fieldset>
         <legend><?= __('Edit League') ?></legend>
+        <?= $this->Form->label('Logo: '); ?>
+        <?= $this->Form->file('logo', array(
+            'type' => 'file',
+            'accept' => 'image/*',
+            'onchange' => 'loadFile(event)',
+            'class' => 'form-control',
+            'value' => $league->logo,
+            'src' => $league->logo
+        )); ?>
+        <?= $this->Html->image($league->logo, ['id' => 'output', 'width' => '75', 'height' => '75']); ?>
+
+        <script>
+            var loadFile = function(event) {
+                var output = document.getElementById('output');
+                output.src = URL.createObjectURL(event.target.files[0]);
+            };
+        </script>
         <?php
-            echo $this->Form->control('logo');
-            echo $this->Form->control('name');
-            echo $this->Form->control('description');
-            echo $this->Form->control('social_facebook');
-            echo $this->Form->control('social_twitter');
-            echo $this->Form->control('social_instagram');
-            echo $this->Form->control('social_youtube');
-            echo $this->Form->control('social_website');
-            echo $this->Form->control('contact_phone');
-            echo $this->Form->control('contact_email');
-            echo $this->Form->control('slug');
-            echo $this->Form->control('since');
+        echo $this->Form->control('name');
+        echo $this->Form->control('description');
+        echo $this->Form->control('social_facebook');
+        echo $this->Form->control('social_twitter');
+        echo $this->Form->control('social_instagram');
+        echo $this->Form->control('social_youtube');
+        echo $this->Form->control('social_website');
+        echo $this->Form->control('contact_phone');
+        echo $this->Form->control('contact_email');
+        echo $this->Form->control('slug');
+        echo $this->Form->control('since');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

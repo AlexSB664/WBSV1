@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -126,26 +127,52 @@ class LeaguesTable extends Table
 
     public function addLeague($data = [])
     {
-      if(empty($data)){
-        return false;
-      }
+        if (empty($data)) {
+            return false;
+        }
 
-      $lgs = $this->newEntity();
+        $lgs = $this->newEntity();
 
-      $lgs = $this->patchEntity($lgs,$data);
+        $lgs = $this->patchEntity($lgs, $data);
 
-      $file_name =  $this->uploadFile($data['logo'], 'img','uploads/leagues/');
-      $lgs->logo = $file_name;
-      
-      if(!$this->save($lgs)){
-        debug($lgs->errors());
-        die();
-        return false;
-      }
-      return true;
+        $file_name =  $this->uploadFile($data['logo'], 'img', 'uploads/leagues/');
+        $lgs->logo = $file_name;
+
+        if (!$this->save($lgs)) {
+            debug($lgs->errors());
+            die();
+            return false;
+        }
+        return true;
     }
-    public function  getIdBySlug($leagues_slug){
-        $lgs = $this->find()->where(['slug'=>$leagues_slug])->first();
+    public function  getIdBySlug($leagues_slug)
+    {
+        $lgs = $this->find()->where(['slug' => $leagues_slug])->first();
         return $lgs;
+    }
+
+    public function editLeague($leaguaje = null, $data = [])
+    {
+        if (empty($data)) {
+            return false;
+        }
+        $tmpLogo = $leaguaje->logo;
+
+        $lgs = $this->patchEntity($leaguaje, $data);
+        
+        if (empty($data['logo']['tmp_name']) & $data['logo']['error'] === 4 & empty($data['logo']['name']) &  empty($data['logo']['type']) & empty($data['logo']['size'])) {
+            $lgs->logo = $tmpLogo;
+        } else {
+            $this->deleteFile($tmpLogo, 'img');
+            $file_name =  $this->uploadFile($data['logo'], 'img', 'uploads/leagues/');
+            $lgs->logo = $file_name;
+        }
+
+        if (!$this->save($lgs)) {
+            debug($lgs->errors());
+            die();
+            return false;
+        }
+        return true;
     }
 }
