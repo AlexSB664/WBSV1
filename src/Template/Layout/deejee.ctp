@@ -24,6 +24,12 @@
   <link rel="stylesheet" href="/css/deejee/aos.css">
   <link rel="stylesheet" href="/css/deejee/style.css">
 
+    <?= $this->Html->meta(
+    		'img/favicon-wbs.png',
+    		'/img/favicon-wbs.png',
+    		['type' => 'icon']
+    	); 
+    ?>
 </head>
 
 <body>

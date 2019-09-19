@@ -28,11 +28,10 @@ class CompetitionsController extends AppController
      */
     public function index()
     {
-        // if ($this->Auth->user('role') == "participant") {
-        //     return $this->redirect(['action' => 'join']);
-        // }
-        $this->paginate = [
-            'contain' => ['Seasons', 'Locations','Schemes']
+    	$this->viewBuilder()->layout('deejee');
+
+	$this->paginate = [
+            'contain' => ['Seasons.Leagues', 'Locations','Schemes']
         ];
         $competitions = $this->paginate($this->Competitions);
 

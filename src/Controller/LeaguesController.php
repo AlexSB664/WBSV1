@@ -48,7 +48,7 @@ class LeaguesController extends AppController
      */
     public function view($slug = null)
     {
-        $this->viewBuilder()->layout('login');
+        $this->viewBuilder()->layout('deejee');
 
 	$leagues = $this->Leagues->find('all')
 		->where(['Leagues.slug' => $slug ])

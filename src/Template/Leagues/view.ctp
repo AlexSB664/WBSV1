@@ -5,71 +5,61 @@
  * @var \App\Model\Entity\League $league
  */
 ?>
-<div="league-header">
-	<span class="login100-form-logo">
-            <?= $this->Html->image($league->logo, ['alt' => "$league->name",'width'=>'120','height'=>'120', 'class'=>'center']); ?>
-	</span>
-
-	<span class="login100-form-title p-b-34 p-t-27"> <?= h($league->name) ?> </span>
-</div>
-
-  <div id="social">
-    <ul class="social">
-        <li><a href="<?= $league->social_facebook; ?>"><i class="fa fa-facebook" aria-hidden="true"> </i></a></li>
-        <li><a href="<?= $league->social_twitter; ?>"><i class="fa fa-twitter" aria-hidden="true"> </a></i></li>
-        <li><a href="<?= $league->social_instagram; ?>"><i class="fa fa-instagram" aria-hidden="true"> </i></a></li>
-        <li><a href="<?= $league->social_youtube; ?>"><i class="fa fa-youtube" aria-hidden="true"> </a></i></li>
-        <li><a href="<?= $league->social_website; ?>"><i class="fa fa-globe" aria-hidden="true"> </a></i></li>
-        <li><a href="<?= $league->social_phone; ?>"><i class="fa fa-phone" aria-hidden="true"> <?= $league->social_phone; ?></a></i></li>
-        <li><a href="<?= $league->social_email; ?>"><i class="fa fa-envelope" aria-hidden="true"> FFF <?= $league->social_email; ?> </a></i></li>
-
-    </ul>
-  </div>  
-
-<div class="contact" >
-	    <?= __('Website') ?>
-            <?= h($league->social_website) ?>
-            <?= __('Telefono') ?>
-            <?= h($league->contact_phone) ?>
-            <?= __('Email') ?>
-            <?= h($league->contact_email) ?>
-            <?= __('Fecha de Creacion') ?>
-	    <?= h($league->since) ?>
-</div>
-    <div class="related">
-        <h4><?= __('Temporadas') ?></h4>
-        <?php if (!empty($league->seasons)) : ?>
-            <table cellpadding="0" cellspacing="0">
-                <tr>
-                    <th scope="col"><?= __('Id') ?></th>
-                    <th scope="col"><?= __('Name') ?></th>
-                    <th scope="col"><?= __('Description') ?></th>
-                    <th scope="col"><?= __('League Id') ?></th>
-                    <th scope="col"><?= __('Status') ?></th>
-                    <th scope="col"><?= __('Date Start') ?></th>
-                    <th scope="col"><?= __('Date End') ?></th>
-                    <th scope="col"><?= __('Created') ?></th>
-                    <th scope="col"><?= __('Modified') ?></th>
-                    <th scope="col" class="actions"><?= __('Actions') ?></th>
-                </tr>
-                <?php foreach ($league->seasons as $seasons) : ?>
-                    <tr>
-                        <td><?= h($seasons->id) ?></td>
-                        <td><?= h($seasons->name) ?></td>
-                        <td><?= h($seasons->description) ?></td>
-                        <td><?= h($seasons->league_id) ?></td>
-                        <td><?= h($seasons->status) ?></td>
-                        <td><?= h($seasons->date_start) ?></td>
-                        <td><?= h($seasons->date_end) ?></td>
-                        <td><?= h($seasons->created) ?></td>
-                        <td><?= h($seasons->modified) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link(__('View'), ['controller' => 'Seasons', 'action' => 'view', $seasons->id]) ?>
-                            <?= $this->Html->link(__('Edit'), ['controller' => 'Seasons', 'action' => 'edit', $seasons->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['controller' => 'Seasons', 'action' => 'delete', $seasons->id], ['confirm' => __('Are you sure you want to delete # {0}?', $seasons->id)]) ?>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
-        <?php endif; ?>
+  <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url('/img/hero_bg_02.jpg');"
+    data-aos="fade" data-stellar-background-ratio="0.5" data-aos="fade">
+    <div class="container">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-7 text-center" data-aos="fade-up" data-aos-delay="400">
+  
+          <h1 class="text-white">Ligas de BajaMx - <?= h($league->name) ?></h1>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+        </div>
+      </div>
     </div>
+  </div>
+
+  <div class="site-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-5 ml-auto order-lg-2 mb-5" data-aos="fade-up" data-aos-delay="200">
+            <?= $this->Html->image($league->logo, ['alt' => "$league->name", 'class'=>'img-fluid']); ?>
+        </div>
+        <div class="col-lg-6 order-lg-1" data-aos="fade-up" data-aos-delay="100">
+          <div class="site-section-heading text-left mb-5 w-border">
+            <h2>Acerca de <?= h($league->name) ?></h2>
+          </div>
+          <p class="lead">Aqui va una descripcion de las ligas que aún no tenemos.... :(  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate accusamus porro, iusto id
+            iste, quo nulla. Quisquam quia reiciendis iste earum mollitia officiis pariatur, culpa ab rerum quam, sint
+            veritatis?</p>
+          <p>Nobis rem impedit eligendi! Temporibus dolorum rerum quod autem, iusto excepturi distinctio maxime, deserunt,
+            odio veritatis aliquid illo dolorem! Odio quibusdam repellat dolores dolor ipsum perferendis id, quod
+            voluptates amet.</p>
+          <p>Perspiciatis porro cumque dicta laborum laudantium quia et expedita dolorum, quis id facilis repudiandae
+            nostrum nam temporibus dolores impedit tempora! Blanditiis tenetur neque harum molestiae ipsa minus. Nulla
+            nemo, quis.</p>
+					<div class="text">
+						<h2 class="mb-2 font-weight-light h4"> <?= $league->name; ?> </h2>
+						<span class="d-block mb-2 text-white-opacity-05">Telefono: <?= $league->social_telephone; ?></span>
+						<p class="mb-4"> Email: <?= $league->social_email; ?>.</p>
+						<p>
+							<a href="<?= $league->social_facebook; ?>" class="text-white p-2"><span class="icon-facebook"></span></a>
+							<a href="<?= $league->social_twitter; ?>" class="text-white p-2"><span class="icon-twitter"></span></a>
+							<a href="<?= $league->social_instagram; ?>" class="text-white p-2"><span class="icon-instagram"></span></a>
+						</p>
+					</div> 
+	</div>
+  
+      </div>
+    </div>
+  </div>
+
+  <div class="site-section">
+    <div class="container" data-aos="fade-up">
+      <div class="row">
+        <div class="site-section-heading text-center mb-5 w-border col-md-6 mx-auto">
+          <h2 class="mb-5"> Próximos Eventos</h2>
+          <p> En esta sección apareceran los evento de la liga.... Proximamente....</p>
+        </div>
+      </div>
+    </div>
+  </div>

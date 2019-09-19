@@ -26,13 +26,23 @@
 				<div class="team-member">
 					<img src="/img/<?= $league->logo; ?>" alt="Image" class="img-fluid">
 					<div class="text">
-						<h2 class="mb-2 font-weight-light h4"> <?= $league->name; ?> </h2>
-						<span class="d-block mb-2 text-white-opacity-05">Telefono: <?= $league->social_telephone; ?></span>
-						<p class="mb-4"> Email: <?= $league->social_email; ?>.</p>
+						<h2 class="mb-2 font-weight-light h4">  <a href="/liga/<?= $league->slug; ?>"> <?= $league->name; ?> </a></h2>
+						<span class="d-block mb-2 text-white-opacity-05">Telefono: <?= $league->contact_phone; ?></span>
+						<span class="d-block mb-2 text-white-opacity-05"> Email: <?= $league->contact_email; ?>.</span>
 						<p>
-							<a href="<?= $league->social_facebook; ?>" class="text-white p-2"><span class="icon-facebook"></span></a>
-							<a href="<?= $league->social_twitter; ?>" class="text-white p-2"><span class="icon-twitter"></span></a>
-							<a href="<?= $league->social_instagram; ?>" class="text-white p-2"><span class="icon-instagram"></span></a>
+							<?php if($league->social_facebook != "NULL"): ?>
+								<a href="<?= $league->social_facebook; ?>" class="text-white p-2"><span class="icon-facebook"></span></a>
+							<?php endif; ?>
+							<?php if($league->social_twitter != "NULL"): ?>
+								<a href="<?= $league->social_twitter; ?>" class="text-white p-2"><span class="icon-twitter"></span></a>
+                                                        <?php endif; ?>
+							<?php if($league->social_instagram != "NULL"): ?>
+								<a href="<?= $league->social_instagram; ?>" class="text-white p-2"><span class="icon-instagram"></span></a>
+                                                        <?php endif; ?>
+							<?php if($league->social_youtube != "NULL"): ?>
+								<a href="<?= $league->social_youtube; ?>" class="text-white p-2"><span class="icon-youtube"></span></a>
+                                                        <?php endif; ?>
+
 						</p>
 					</div>
 				</div>
