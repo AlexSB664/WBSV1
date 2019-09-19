@@ -71,6 +71,7 @@ Router::scope('/', function (RouteBuilder $routes) {
 
     $routes->connect('/eventos', ['controller' => 'Pages', 'action' => 'display', "proxima"]);
     $routes->connect('/freestylers', ['controller' => 'Pages', 'action' => 'display', "proxima"]);
+    $routes->connect('/estadisticas', ['controller' => 'Pages', 'action' => 'display', "proxima"]);
     $routes->connect('/stats', ['controller' => 'Pages', 'action' => 'display', "proxima"]);
     $routes->connect('/nosotros', ['controller' => 'Pages', 'action' => 'display', "proxima"]);
     $routes->connect('/stats', ['controller' => 'Pages', 'action' => 'display', "proxima"]);
