@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Competition $competition
@@ -39,21 +40,24 @@
                 output.src = URL.createObjectURL(event.target.files[0]);
             };
         </script>
-    <fieldset>
-        <legend><?= __('Agregar Competencia') ?></legend>
-            <?= $this->Form->label('nombre', array('class'=> 'Nombre: ')); ?>
-            <?= $this->Form->input('name', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
-            <?= $this->Form->label('fecha', array('class'=> 'Fecha: ')); ?>
-            <?= $this->Form->control('date', array('label'=>false)); ?>
-            <?= $this->Form->label('temporada', array('class'=> 'Temporada: ')); ?>
-            <?= $this->Form->control('season_id', ['options' => $seasons,'class'=>'form-control col-md-7 col-xs-12', 'label'=>false]); ?>
-            <?= $this->Form->control('status'); ?>
-            <?= $this->Form->label('localización', array('class'=> 'Localizacion: ')); ?>
-            <?= $this->Form->control('location_id', ['options' => $locations,'class'=>'form-control col-md-7 col-xs-12','label'=>false]); ?>
-            <?= $this->Form->label('esquema', array('class'=> 'Esquema: ')); ?>
-            <?= $this->Form->control('scheme_id', ['options' => $schemes, 'empty' => true,'class'=>'form-control col-md-7 col-xs-12','label'=>false]); ?>
-    </fieldset>
-    <br>
-    <?= $this->Form->button(__('Agregar'), array('class'=>'btn btn-default btn-lg')) ?>
-    <?= $this->Form->end() ?>
+        <fieldset>
+            <legend><?= __('Agregar Competencia') ?></legend>
+            <?= $this->Form->label('Nombre: '); ?>
+            <?= $this->Form->input('name', ['label' => false, 'class' => 'form-control']); ?>
+            <?= $this->Form->label('Fecha: '); ?>
+            <?= $this->Form->control('date', array('label' => false)); ?>
+            <?= $this->Form->label('Slug: '); ?>
+            <?= $this->Form->control('slug', ['label' => false]); ?>
+            <?= $this->Form->label('Temporada: '); ?>
+            <?= $this->Form->control('season_id', ['options' => $seasons, 'class' => 'form-control', 'label' => false]); ?>
+            <?= $this->Form->label('Activa?:'); ?>
+            <?= $this->Form->control('status', ['label' => false]); ?>
+            <?= $this->Form->label('Localización: '); ?>
+            <?= $this->Form->control('location_id', ['options' => $locations, 'class' => 'form-control', 'label' => false]); ?>
+            <?= $this->Form->label('Esquema: '); ?>
+            <?= $this->Form->control('scheme_id', ['options' => $schemes, 'empty' => true, 'class' => 'form-control', 'label' => false]); ?>
+        </fieldset>
+        <br>
+        <?= $this->Form->button(__('Agregar'), array('class' => 'btn btn-default btn-lg')) ?>
+        <?= $this->Form->end() ?>
 </div>
