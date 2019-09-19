@@ -186,29 +186,4 @@ class UsersTable extends Table
         }
         return true;
     }
-
-    public function editLeague($leaguaje = null, $data = [])
-    {
-        if (empty($data)) {
-            return false;
-        }
-        $tmpLogo = $leaguaje->logo;
-
-        $lgs = $this->patchEntity($leaguaje, $data);
-
-        if (empty($data['logo']['tmp_name']) & $data['logo']['error'] === 4 & empty($data['logo']['name']) &  empty($data['logo']['type']) & empty($data['logo']['size'])) {
-            $lgs->logo = $tmpLogo;
-        } else {
-            $this->deleteFile($tmpLogo, 'img');
-            $file_name =  $this->uploadFile($data['logo'], 'img', 'uploads/leagues/');
-            $lgs->logo = $file_name;
-        }
-
-        if (!$this->save($lgs)) {
-            debug($lgs->errors());
-            die();
-            return false;
-        }
-        return true;
-    }
 }
