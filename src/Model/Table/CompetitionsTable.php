@@ -172,7 +172,7 @@ class CompetitionsTable extends Table
         $tmpFlyer = $competition->flyer;
         $cmps = $this->patchEntity($competition, $data);
 
-        if (empty($data['logo']['tmp_name']) & $data['logo']['error'] === 4 & empty($data['logo']['name']) &  empty($data['logo']['type']) & empty($data['logo']['size'])) {
+        if (empty($data['flyer']['tmp_name']) & $data['flyer']['error'] === 4 & empty($data['flyer']['name']) &  empty($data['flyer']['type']) & empty($data['flyer']['size'])) {
             $cmps->flyer = $tmpFlyer;
         } else {
             $this->deleteFile($tmpFlyer, 'img');
