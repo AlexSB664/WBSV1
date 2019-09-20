@@ -45,6 +45,27 @@ class CompetitionsController extends AppController
         $this->set(compact('competitions'));
     }
 
+
+    /**
+     * Manage method
+     *
+     * @return \Cake\Http\Response|null
+     */
+    public function manage()
+    {
+
+        $this->paginate = [
+                'contain' => ['Seasons.Leagues', 'Locations','Schemes'],
+                'order' => ['date' => 'ASC']
+        ];
+
+        $Events = $this->Competitions->find('all');
+
+        $competitions = $this->paginate($Events);
+        Time::setDefaultLocale('es-MX');
+        $this->set(compact('competitions'));
+    }
+
     public function join()
     {
         $this->paginate = array(

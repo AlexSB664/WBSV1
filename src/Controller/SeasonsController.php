@@ -76,8 +76,10 @@ class SeasonsController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $season = $this->Seasons->patchEntity($season, $this->request->getData());
-            if ($this->Seasons->save($season)) {
+           /* $season = $this->Seasons->patchEntity($season, $this->request->getData());
+            if ($this->Seasons->save($season)) { */
+        if ($this->Seasons->editSeason($season, $this->request->data))
+            {
                 $this->Flash->success(__('The season has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
