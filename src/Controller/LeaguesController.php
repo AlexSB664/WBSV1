@@ -53,8 +53,9 @@ class LeaguesController extends AppController
 
         $leagues = $this->Leagues->find('all')
             ->where(['Leagues.slug' => $slug])
-            ->contain(['Schemes', 'Seasons']);
+            ->contain(['Schemes', 'Seasons.Competitions']);
         $league = $leagues->first();
+        $league->seasons = array_reverse($league->seasons);
         $this->set('league', $league);
     }
 
