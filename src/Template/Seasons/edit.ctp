@@ -21,7 +21,7 @@
     </ul>
 </nav> -->
 <div class="seasons form large-9 medium-8 columns content">
-    <?= $this->Form->create($season) ?>
+    <?= $this->Form->create($season,['type'=>'file']) ?>
     <fieldset>
         <legend><?= __('Editar Temporada') ?></legend>
             <?= $this->Form->label('nombre', array('class'=>'Nombre: ')); ?>
@@ -34,6 +34,7 @@
             <?= $this->Form->control('status', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
             <?= $this->Form->label('slug', array('class'=>'Slug: ')); ?>
             <?= $this->Form->control('slug', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
+            <?= $this->Form->file('flyer'); ?>
             <?= $this->Form->label('inicio', array('class'=>'Inicio: ')); ?>
             <?= $this->Form->control('date_start'); ?>
             <?= $this->Form->label('fin', array('class'=>'Fin: ')); ?>

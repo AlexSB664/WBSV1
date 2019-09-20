@@ -109,23 +109,44 @@ class SeasonsTable extends Table
 
     public function addSeason($data = [])
     {
-      if(empty($data)){
-        return false;
-      }
-
+        if(empty($data)){
+            return false;
+        }
       $ssn = $this->newEntity();
-
       $ssn = $this->patchEntity($ssn,$data);
-
       $file_name =  $this->uploadFile($data['flyer'], 'img','uploads/seasons/');
       $ssn->flyer = $file_name;
       
       if(!$this->save($ssn)){
-          debug($ssn->errors());
-          echo($ssn->flyer);
-        die();
+          debug($ssn->errors());    
         return false;
       }
       return true;
+    }
+    public function editSeason($season = null, $data=[])
+    {
+        if(empty($data))
+        {
+            return false;
+        }
+        $tempFlyer=$season->flyer;
+        $ssn=$this->patchEntity($season,$data);
+        if(empty($data['flyer']['tmp_name'])& $data['flyer']['error']===4 & empty($data['flyer']['name'])
+        & empty($data['flyer']['type']) & empty($data['flyer']['size']))
+        {
+            $ssn->flyer = $tempFlyer;
+        }
+        else
+        {
+            $this->deleteFile($tempFlyer,'img');
+            $file_name=$this->uploadFile($data['flyer'],'img','uploads/seasons/');
+            $ssn->flyer = $file_name;
+        }
+        if(!$this->save($ssn))
+        {
+            debug($ssn->errors());
+            return false;
+        }
+        return true;
     }
 }
