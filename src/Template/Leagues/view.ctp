@@ -57,14 +57,16 @@
     <div class="row">
       <div class="site-section-heading text-center mb-5 w-border col-md-6 mx-auto">
         <h2 class="mb-5"> Eventos</h2>
-        <p> En esta sección aparecen todos los evento de la liga   <?= h($league->name) ?></p>
+        <p> En esta sección aparecen todos los evento de la liga <?= h($league->name) ?></p>
       </div>
     </div>
+    <?= empty($season->competitions) ? '<h3 class="mb-5"> No hay eventos de esta liga :( </h3>'  : '' ?>
     <?php foreach ($league->seasons as $season) : ?>
       <div class="row">
         <h3 class="mb-5"> Eventos de <?= $season->name ?></h3>
       </div>
       <div class="row">
+        <?= empty($season->competitions) ? '<h3 class="mb-5"> No hay eventos  de esta temporada :( </h3>'  : '' ?>
         <?php foreach ($season->competitions as $competition) : ?>
           <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
             <a href="/events/<?= $competition->slug; ?>">
