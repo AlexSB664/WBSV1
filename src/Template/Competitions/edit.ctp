@@ -37,7 +37,21 @@
         <?= $this->Form->label('Nombre: '); ?>
         <?= $this->Form->control('name', array('label' => false, 'class' => 'form-control')); ?>
         <?= $this->Form->label('Flyer: '); ?>
-        <?= $this->Form->file('flyer', array('label' => false, 'class' => 'form-control')); ?>
+        <?= $this->Form->file('flyer', array(
+            'type' => 'file',
+            'accept' => 'image/*',
+            'onchange' => 'loadFile(event)',
+            'class' => 'form-control',
+        )); ?>
+        <?= $this->Html->image($competition->flyer, ['id' => 'output', 'width' => '75', 'height' => '75']); ?>
+
+        <script>
+            var loadFile = function(event) {
+                var output = document.getElementById('output');
+                output.src = URL.createObjectURL(event.target.files[0]);
+            };
+        </script>
+        <br>
         <?= $this->Form->label('Slug: '); ?>
         <?= $this->Form->control('slug', array('label' => false, 'class' => 'form-control')); ?>
         <?= $this->Form->label('Fecha: '); ?>
