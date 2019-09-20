@@ -60,7 +60,7 @@
         <p> En esta sección aparecen todos los evento de la liga <?= h($league->name) ?></p>
       </div>
     </div>
-    <?= empty($season->competitions) ? '<h3 class="mb-5"> No hay eventos de esta liga :( </h3>'  : '' ?>
+    <?= empty($league->seasons) ? '<h3 class="mb-5"> No hay eventos de esta liga :( </h3>'  : '' ?>
     <?php foreach ($league->seasons as $season) : ?>
       <div class="row">
         <h3 class="mb-5"> Eventos de <?= $season->name ?></h3>
