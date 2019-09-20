@@ -56,8 +56,8 @@
   <div class="container" data-aos="fade-up">
     <div class="row">
       <div class="site-section-heading text-center mb-5 w-border col-md-6 mx-auto">
-        <h2 class="mb-5"> Próximos Eventos</h2>
-        <p> En esta sección apareceran los evento de la liga.... Proximamente....</p>
+        <h2 class="mb-5"> Eventos</h2>
+        <p> En esta sección aparecen todos los evento de la liga   <?= h($league->name) ?></p>
       </div>
     </div>
     <?php foreach ($league->seasons as $season) : ?>

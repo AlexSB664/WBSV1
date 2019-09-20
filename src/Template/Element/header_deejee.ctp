@@ -16,13 +16,15 @@
                     <ul class="site-menu js-clone-nav d-none d-lg-block">
                         <li <?= $this->request->params['controller'] === 'Competitions' ? 'class="active"' : '' ?>>
                             <a href="<?= $this->Url->build([
-                                            'controller' => 'Competitions'
+                                            'controller' => 'Competitions',
+                                            'action' => 'index'
                                         ]);
                                         ?>">Inicio</a>
                         </li>
                         <li <?= $this->request->params['controller'] === 'Leagues' ? 'class="active"' : '' ?>>
                             <a href="<?= $this->Url->build([
-                                            'controller' => 'Leagues'
+                                            'controller' => 'Leagues',
+                                            'action' => 'index'
                                         ]);
                                         ?>">Ligas</a>
                         </li>
