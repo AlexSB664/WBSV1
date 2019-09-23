@@ -53,6 +53,9 @@
 
   <script src="/js/deejee//main.js"></script>
 
+  <?php echo $this->element('google') ?>
+
+
 </body>
 
 </html>

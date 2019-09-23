@@ -6,6 +6,7 @@
 /tmp/*
 /vendor/*
 /webroot/img/uploads/*
+src/Template/Element/google.ctp
 
 # OS generated files #
 ######################
