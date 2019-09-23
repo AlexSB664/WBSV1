@@ -137,7 +137,7 @@ class CompetitionsUsersController extends AppController
             return $this->redirect(['action' => 'index']);
         }
         $competitions = $this->CompetitionsUsers->Competitions->find('list', ['limit' => 200])->where(['id'=>$competition_id]);
-        $users = $this->CompetitionsUsers->Users->find('list', ['limit' => 200]);
+        $users = $this->CompetitionsUsers->Users->find('list');
         $this->set(compact('competitionsUser', 'competitions', 'users'));
     }
     /**
