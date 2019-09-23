@@ -23,7 +23,7 @@
 			<a href="/events/<?= $competition->slug; ?>">
 				<img src="/img/<?= $competition->flyer; ?>" 
 		     			alt="<?= $competition->season->league->name ?> - <?= $competition->season->name ?> - <?= $competition->name ?>" 
-		     			class="img-fluid-event">
+		     			class="img-fluid">
 	    		</a>
                 	<div class="p-4 bg-white">
 			<span class="d-block text-secondary small text-uppercase"><?= date("F jS, Y", strtotime($competition->date)) ?> </span>

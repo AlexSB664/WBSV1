@@ -166,4 +166,5 @@ class CompetitionsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+public function beforeFilter(\Cake\Event\Event $event)                                                      {                                                         $this->Auth->allow(['index', 'view']);            }             
 }
