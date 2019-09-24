@@ -69,13 +69,13 @@
         <?= empty($season->competitions) ? '<h3 class="mb-5"> No hay eventos  de esta temporada :( </h3>'  : '' ?>
         <?php foreach ($season->competitions as $competition) : ?>
           <div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
-            <a href="/events/<?= $competition->slug; ?>">
+            <a href="/eventos/<?= $competition->id; ?>">
               <img src="/img/<?= $competition->flyer; ?>" alt="<?= $competition->name ?>" class="img-fluid">
             </a>
             <div class="p-4 bg-white">
-              <span class="d-block text-secondary small text-uppercase"><?= date("F jS, Y", strtotime($competition->date)) ?> </span>
+              <span class="d-block text-secondary small text-uppercase"><?= date("l, F jS, Y", strtotime($competition->date)) ?> </span>
               <h2 class="h5 text-black mb-3">
-                <a href="/events/<?= $competition->slug; ?>">
+                <a href="/eventos/<?= $competition->id; ?>">
                   <?= $competition->name ?>
                 </a>
               </h2>

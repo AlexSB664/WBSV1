@@ -20,18 +20,19 @@
 	<div class="row">
 		<?php foreach ($competitions as $competition): ?>
 		<div class="col-md-6 col-lg-4 mb-5" data-aos="fade-up" data-aos-delay="100">
-			<a href="/events/<?= $competition->slug; ?>">
+			<a href="/eventos/<?= $competition->id; ?>">
 				<img src="/img/<?= $competition->flyer; ?>" 
 		     			alt="<?= $competition->season->league->name ?> - <?= $competition->season->name ?> - <?= $competition->name ?>" 
 		     			class="img-fluid">
 	    		</a>
                 	<div class="p-4 bg-white">
-			<span class="d-block text-secondary small text-uppercase"><?= date("F jS, Y", strtotime($competition->date)) ?> </span>
+			<span class="d-block text-secondary small text-uppercase"><?= date("l, F jS, Y", strtotime($competition->date)) ?> </span>
                     		<h2 class="h5 text-black mb-3">
-                			<a href="/events/<?= $competition->slug; ?>"> 
+                			<a href="/eventos/<?= $competition->id; ?>"> 
 						<?= $competition->season->league->name ?> - <?= $competition->season->name ?> - <?= $competition->name ?>
                 			</a>
-                    		</h2>
+				</h2>
+				<h5 class="location" > En <?= $competition->location->name ?> </h5>
                 	</div>
             	</div>
             	<?php endforeach; ?>

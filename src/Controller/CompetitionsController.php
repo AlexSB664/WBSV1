@@ -91,11 +91,20 @@ class CompetitionsController extends AppController
      */
     public function view($id = null)
     {
-        $competition = $this->Competitions->get($id, [
-            'contain' => ['Seasons', 'Locations', 'Matches', 'Schemes']
+        $this->viewBuilder()->layout('deejee');
+    
+	$competition = $this->Competitions->get($id, [
+            'contain' => ['Seasons', 'Locations', 'Matches', 'Schemes', 'Seasons.Leagues']
         ]);
 
-        $this->set('competition', $competition);
+	$this->leaguesTable = TableRegistry::get('leagues');
+	$leagues = $this->leaguesTable->find('all')
+            ->where(['id' => $competition->season->league_id])
+            ->contain([ 'Seasons', 'Seasons.Competitions']);
+
+	$league = $leagues->first();
+	$this->set('competition', $competition);
+        $this->set('league', $league);
     }
 
     /**
@@ -165,8 +174,9 @@ class CompetitionsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-    public function beforeFilter(\Cake\Event\Event $event)
-    {
-        $this->Auth->allow(['index', 'view']);
-    }
+    
+    public function beforeFilter(\Cake\Event\Event $event)                                                      
+    {                                                         
+	    $this->Auth->allow(['index', 'view']);            
+    }             
 }
