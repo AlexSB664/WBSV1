@@ -70,6 +70,8 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
 
     $routes->connect('/eventos', ['controller' => 'Competitions', 'action' => 'index']);
+    $routes->connect('/eventos/*', ['controller' => 'Competitions', 'action' => 'view']);
+
     $routes->connect('/freestylers', ['controller' => 'Pages', 'action' => 'display', "proxima"]);
     $routes->connect('/estadisticas', ['controller' => 'Pages', 'action' => 'display', "proxima"]);
     $routes->connect('/stats', ['controller' => 'Pages', 'action' => 'display', "proxima"]);
@@ -78,8 +80,8 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/contacto', ['controller' => 'Pages', 'action' => 'display', "proxima"]);
 
 
-    $routes->connect('/liga/*', ['controller' => 'Leagues', 'action' => 'view']);
-    $routes->connect('/ligas/*', ['controller' => 'Leagues', 'action' => 'index']);
+    $routes->connect('/ligas', ['controller' => 'Leagues', 'action' => 'index']);
+    $routes->connect('/ligas/*', ['controller' => 'Leagues', 'action' => 'view']);
 
     /**
      * Connect catchall routes for all controllers.

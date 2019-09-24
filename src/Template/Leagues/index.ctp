@@ -26,7 +26,7 @@
 				<div class="team-member">
 					<img src="/img/<?= $league->logo; ?>" alt="Image" class="img-fluid">
 					<div class="text">
-						<h2 class="mb-2 font-weight-light h4">  <a href="/liga/<?= $league->slug; ?>"> <?= $league->name; ?> </a></h2>
+						<h2 class="mb-2 font-weight-light h4">  <a href="/ligas/<?= $league->slug; ?>"> <?= $league->name; ?> </a></h2>
 						<span class="d-block mb-2 text-white-opacity-05">Telefono: <?= $league->contact_phone; ?></span>
 						<span class="d-block mb-2 text-white-opacity-05"> Email: <?= $league->contact_email; ?>.</span>
 						<p>

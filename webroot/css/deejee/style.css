@@ -15,9 +15,8 @@ body {
   background: #000;
   color: #fff; }
 
-.img-fluid-event {
-    height: 450px;
-    width: 350px;
+.location {
+    color: #262927;
 }
 
 h1, h2, h3, h4, h5, h6 {
