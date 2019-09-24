@@ -21,6 +21,10 @@
             <td><?= h($location->name) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('City') ?></th>
+            <td><?= h($location->city) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Address') ?></th>
             <td><?= h($location->address) ?></td>
         </tr>

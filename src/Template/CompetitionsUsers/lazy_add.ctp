@@ -21,7 +21,7 @@
         <?php
             echo $this->Form->control('competitions_id', ['options' => $competitions]);
             echo $this->Form->control('users_id', ['options' => $users,'multiple'=>'checkbox']);
-            echo $this->Form->control('assistance');
+            echo $this->Form->control('assistance',['hidden'=>true,'label'=>false]);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
