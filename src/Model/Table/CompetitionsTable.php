@@ -40,7 +40,7 @@ class CompetitionsTable extends Table
         parent::initialize($config);
 
         $this->setTable('competitions');
-        $this->setDisplayField('name');
+        $this->setDisplayField(['name', 'season_id']);
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
