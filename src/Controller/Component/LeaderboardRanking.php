@@ -124,7 +124,7 @@ class LeaderboardRanking
             $userTmp = $this->getUser($key);
             $this->users_list[$key]['aka'] = $userTmp->aka;
             $this->users_list[$key]['avatar'] = $userTmp->avatar;
-            $this->users_list[$key]['crew'] = $this->getCrew($userTmp->crew);
+            $this->users_list[$key]['crew'] = $this->getCrew($userTmp->crew_id);
             $this->users_list[$key]['position'] = $this->position_count;
             $this->position_count++;
         }
