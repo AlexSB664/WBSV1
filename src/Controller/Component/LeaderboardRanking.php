@@ -14,11 +14,13 @@ class LeaderboardRanking
     private $Matches;
     private $MatchesUsers;
     private $Users;
-    private $required_args = ['season', 'competition'];
+    private $required_args = ['league', 'season', 'competition'];
 
     // Report query
+    public $league;
     public $season;
     public $competition;
+    public $competition_slug;
 
     //Repor Data
     public $results = [];
@@ -39,10 +41,13 @@ class LeaderboardRanking
 
         $this->season = $data['season'];
         $this->competition =  $data['competition'];
+        $this->league = $data['league'];
+        $this->competition_slug = $data['competition'];;
     }
 
     public function make()
     {
+        $this->beforeUpData();
         $this->setUpData();
         return $this->users_list;
     }
@@ -53,14 +58,18 @@ class LeaderboardRanking
         return $this->users_list;
     }
 
+    private function beforeUpData()
+    {
+        $this->season = $this->getSeasonByLeague($this->league, $this->season);
+        $this->competition  = $this->getCompetitionBySeason($this->season, $this->competition);
+    }
+
     private function setUpData()
     {
-        $this->season_id = $this->Seasons->find()->where(['slug' => $this->season])->first();
-        if( $this->competition != 'all'){
-            $this->competition_id = $this->Competitions->find()->where(['slug' => $this->competition])->first();
-            $this->matches_list = $this->getMatches($this->competition_id->id);
-        }else{
-            $this->competition_id = $this->Competitions->getCompetitionsBySeason($this->season_id->id);
+        if ($this->competition_slug != 'all') {
+            $this->matches_list = $this->getMatches($this->competition->id);
+        } else {
+            $this->competition_id = $this->Competitions->getCompetitionsBySeason($this->season->id);
             $this->matches_list = $this->getMatchesByMultipleCompetitions($this->competition_id);
         }
         foreach ($this->matches_list as $match) {
@@ -119,15 +128,16 @@ class LeaderboardRanking
             $this->users_list[$key]['position'] = $this->position_count;
             $this->position_count++;
         }
-        // foreach ($this->users_list as $key => $user) {
-        //     echo ($key . ':');
-        //     echo ($user['points'] . ' : ');
-        //     echo ($user['position'] . ' : ');
-        //     echo ($user['aka'] . ' : ');
-        //     echo ($user['avatar'] . ' : ');
-        //     echo ($user['crew'] . ' : ');
-        //     echo ('<br>');
-        // }
+    }
+
+    public function getSeasonByLeague($league_id, $season_slug)
+    {
+        return $this->Seasons->find()->where(['slug' => $season_slug, 'league_id' => $league_id])->first();
+    }
+
+    public function getCompetitionBySeason($season, $competition_slug)
+    {
+        return $this->Competitions->find()->where(['slug' => $competition_slug, 'season_id' => $season->id])->first();
     }
 
     private function validateArgs($data = [])
