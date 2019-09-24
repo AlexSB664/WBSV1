@@ -78,6 +78,10 @@ class MatchesTable extends Table
             ->integer('points')
             ->allowEmptyString('points');
 
+        $validator
+            ->integer('score')
+            ->allowEmptyString('score');
+
         return $validator;
     }
 

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Entity;
 
 use Cake\ORM\Entity;
@@ -35,6 +36,7 @@ class Match extends Entity
         'modified' => true,
         'competition' => true,
         'users' => true,
-        'user_id'=>true
+        'score' => true,
+        'user_id' => true
     ];
 }

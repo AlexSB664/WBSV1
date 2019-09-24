@@ -31,17 +31,16 @@ class CompetitionsController extends AppController
     {
         $this->viewBuilder()->layout('deejee');
 
-	$this->paginate = [
-		'contain' => ['Seasons.Leagues', 'Locations','Schemes'],
-		'order' => ['date' => 'ASC']
-	];
+        $this->paginate = [
+            'contain' => ['Seasons.Leagues', 'Locations', 'Schemes'],
+            'order' => ['date' => 'ASC']
+        ];
 
-	$activeEvents = $this->Competitions->find('all')->
-                                where(['Competitions.status' => '1']);
+        $activeEvents = $this->Competitions->find('all')->where(['Competitions.status' => '1']);
 
 
         $competitions = $this->paginate($activeEvents);
-	Time::setDefaultLocale('es-MX');
+        Time::setDefaultLocale('es-MX');
         $this->set(compact('competitions'));
     }
 
@@ -55,8 +54,8 @@ class CompetitionsController extends AppController
     {
 
         $this->paginate = [
-                'contain' => ['Seasons.Leagues', 'Locations','Schemes'],
-                'order' => ['date' => 'ASC']
+            'contain' => ['Seasons.Leagues', 'Locations', 'Schemes'],
+            'order' => ['date' => 'ASC']
         ];
 
         $Events = $this->Competitions->find('all');
@@ -166,5 +165,8 @@ class CompetitionsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-public function beforeFilter(\Cake\Event\Event $event)                                                      {                                                         $this->Auth->allow(['index', 'view']);            }             
+    public function beforeFilter(\Cake\Event\Event $event)
+    {
+        $this->Auth->allow(['index', 'view']);
+    }
 }

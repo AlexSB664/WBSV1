@@ -37,6 +37,10 @@
             <td><?= $this->Number->format($match->points) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Score') ?></th>
+            <td><?= $this->Number->format($match->score) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Winner') ?></th>
             <td><?= h($match->user_id) ?></td>
         </tr>

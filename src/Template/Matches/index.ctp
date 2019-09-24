@@ -23,6 +23,7 @@
                 <th scope="col"><?= $this->Paginator->sort('competition_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('stage') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('points') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('score') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
@@ -36,6 +37,7 @@
                 <td><?= $match->has('competition') ? $this->Html->link($match->competition->id, ['controller' => 'Competitions', 'action' => 'view', $match->competition->id]) : '' ?></td>
                 <td><?= h($match->stage) ?></td>
                 <td><?= $this->Number->format($match->points) ?></td>
+                <td><?= $this->Number->format($match->score) ?></td>
                 <td><?= $this->Number->format($match->user_id) ?></td>
                 <td><?= h($match->created) ?></td>
                 <td><?= h($match->modified) ?></td>

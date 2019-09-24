@@ -80,7 +80,6 @@ class MatchesController extends AppController
                 $match = $this->Matches->patchEntity($match, $this->request->getData());
                 if ($this->Matches->save($match)) {
                     $this->Flash->success(__('The match has been saved.'));
-
                     return $this->redirect(['action' => 'index']);
                 }
                 $this->Flash->error(__('The match could not be saved. Please, try again.'));
@@ -89,7 +88,7 @@ class MatchesController extends AppController
 
             $usr_id = $this->CompetitionsUsers->getUsersIdByCompetition($competition_id);
 
-            $users = $this->Matches->Users->find('list', ['limit' => 200])->where(['id IN'=>$usr_id]);
+            $users = $this->Matches->Users->find('list', ['limit' => 200])->where(['id IN' => $usr_id]);
             $this->set(compact('match', 'competition', 'users'));
         } else {
             $competitions = $this->Matches->Competitions->find();
