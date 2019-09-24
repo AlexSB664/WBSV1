@@ -84,6 +84,9 @@ class MatchesController extends AppController
                 }
                 $this->Flash->error(__('The match could not be saved. Please, try again.'));
             }
+            // $stages = $this->Matches->Competitions->Schemes->SchemesDetails->find('all');
+            // echo ($stages);
+            // die();
             $competition2 = $this->Matches->Competitions->find('all',['contain' => ['Seasons.Leagues']])->where(['Competitions.id' => $competition_id])->first();
             $competition = $this->Matches->Competitions->find('list')->where(['id' => $competition_id]);
             $usr_id = $this->CompetitionsUsers->getUsersIdByCompetition($competition_id);
@@ -118,8 +121,8 @@ class MatchesController extends AppController
             }
             $this->Flash->error(__('The match could not be saved. Please, try again.'));
         }
-        $competitions = $this->Matches->Competitions->find('list', ['limit' => 200]);
-        $users = $this->Matches->Users->find('list', ['limit' => 200]);
+        $competitions = $this->Matches->Competitions->find('list');
+        $users = $this->Matches->Users->find('list');
         $this->set(compact('match', 'competitions', 'users'));
     }
 
