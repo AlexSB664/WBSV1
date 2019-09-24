@@ -16,16 +16,18 @@
         <legend><?= __('Agregar Dirección') ?></legend>
         <div class="form-row">
             <div class="col">
-                <?= $this->Form->label('nombre', array('class'=> 'Nombre: ')); ?>
-                <?= $this->Form->input('name', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
-                <?= $this->Form->label('dirección', array('class'=> 'Dirección: ')); ?>
-                <?= $this->Form->input('address', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
-                <?= $this->Form->label('latitud', array('class'=> 'Latitud: ')); ?>
-                <?= $this->Form->input('lat', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
-                <?= $this->Form->label('longitud', array('class'=> 'Longitud: ')); ?>
-                <?= $this->Form->input('lng', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
-                <?= $this->Form->label('tipo', array('class'=> 'Tipo: ')); ?>
-                <?= $this->Form->input('type', array('label'=>false, 'class'=> 'form-control col-md-7 col-xs-12')); ?>
+                <?= $this->Form->label('Nombre: '); ?>
+                <?= $this->Form->input('name', array('label'=>false, 'class'=> 'form-control')); ?>
+                <?= $this->Form->label('Ciudad:'); ?>
+                <?= $this->Form->input('city', array('label'=>false, 'class'=> 'form-control')); ?>
+                <?= $this->Form->label('Dirección:'); ?>
+                <?= $this->Form->input('address', array('label'=>false, 'class'=> 'form-control')); ?>
+                <?= $this->Form->label('Latitud: '); ?>
+                <?= $this->Form->input('lat', array('label'=>false, 'class'=> 'form-control')); ?>
+                <?= $this->Form->label('Longitud: '); ?>
+                <?= $this->Form->input('lng', array('label'=>false, 'class'=> 'form-control')); ?>
+                <?= $this->Form->label('Tipo: '); ?>
+                <?= $this->Form->input('type', array('label'=>false, 'class'=> 'form-control')); ?>
             </div>
         </div>
     </fieldset>

@@ -17,6 +17,7 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('city') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('address') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('lat') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('lng') ?></th>
@@ -31,6 +32,7 @@
             <tr>
                 <td><?= $this->Number->format($location->id) ?></td>
                 <td><?= h($location->name) ?></td>
+                <td><?= h($location->city) ?></td>
                 <td><?= h($location->address) ?></td>
                 <td><?= $this->Number->format($location->lat) ?></td>
                 <td><?= $this->Number->format($location->lng) ?></td>

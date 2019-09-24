@@ -36,9 +36,9 @@
                         'controller' => 'competitions_users',
                         'action' => 'Assistance', $competitionUser->id]); ?>">
                         <?php if ($competitionUser->assistance ==1): ?>
-                        <input type="submit" class="btn btn-danger" value="No asistio" />
+                        <input type="submit" class="btn btn-success" value="Presente" />
                         <?php else : ?>
-                        <input type="submit" class="btn btn-primary" value="Asistio" />
+                        <input type="submit" class="btn btn-danger" value="Ausente" />
                         <?php endif; ?>
                     </form>
                 </td>

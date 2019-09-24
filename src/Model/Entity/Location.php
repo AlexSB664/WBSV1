@@ -33,6 +33,7 @@ class Location extends Entity
         'lng' => true,
         'type' => true,
         'created' => true,
+        'city' => true,
         'modified' => true
     ];
 }
