@@ -70,7 +70,7 @@ class LeaderboardController extends AppController
             $board = $this->seasonsTable->find()->where(['league_id' => $leagues->id]);
             $this->set(compact('leagues'));
             if ($seasons_slug) {
-                $seasons = $this->seasonsTable->find()->where(['slug' => $seasons_slug])->first();
+                $seasons = $this->seasonsTable->find()->where(['slug' => $seasons_slug,'league_id' => $leagues->id])->first();
                 $competitions = $this->competitionsTable->find('all',['order' => ['date ASC']])->where(['season_id' => $seasons->id]);
                 if ($competition_slug === "all") {
                     $board = (new LeaderboardRanking(['league' => $leagues->id, 'season' => $seasons_slug, 'competition' => $competition_slug]))->make();
