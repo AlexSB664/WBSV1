@@ -74,7 +74,7 @@ class MatchesController extends AppController
 
     public function lazyAdd($competition_id = null)
     {
-        if ($competition_id ) {
+        if ($competition_id) {
             $match = $this->Matches->newEntity();
             if ($this->request->is('post')) {
                 $match = $this->Matches->patchEntity($match, $this->request->getData());
@@ -84,15 +84,17 @@ class MatchesController extends AppController
                 }
                 $this->Flash->error(__('The match could not be saved. Please, try again.'));
             }
-            // $stages = $this->Matches->Competitions->Schemes->SchemesDetails->find('all');
-            // echo ($stages);
-            // die();
-            $competition2 = $this->Matches->Competitions->find('all',['contain' => ['Seasons.Leagues']])->where(['Competitions.id' => $competition_id])->first();
+            $details = $this->Matches->Competitions->find('all', ['contain' => ['Schemes.SchemesDetails']])->where(['Competitions.id' => $competition_id])->first();
+            $stages[] = "";
+            foreach ($details->scheme->schemes_details as $detail) {
+                $stages[$detail->position] = $detail->position;
+            }
+            $competition2 = $this->Matches->Competitions->find('all', ['contain' => ['Seasons.Leagues','Schemes.SchemesDetails']])->where(['Competitions.id' => $competition_id])->first();
             $competition = $this->Matches->Competitions->find('list')->where(['id' => $competition_id]);
             $usr_id = $this->CompetitionsUsers->getUsersIdByCompetition($competition_id);
 
             $users = $this->Matches->Users->find('list', ['limit' => 200])->where(['id IN' => $usr_id]);
-            $this->set(compact('match', 'competition','competition2', 'users'));
+            $this->set(compact('match', 'competition', 'competition2', 'users','stages'));
         } else {
             $competitions = $this->Matches->Competitions->find('all', ['contain' => ['Seasons.Leagues']]);
             //$competitions = $this->Matches->Competitions->find();

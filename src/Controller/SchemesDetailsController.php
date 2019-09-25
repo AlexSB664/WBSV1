@@ -108,4 +108,15 @@ class SchemesDetailsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function getPoints()
+    {
+        $this->autoRender = false;
+        if ($this->request->is(['get'])) {
+            $schemeTmp = $this->SchemesDetails->find('all')->where(['position'=>$this->request->query['stage'],'scheme_id'=>$this->request->query['scheme_id']])->first();
+            echo($schemeTmp->points);
+        }else{
+            echo('oh aqui');
+        }
+    }
 }
