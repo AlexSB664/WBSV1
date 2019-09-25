@@ -15,7 +15,6 @@
         <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
     </ul>
 </nav>
-<input type="hidden"  value="<?= $competition2->scheme->id?>"  id="scheme_id"/>
 <?php if (isset($competition)) : ?>
     <div class="matches form large-9 medium-8 columns content">
         <?= $this->Form->create($match) ?>
