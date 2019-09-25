@@ -4,13 +4,11 @@
 
         <?= $this->Html->image('logo-wbs.png', ['alt' => 'Logo WBS', 'class' => 'logos', 'width' => '100', 'height' => '100']); ?>
         <div class="logos">
-            <h1 class="league-title"> Jueves de Practica tu Freestyle </h1>
-            <h2 class="seasson-title"> Temporada Septiembre 2019 </h2>
-            <h2 class="event-title"> Jornada 01 </h2>
+            <h1 class="league-title"><?= isset($leagues) ? $leagues->name : 'Selecciona una liga' ?></h1>
+            <h2 class="seasson-title"> <?= isset($seasons_slug) ? $seasons_slug : 'Selecciona una temporada' ?></h2>
+            <h2 class="event-title"> <?= isset($competition_slug) ? $competition_slug : 'Selecciona una temporada' ?></h2>
         </div>
-        <?php if (isset($leagues)) : ?>
-            <?= $this->Html->image($leagues->logo, ['alt' => 'Logo Liga', 'class' => 'logos', 'width' => '100', 'height' => '100']); ?>
-        <?php endif  ?>
+        <?= $this->Html->image(isset($leagues) ? $leagues->logo : 'logo-wbs.png', ['alt' => 'Logo Liga', 'class' => 'logos', 'width' => '100', 'height' => '100']); ?>
     </div>
 
     <div class="leaderboard flex column wrap">
@@ -20,21 +18,21 @@
 
                     <div class="filter-by flex grow wrap">
                         <div class="time-filter flex grow">
-                            <div class="row-button pointer align-center <?= $competition_slug === 'all'  ?  'row-button--active' : '' ?>"  onclick="window.location='<?= $this->Url->build([
-                                                                                                                'controller' => 'leaderboard',
-                                                                                                                'action' => 'board',
-                                                                                                                $leagues->slug,
-                                                                                                                $seasons_slug,
-                                                                                                                'all'
-                                                                                                            ]); ?>'">General</div>
+                            <div class="row-button pointer align-center <?= $competition_slug === 'all'  ?  'row-button--active' : '' ?>" onclick="window.location='<?= $this->Url->build([
+                                                                                                                                                                            'controller' => 'leaderboard',
+                                                                                                                                                                            'action' => 'board',
+                                                                                                                                                                            $leagues->slug,
+                                                                                                                                                                            $seasons_slug,
+                                                                                                                                                                            'all'
+                                                                                                                                                                        ]); ?>'">General</div>
                             <?php foreach ($competitions as $competition) : ?>
                                 <div class="row-button pointer align-center <?= $competition_slug === $competition->slug  ?  'row-button--active' : '' ?>" onclick="window.location='<?= $this->Url->build([
-                                                                                                                'controller' => 'leaderboard',
-                                                                                                                'action' => 'board',
-                                                                                                                $leagues->slug,
-                                                                                                                $seasons_slug,
-                                                                                                                $competition->slug
-                                                                                                            ]); ?>'" ><?= $competition->slug ?></div>
+                                                                                                                                                                                                    'controller' => 'leaderboard',
+                                                                                                                                                                                                    'action' => 'board',
+                                                                                                                                                                                                    $leagues->slug,
+                                                                                                                                                                                                    $seasons_slug,
+                                                                                                                                                                                                    $competition->slug
+                                                                                                                                                                                                ]); ?>'"><?= $competition->slug ?></div>
                             <?php endforeach ?>
                         </div>
                         <div class="subject-filter flex grow">

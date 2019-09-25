@@ -16,14 +16,14 @@
     <?= $this->Form->create($schemesDetail) ?>
     <fieldset>
         <legend><?= __('Agregar Detalle de Esquema') ?></legend>
-            <?= $this->Form->label('esquema', array('class'=> 'Esquema: ')); ?>
-            <?= $this->Form->control('scheme_id', ['options' => $schemes, 'class'=>'form-control col-md-7 col-xs-12', 'label'=>false]); ?>
-            <?= $this->Form->label('posicion', array('class'=> 'Posicion: ')); ?>
-            <?= $this->Form->control('position',array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
-            <?= $this->Form->label('puntos', array('class'=> 'Puntos: ')); ?>
-            <?= $this->Form->control('points',array('label'=>false,'class'=>'form-control col-md-7 col-xs-12')); ?>
-            <?= $this->Form->label('puntos Adicionales', array('class'=> 'puntosAdicionales: ')); ?>
-            <?= $this->Form->control('aditional_points',array('label'=>false,'class'=>'form-control col-md-7 col-xs-12')); ?>
+            <?= $this->Form->label('Esquema: '); ?>
+            <?= $this->Form->control('scheme_id', ['options' => $schemes, 'class'=>'form-control', 'label'=>false]); ?>
+            <?= $this->Form->label('Posicion: '); ?>
+            <?= $this->Form->control('position',array('label'=>false, 'class'=>'form-control')); ?>
+            <?= $this->Form->label('Puntos :'); ?>
+            <?= $this->Form->control('points',array('label'=>false,'class'=>'form-control')); ?>
+            <?= $this->Form->label('Puntos Adicionales: '); ?>
+            <?= $this->Form->control('aditional_points',array('label'=>false,'class'=>'form-control')); ?>
     </fieldset>
     <br>
     <?= $this->Form->button(__('Agregar'), array('class'=>'btn btn-default btn-lg')) ?>
