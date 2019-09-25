@@ -5,8 +5,8 @@
         <?= $this->Html->image('logo-wbs.png', ['alt' => 'Logo WBS', 'class' => 'logos', 'width' => '100', 'height' => '100']); ?>
         <div class="logos">
             <h1 class="league-title"><?= isset($leagues) ? $leagues->name : 'Selecciona una liga' ?></h1>
-            <h2 class="seasson-title"> <?= isset($seasons_slug) ? $seasons_slug : 'Selecciona una temporada' ?></h2>
-            <h2 class="event-title"> <?= isset($competition_slug) ? $competition_slug : 'Selecciona una temporada' ?></h2>
+            <h2 class="seasson-title"> <?= isset($seasons_slug) ? 'Temporada: '.$seasons_slug : 'Selecciona una temporada' ?></h2>
+            <h2 class="event-title"> <?= isset($competition_slug) ? 'Competencia: '.$competition_slug : 'Selecciona una jornada' ?></h2>
         </div>
         <?= $this->Html->image(isset($leagues) ? $leagues->logo : 'logo-wbs.png', ['alt' => 'Logo Liga', 'class' => 'logos', 'width' => '100', 'height' => '100']); ?>
     </div>
@@ -18,21 +18,10 @@
 
                     <div class="filter-by flex grow wrap">
                         <div class="time-filter flex grow">
-                            <div class="row-button pointer align-center <?= $competition_slug === 'all'  ?  'row-button--active' : '' ?>" onclick="window.location='<?= $this->Url->build([
-                                                                                                                                                                            'controller' => 'leaderboard',
-                                                                                                                                                                            'action' => 'board',
-                                                                                                                                                                            $leagues->slug,
-                                                                                                                                                                            $seasons_slug,
-                                                                                                                                                                            'all'
-                                                                                                                                                                        ]); ?>'">General</div>
+                            <div class="row-button pointer align-center <?= $competition_slug === 'all'  ?  'row-button--active' : '' ?>" onclick="window.location='<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board', $leagues->slug, $seasons_slug, 'all']); ?>'">General</div>
                             <?php foreach ($competitions as $competition) : ?>
-                                <div class="row-button pointer align-center <?= $competition_slug === $competition->slug  ?  'row-button--active' : '' ?>" onclick="window.location='<?= $this->Url->build([
-                                                                                                                                                                                                    'controller' => 'leaderboard',
-                                                                                                                                                                                                    'action' => 'board',
-                                                                                                                                                                                                    $leagues->slug,
-                                                                                                                                                                                                    $seasons_slug,
-                                                                                                                                                                                                    $competition->slug
-                                                                                                                                                                                                ]); ?>'"><?= $competition->slug ?></div>
+                                <div class="row-button pointer align-center <?= $competition_slug === $competition->slug  ?  'row-button--active' : '' ?>" onclick="window.location='<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board', $leagues->slug, $seasons_slug, $competition->slug]); ?>'">
+                                    <?= $competition->slug ?></div>
                             <?php endforeach ?>
                         </div>
                         <div class="subject-filter flex grow">
@@ -66,16 +55,7 @@
                             </div>
                             <div class="row-calls"> <?= $row['points'] ?></div>
                         <?php else : ?>
-                            <div class="row-collapse flex align-center" onclick="window.location='<?= $this->Url->build([
-                                                                                                                'controller' => 'leaderboard',
-                                                                                                                'action' => 'board',
-                                                                                                                (isset($leagues) ?
-                                                                                                                    $leagues->slug : ''),
-                                                                                                                $row->slug,
-                                                                                                                (isset($leagues) ?
-                                                                                                                    'all' : ''),
-
-                                                                                                            ]); ?>'">
+                            <div class="row-collapse flex align-center" onclick="window.location='<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board', (isset($leagues) ? $leagues->slug : ''), $row->slug, (isset($leagues) ? 'all' : ''),]); ?>'">
                                 <div class="row-caller flex">
                                     <?= $this->Html->image(($row->logo ? $row->logo : $row->flyer), ['alt' => "default-avatar", 'class' => 'avatar']); ?>
                                     <div class="row-user"> <?= $row->name ?></div>
