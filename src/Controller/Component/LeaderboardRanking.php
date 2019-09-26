@@ -52,12 +52,6 @@ class LeaderboardRanking
         return $this->users_list;
     }
 
-    public function makeGeneral()
-    {
-        $this->setUpData();
-        return $this->users_list;
-    }
-
     private function beforeUpData()
     {
         $this->season = $this->getSeasonByLeague($this->league, $this->season);
@@ -73,7 +67,7 @@ class LeaderboardRanking
             $this->matches_list = $this->getMatchesByMultipleCompetitions($this->competition_id);
         }
         foreach ($this->matches_list as $match) {
-            $this->getUsersIdsByMatches($match->id, $match->points);
+            $this->getUsersIdsByMatches($match, $match->points);
         }
         $this->getData();
     }
@@ -88,14 +82,16 @@ class LeaderboardRanking
         return $this->Matches->find()->where(['competition_id IN' => $competitions_id]);
     }
 
-    public function getUsersIdsByMatches($matches_id, $points)
+    public function getUsersIdsByMatches($matches, $points)
     {
-        $users = $this->MatchesUsers->find()->where(['match_id' => $matches_id]);
+        $users = $this->MatchesUsers->find()->where(['match_id' => $matches->id]);
         foreach ($users as $user) {
             if (array_key_exists($user->user_id, $this->users_list)) {
                 $this->users_list[$user->user_id]['points'] =  $this->users_list[$user->user_id]['points'] + $points;
+                $this->users_list[$user->user_id]['score'] =  $this->users_list[$user->user_id]['score'] + $matches->score;
             } else {
                 $this->users_list[$user->user_id]['points'] =  $points;
+                $this->users_list[$user->user_id]['score'] =  $matches->score;
             }
         }
     }

@@ -6,6 +6,7 @@ use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
 use Competitions;
 use App\Controller\Component\LeaderboardRanking;
+use App\Controller\Component\CustomSort;
 
 /**
  * SeasonsReports Controller
@@ -70,8 +71,8 @@ class LeaderboardController extends AppController
             $board = $this->seasonsTable->find()->where(['league_id' => $leagues->id]);
             $this->set(compact('leagues'));
             if ($seasons_slug) {
-                $seasons = $this->seasonsTable->find()->where(['slug' => $seasons_slug,'league_id' => $leagues->id])->first();
-                $competitions = $this->competitionsTable->find('all',['order' => ['date ASC']])->where(['season_id' => $seasons->id]);
+                $seasons = $this->seasonsTable->find()->where(['slug' => $seasons_slug, 'league_id' => $leagues->id])->first();
+                $competitions = $this->competitionsTable->find('all', ['order' => ['date ASC']])->where(['season_id' => $seasons->id]);
                 if ($competition_slug === "all") {
                     $board = (new LeaderboardRanking(['league' => $leagues->id, 'season' => $seasons_slug, 'competition' => $competition_slug]))->make();
                 } else {
@@ -80,6 +81,10 @@ class LeaderboardController extends AppController
                 $this->set(compact('seasons_slug'));
                 $this->set(compact('competitions'));
                 $this->set(compact('competition_slug'));
+                if (array_key_exists('colum',$this->request->query) & array_key_exists('direction',$this->request->query)) {
+                    $customSort = new CustomSort();
+                    $customSort->arrayMultipleSort($board,$this->request->query['colum'],$this->request->query['direction']);
+                }
             }
         }
         $this->set(compact('board'));
