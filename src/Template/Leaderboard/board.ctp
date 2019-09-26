@@ -42,7 +42,7 @@
                                                 $leagues->slug,
                                                 $seasons_slug,
                                                 $competition_slug
-                                            ]) ?>?colum=points&direction=asc">Points</a>
+                                            ]) ?>">Points</a>
                         </div>
                         <div class="row-calls">
                             <a href="<?= $this->Url->build([
