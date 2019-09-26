@@ -144,4 +144,16 @@ class LeaderboardRanking
             }
         }
     }
+    public function numericColumEmpty($array,$colum)
+    {
+        $empty=true;
+        $valueTmp=0;
+        foreach ($array as $row) {
+           $valueTmp += $row[$colum];
+        }
+        if($valueTmp!=0){
+            $empty=false;
+        }
+        return $empty;
+    }
 }

@@ -44,6 +44,7 @@
                                                 $competition_slug
                                             ]) ?>">Points</a>
                         </div>
+                        <?php if(!$empyScore):?>
                         <div class="row-calls">
                             <a href="<?= $this->Url->build([
                                                 'controller' => 'leaderboard',
@@ -53,6 +54,7 @@
                                                 $competition_slug
                                             ]) ?>?colum=score&direction=asc">Score</a>
                         </div>
+                        <?php endif ?>
                     </div>
                 </div>
             <?php endif ?>
@@ -71,7 +73,7 @@
                                 <div class="row-team"> <?= $row['crew'] ?></div>
                             </div>
                             <div class="row-calls"> <?= $row['points'] ?></div>
-                            <div class="row-calls"> <?= $row['score'] ?></div>
+                            <?= $empyScore?'':'<div class="row-calls">'.$row['score'].'</div>'?>
                         <?php else : ?>
                             <div class="row-collapse flex align-center" onclick="window.location='<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board', (isset($leagues) ? $leagues->slug : ''), $row->slug, (isset($leagues) ? 'all' : ''),]); ?>'">
                                 <div class="row-caller flex">
