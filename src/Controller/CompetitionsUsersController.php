@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use Cake\Routing\Router;
 
 /**
  * CompetitionsUsers Controller
@@ -19,11 +20,17 @@ class CompetitionsUsersController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function inicialize()
-    { 
+    private $session;
+    public function initialize()
+    {
         parent::initialize();
         $this->loadModel('Users');
         $this->loadModel('Competitions');
+        $this->session = $this->getRequest()->getSession();
+    }
+    public function getLastUrl()
+    {
+        return $this->session->read('lastUrl');
     }
     public function index($id = null)
     {
@@ -117,12 +124,12 @@ class CompetitionsUsersController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function lazyAdd($competition_id=null)
+    public function lazyAdd($competition_id = null)
     {
         $competitionsUser = $this->CompetitionsUsers->newEntity();
         if ($this->request->is('post')) {
             $data = $this->request->getData();
-            foreach ($data['users_id'] as $value) {
+            foreach ($data['users_id'] as $index => $value) {
                 $dataTmp = [];
                 $dataTmp['competitions_id'] = $data['competitions_id'];
                 $dataTmp['users_id'] = $value;
@@ -131,12 +138,18 @@ class CompetitionsUsersController extends AppController
                 $competitionsTmp = $this->CompetitionsUsers->patchEntity($competitionsTmp, $dataTmp);
                 if ($this->CompetitionsUsers->save($competitionsTmp)) {
                     $this->Flash->success(__('The competitions user has been saved.'));
+                    if ($index === array_key_last($data['users_id'])) {
+                        return $this->redirect(Router::url($this->getLastUrl(), true));
+                    }
                 }
                 $this->Flash->error(__('The competitions user could not be saved. Please, try again.'));
             }
-            return $this->redirect(['action' => 'index']);
+        } else {
+            $this->session->write([
+                'lastUrl' => $this->referer()
+            ]);
         }
-        $competitions = $this->CompetitionsUsers->Competitions->find('list', ['limit' => 200])->where(['id'=>$competition_id]);
+        $competitions = $this->CompetitionsUsers->Competitions->find('list', ['limit' => 200])->where(['id' => $competition_id]);
         $users = $this->CompetitionsUsers->Users->find('list');
         $this->set(compact('competitionsUser', 'competitions', 'users'));
     }
