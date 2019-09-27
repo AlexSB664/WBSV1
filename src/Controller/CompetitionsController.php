@@ -145,7 +145,7 @@ class CompetitionsController extends AppController
             if ($this->Competitions->editCompetitions($competition, $this->request->data)) {
                 $this->Flash->success(__('The competition has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'manage']);
             }
             $this->Flash->error(__('The competition could not be saved. Please, try again.'));
         }
