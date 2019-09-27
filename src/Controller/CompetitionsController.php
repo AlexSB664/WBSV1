@@ -6,6 +6,7 @@ use App\Controller\AppController;
 use Cake\I18n\Time;
 use Cake\ORM\TableRegistry;
 use Competitions;
+use Cake\Routing\Router;
 
 /**
  * Competitions Controller
@@ -16,10 +17,16 @@ use Competitions;
  */
 class CompetitionsController extends AppController
 {
+
+    private $session;
     public function initialize()
     {
         parent::initialize();
         $this->loadModel('CompetitionsUsers');
+        $this->session=$this->getRequest()->getSession();
+    }
+    public function getLastUrl(){
+      return $this->session->read('lastUrl');
     }
 
     /**
@@ -144,10 +151,13 @@ class CompetitionsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             if ($this->Competitions->editCompetitions($competition, $this->request->data)) {
                 $this->Flash->success(__('The competition has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect( Router::url( $this->getLastUrl(), true ) );
             }
             $this->Flash->error(__('The competition could not be saved. Please, try again.'));
+        }else{
+            $this->session->write([
+                'lastUrl' => $this->referer(),
+              ]);
         }
         $seasons = $this->Competitions->Seasons->find('list', ['limit' => 200]);
         $locations = $this->Competitions->Locations->find('list', ['limit' => 200]);
