@@ -6,7 +6,6 @@
             <div class="title_right">
             </div>
         </div>
-
         <div class="clearfix"></div>
         <div class="row">
             <?= $this->fetch('content') ?>

@@ -19,8 +19,6 @@
   <link rel="stylesheet" href="/css/deejee/animate.css">
   <link rel="stylesheet" href="/css/flaticon.css">
   <link rel="stylesheet" href="/css/deejee/fl-bigmug-line.css">
-
-
   <link rel="stylesheet" href="/css/deejee/aos.css">
   <link rel="stylesheet" href="/css/deejee/style.css">
 
