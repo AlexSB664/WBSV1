@@ -42,7 +42,7 @@
                     <div class="col-md-6 col-lg-6">
                         <ul class="list-unstyled">
                             <li><a href="https://coliseumwbs.com/freestylers">Freestylers</a></li>
-                            <li><a href="https://coliseumwbs.com/nosotros">Aceerca de Nosotros</a></li>
+                            <li><a href="https://coliseumwbs.com/nosotros">Acerca de Nosotros</a></li>
                             <li><a href="https://coliseumwbs.com/contacto">Contacto</a></li>
                             <li><a href="https://coliseumwbs.com/users/login">Login</a></li>
                         </ul>

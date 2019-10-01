@@ -59,7 +59,6 @@ class CompetitionsController extends AppController
      */
     public function manage()
     {
-
         $this->paginate = [
             'contain' => ['Seasons.Leagues', 'Locations', 'Schemes'],
             'order' => ['date' => 'ASC']
@@ -151,7 +150,8 @@ class CompetitionsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             if ($this->Competitions->editCompetitions($competition, $this->request->data)) {
                 $this->Flash->success(__('The competition has been saved.'));
-                return $this->redirect( Router::url( $this->getLastUrl(), true ) );
+                //return $this->redirect( Router::url( $this->getLastUrl(), true ) );
+		return $this->redirect(['action'=>'manage']);
             }
             $this->Flash->error(__('The competition could not be saved. Please, try again.'));
         }else{
