@@ -60,6 +60,7 @@
   width="600"
   height="450"
   frameborder="0" style="border:0"
-  src="https://www.google.com/maps/embed/v1/place?key=<?= $apikey ?>&q=<?= $location->lat ?>,<?= $location->lng ?>" allowfullscreen>
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDURexdbTR3rNlQ3HJ_wH_4Ag--juvs-wM
+  &q=<?= $location->lat ?>,<?= $location->lng ?>" allowfullscreen>
 </iframe>
 
