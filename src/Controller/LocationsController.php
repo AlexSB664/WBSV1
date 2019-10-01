@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\Core\Configure;
+use Cake\Core\Configure\Engine\PhpConfig;
 /**
  * Locations Controller
  *
@@ -36,7 +38,10 @@ class LocationsController extends AppController
         $location = $this->Locations->get($id, [
             'contain' => []
         ]);
+        Configure::load('app', 'default');
+        $configValue = Configure::read('ApiKeys');
 
+        $this->set('apikey', $configValue['GoogleMaps']);
         $this->set('location', $location);
     }
 
