@@ -75,7 +75,7 @@ class MatchesTable extends Table
             ->allowEmptyString('stage');
 
         $validator
-            ->integer('points')
+            ->numeric('points')
             ->allowEmptyString('points');
 
         $validator

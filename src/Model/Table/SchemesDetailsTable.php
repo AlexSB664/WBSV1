@@ -65,7 +65,7 @@ class SchemesDetailsTable extends Table
             ->notEmptyString('position');
 
         $validator
-            ->integer('points')
+            ->numeric('points')
             ->allowEmptyString('points');
 
         $validator
