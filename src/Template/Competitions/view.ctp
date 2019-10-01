@@ -27,15 +27,19 @@
         <div class="site-section-heading text-left mb-5 w-border">
           <h2>Acerca de <?= h($competition->name) ?></h2>
         </div>
-        <p class="lead">Aqui va una descripcion de las ligas que aún no tenemos.... :( Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate accusamus porro, iusto id
-          iste, quo nulla. Quisquam quia reiciendis iste earum mollitia officiis pariatur, culpa ab rerum quam, sint
-          veritatis?</p>
-        <p>Nobis rem impedit eligendi! Temporibus dolorum rerum quod autem, iusto excepturi distinctio maxime, deserunt,
-          odio veritatis aliquid illo dolorem! Odio quibusdam repellat dolores dolor ipsum perferendis id, quod
-          voluptates amet.</p>
+        <p class="lead"> Lugar:  <?= $competition->location->name ?></p>
+        <p>Fecha y Hora: <?= $competition->date ?></p>
         <p>Perspiciatis porro cumque dicta laborum laudantium quia et expedita dolorum, quis id facilis repudiandae
           nostrum nam temporibus dolores impedit tempora! Blanditiis tenetur neque harum molestiae ipsa minus. Nulla
-          nemo, quis.</p>
+	  nemo, quis.</p>
+<iframe
+  width="600"
+  height="450"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDURexdbTR3rNlQ3HJ_wH_4Ag--juvs-wM
+  &q=<?= $competition->location->lat ?>,<?= $competition->location->lng ?>" allowfullscreen>
+</iframe>
+
         <div class="text">
           <h2 class="mb-2 font-weight-light h4"> <?= $competition->season->league->name; ?> </h2>
           <span class="d-block mb-2 text-white-opacity-05">Telefono: <?= $competition->season->league->social_telephone; ?></span>
