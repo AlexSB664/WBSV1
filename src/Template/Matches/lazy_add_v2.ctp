@@ -36,7 +36,7 @@
             </div>
             <div class="col-sm">
                 <h2>Lista de Batallas</h2>
-                <a href="<?= $this->Url->build(['controller' => '', 'action' => '', $competition_id->id]) ?>"><i class="fa fa-sitemap fa-w-18 fa-5x"></i></a>
+                <a href="<?= $this->Url->build(['controller' => 'MatchesUsers', 'action' => 'listByCompetition', $competition_id->id]) ?>"><i class="fa fa-sitemap fa-w-18 fa-5x"></i></a>
             </div>
             <div class="col-sm">
                 <h2>Susbribir Usuarios A Esta Competencia</h2>

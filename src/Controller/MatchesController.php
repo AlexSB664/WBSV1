@@ -125,7 +125,7 @@ class MatchesController extends AppController
             $list = $this->Seasons->find()->where(['league_id' => $league_id]);
             if ($season_id) {
                 $this->set(compact('season_id'));
-                $list = $this->Competitions->find()->where(['season_id' => $league_id]);
+                $list = $this->Competitions->find()->where(['season_id' => $season_id]);
                 if ($competition_id) {
                     $competition_id = $this->Competitions->get($competition_id, ['contain' => ['Seasons.Leagues']]);
                     $this->set(compact('competition_id'));

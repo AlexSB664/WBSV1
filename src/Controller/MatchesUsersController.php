@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Controller\Component\Battles;
 
 /**
  * MatchesUsers Controller
@@ -109,5 +110,12 @@ class MatchesUsersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function listByCompetition($competition_id = null)
+    {
+        $list = $this->MatchesUsers->find('all',['contain'=>['Matches','Users'],'order'=>['Matches.id','Matches.stage']])->where(['Matches.competition_id'=>$competition_id])->toArray();
+        $list =( new Battles(['competition_id'=>$competition_id]))->make();
+        $this->set(compact('list'));
     }
 }
