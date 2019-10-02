@@ -17,7 +17,7 @@ class ContactController extends AppController
      * @return \Cake\Http\Response|null
      */
     public function Contact(){
-        $this->viewBuilder()->layout('deejee');
+        $this->viewBuilder()->layout('contactame');
     }
     public function index()
     {

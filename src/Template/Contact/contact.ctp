@@ -11,7 +11,7 @@
 </div>
 <div class="container-contact100">
 		<div class="wrap-contact100">
-			<div class="contact100-form-title" style="background-image: url(images/hero_bg_02.jpg);">
+			<div class="contact100-form-title" style="background-image: url(/img/hero_bg_02.jpg);">
 				<span class="contact100-form-title-1">
 					Contactanos
 				</span>
@@ -39,7 +39,7 @@
 					<textarea class="input100" name="message" placeholder="Tu mensaje aqui..."></textarea>
 					<span class="focus-input100"></span>
                 </div>
-                <div class="g-recaptcha" data-sitekey="6Le2MbsUAAAAALQg0TUDoOfB6feb2ARNR1K1vbAt"></div> 
+                <div class="g-recaptcha" data-sitekey="6LcAYLsUAAAAAFpKhB4bKTdyzNO0ky_Zevv6YcMs"></div> 
 
 				<div class="container-contact100-form-btn">
 					<button class="contact100-form-btn">
