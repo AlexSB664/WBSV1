@@ -69,7 +69,7 @@ p {
 	font-family: Poppins-Regular;
 	font-size: 14px;
 	line-height: 1.7;
-	color: #666666;
+	color: #FFF;
 	margin: 0px;
 }
 
@@ -161,6 +161,7 @@ iframe {
   background: transparent;
   position: relative;
   z-index: 1;
+  background-color: #333333;
 }
 
 .contact100-map {
@@ -246,6 +247,7 @@ iframe {
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 43px 88px 57px 190px;
+  background-color: #000;
 }
 
 
@@ -262,7 +264,7 @@ iframe {
 .label-input100 {
   font-family: Poppins-Regular;
   font-size: 15px;
-  color: #808080;
+  color: #FFF;
   line-height: 1.2;
   text-align: right;
 

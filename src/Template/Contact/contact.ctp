@@ -4,7 +4,7 @@
 		<div class="row align-items-center justify-content-center">
 			<div class="col-md-7 text-center" data-aos="fade-up" data-aos-delay="400">
 		  		<h1 class="text-white">Ligas de BajaMx </h1>
-    	    	<p>Contactacate con nosotros mediante este formulario..</p>
+    	    	<p>Contáctanos con nosotros mediante este formulario..</p>
 			</div>
 		</div>
 	</div>
@@ -18,7 +18,7 @@
 				<span class="contact100-form-title-2">
 				</span>
 			</div>
-			<form class="contact100-form validate-form">
+			<?=$this->Form->create('',array('class'=>"contact100-form validate-form"))?>
 				<div class="wrap-input100 validate-input" data-validate="El nombre es requerido">
 					<span class="label-input100">Nombre: </span>
 					<input class="input100" type="text" name="name" placeholder="Ingresa el nombre">

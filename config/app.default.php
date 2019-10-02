@@ -205,18 +205,19 @@ return [
      */
     'EmailTransport' => [
         'default' => [
-            'className' => MailTransport::class,
+            'className' => 'Smtp',
             /*
              * The following keys are used in SMTP transports:
              */
-            'host' => 'localhost',
-            'port' => 25,
+            'host' => 'ssl://smtp.gmail.com',
+            'port' => 465,
             'timeout' => 30,
-            'username' => null,
-            'password' => null,
+            'username' => 'ayudacontable664@gmail.com',
+            'password' => '123tamarindo',
             'client' => null,
-            'tls' => null,
+            'tls' => true,
             'url' => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
+            'context' => ['verify_peer'=>false,'verify_peer_name'=>false], 'allow_self_signed'=>true
         ],
     ],
 

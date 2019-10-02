@@ -2,7 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\Mailer\Email;
+use Cake\Mailer\TransportFactory;
 /**
  * Contact Controller
  *
@@ -17,6 +18,15 @@ class ContactController extends AppController
      * @return \Cake\Http\Response|null
      */
     public function Contact(){
+        if ($this->request->is('post')) {
+            $info = $this->request->data;
+            $email = new Email('default');
+            $message = 'Name: '.$info['name'].'<br>'.'Email: '.$info['email'].'<br>'.'Asunto: '.$info['affair'].'<br>'.'Mensaje: '.$info['message'];
+            $email
+                ->emailFormat('html')
+                ->to('alexskullsoft@gmail.com')
+                ->send($message);
+            }
         $this->viewBuilder()->layout('contactame');
     }
     public function index()
