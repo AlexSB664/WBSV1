@@ -75,8 +75,8 @@ class LeaderboardController extends AppController
                 $competitions = $this->competitionsTable->find('all', ['order' => ['date ASC']])->where(['season_id' => $seasons->id]);
                 $ldrBrd = new LeaderboardRanking(['league' => $leagues->id, 'season' => $seasons_slug, 'competition' => $competition_slug]);
                 $board=$ldrBrd->make();
-                $empyScore = $ldrBrd->numericColumEmpty($board,'score');
-                $this->set(compact('empyScore'));
+                $emptyScore = $ldrBrd->numericColumEmpty($board,'score');
+                $this->set(compact('emptyScore'));
                 $this->set(compact('seasons_slug'));
                 $this->set(compact('competitions'));
                 $this->set(compact('competition_slug'));

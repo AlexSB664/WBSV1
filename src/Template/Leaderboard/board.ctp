@@ -11,11 +11,10 @@
         <?= $this->Html->image(isset($leagues) ? $leagues->logo : 'logo-wbs.png', ['alt' => 'Logo Liga', 'class' => 'logos', 'width' => '100', 'height' => '100']); ?>
     </div>
 
-    <div class="leaderboard flex column wrap">
+    <div class="column wrap">
         <div class="leaderboard-table flex column" style="color:black">
             <?php if (isset($competition_slug)) : ?>
                 <div class="leaderboard-header flex column grow">
-
                     <div class="filter-by flex grow wrap">
                         <div class="time-filter flex grow">
                             <div class="row-button pointer align-center <?= $competition_slug === 'all'  ?  'row-button--active' : '' ?>" onclick="window.location='<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board', $leagues->slug, $seasons_slug, 'all']); ?>'">General</div>
@@ -30,7 +29,7 @@
                     </div>
 
                     <div class="leaderboard-row flex align-center row--header" style="border-radius: 0 !important;">
-                        <div class="row-position">Posicion</div>
+                        <div class="row-collapse flex align-center">Posicion</div>
                         <div class="row-collapse flex align-center">
                             <div class="row-user--header">Freestyler</div>
                             <div class="row-team--header">Crew</div>
@@ -44,7 +43,7 @@
                                                 $competition_slug
                                             ]) ?>">Points</a>
                         </div>
-                        <?php if(!$empyScore):?>
+                        <?php if(!$emptyScore):?>
                         <div class="row-calls">
                             <a href="<?= $this->Url->build([
                                                 'controller' => 'leaderboard',
@@ -73,12 +72,13 @@
                                 <div class="row-team"> <?= $row['crew'] ?></div>
                             </div>
                             <div class="row-calls"> <?= $row['points'] ?></div>
-                            <?= $empyScore?'':'<div class="row-calls">'.$row['score'].'</div>'?>
+                            <?= $emptyScore?'':'<div class="row-calls">'.$row['score'].'</div>'?>
                         <?php else : ?>
                             <div class="row-collapse flex align-center" onclick="window.location='<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board', (isset($leagues) ? $leagues->slug : ''), $row->slug, (isset($leagues) ? 'all' : ''),]); ?>'">
-                                <div class="row-caller flex">
+                            
+                                <div class="column">
                                     <?= $this->Html->image(($row->logo ? $row->logo : $row->flyer), ['alt' => "default-avatar", 'class' => 'avatar']); ?>
-                                    <div class="row-user"> <?= $row->name ?></div>
+                                    <div class="column"> <?= $row->name ?></div>
                                 </div>
                             </div>
                         <?php endif ?>

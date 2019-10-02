@@ -115,14 +115,21 @@ class LeaderboardRanking
     {
         //order by points
         arsort($this->users_list, false);
-
+        $pointsTmp = 0;
         foreach ($this->users_list as $key => $user) {
+
+            if ($key === array_key_first($this->users_list)) {
+                $pointsTmp = $this->users_list[$key]['points'];
+            }
+            if (!($this->users_list[$key]['points'] === $pointsTmp)){
+                $this->position_count++;
+                $pointsTmp = $this->users_list[$key]['points'];
+            }
             $userTmp = $this->getUser($key);
             $this->users_list[$key]['aka'] = $userTmp->aka;
             $this->users_list[$key]['avatar'] = $userTmp->avatar;
             $this->users_list[$key]['crew'] = $this->getCrew($userTmp->crew_id);
             $this->users_list[$key]['position'] = $this->position_count;
-            $this->position_count++;
         }
     }
 
@@ -144,15 +151,15 @@ class LeaderboardRanking
             }
         }
     }
-    public function numericColumEmpty($array,$colum)
+    public function numericColumEmpty($array, $colum)
     {
-        $empty=true;
-        $valueTmp=0;
+        $empty = true;
+        $valueTmp = 0;
         foreach ($array as $row) {
-           $valueTmp += $row[$colum];
+            $valueTmp += $row[$colum];
         }
-        if($valueTmp!=0){
-            $empty=false;
+        if ($valueTmp != 0) {
+            $empty = false;
         }
         return $empty;
     }

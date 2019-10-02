@@ -46,32 +46,25 @@ class Battles
     private function orderData()
     {
         foreach ($this->list as $battle) {
-            // if (array_key_exists($battle->match->stage, $this->results)) {
-            //     $this->users_list[$user->user_id]['points'] =  $this->users_list[$user->user_id]['points'] + $points;
-            //     $this->users_list[$user->user_id]['score'] =  $this->users_list[$user->user_id]['score'] + $matches->score;
-            // } else {
-            //     $this->users_list[$user->user_id]['points'] =  $points;
-            //     $this->users_list[$user->user_id]['score'] =  $matches->score;
-            echo ('<br>');
-            echo $battle->user->aka;
-            echo ('<br>');
-            echo $battle->user->avatar;
-            echo ('<br>');
-            echo $battle->user->crew ? $battle->user->crew->name : 'NA';
-            echo ('<br>');
-            echo $battle->match->id;
-            echo ('<br>');
-            echo $battle->match->stage;
-            echo ('<br>');
+            $this->results[$battle->match->stage][$battle->match->id][]=$battle->user;
+        }
 
-            foreach ($this->results as $key => $stage) {
-                echo "battles of " . $key;
-                echo "battle";
-                foreach ($stage as $match) {
-                    foreach ($match as $users) {
-                        echo $users;
-                    }
+        foreach ($this->results as $key => $stage) {
+            echo "<br>";
+            echo "battles of " . $key;
+            echo "<br>";
+            echo "battle";
+            echo "<br>";
+            foreach ($stage as $match) {
+                echo "<br>";
+                echo "<-------------------------------------Battle--------------------------->";
+                echo "<br>";    
+                foreach ($match as $users) {
+                    echo "<br>";
+                    echo $users->aka;
                 }
+                echo "<br>";
+                echo "<----------------------------------------------------------------------->";    
             }
         }
     }
