@@ -21,10 +21,10 @@ class ContactController extends AppController
         if ($this->request->is('post')) {
             $info = $this->request->data;
             $email = new Email('default');
+            $subject='Duda de algun seguidor';
             $message = 'Name: '.$info['name'].'<br>'.'Email: '.$info['email'].'<br>'.'Asunto: '.$info['affair'].'<br>'.'Mensaje: '.$info['message'];
             $email
-                ->emailFormat('html')
-                ->to('alexskullsoft@gmail.com')
+                ->to('coliseumwbs@c4-technologies.com')
                 ->send($message);
             }
         $this->viewBuilder()->layout('contactame');
