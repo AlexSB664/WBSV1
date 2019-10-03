@@ -63,7 +63,7 @@ class LeaderboardController extends AppController
 
     public function board($leagues_slug = null, $seasons_slug = null, $competition_slug = null)
     {
-        $this->viewBuilder()->layout('public');
+        $this->viewBuilder()->layout('deejee');
         $board = $this->leaguesTable->find();
         if ($leagues_slug) {
 

@@ -19,6 +19,25 @@ body {
     color: #262927;
 }
 
+.leaderboard td
+{
+  font-size:4vw;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.leaderboard th
+{
+  font-size:4vw;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.img-max {
+  max-width: 100px;
+  width:100%;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Oswald', sans-serif; }
 
