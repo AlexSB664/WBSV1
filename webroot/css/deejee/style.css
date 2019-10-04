@@ -18,19 +18,20 @@ body {
 .location {
     color: #262927;
 }
-
 .leaderboard td
 {
-  font-size:4vw;
+  font-size:3vw;
   text-align: center;
   vertical-align: middle;
+  font-weight:bold;
 }
 
 .leaderboard th
 {
-  font-size:4vw;
+  font-size:3vw;
   text-align: center;
   vertical-align: middle;
+  font-weight:bold;
 }
 
 .img-max {
