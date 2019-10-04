@@ -20,7 +20,7 @@ body {
 }
 .leaderboard td
 {
-  font-size:3vw;
+  font-size:4vw;
   text-align: center;
   vertical-align: middle;
   font-weight:bold;
@@ -28,7 +28,7 @@ body {
 
 .leaderboard th
 {
-  font-size:3vw;
+  font-size:4vw;
   text-align: center;
   vertical-align: middle;
   font-weight:bold;
@@ -236,7 +236,7 @@ a {
     .site-footer {
       padding: 7em 0; } }
   .site-footer p {
-    color: #737373; }
+    color: #FFF; }
   .site-footer h2, .site-footer h3, .site-footer h4, .site-footer h5 {
     color: #fff; }
   .site-footer a {
