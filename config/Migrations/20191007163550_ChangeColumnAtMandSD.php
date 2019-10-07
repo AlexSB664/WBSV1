@@ -1,7 +1,7 @@
 <?php
 use Migrations\AbstractMigration;
 
-class ChangeColumnMatches extends AbstractMigration
+class ChangeColumnAtMandSD extends AbstractMigration
 {
     /**
      * Change Method.
@@ -16,7 +16,16 @@ class ChangeColumnMatches extends AbstractMigration
         $table->changeColumn('points', 'decimal', [
             'default' => 0,
             'null' => false,
-            'precision'=>6,
+            'precision'=>10,
+            'scale'=>2
+        ]);
+        $table->update();
+
+        $table = $this->table('schemes_details');
+        $table->changeColumn('points', 'decimal', [
+            'default' => 0,
+            'null' => false,
+            'precision'=>10,
             'scale'=>2
         ]);
         $table->update();
