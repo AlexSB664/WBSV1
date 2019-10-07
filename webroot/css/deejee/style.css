@@ -35,8 +35,15 @@ body {
 }
 
 .img-max {
-  max-width: 100px;
+  max-width: 80px;
   width:100%;
+}
+
+@media only screen and (min-width: 768px) {
+.leaderboard {
+   margin: auto;
+   width: 70% !important;
+}
 }
 
 h1, h2, h3, h4, h5, h6 {
