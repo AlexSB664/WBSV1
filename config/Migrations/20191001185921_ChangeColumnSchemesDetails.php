@@ -16,7 +16,7 @@ class ChangeColumnSchemesDetails extends AbstractMigration
         $table->changeColumn('points', 'decimal', [
             'default' => 0,
             'null' => false,
-            'precision'=>6,
+            'precision'=>10,
             'scale'=>2
         ]);
         $table->update();
