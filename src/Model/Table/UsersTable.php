@@ -140,9 +140,12 @@ class UsersTable extends Table
 
         $user = $this->patchEntity($user, $data);
         $user->status = 1;
-
-        $file_name =  $this->uploadFile($data['avatar'], 'img', 'uploads/users/');
-        $user->avatar = $file_name;
+        if (empty($data['avatar']['tmp_name']) & $data['avatar']['error'] === 4 & empty($data['avatar']['name']) &  empty($data['avatar']['type']) & empty($data['avatar']['size'])) {
+            $user->avatar = 'default.png';
+        } else {
+            $file_name =  $this->uploadFile($data['avatar'], 'img', 'uploads/users/');
+            $user->avatar = $file_name;
+        }
 
         if (!$this->save($user)) {
             debug($user->errors());
