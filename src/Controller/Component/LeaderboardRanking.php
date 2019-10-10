@@ -29,6 +29,7 @@ class LeaderboardRanking
     public $matches_list;
     public $users_list = [];
     public $position_count = 1;
+    public $real_position_count = 1;
 
     public function __construct($data = [])
     {
@@ -122,7 +123,7 @@ class LeaderboardRanking
                 $pointsTmp = $this->users_list[$key]['points'];
             }
             if (!($this->users_list[$key]['points'] === $pointsTmp)){
-                $this->position_count++;
+                $this->position_count=$this->real_position_count;
                 $pointsTmp = $this->users_list[$key]['points'];
             }
             $userTmp = $this->getUser($key);
@@ -130,6 +131,7 @@ class LeaderboardRanking
             $this->users_list[$key]['avatar'] = $userTmp->avatar;
             $this->users_list[$key]['crew'] = $this->getCrew($userTmp->crew_id);
             $this->users_list[$key]['position'] = $this->position_count;
+            $this->real_position_count++;
         }
     }
 
