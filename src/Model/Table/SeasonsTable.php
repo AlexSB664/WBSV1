@@ -114,7 +114,7 @@ class SeasonsTable extends Table
         }
       $ssn = $this->newEntity();
       $ssn = $this->patchEntity($ssn,$data);
-      $file_name =  $this->uploadFile($data['flyer'], 'img','uploads/seasons/');
+      $file_name =  $this->uploadFile($data['flyer'], 'img','flyer','uploads/seasons/');
       $ssn->flyer = $file_name;
       
       if(!$this->save($ssn)){
@@ -139,7 +139,7 @@ class SeasonsTable extends Table
         else
         {
             $this->deleteFile($tempFlyer,'img');
-            $file_name=$this->uploadFile($data['flyer'],'img','uploads/seasons/');
+            $file_name=$this->uploadFile($data['flyer'],'img','flyer','uploads/seasons/');
             $ssn->flyer = $file_name;
         }
         if(!$this->save($ssn))
