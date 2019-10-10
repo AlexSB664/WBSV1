@@ -79,9 +79,21 @@
                       <th scope="col">Posición</th>
                         <th scope="col">Avatar</th>
                         <th scope="col">Freestyler</th>
-                        <th scope="col">Points</th>
+                        <th scope="col" onclick="window.location='<?=$this->Url->build([
+                                                'controller' => 'leaderboard',
+                                                'action' => 'board',
+                                                $leagues->slug,
+                                                $seasons_slug,
+                                                $competition_slug
+                                            ]) ?>'">Points</th>
                         <?php if(!$emptyScore):?>
-                        <th scope="col">Score</th>
+                        <th scope="col" onclick="window.location='<?= $this->Url->build([
+                                                'controller' => 'leaderboard',
+                                                'action' => 'board',
+                                                $leagues->slug,
+                                                $seasons_slug,
+                                                $competition_slug
+                                            ]); ?>?colum=score&direction=asc'" >Score</th>
                         <?php endif ?>
                     </tr>
                   </thead>
