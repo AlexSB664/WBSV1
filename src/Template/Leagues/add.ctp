@@ -51,6 +51,12 @@
 </div>
 <script>
     tinymce.init({
-        selector: '#description'
+        selector: '#description',
+        menubar:false,
+        menu: {
+            edit: { title: 'Edit', items: 'undo redo | cut copy paste | selectall | searchreplace' },
+            view: { title: 'View', items: 'code | visualaid visualchars visualblocks | spellchecker | preview fullscreen' },
+            format: { title: 'Format', items: 'bold italic underline strikethrough superscript subscript codeformat | formats blockformats fontformats fontsizes align | forecolor backcolor | removeformat' }
+        }
     });
 </script>
