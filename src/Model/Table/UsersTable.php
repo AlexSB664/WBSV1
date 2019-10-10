@@ -143,7 +143,7 @@ class UsersTable extends Table
         if (empty($data['avatar']['tmp_name']) & $data['avatar']['error'] === 4 & empty($data['avatar']['name']) &  empty($data['avatar']['type']) & empty($data['avatar']['size'])) {
             $user->avatar = 'default.png';
         } else {
-            $file_name =  $this->uploadFile($data['avatar'], 'img', 'uploads/users/');
+            $file_name =  $this->uploadFile($data['avatar'], 'img','avatar','uploads/users/');
             $user->avatar = $file_name;
         }
 
@@ -170,14 +170,14 @@ class UsersTable extends Table
             $user->avatar = $tmpAvatar;
         } else {
             $this->deleteFile($tmpAvatar, 'img');
-            $file_name =  $this->uploadFile($data['avatar'], 'img', 'uploads/users/');
+            $file_name =  $this->uploadFile($data['avatar'], 'img','avatar','uploads/users/');
             $user->avatar = $file_name;
         }
         if (empty($data['head_bg']['tmp_name']) & $data['head_bg']['error'] === 4 & empty($data['head_bg']['name']) &  empty($data['head_bg']['type']) & empty($data['head_bg']['size'])) {
             $user->head_bg = $tmpHeadBG;
         } else {
             $this->deleteFile($tmpHeadBG, 'img');
-            $file_name =  $this->uploadFile($data['head_bg'], 'img', 'uploads/users/');
+            $file_name =  $this->uploadFile($data['head_bg'], 'img','avatar','uploads/users/');
             $user->head_bg = $file_name;
         }
 

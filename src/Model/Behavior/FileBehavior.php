@@ -7,6 +7,7 @@ use Cake\Http\Exception\InternalErrorException;
 use Cake\ORM\Behavior;
 use Cake\ORM\Table;
 use Cake\Utility\Text;
+use App\Model\Behavior\ResizeBot;
 
 /**
  * FileBehavior behavior
@@ -36,13 +37,10 @@ class FileBehavior extends Behavior
         'hero_bg_02.jpg'
     ];
 
-    public function uploadFile($file, $type = 'files', $deep_dir = null)
+    public function uploadFile($file, $type = 'files',$class=null, $deep_dir = null)
     {
         $this->validateUpload($file['name'], $type);
-
         $config = $this->config();
-
-
         $new_name = Text::uuid() . '-' . $file['name'];
 
         $dir = $config['dirs'][$type] . DS . $deep_dir;
@@ -51,6 +49,12 @@ class FileBehavior extends Behavior
         move_uploaded_file($file['tmp_name'], $dir . DS . $new_name);
         if ($deep_dir) {
             $new_name = $deep_dir . $new_name;
+        }
+        if($class!=null){
+            $gabrielBot = new ResizeBot();
+            if($class==='flyer'){
+                $gabrielBot->resizeFlyer( WWW_ROOT.'img/'. $new_name);
+            }
         }
         return $new_name;
     }

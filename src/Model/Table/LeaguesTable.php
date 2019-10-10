@@ -135,7 +135,7 @@ class LeaguesTable extends Table
 
         $lgs = $this->patchEntity($lgs, $data);
 
-        $file_name =  $this->uploadFile($data['logo'], 'img', 'uploads/leagues/');
+        $file_name =  $this->uploadFile($data['logo'], 'img','logo','uploads/leagues/');
         $lgs->logo = $file_name;
 
         if (!$this->save($lgs)) {
@@ -164,7 +164,7 @@ class LeaguesTable extends Table
             $lgs->logo = $tmpLogo;
         } else {
             $this->deleteFile($tmpLogo, 'img');
-            $file_name =  $this->uploadFile($data['logo'], 'img', 'uploads/leagues/');
+            $file_name =  $this->uploadFile($data['logo'], 'img','logo','uploads/leagues/');
             $lgs->logo = $file_name;
         }
 
