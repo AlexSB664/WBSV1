@@ -30,7 +30,6 @@
         <?= $this->Form->control('name', array('label' => false, 'class' => 'form-control')); ?>
         <?= $this->Form->label('descripcion', array('class' => 'Descripcion: ')); ?>
         <?= $this->Form->control('description', array('label' => false, 'class' => 'form-control')); ?>
-        <?= $this->Form->label('liga', array('class' => 'Liga: ')); ?>
         <?= $this->Form->control('league_id', ['options' => $leagues,'class' => 'form-control']); ?>
         <?= $this->Form->label('estatus', array('class' => 'Estatus: ')); ?>
         <?= $this->Form->control('status', array('label' => false, 'class' => 'form-control')); ?>
@@ -53,9 +52,9 @@
         </script>
         <br>
         <?= $this->Form->label('inicio', array('class' => 'Inicio: ')); ?>
-        <?= $this->Form->control('date_start'); ?>
+        <?= $this->Form->control('date_start',array('label'=>false)); ?>
         <?= $this->Form->label('fin', array('class' => 'Fin: ')); ?>
-        <?= $this->Form->control('date_end'); ?>
+        <?= $this->Form->control('date_end',array('label'=>false)); ?>
     </fieldset>
     <?= $this->Form->button(__('Guardar'), array('class' => 'btn btn-default btn-lg')) ?>
     <?= $this->Form->end() ?>

@@ -11,7 +11,7 @@
       <div class="col-md-7 text-center" data-aos="fade-up" data-aos-delay="400">
 
         <h1 class="text-white">Ligas de BajaMx - <?= h($league->name) ?></h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+      <!--  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p> -->
       </div>
     </div>
   </div>
@@ -27,15 +27,7 @@
         <div class="site-section-heading text-left mb-5 w-border">
           <h2>Acerca de <?= h($league->name) ?></h2>
         </div>
-        <p class="lead">Aqui va una descripcion de las ligas que aún no tenemos.... :( Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate accusamus porro, iusto id
-          iste, quo nulla. Quisquam quia reiciendis iste earum mollitia officiis pariatur, culpa ab rerum quam, sint
-          veritatis?</p>
-        <p>Nobis rem impedit eligendi! Temporibus dolorum rerum quod autem, iusto excepturi distinctio maxime, deserunt,
-          odio veritatis aliquid illo dolorem! Odio quibusdam repellat dolores dolor ipsum perferendis id, quod
-          voluptates amet.</p>
-        <p>Perspiciatis porro cumque dicta laborum laudantium quia et expedita dolorum, quis id facilis repudiandae
-          nostrum nam temporibus dolores impedit tempora! Blanditiis tenetur neque harum molestiae ipsa minus. Nulla
-          nemo, quis.</p>
+        <p class="lead"><?= ($league->description) ?>
         <div class="text">
           <h2 class="mb-2 font-weight-light h4"> <?= $league->name; ?> </h2>
           <span class="d-block mb-2 text-white-opacity-05">Telefono: <?= $league->social_telephone; ?></span>
@@ -47,7 +39,6 @@
           </p>
         </div>
       </div>
-
     </div>
   </div>
 </div>

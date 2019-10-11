@@ -4,6 +4,9 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\League $league
  */
+
+use App\Model\Entity\League;
+
 ?>
 <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url('/img/hero_bg_02.jpg');" data-aos="fade" data-stellar-background-ratio="0.5" data-aos="fade">
   <div class="container">
@@ -11,7 +14,7 @@
       <div class="col-md-7 text-center" data-aos="fade-up" data-aos-delay="400">
 
         <h1 class="text-white">Eventos de BajaMx - <?= h($competition->name) ?></h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+      <!--  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p> -->
       </div>
     </div>
   </div>
@@ -29,9 +32,10 @@
         </div>
         <p class="lead"> Lugar:  <?= $competition->location->name ?></p>
         <p>Fecha y Hora: <?= $competition->date ?></p>
-        <p>Perspiciatis porro cumque dicta laborum laudantium quia et expedita dolorum, quis id facilis repudiandae
+        <p class="lead"><?= ($league->description) ?>
+     <!--   <p>Perspiciatis porro cumque dicta laborum laudantium quia et expedita dolorum, quis id facilis repudiandae
           nostrum nam temporibus dolores impedit tempora! Blanditiis tenetur neque harum molestiae ipsa minus. Nulla
-	  nemo, quis.</p>
+	  nemo, quis.</p> -->
 <iframe
   width="600"
   height="450"

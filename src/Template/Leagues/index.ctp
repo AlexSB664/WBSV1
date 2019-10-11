@@ -15,13 +15,10 @@
 		</div>
 	</div>
 </div>
-
 <div class="site-section">
 	<div class="container" data-aos="fade-up">
 		<div class="row">
-
 		<?php foreach ($leagues as $league): ?>
-
 			<div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
 				<div class="team-member">
 					<img src="/img/<?= $league->logo; ?>" alt="Image" class="img-fluid">
@@ -42,7 +39,6 @@
 							<?php if($league->social_youtube != "NULL"): ?>
 								<a href="<?= $league->social_youtube; ?>" class="text-white p-2"><span class="icon-youtube"></span></a>
                                                         <?php endif; ?>
-
 						</p>
 					</div>
 				</div>

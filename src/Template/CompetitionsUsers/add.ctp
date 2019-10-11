@@ -20,8 +20,8 @@
     <fieldset>
         <legend><?= __('Add Competitions User') ?></legend>
         <?php
-            echo $this->Form->control('competitions_id', ['options' => $competitions,]);
-            echo $this->Form->control('users_id', ['options' => $users]);
+            echo $this->Form->control('competitions_id', ['options' => $competitions,'class'=>'form-control']);
+            echo $this->Form->control('users_id', ['options' => $users,'class'=>'form-control']);
             echo $this->Form->control('assistance');
         ?>
     </fieldset>
