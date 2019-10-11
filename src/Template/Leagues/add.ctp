@@ -6,7 +6,7 @@
  */
 ?>
 <script src="/tinymce/tinymce.min.js"></script>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<!--<nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('List Leagues'), ['action' => 'index']) ?></li>
@@ -15,7 +15,7 @@
         <li><?= $this->Html->link(__('List Seasons'), ['controller' => 'Seasons', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Season'), ['controller' => 'Seasons', 'action' => 'add']) ?></li>
     </ul>
-</nav>
+</nav> -->
 <div class="leagues form large-9 medium-8 columns content">
     <?= $this->Form->create($league, ['type' => 'file']); ?>
     <fieldset>
@@ -57,6 +57,7 @@
             edit: { title: 'Edit', items: 'undo redo | cut copy paste | selectall | searchreplace' },
             view: { title: 'View', items: 'code | visualaid visualchars visualblocks | spellchecker | preview fullscreen' },
             format: { title: 'Format', items: 'bold italic underline strikethrough superscript subscript codeformat | formats blockformats fontformats fontsizes align | forecolor backcolor | removeformat' }
-        }
+        },
+        resize: false
     });
 </script>
