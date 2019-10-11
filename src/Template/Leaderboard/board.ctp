@@ -1,4 +1,3 @@
-
 <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url('/img/hero_bg_02.jpg');"
     data-aos="fade" data-stellar-background-ratio="0.5" data-aos="fade">
         <div class="container">

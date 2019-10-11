@@ -114,6 +114,7 @@ class MatchesUsersController extends AppController
 
     public function listByCompetition($competition_id = null)
     {
+        $this->viewBuilder()->layout('deejee');
         $list = $this->MatchesUsers->find('all',['contain'=>['Matches','Users'],'order'=>['Matches.id','Matches.stage']])->where(['Matches.competition_id'=>$competition_id])->toArray();
         $list =( new Battles(['competition_id'=>$competition_id]))->make();
         $this->set(compact('list'));

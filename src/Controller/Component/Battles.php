@@ -39,7 +39,7 @@ class Battles
         $this->list = $this->MatchesUsers->find('all', ['contain' => ['Matches', 'Users.Crews'], 'order' => 'Matches.id'])->where(['Matches.competition_id' => $this->competition])->toArray();
         // echo implode($this->list);
         $this->orderData();
-        die();
+        // die();
         //structure match, users in same stage
     }
 
@@ -49,24 +49,24 @@ class Battles
             $this->results[$battle->match->stage][$battle->match->id][]=$battle->user;
         }
 
-        foreach ($this->results as $key => $stage) {
-            echo "<br>";
-            echo "battles of " . $key;
-            echo "<br>";
-            echo "battle";
-            echo "<br>";
-            foreach ($stage as $match) {
-                echo "<br>";
-                echo "<-------------------------------------Battle--------------------------->";
-                echo "<br>";    
-                foreach ($match as $users) {
-                    echo "<br>";
-                    echo $users->aka;
-                }
-                echo "<br>";
-                echo "<----------------------------------------------------------------------->";    
-            }
-        }
+        // foreach ($this->results as $key => $stage) {
+        //     echo "<br>";
+        //     echo "battles of " . $key;
+        //     echo "<br>";
+        //     echo "battle";
+        //     echo "<br>";
+        //     foreach ($stage as $match) {
+        //         echo "<br>";
+        //         echo "<-------------------------------------Battle--------------------------->";
+        //         echo "<br>";    
+        //         foreach ($match as $users) {
+        //             echo "<br>";
+        //             echo $users->aka;
+        //         }
+        //         echo "<br>";
+        //         echo "<----------------------------------------------------------------------->";    
+        //     }
+        // }
     }
 
     private function validateArgs($data = [])
