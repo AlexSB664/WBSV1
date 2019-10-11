@@ -5,6 +5,7 @@
  * @var \App\Model\Entity\League $league
  */
 ?>
+<script src="/tinymce/tinymce.min.js"></script>
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -33,7 +34,7 @@
         </script>
         <?php
         echo $this->Form->control('name');
-        echo $this->Form->control('description');
+        echo $this->Form->control('description',array('name'=>'description','id'=>'description'));
         echo $this->Form->control('social_facebook');
         echo $this->Form->control('social_twitter');
         echo $this->Form->control('social_instagram');
@@ -48,3 +49,14 @@
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>
+<script>
+    tinymce.init({
+        selector: '#description',
+        menubar:false,
+        menu: {
+            edit: { title: 'Edit', items: 'undo redo | cut copy paste | selectall | searchreplace' },
+            view: { title: 'View', items: 'code | visualaid visualchars visualblocks | spellchecker | preview fullscreen' },
+            format: { title: 'Format', items: 'bold italic underline strikethrough superscript subscript codeformat | formats blockformats fontformats fontsizes align | forecolor backcolor | removeformat' }
+        }
+    });
+</script>
