@@ -119,4 +119,8 @@ class MatchesUsersController extends AppController
         $list =( new Battles(['competition_id'=>$competition_id]))->make();
         $this->set(compact('list'));
     }
+    public function beforeFilter(\Cake\Event\Event $event)
+    {
+        $this->Auth->allow(['listByCompetition']);
+    }
 }
