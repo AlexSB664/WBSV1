@@ -17,14 +17,14 @@ class ContactController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function Contact(){
+    public function contact(){
         if ($this->request->is('post')) {
             $info = $this->request->data;
             $email = new Email('default');
             $subject='Duda de algun seguidor';
             $message = 'Name: '.$info['name'].'<br>'.'Email: '.$info['email'].'<br>'.'Asunto: '.$info['affair'].'<br>'.'Mensaje: '.$info['message'];
-            $email
-                ->to('coliseumwbs@c4-technologies.com')
+            $email->from('coliseumwbs@c4-technologies.com')
+                ->to('coliseumwbs@c4-technologies.com','alexskullsoft@gmail.com')
                 ->send($message);
             }
         $this->viewBuilder()->layout('contactame');
@@ -114,5 +114,10 @@ class ContactController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function beforeFilter(\Cake\Event\Event $event)
+    {
+        $this->Auth->allow(['contact']);
     }
 }

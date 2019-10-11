@@ -26,11 +26,11 @@
     <fieldset>
         <legend><?= __('Edit Competition User') ?></legend>
         <?php
-            echo $this->Form->control('competitions_id', ['options' => $competitions]);
-            echo $this->Form->control('users_id', ['options' => $users]);
+            echo $this->Form->control('competitions_id', ['options' => $competitions,'class' => 'form-control']);
+            echo $this->Form->control('users_id', ['options' => $users,'class' => 'form-control']);
             echo $this->Form->control('assistance');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Guardar'),array('class' => 'btn btn-default btn-lg')) ?>
     <?= $this->Form->end() ?>
 </div>

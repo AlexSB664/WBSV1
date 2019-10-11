@@ -32,7 +32,7 @@
 						<?= $competition->season->league->name ?> - <?= $competition->season->name ?> - <?= $competition->name ?>
                 			</a>
 				</h2>
-				<h5 class="location" > En <?= $competition->location->name ?> </h5>
+				<h5 class="location" > En <?= $competition->location->name ?> @ <?= $competition->location->city ?> </h5>
                 	</div>
             	</div>
             	<?php endforeach; ?>

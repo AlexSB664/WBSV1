@@ -5,6 +5,7 @@
  * @var \App\Model\Entity\League $league
  */
 ?>
+<!--
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -20,7 +21,8 @@
         <li><?= $this->Html->link(__('List Seasons'), ['controller' => 'Seasons', 'action' => 'index']) ?></li>
         <li><?= $this->Html->link(__('New Season'), ['controller' => 'Seasons', 'action' => 'add']) ?></li>
     </ul>
-</nav>
+</nav> -->
+<script src="/tinymce/tinymce.min.js"></script>
 <div class="leagues form large-9 medium-8 columns content">
     <?= $this->Form->create($league, ['type' => 'file']); ?>
     <fieldset>
@@ -41,19 +43,31 @@
             };
         </script>
         <?php
-        echo $this->Form->control('name');
-        echo $this->Form->control('description');
-        echo $this->Form->control('social_facebook');
-        echo $this->Form->control('social_twitter');
-        echo $this->Form->control('social_instagram');
-        echo $this->Form->control('social_youtube');
-        echo $this->Form->control('social_website');
-        echo $this->Form->control('contact_phone');
-        echo $this->Form->control('contact_email');
-        echo $this->Form->control('slug');
-        echo $this->Form->control('since');
+        echo $this->Form->control('name', array('class' => 'form-control'));
+        echo $this->Form->control('description',array('id'=>'description','required'=>'false'));
+        echo $this->Form->control('social_facebook',array('class' => 'form-control'));
+        echo $this->Form->control('social_twitter',array('class' => 'form-control'));
+        echo $this->Form->control('social_instagram',array('class' => 'form-control'));
+        echo $this->Form->control('social_youtube',array('class' => 'form-control'));
+        echo $this->Form->control('social_website',array('class' => 'form-control'));
+        echo $this->Form->control('contact_phone',array('class' => 'form-control'));
+        echo $this->Form->control('contact_email',array('class' => 'form-control'));
+        echo $this->Form->control('slug',array('class' => 'form-control'));
+        echo $this->Form->control('since',array('class' => 'form-control'));
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Editar'), array('class' => 'btn btn-default btn-lg')) ?>
     <?= $this->Form->end() ?>
 </div>
+<script>
+    tinymce.init({
+        selector: '#description',
+        menubar:false,
+        menu: {
+            edit: { title: 'Edit', items: 'undo redo | cut copy paste | selectall | searchreplace' },
+            view: { title: 'View', items: 'code | visualaid visualchars visualblocks | spellchecker | preview fullscreen' },
+            format: { title: 'Format', items: 'bold italic underline strikethrough superscript subscript codeformat | formats blockformats fontformats fontsizes align | forecolor backcolor | removeformat' }
+        },
+        resize: false
+    });
+</script>
