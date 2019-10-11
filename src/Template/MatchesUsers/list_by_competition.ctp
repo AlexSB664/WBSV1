@@ -1,80 +1,76 @@
-<div class="site-blocks-cover inner-page-cover overlay" style="background-image: url('/img/hero_bg_02.jpg');"
-    data-aos="fade" data-stellar-background-ratio="0.5" data-aos="fade">
-        <div class="container">
-                <div class="row align-items-center justify-content-center">
-                        <div class="col-md-8 text-center" data-aos="fade-up" data-aos-delay="400">
-                                <h1 class="league-title text-white">Batallas</h1>
-	 		                	<h2 class="seasson-title">del</h2>
-            			        <h2 class="event-title">Evento</h2>
-			</div>
-                </div>
+<div class="site-blocks-cover inner-page-cover overlay" style="background-image: url('/img/hero_bg_02.jpg');" data-aos="fade" data-stellar-background-ratio="0.5" data-aos="fade">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-8 text-center" data-aos="fade-up" data-aos-delay="400">
+                <h1 class="league-title text-white">Batallas</h1>
+                <h2 class="seasson-title">del</h2>
+                <h2 class="event-title">Evento</h2>
+            </div>
         </div>
+    </div>
 </div>
 
-<div class="row">
-      <div class="col-10 col-sm-2"></div>
-      <div class="col-10 col-sm-10">
-        <div class="table-responsive-md">
-            <table class="table table-responsive leaderboard">
-                <thead class="thead-dark">
-                    <tr>
-                      <th scope="col">Posición</th>
-                        <th scope="col">Avatar</th>
-                        <th scope="col">Freestyler</th>
-                        <th scope="col">Points</th>
-                        <th scope="col">Score</th>
-                    </tr>
-                  </thead>
-                <tbody>
-                    <tr>
-                        <td>ID</td>
-                        <td>Avatar </td>
-                        <td>  $row['aka']  </td>
-                        <td> $row['points'] </td>
-                        <td> $row['score'] </td>
+<div class="col-sm-auto text-center">
+    <div class="container">
+        <?php foreach ($list as $key =>  $item) : ?>
+            <!-- Stage -->
+            <div class="row">
+                <div class="col">
+                    <h1><?= $key ?></h1>
+                </div>
+            </div>
+            <!-- Battles in stage -->
+            <?php foreach ($item as  $match) : ?>
+            <div class="row"><div class="col">
+                <h2>VS</h2></div>
+            </div>
+                <div class="row">
+                    <?php foreach ($match as  $user) : ?>
+                        <div class="col">
+                            <!-- user card -->
 
-                    </tr>
+                            <!-- Section: Personal card -->
+                            <section class="my-5">
 
-                </tbody>
-            </table>
+                                <!-- Grid row -->
+                                <div class="row">
 
-          </div>
-    </div>
-    <div class="col-10 col-sm-2"></div>
-</div>
-<?php foreach ($list as $key =>  $item): ?>
-<?= $key ?>
-<?php foreach ($item as  $match): ?>
+                                    <!-- Grid column -->
+                                    <div class="col">
 
-<h1>Batalla</h1>
-<?php foreach ($match as  $user): ?>
-<br>
-<br>
-<?= ($user->aka) ?>
-<br>
-<?php endforeach ?>
-<h1>Termina aqui</h1>
-<?php endforeach ?>
-<?php endforeach ?> 
+                                        <!-- Card -->
+                                        <div class="card card-personal">
 
-<div class="container">
-  <div class="row">
-    <div class="col">
-      1 of 2
+                                            <!-- Card image-->
+                                            <?= $this->Html->image(($user->avatar), ['alt' => "default-avatar", 'class' => 'card-img-top']); ?>
+                                            <!-- Card image-->
+
+                                            <!-- Card content -->
+                                            <div class="card-body bg-black">
+                                                <!-- Title-->
+                                                <a>
+                                                    <h4 class="card-title title-one"><?= $user->aka ?></h4>
+                                                </a>
+                                                <p class="card-meta"><?= $user->crew?$user->crew->name:'NA'?></p>
+                                                <!-- Text -->
+                                            </div>
+                                            <!-- Card content -->
+
+                                        </div>
+                                        <!-- Card -->
+
+                                    </div>
+                                    <!-- Grid column -->
+
+                                </div>
+                                <!-- Grid row -->
+
+                            </section>
+                            <!-- Section: Personal card -->
+                        </div>
+                    <?php endforeach ?>
+                </div>
+            <?php endforeach ?>
+        <?php endforeach ?>
     </div>
-    <div class="col">
-      2 of 2
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      1 of 3
-    </div>
-    <div class="col">
-      2 of 3
-    </div>
-    <div class="col">
-      3 of 3
-    </div>
-  </div>
 </div>
