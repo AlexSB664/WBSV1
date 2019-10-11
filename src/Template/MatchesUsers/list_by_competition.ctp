@@ -32,12 +32,6 @@
                             <!-- Section: Personal card -->
                             <section class="my-5">
 
-                                <!-- Grid row -->
-                                <div class="row">
-
-                                    <!-- Grid column -->
-                                    <div class="col">
-
                                         <!-- Card -->
                                         <div class="card card-personal">
 
@@ -58,12 +52,6 @@
 
                                         </div>
                                         <!-- Card -->
-
-                                    </div>
-                                    <!-- Grid column -->
-
-                                </div>
-                                <!-- Grid row -->
 
                             </section>
                             <!-- Section: Personal card -->
