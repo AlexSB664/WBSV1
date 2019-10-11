@@ -33,20 +33,20 @@
             };
         </script>
         <?php
-        echo $this->Form->control('name');
+        echo $this->Form->control('name',array('class' => 'form-control'));
         echo $this->Form->control('description',array('id'=>'description','required'=>'false'));
-        echo $this->Form->control('social_facebook');
-        echo $this->Form->control('social_twitter');
-        echo $this->Form->control('social_instagram');
-        echo $this->Form->control('social_youtube');
-        echo $this->Form->control('social_website');
-        echo $this->Form->control('contact_phone');
-        echo $this->Form->control('contact_email');
-        echo $this->Form->control('slug');
-        echo $this->Form->control('since');
+        echo $this->Form->control('social_facebook',array('class' => 'form-control'));
+        echo $this->Form->control('social_twitter',array('class' => 'form-control'));
+        echo $this->Form->control('social_instagram',array('class' => 'form-control'));
+        echo $this->Form->control('social_youtube',array('class' => 'form-control'));
+        echo $this->Form->control('social_website',array('class' => 'form-control'));
+        echo $this->Form->control('contact_phone',array('class' => 'form-control'));
+        echo $this->Form->control('contact_email',array('class' => 'form-control'));
+        echo $this->Form->control('slug',array('class' => 'form-control'));
+        echo $this->Form->control('since',array('class' => 'form-control'));
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Agregar'), array('class' => 'btn btn-default btn-lg')) ?>
     <?= $this->Form->end() ?>
 </div>
 <script>

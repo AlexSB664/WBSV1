@@ -31,7 +31,7 @@
         <?= $this->Form->label('descripcion', array('class' => 'Descripcion: ')); ?>
         <?= $this->Form->control('description', array('label' => false, 'class' => 'form-control')); ?>
         <?= $this->Form->label('liga', array('class' => 'Liga: ')); ?>
-        <?= $this->Form->control('league_id', ['options' => $leagues]); ?>
+        <?= $this->Form->control('league_id', ['options' => $leagues,'class' => 'form-control']); ?>
         <?= $this->Form->label('estatus', array('class' => 'Estatus: ')); ?>
         <?= $this->Form->control('status', array('label' => false, 'class' => 'form-control')); ?>
         <?= $this->Form->label('slug', array('class' => 'Slug: ')); ?>

@@ -17,7 +17,7 @@
     <fieldset>
         <legend><?= __('Agregar Crew') ?></legend>
         <?= $this->Form->label('nombre', array('class'=> 'Nombre: ')); ?>
-        <?= $this->Form->control('name', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12'));?>
+        <?= $this->Form->control('name', array('label'=>false, 'class'=>'form-control'));?>
     </fieldset>
     <br>
     <?= $this->Form->button(__('Agregar'), array('class'=>'btn btn-default btn-lg')) ?>
