@@ -43,7 +43,7 @@
         </script>
         <?php
         echo $this->Form->control('name');
-        echo $this->Form->control('description',array('name'=>'description','id'=>'description'));
+        echo $this->Form->control('description',array('id'=>'description','required'=>'false'));
         echo $this->Form->control('social_facebook');
         echo $this->Form->control('social_twitter');
         echo $this->Form->control('social_instagram');
