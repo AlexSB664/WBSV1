@@ -281,7 +281,7 @@ iframe {
   font-size: 15px;
   color: #555555;
   line-height: 1.2;
-
+  resize: none;
   display: block;
   width: 100%;
   background: transparent;

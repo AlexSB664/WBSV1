@@ -10,9 +10,7 @@
             </div>
             <div class="col-4 col-md-4 col-lg-8">
                 <nav class="site-navigation text-right text-md-right" role="navigation">
-
                     <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
-
                     <ul class="site-menu js-clone-nav d-none d-lg-block">
                         <li <?= $this->request->params['controller'] === 'Competitions' ? 'class="active"' : '' ?>>
                             <a href="<?= $this->Url->build([
@@ -44,11 +42,12 @@
                             <a href="<?= $this->Url->build([
                                             'controller' => 'estadisticas'
                                         ]);
-                                        ?>">Estadisticas</a>
+                                        ?>">Estadísticas</a>
                         </li>
                         <li <?= ($this->request->url) === 'contacto' ? 'class="active"' : '' ?>>
                             <a href="<?= $this->Url->build([
-                                            'controller' => 'contacto'
+                                            'controller' => 'contact',
+                                            'action' => 'contact'
                                         ]);
                                         ?>">Contacto</a>
                         </li>
