@@ -34,21 +34,19 @@
 				</h2>
 				<h5 class="location" > En <?= $competition->location->name ?> @ <?= $competition->location->city ?> </h5>
                 	</div>
-            	</div>
-            	<?php endforeach; ?>
-    	</div>
-
-<div class="container mt-5" data-aos="fade-up">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <div class="site-block-27">
-            <ul>
-            <?= $this->Paginator->numbers() ?>
-	    </ul>
-          </div>
         </div>
-      </div>
+            <?php endforeach; ?>
     </div>
-        <p><?= $this->Paginator->counter(['format' => __('Pagina {{page}} de {{pages}}, mostrando {{current}} eventos de {{count}} en total')]) ?></p>
+	<div class="container mt-5" data-aos="fade-up">
+		<div class="row">
+			<div class="col-md-12 text-center">
+				<div class="site-block-27">
+					<ul>
+						<?= $this->Paginator->numbers() ?>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<p><?= $this->Paginator->counter(['format' => __('Pagina {{page}} de {{pages}}, mostrando {{current}} eventos de {{count}} en total')]) ?></p>
 </div>
-
