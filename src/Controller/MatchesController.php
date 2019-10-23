@@ -16,9 +16,9 @@ use Cake\Routing\Router;
 class MatchesController extends AppController
 {
     private $session;
+
     public function initialize()
     {
-        parent::initialize();
         $this->CompetitionsUsers = TableRegistry::get('competitions_users');
         $this->Leagues = TableRegistry::get('leagues');
         $this->Seasons = TableRegistry::get('seasons');
@@ -27,8 +27,9 @@ class MatchesController extends AppController
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
             'authorize' => ['Controller'] // Added this line
-            ]);
+        ]);
     }
+
     public function getLastUrl()
     {
         return $this->session->read('lastUrl');
