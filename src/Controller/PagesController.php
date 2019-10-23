@@ -66,4 +66,9 @@ class PagesController extends AppController
             throw new NotFoundException();
         }
     }
+
+    public function beforeFilter(\Cake\Event\Event $event)
+    {
+        $this->Auth->allow(['display']);
+    }
 }

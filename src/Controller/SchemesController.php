@@ -131,11 +131,11 @@ class SchemesController extends AppController
              return true;
          }
          break;
-      case 'participant':
-         if (in_array($this->request->action, ['index,view'])){
-             return true;
-         }
-         break;
+    //   case 'participant':
+    //      if (in_array($this->request->action, ['index,view'])){
+    //          return true;
+    //      }
+    //      break;
      }
      return false;
   }

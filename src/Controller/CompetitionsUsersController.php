@@ -215,11 +215,11 @@ class CompetitionsUsersController extends AppController
                     return true;
                 }
                 break;
-            case 'participant':
-                if (in_array($this->request->action, ['index,view','join','unjoin'])) {
-                    return true;
-                }
-                break;
+            // case 'participant':
+            //     if (in_array($this->request->action, ['index,view','join','unjoin'])) {
+            //         return true;
+            //     }
+            //     break;
         }
         return false;
     }

@@ -212,4 +212,9 @@ class CompetitionsController extends AppController
         }
         return false;
     }
+
+    public function beforeFilter(\Cake\Event\Event $event)
+    {
+        $this->Auth->allow(['index','view']);
+    }
 }
