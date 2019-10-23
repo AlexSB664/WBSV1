@@ -14,6 +14,14 @@ use Cake\Core\Configure\Engine\PhpConfig;
  */
 class LocationsController extends AppController
 {
+    public function initialize()
+    {
+    $this->loadComponent('Flash');
+    $this->loadComponent('Auth', [
+        'authorize' => ['Controller'] // Added this line
+        ]);
+    }
+
     /**
      * Index method
      *
@@ -107,5 +115,27 @@ class LocationsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function isAuthorized($user)
+    {
+       switch ($this->Auth->user('role')) {
+         case 'admin':
+           if (in_array($this->request->action, ['index','view', 'add', 'edit', 'delete'])){
+             return true;
+           }
+           break;
+         case 'organizers':
+         if (in_array($this->request->action, ['index,view'])){
+               return true;
+           }
+           break;
+        case 'participant':
+           if (in_array($this->request->action, ['index,view'])){
+               return true;
+           }
+           break;
+       }
+       return false;
     }
 }

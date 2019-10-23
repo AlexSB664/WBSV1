@@ -24,7 +24,7 @@ class ContactController extends AppController
             $subject='Duda de algun seguidor';
             $message = 'Name: '.$info['name'].'<br>'.'Email: '.$info['email'].'<br>'.'Asunto: '.$info['affair'].'<br>'.'Mensaje: '.$info['message'];
             $email->from('coliseumwbs@c4-technologies.com')
-                ->to('coliseumwbs@c4-technologies.com','alexskullsoft@gmail.com')
+                ->to('coliseumwbs@c4-technologies.com')
                 ->send($message);
             }
         $this->viewBuilder()->layout('contactame');

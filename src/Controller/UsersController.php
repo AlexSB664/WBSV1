@@ -20,6 +20,11 @@ class UsersController extends AppController
      */
     public function index()
     {
+        if($this->Auth->user('role')!=='admin'){ 
+            $this->Flash->error(__("You don't have 
+            permissions"));
+            return $this->redirect(['controller' => 'Competitions', 'action' => 'index']);
+        }
         $this->paginate = [
             'contain' => ['Crews']
         ];
@@ -51,6 +56,11 @@ class UsersController extends AppController
      */
     public function add()
     {
+        if($this->Auth->user('role')!=='admin'){ 
+            $this->Flash->error(__("You don't have 
+            permissions"));
+            return $this->redirect(['controller' => 'Competitions', 'action' => 'index']);
+        }
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
@@ -75,6 +85,11 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
+        if($this->Auth->user('role')!=='admin'){ 
+            $this->Flash->error(__("You don't have 
+            permissions"));
+            return $this->redirect(['controller' => 'Competitions', 'action' => 'index']);
+        }
         $user = $this->Users->get($id, [
             'contain' => ['Matches']
         ]);
@@ -100,6 +115,11 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
+        if($this->Auth->user('role')!=='admin'){ 
+            $this->Flash->error(__("You don't have 
+            permissions"));
+            return $this->redirect(['controller' => 'Competitions', 'action' => 'index']);
+        }
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
@@ -149,6 +169,6 @@ class UsersController extends AppController
 
     public function beforeFilter(\Cake\Event\Event $event)
     {
-        $this->Auth->allow(['singup', 'add']);
+        $this->Auth->allow(['singup']);
     }
 }

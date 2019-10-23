@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -12,6 +13,14 @@ use App\Controller\AppController;
  */
 class SchemesDetailsController extends AppController
 {
+    public function initialize()
+    {
+        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'authorize' => ['Controller'] // Added this line
+        ]);
+    }
+
     /**
      * Index method
      *
@@ -113,8 +122,31 @@ class SchemesDetailsController extends AppController
     {
         $this->autoRender = false;
         if ($this->request->is(['get'])) {
-            $schemeTmp = $this->SchemesDetails->find('all')->where(['position'=>$this->request->query['stage'],'scheme_id'=>$this->request->query['scheme_id']])->first();
-            echo($schemeTmp->points);
+            $schemeTmp = $this->SchemesDetails->find('all')->where(['position' => $this->request->query['stage'], 'scheme_id' => $this->request->query['scheme_id']])->first();
+            echo ($schemeTmp->points);
         }
+    }
+
+    //Autorizacion hacia las vistas del usuario
+    public function isAuthorized($user)
+    {
+        switch ($this->Auth->user('role')) {
+            case 'admin':
+                if (in_array($this->request->action, ['index', 'view', 'add', 'edit', 'delete', 'getPoints'])) {
+                    return true;
+                }
+                break;
+            case 'organizers':
+                if (in_array($this->request->action, ['index,view', 'getPoints'])) {
+                    return true;
+                }
+                break;
+            case 'participant':
+                if (in_array($this->request->action, ['index,view'])) {
+                    return true;
+                }
+                break;
+        }
+        return false;
     }
 }

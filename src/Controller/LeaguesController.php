@@ -20,9 +20,9 @@ class LeaguesController extends AppController
      */
     public function initialize()
     {
-    $this->loadComponent('Flash');
-    $this->loadComponent('Auth', [
-        'authorize' => ['Controller'] // Added this line
+        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'authorize' => ['Controller'] // Added this line
         ]);
     }
 
@@ -129,64 +129,31 @@ class LeaguesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    /*public function beforeFilter(\Cake\Event\Event $event)
+    public function beforeFilter(\Cake\Event\Event $event)
     {
         $this->Auth->allow(['index', 'view']);
-    }*/
+    }
 
-    // public function loginRedirects($role= null)
-    // {
-    //     switch ($role) {
-    //         case 'Telefonista':
-    //             return $this->redirect(['controller' => 'Leads', 'action' => 'telefonistaLeads', $this->Auth->user('id')]);
-    //             break;
-
-    //         case 'Vendedor':
-    //             return $this->redirect(['controller' => 'Contracts', 'action' => 'contractsSeller']);
-    //             break;
-
-    //         case 'Supervisor':
-    //             return $this->redirect(['controller' => 'Leads', 'action' => 'allocate_telephonists']);
-    //             break;
-            
-    //         case 'Admin':
-    //             return $this->redirect(['controller' => 'dashboard', 'action' => 'index']);
-    //             break;
-
-    //         case 'Supervisor Financiera':
-    //             return $this->redirect(['controller' => 'accounts', 'action' => 'index']);
-    //             break;
-
-    //         case 'Agente Financiera':
-    //             return $this->redirect(['controller' => 'accounts', 'action' => 'active']);
-    //           break;
-              
-    //         default:
-    //             # code...
-    //             break;
-    //     }
-    // }
-
-  //Autorizacion hacia las vistas del usuario
-  public function isAuthorized($user)
-  {
-     switch ($this->Auth->user('role')) {
-       case 'admin':
-         if (in_array($this->request->action, ['index','manage','view', 'add', 'edit', 'delete'])){
-           return true;
-         }
-         break;
-       case 'organizers':
-       if (in_array($this->request->action, ['index,view'])){
-             return true;
-         }
-         break;
-      case 'participant':
-         if (in_array($this->request->action, ['index,view'])){
-             return true;
-         }
-         break;
-     }
-     return false;
-  }
+    //Autorizacion hacia las vistas del usuario
+    public function isAuthorized($user)
+    {
+        switch ($this->Auth->user('role')) {
+            case 'admin':
+                if (in_array($this->request->action, ['index', 'manage', 'view', 'add', 'edit', 'delete'])) {
+                    return true;
+                }
+                break;
+            case 'organizers':
+                if (in_array($this->request->action, ['index,view'])) {
+                    return true;
+                }
+                break;
+            case 'participant':
+                if (in_array($this->request->action, ['index,view'])) {
+                    return true;
+                }
+                break;
+        }
+        return false;
+    }
 }

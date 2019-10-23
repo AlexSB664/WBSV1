@@ -23,10 +23,15 @@ class CompetitionsController extends AppController
     {
         parent::initialize();
         $this->loadModel('CompetitionsUsers');
-        $this->session=$this->getRequest()->getSession();
+        $this->session = $this->getRequest()->getSession();
+        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'authorize' => ['Controller'] // Added this line
+        ]);
     }
-    public function getLastUrl(){
-      return $this->session->read('lastUrl');
+    public function getLastUrl()
+    {
+        return $this->session->read('lastUrl');
     }
 
     /**
@@ -98,18 +103,18 @@ class CompetitionsController extends AppController
     public function view($id = null)
     {
         $this->viewBuilder()->layout('deejee');
-    
-	$competition = $this->Competitions->get($id, [
+
+        $competition = $this->Competitions->get($id, [
             'contain' => ['Seasons', 'Locations', 'Matches', 'Schemes', 'Seasons.Leagues']
         ]);
 
-	$this->leaguesTable = TableRegistry::get('leagues');
-	$leagues = $this->leaguesTable->find('all')
+        $this->leaguesTable = TableRegistry::get('leagues');
+        $leagues = $this->leaguesTable->find('all')
             ->where(['id' => $competition->season->league_id])
-            ->contain([ 'Seasons', 'Seasons.Competitions']);
+            ->contain(['Seasons', 'Seasons.Competitions']);
 
-	$league = $leagues->first();
-	$this->set('competition', $competition);
+        $league = $leagues->first();
+        $this->set('competition', $competition);
         $this->set('league', $league);
     }
 
@@ -151,13 +156,13 @@ class CompetitionsController extends AppController
             if ($this->Competitions->editCompetitions($competition, $this->request->data)) {
                 $this->Flash->success(__('The competition has been saved.'));
                 //return $this->redirect( Router::url( $this->getLastUrl(), true ) );
-		return $this->redirect(['action'=>'manage']);
+                return $this->redirect(['action' => 'manage']);
             }
             $this->Flash->error(__('The competition could not be saved. Please, try again.'));
-        }else{
+        } else {
             $this->session->write([
                 'lastUrl' => $this->referer(),
-              ]);
+            ]);
         }
         $seasons = $this->Competitions->Seasons->find('list', ['limit' => 200]);
         $locations = $this->Competitions->Locations->find('list', ['limit' => 200]);
@@ -184,9 +189,27 @@ class CompetitionsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-    
-    public function beforeFilter(\Cake\Event\Event $event)                                                      
-    {                                                         
-	    $this->Auth->allow(['index', 'view']);            
-    }             
+
+    //Autorizacion hacia las vistas del usuario
+    public function isAuthorized($user)
+    {
+        switch ($this->Auth->user('role')) {
+            case 'admin':
+                if (in_array($this->request->action, ['index', 'view', 'add', 'edit', 'delete'])) {
+                    return true;
+                }
+                break;
+            case 'organizers':
+                if (in_array($this->request->action, ['index,view'])) {
+                    return true;
+                }
+                break;
+            case 'participant':
+                if (in_array($this->request->action, ['index,view'])) {
+                    return true;
+                }
+                break;
+        }
+        return false;
+    }
 }

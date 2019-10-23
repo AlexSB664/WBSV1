@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -13,6 +14,13 @@ use App\Controller\Component\Battles;
  */
 class MatchesUsersController extends AppController
 {
+    public function initialize()
+    {
+        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'authorize' => ['Controller'] // Added this line
+        ]);
+    }
     /**
      * Index method
      *
@@ -115,12 +123,34 @@ class MatchesUsersController extends AppController
     public function listByCompetition($competition_id = null)
     {
         $this->viewBuilder()->layout('deejee');
-        $list = $this->MatchesUsers->find('all',['contain'=>['Matches','Users'],'order'=>['Matches.id','Matches.stage']])->where(['Matches.competition_id'=>$competition_id])->toArray();
-        $list =( new Battles(['competition_id'=>$competition_id]))->make();
+        $list = $this->MatchesUsers->find('all', ['contain' => ['Matches', 'Users'], 'order' => ['Matches.id', 'Matches.stage']])->where(['Matches.competition_id' => $competition_id])->toArray();
+        $list = (new Battles(['competition_id' => $competition_id]))->make();
         $this->set(compact('list'));
     }
     public function beforeFilter(\Cake\Event\Event $event)
     {
         $this->Auth->allow(['listByCompetition']);
+    }
+    
+    public function isAuthorized($user)
+    {
+       switch ($this->Auth->user('role')) {
+         case 'admin':
+           if (in_array($this->request->action, ['index','view', 'add', 'edit', 'delete'])){
+             return true;
+           }
+           break;
+         case 'organizers':
+         if (in_array($this->request->action, ['index,view'])){
+               return true;
+           }
+           break;
+        case 'participant':
+           if (in_array($this->request->action, ['index,view'])){
+               return true;
+           }
+           break;
+       }
+       return false;
     }
 }

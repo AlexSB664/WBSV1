@@ -24,6 +24,10 @@ class MatchesController extends AppController
         $this->Seasons = TableRegistry::get('seasons');
         $this->Competitions = TableRegistry::get('competitions');
         $this->session = $this->getRequest()->getSession();
+        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'authorize' => ['Controller'] // Added this line
+            ]);
     }
     public function getLastUrl()
     {
@@ -180,4 +184,26 @@ class MatchesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+      //Autorizacion hacia las vistas del usuario
+  public function isAuthorized($user)
+  {
+     switch ($this->Auth->user('role')) {
+       case 'admin':
+         if (in_array($this->request->action, ['index','lazyAdd','lazyAddV2','view', 'add', 'edit', 'getLastUrl','delete'])){
+           return true;
+         }
+         break;
+       case 'organizers':
+       if (in_array($this->request->action, ['index,view'])){
+             return true;
+         }
+         break;
+      case 'participant':
+         if (in_array($this->request->action, ['index,view'])){
+             return true;
+         }
+         break;
+     }
+     return false;
+  }
 }

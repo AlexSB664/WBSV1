@@ -27,6 +27,10 @@ class CompetitionsUsersController extends AppController
         $this->loadModel('Users');
         $this->loadModel('Competitions');
         $this->session = $this->getRequest()->getSession();
+        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'authorize' => ['Controller'] // Added this line
+        ]);
     }
     public function getLastUrl()
     {
@@ -196,5 +200,27 @@ class CompetitionsUsersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function isAuthorized($user)
+    {
+        switch ($this->Auth->user('role')) {
+            case 'admin':
+                if (in_array($this->request->action, ['index','view','add','edit','delete','getLastUrl','join','unjoin','Assistance','lazyAdd'])) {
+                    return true;
+                }
+                break;
+            case 'organizers':
+                if (in_array($this->request->action, ['index','view', 'Assistance'])) {
+                    return true;
+                }
+                break;
+            case 'participant':
+                if (in_array($this->request->action, ['index,view','join','unjoin'])) {
+                    return true;
+                }
+                break;
+        }
+        return false;
     }
 }
