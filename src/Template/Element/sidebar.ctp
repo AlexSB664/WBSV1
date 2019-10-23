@@ -1,7 +1,7 @@
 <div class="col-md-3 left_col">
     <div class="left_col scroll-view">
         <div class="navbar nav_title" style="border: 0;">
-            <a href="index.html" class="site_title"><img src="/img/logo-wbs-horizontal.png" style="background-color:black;" width="120" height="60">
+            <a href="https://coliseumwbs.com/" class="site_title"><img src="/img/logo-wbs-horizontal.png" style="background-color:black;" width="120" height="60">
                 <span>ColiseumWBS</span></a>
         </div>
         <div class="clearfix"></div>
