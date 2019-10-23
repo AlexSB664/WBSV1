@@ -18,6 +18,14 @@ class LeaguesController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
+    public function initialize()
+    {
+    $this->loadComponent('Flash');
+    $this->loadComponent('Auth', [
+        'authorize' => ['Controller'] // Added this line
+        ]);
+    }
+
     public function index()
     {
         $this->viewBuilder()->layout('deejee');
@@ -121,10 +129,10 @@ class LeaguesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function beforeFilter(\Cake\Event\Event $event)
+    /*public function beforeFilter(\Cake\Event\Event $event)
     {
         $this->Auth->allow(['index', 'view']);
-    }
+    }*/
 
     // public function loginRedirects($role= null)
     // {
@@ -179,6 +187,6 @@ class LeaguesController extends AppController
          }
          break;
      }
-     return parent::isAuthorized($user);
+     return false;
   }
 }
