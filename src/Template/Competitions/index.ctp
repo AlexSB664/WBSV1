@@ -26,7 +26,7 @@
 		     			class="img-fluid">
 	    		</a>
                 	<div class="p-4 bg-white">
-			<span class="d-block text-secondary small text-uppercase"><?= date("l, F jS, Y", strtotime($competition->date)) ?> </span>
+			<span class="d-block text-secondary small text-uppercase"><?= date("l, F jS, Y g:i a", strtotime($competition->date)) ?> </span>
                     		<h2 class="h5 text-black mb-3">
                 			<a href="/eventos/<?= $competition->id; ?>"> 
 						<?= $competition->season->league->name ?> - <?= $competition->season->name ?> - <?= $competition->name ?>
