@@ -40,12 +40,12 @@
                                             <!-- Card image-->
 
                                             <!-- Card content -->
-                                            <div class="card-body bg-black">
+                                            <div class="card-body bg-black"  style="width:auto;height:auto;">
                                                 <!-- Title-->
                                                 <a>
-                                                    <h4 class="card-title title-one"><?= $user->aka ?></h4>
+                                                    <h4 style="font-size:1vw;"><?= $user->aka ?></h4>
                                                 </a>
-                                                <p class="card-meta"><?= $user->crew?$user->crew->name:'NA'?></p>
+                                                <!-- <p class="card-meta"><?= $user->crew?$user->crew->name:'NA'?></p> -->
                                                 <!-- Text -->
                                             </div>
                                             <!-- Card content -->
