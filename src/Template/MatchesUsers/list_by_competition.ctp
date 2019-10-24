@@ -36,7 +36,7 @@
                                         <div class="card card-personal">
 
                                             <!-- Card image-->
-                                            <?= $this->Html->image(($user->avatar), ['alt' => "default-avatar", 'class' => 'card-img-top']); ?>
+                                            <?= $this->Html->image(($user->avatar), ['alt' => "$user->aka", 'class' => 'card-img-top']); ?>
                                             <!-- Card image-->
 
                                             <!-- Card content -->
