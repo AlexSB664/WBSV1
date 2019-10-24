@@ -31,7 +31,8 @@
                 <?php endforeach ?>
                 <a class="nav-item nav-link active" href="<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board', $leagues->slug]); ?>"> Otras Temporadas</a>
                 <a class="nav-item nav-link active" href="<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board']); ?>">Otras Ligas</a>
-            </div>
+                <a class="nav-item nav-link active" href="<?= $this->Url->build(['controller' => 'matches-users', 'action' => 'list-by-competition', $competition->id]); ?>">Ver Tiros</a>
+	    </div>
         </div>
     </nav>
 
@@ -110,38 +111,50 @@
 
     <!--  SEASONS BOARD  -->
 
-    <?php foreach ($board as $row) : ?>
-        <div class=row>
-            <div class="col-md-6 col-xs-6 text-right">
-                <a href="<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board', $leagues->slug, $row->slug, 'all']); ?>">
-                    <?= $this->Html->image(($row->flyer), ['alt' => "default-avatar", 'class' => 'logos', 'width' => '100', 'height' => '100']); ?>
-                </a>
-            </div>
-            <div class="col-md-6 col-xs-6">
-                <a href="<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board',  $leagues->slug, $row->slug, 'all']); ?>">
-                    <h3><?= $row->name ?></h3>
-                </a>
-            </div>
-        </div>
-    <?php endforeach; ?>
+    <div class="col-sm-auto text-center">
+        <table class="table leaderboard">
+            <tbody class="thead-dark">
 
+    		<?php foreach ($board as $row) : ?>
+		<tr>
+            		<td class="col-md-6 col-xs-6 text-right">
+                		<a href="<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board', $leagues->slug, $row->slug, 'all']); ?>">
+                    		<?= $this->Html->image(($row->flyer), ['alt' => "default-avatar", 'class' => 'logos', 'width' => '100', 'height' => '100']); ?>
+                		</a>
+            		</td>
+            		<td class="col-md-6 col-xs-6">
+                		<a href="<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board',  $leagues->slug, $row->slug, 'all']); ?>">
+                    		<h3><?= $row->name ?></h3>
+                		</a>
+            		</td>
+        	</tr>
+    		<?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 <?php else : ?>
 
     <!--  LEAGUES BOARD  -->
 
+    <div class="col-sm-auto text-center">
+        <table class="table leaderboard">
+            <tbody class="thead-dark">
+    		<?php foreach ($board as $row) : ?>
 
-    <?php foreach ($board as $row) : ?>
-        <div class=row>
-            <div class="col-md-6 col-xs-6 text-right">
-                <a href="<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board', $row->slug]); ?>">
-                    <?= $this->Html->image(($row->logo), ['alt' => "default-avatar", 'class' => 'logos', 'width' => '100', 'height' => '100']); ?>
-                </a>
-            </div>
-            <div class="col-md-6 col-xs-6">
-                <a href="<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board',  $row->slug]); ?>">
-                    <h3><?= $row->name ?></h3>
-                </a>
-            </div>
-        </div>
-    <?php endforeach; ?>
+		<tr>
+                        <td> <a href="<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board', $row->slug]); ?>">
+                                <?= $this->Html->image(($row->logo), ['alt' => "default-avatar", 'class' => 'logos', 'width' => '100', 'height' => '100']); ?>
+                        </a>
+                        </td>
+                        <td> <a href="<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board',  $row->slug]); ?>">
+                                <h3><?= $row->name ?></h3>
+                             </a>
+                        </td>
+		</tr>
+    		<?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+
 <?php endif ?>

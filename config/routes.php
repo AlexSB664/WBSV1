@@ -73,10 +73,15 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->connect('/eventos/*', ['controller' => 'Competitions', 'action' => 'view']);
 
     $routes->connect('/freestylers', ['controller' => 'Pages', 'action' => 'display', "proxima"]);
-    $routes->connect('/estadisticas', ['controller' => 'Pages', 'action' => 'display', "proxima"]);
-    $routes->connect('/stats', ['controller' => 'Leaderboard', 'action' => 'board']);
+
+    $routes->connect('/estadisticas', ['controller' => 'Leaderboard', 'action' => 'board']);
+    $routes->connect('/estadisticas/tablas', ['controller' => 'Leaderboard', 'action' => 'board']);
+    $routes->connect('/estadisticas/tablas/*', ['controller' => 'Leaderboard', 'action' => 'board']);
+
+    $routes->connect('/estadisticas/tablas/*', ['controller' => 'Leaderboard', 'action' => 'board']);
+
+
     $routes->connect('/nosotros', ['controller' => 'Pages', 'action' => 'display', "proxima"]);
-    $routes->connect('/stats', ['controller' => 'Pages', 'action' => 'display', "proxima"]);
     $routes->connect('/contacto', ['controller' => 'Pages', 'action' => 'display', "proxima"]);
 
 
