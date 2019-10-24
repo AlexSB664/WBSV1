@@ -14,17 +14,17 @@
     <div class="container">
         <?php foreach ($list as $key =>  $item) : ?>
             <!-- Stage -->
-            <div class="row">
+            <div class="d-flex p-2">
                 <div class="col">
                     <h1><?= $key ?></h1>
                 </div>
             </div>
             <!-- Battles in stage -->
             <?php foreach ($item as  $match) : ?>
-            <div class="row"><div class="col">
+            <div class="d-flex p-2"><div class="col">
                 <h2>VS</h2></div>
             </div>
-                <div class="row">
+                <div class="d-flex p-2">
                     <?php foreach ($match as  $user) : ?>
                         <div class="col">
                             <!-- user card -->
