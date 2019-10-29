@@ -80,6 +80,10 @@ class LeaderboardController extends AppController
                 $this->set(compact('seasons_slug'));
                 $this->set(compact('competitions'));
                 $this->set(compact('competition_slug'));
+                if($competition_slug != "all"){
+                    $competition_id = $this->competitionsTable->find('all')->where(['slug'=>$competition_slug,'season_id'=>$seasons->id])->first();
+                    $this->set(compact('competition_id'));
+                }
                 if (array_key_exists('colum',$this->request->query) & array_key_exists('direction',$this->request->query)) {
                     $customSort = new CustomSort();
                     $customSort->arrayMultipleSort($board,$this->request->query['colum'],$this->request->query['direction']);
