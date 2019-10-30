@@ -10,7 +10,7 @@
                 </form>
                 <div class="header-button">
                     <!-- NOTIFICATION SECTION -->
-                    <?php //echo $this->element('notification') 
+                    <?php echo $this->element('notification') 
                     ?>
                     <!-- END NOTIFICATION SECTION -->
                     <div class="account-wrap">
@@ -58,7 +58,7 @@
                                     </div>
                                 </div>
                                 <div class="account-dropdown__footer">
-                                    <a href="#">
+                                    <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'logout']); ?>">
                                         <i class="zmdi zmdi-power"></i>Logout</a>
                                 </div>
                             </div>
