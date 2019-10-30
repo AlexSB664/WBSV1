@@ -10,30 +10,30 @@
     <link rel="stylesheet" type="text/css" href="/css/util.css">
 	<link rel="stylesheet" type="text/css" href="/css/main.css">
     <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.css" rel="stylesheet"> 
+    <link href="../vendor/bootstrap/dist/css/bootstrap.css" rel="stylesheet"> 
     <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <link href="../vendor/nprogress/nprogress.css" rel="stylesheet">
     <!-- Animate.css -->
-    <link href="../vendors/animate.css/animate.min.css" rel="stylesheet">
+    <link href="../vendor/animate.css/animate.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendor/bootstrap/dist/css/bootstrap.min.css">
     <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendor/font-awesome-4.7.0/css/font-awesome.min.css">
     <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/iconic/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendor/iconic/css/material-design-iconic-font.min.css">
     <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/animate/animate.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendor/animate/animate.css">
     <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendor/css-hamburgers/hamburgers.min.css">
     <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendor/animsition/css/animsition.min.css">
     <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendor/select2/select2.min.css">
     <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendors/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->request->webroot; ?>vendor/daterangepicker/daterangepicker.css">
     <!--===============================================================================================-->
     <?= $this->Html->meta(
     		'img/favicon-wbs.png',
@@ -53,19 +53,19 @@
 	</div>
             	
 <!--===============================================================================================-->
-	<script src="<?php echo $this->request->webroot; ?>vendors/jquery/jquery-3.2.1.min.js"></script>
+	<script src="<?php echo $this->request->webroot; ?>vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
-	<script src="<?php echo $this->request->webroot; ?>vendors/animsition/js/animsition.min.js"></script>
+	<script src="<?php echo $this->request->webroot; ?>vendor/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
-	<script src="<?php echo $this->request->webroot; ?>vendors/bootstrap/js/popper.js"></script>
-	<script src="<?php echo $this->request->webroot; ?>vendors/bootstrap/js/bootstrap.min.js"></script>
+	<script src="<?php echo $this->request->webroot; ?>vendor/bootstrap/js/popper.js"></script>
+	<script src="<?php echo $this->request->webroot; ?>vendor/bootstrap/js/bootstrap.min.js"></script>
 <!--===============================================================================================-->
-	<script src="<?php echo $this->request->webroot; ?>vendors/select2/select2.min.js"></script>
+	<script src="<?php echo $this->request->webroot; ?>vendor/select2/select2.min.js"></script>
 <!--===============================================================================================-->
-	<script src="<?php echo $this->request->webroot; ?>vendors/daterangepicker/moment.min.js"></script>
-	<script src="<?php echo $this->request->webroot; ?>vendors/daterangepicker/daterangepicker.js"></script>
+	<script src="<?php echo $this->request->webroot; ?>vendor/daterangepicker/moment.min.js"></script>
+	<script src="<?php echo $this->request->webroot; ?>vendor/daterangepicker/daterangepicker.js"></script>
 <!--===============================================================================================-->
-	<script src="<?php echo $this->request->webroot; ?>vendors/countdowntime/countdowntime.js"></script>
+	<script src="<?php echo $this->request->webroot; ?>vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 </body>
 </html>
