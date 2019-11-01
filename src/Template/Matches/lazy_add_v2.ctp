@@ -56,8 +56,23 @@
         <div class="col-md-12">
             <div class="overview-wrap">
                 <h2 class="title-1"></h2>
-                <button class="au-btn au-btn-icon au-btn--blue">
-                    <i class="zmdi zmdi-plus"></i>Add League</button>
+                <?php if (isset($season_id)) : ?>
+                    <button class="au-btn au-btn-icon au-btn--blue"  onclick="window.location='<?= $this->Url->build([
+                                                                                        'controller' => 'competitions',
+                                                                                        'action' => 'add'
+                                                                                    ]); ?>'">
+                    <?php elseif (isset($league_id)) : ?>
+                        <button class="au-btn au-btn-icon au-btn--blue"  onclick="window.location='<?= $this->Url->build([
+                                                                                            'controller' => 'seasons',
+                                                                                            'action' => 'add'
+                                                                                        ]); ?>'">
+                        <?php else : ?>
+                        <button class="au-btn au-btn-icon au-btn--blue" onclick="window.location='<?= $this->Url->build([
+                                                                                        'controller' => 'leagues',
+                                                                                        'action' => 'add'
+                                                                                    ]); ?>'">
+                        <?php endif ?>
+                        <i class="zmdi zmdi-plus"></i>Add</button>
             </div>
         </div>
     </div>
