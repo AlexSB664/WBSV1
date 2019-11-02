@@ -56,7 +56,7 @@ class SeasonsController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($league_id=null)
     {
         $season = $this->Seasons->newEntity();
         if ($this->request->is('post')) {
@@ -68,6 +68,7 @@ class SeasonsController extends AppController
             $this->Flash->error(__('The season could not be saved. Please, try again.'));
         }
         $leagues = $this->Seasons->Leagues->find('list', ['limit' => 200]);
+        $league_id?$leagues->where(['id'=>$league_id])->first():'';
         $this->set(compact('season', 'leagues'));
     }
 

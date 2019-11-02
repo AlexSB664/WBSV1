@@ -59,12 +59,14 @@
                 <?php if (isset($season_id)) : ?>
                     <button class="au-btn au-btn-icon au-btn--blue"  onclick="window.location='<?= $this->Url->build([
                                                                                         'controller' => 'competitions',
-                                                                                        'action' => 'add'
+                                                                                        'action' => 'add',
+                                                                                        $season_id
                                                                                     ]); ?>'">
                     <?php elseif (isset($league_id)) : ?>
                         <button class="au-btn au-btn-icon au-btn--blue"  onclick="window.location='<?= $this->Url->build([
                                                                                             'controller' => 'seasons',
-                                                                                            'action' => 'add'
+                                                                                            'action' => 'add',
+                                                                                            $league_id
                                                                                         ]); ?>'">
                         <?php else : ?>
                         <button class="au-btn au-btn-icon au-btn--blue" onclick="window.location='<?= $this->Url->build([
