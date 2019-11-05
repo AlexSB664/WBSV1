@@ -29,8 +29,7 @@ class LeaguesController extends AppController
     public function index()
     {
         $this->viewBuilder()->layout('deejee');
-
-
+        
         $leagues = $this->paginate($this->Leagues->find('all', [
             'order' => ['Leagues.name' => 'ASC']
         ]));

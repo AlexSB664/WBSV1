@@ -14,7 +14,7 @@ class ResizeBot
     public $formats = [
         '0' => 'jpg',
         '1' => 'png',
-	'2'=>'jpeg'
+        '2' => 'jpeg'
     ];
     function resizeFlyer($img = null)
     {
@@ -31,24 +31,24 @@ class ResizeBot
         // $dst = "/home/gabriel/Documents/WBS/events/practica-tu-free/alfa-j5-resize.jpg";
         // $black = "/home/gabriel/Documents/WBS/events/practica-tu-free/black.png";
         // $merge = "/home/gabriel/Documents/WBS/events/practica-tu-free/alfa-j5-merged.jpg";
-	
+
         $this->resizeImage($img, $resize_img, $width, $heigth);
         $this->merge($resize_img, $bg_img, $merge_img);
-        $this->cleanDir($img,$merge_img,$resize_img);
+        $this->cleanDir($img, $merge_img, $resize_img);
     }
 
     public function setData($img, &$resize_img, &$extension, &$merge_img)
     {
-	  $tmp = explode('.', $img);
+        $tmp = explode('.', $img);
         // $filename = reset($tmp);
         $full_name = "";
         foreach ($tmp as $key => $value) {
             if ($key === array_key_last($tmp)) {
                 break;
-            }else if($key==array_key_first($tmp)){
-	    $full_name = $full_name . $value;
-            }else{
-            $full_name = $full_name.'.'. $value;
+            } else if ($key == array_key_first($tmp)) {
+                $full_name = $full_name . $value;
+            } else {
+                $full_name = $full_name . '.' . $value;
             }
         }
         $extension = end($tmp);
@@ -99,12 +99,12 @@ class ResizeBot
         // Create final image with new dimensions.
         $newImage = imagecreatetruecolor($newWidth, $newHeight);
         imagecopyresampled($newImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $origWidth, $origHeight);
-        echo($newImage);
-	echo('<br>');
-	echo($targetImage);
-	echo('<br>');
-	echo($quality);
-	imagejpeg($newImage, $targetImage, $quality);
+        echo ($newImage);
+        echo ('<br>');
+        echo ($targetImage);
+        echo ('<br>');
+        echo ($quality);
+        imagejpeg($newImage, $targetImage, $quality);
 
         // Free up the memory.
         imagedestroy($image);
@@ -151,6 +151,6 @@ class ResizeBot
         $tmp_name = $old;
         unlink($old);
         unlink($tmp);
-        rename($new,$old);
+        rename($new, $old);
     }
 }

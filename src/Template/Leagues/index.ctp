@@ -16,36 +16,61 @@
 	</div>
 </div>
 <div class="site-section">
-	<?= $this->Paginator->sort('name') ?>
-	<?= $this->Paginator->sort('score') ?>
-	<div class="container" data-aos="fade-up">
+	<div class="container mt-5" data-aos="fade-up">
 		<div class="row">
-			<?php foreach ($leagues as $league) : ?>
-				<div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
-					<div class="team-member">
-						<img src="/img/<?= $league->logo; ?>" alt="Image" class="img-fluid">
-						<div class="text">
-							<h2 class="mb-2 font-weight-light h4"> <a href="/ligas/<?= $league->slug; ?>"> <?= $league->name; ?> </a></h2>
-							<span class="d-block mb-2 text-white-opacity-05">Telefono: <?= $league->contact_phone; ?></span>
-							<span class="d-block mb-2 text-white-opacity-05"> Email: <?= $league->contact_email; ?>.</span>
-							<p>
-								<?php if ($league->social_facebook != "NULL") : ?>
-									<a href="<?= $league->social_facebook; ?>" class="text-white p-2"><span class="icon-facebook"></span></a>
-								<?php endif; ?>
-								<?php if ($league->social_twitter != "NULL") : ?>
-									<a href="<?= $league->social_twitter; ?>" class="text-white p-2"><span class="icon-twitter"></span></a>
-								<?php endif; ?>
-								<?php if ($league->social_instagram != "NULL") : ?>
-									<a href="<?= $league->social_instagram; ?>" class="text-white p-2"><span class="icon-instagram"></span></a>
-								<?php endif; ?>
-								<?php if ($league->social_youtube != "NULL") : ?>
-									<a href="<?= $league->social_youtube; ?>" class="text-white p-2"><span class="icon-youtube"></span></a>
-								<?php endif; ?>
-							</p>
+			<div class="col-md-12 text-center">
+				<p>Ordenar por</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6 text-center">
+				<?= $this->Paginator->sort('name', 'Nombre  ') ?><span class="icon-sort-alpha-asc"></span>
+			</div>
+			<div class="col-md-6 text-center">
+				<?= $this->Paginator->sort('score') ?><span class="icon-sort-numeric-asc"></span>
+			</div>
+		</div>
+
+		<div class="container" data-aos="fade-up">
+			<div class="row">
+				<?php foreach ($leagues as $league) : ?>
+					<div class="col-md-6 col-lg-4 mb-5 mb-lg-5">
+						<div class="team-member">
+							<img src="/img/<?= $league->logo; ?>" alt="Image" class="img-fluid">
+							<div class="text">
+								<h2 class="mb-2 font-weight-light h4"> <a href="/ligas/<?= $league->slug; ?>"> <?= $league->name; ?> </a></h2>
+								<span class="d-block mb-2 text-white-opacity-05">Telefono: <?= $league->contact_phone; ?></span>
+								<span class="d-block mb-2 text-white-opacity-05"> Email: <?= $league->contact_email; ?>.</span>
+								<p>
+									<?php if ($league->social_facebook != "NULL") : ?>
+										<a href="<?= $league->social_facebook; ?>" class="text-white p-2"><span class="icon-facebook"></span></a>
+									<?php endif; ?>
+									<?php if ($league->social_twitter != "NULL") : ?>
+										<a href="<?= $league->social_twitter; ?>" class="text-white p-2"><span class="icon-twitter"></span></a>
+									<?php endif; ?>
+									<?php if ($league->social_instagram != "NULL") : ?>
+										<a href="<?= $league->social_instagram; ?>" class="text-white p-2"><span class="icon-instagram"></span></a>
+									<?php endif; ?>
+									<?php if ($league->social_youtube != "NULL") : ?>
+										<a href="<?= $league->social_youtube; ?>" class="text-white p-2"><span class="icon-youtube"></span></a>
+									<?php endif; ?>
+								</p>
+							</div>
 						</div>
 					</div>
+				<?php endforeach; ?>
+			</div>
+			<p><?= $this->Paginator->counter(['format' => __('Pagina {{page}} de {{pages}}, mostrando {{current}} ligas de {{count}} en total')]) ?></p>
+		</div>
+		<div class="container mt-5" data-aos="fade-up">
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<div class="site-block-27">
+						<ul>
+							<?= $this->Paginator->numbers() ?>
+						</ul>
+					</div>
 				</div>
-			<?php endforeach; ?>
+			</div>
 		</div>
 	</div>
-</div>
