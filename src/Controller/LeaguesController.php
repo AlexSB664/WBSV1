@@ -30,9 +30,10 @@ class LeaguesController extends AppController
     {
         $this->viewBuilder()->layout('deejee');
 
-        $leagues = $this->Leagues->find('all', [
+
+        $leagues = $this->paginate($this->Leagues->find('all', [
             'order' => ['Leagues.name' => 'ASC']
-        ]);
+        ]));
 
         $this->set(compact('leagues'));
     }
