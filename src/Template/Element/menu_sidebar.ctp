@@ -30,7 +30,7 @@
                             <a href="<?= $this->Url->build(['controller' => 'leagues', 'action' => 'add']); ?>">Add Leagues</a>
                         </li>
                         <li>
-                            <a href="<?= $this->Url->build(['controller' => 'leagues', 'action' => 'index']); ?>">List Leagues</a>
+                            <a href="<?= $this->Url->build(['controller' => 'leagues', 'action' => 'manage']); ?>">List Leagues</a>
                         </li>
                     </ul>
                 </li>
