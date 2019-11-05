@@ -121,6 +121,19 @@ class LeaguesTable extends Table
             ->maxLength('contact_email', 50)
             ->requirePresence('contact_email', 'create')
             ->notEmptyString('contact_email');
+        
+        $validator
+            ->numeric('level')
+            ->allowEmptyString('level');
+        
+        $validator
+            ->numeric('score')
+            ->allowEmptyString('score');
+        
+        $validator
+            ->numeric('bonus')
+            ->allowEmptyString('bonus');
+
 
         return $validator;
     }

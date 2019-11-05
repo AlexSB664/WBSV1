@@ -17,6 +17,7 @@
 </nav> -->
 <div class="leagues index large-9 medium-8 columns content">
     <h3><?= __('Leagues') ?></h3>
+    <div class="table-responsive">
     <table class="table">
         <thead>
             <tr>
@@ -33,6 +34,9 @@
                 <th scope="col"><?= $this->Paginator->sort('contact_email') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('slug') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('since') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('level') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('score') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('bonus') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -54,6 +58,9 @@
                 <td><?= h($league->contact_email) ?></td>
                 <td><?= h($league->slug) ?></td>
                 <td><?= h($league->since) ?></td>
+                <td><?= $this->Number->format($league->level) ?></td>
+                <td><?= $this->Number->format($league->score) ?></td>
+                <td><?= $this->Number->format($league->bonus) ?></td>
                 <td><?= h($league->created) ?></td>
                 <td><?= h($league->modified) ?></td>
                 <td class="actions">
@@ -65,6 +72,7 @@
             <?php endforeach; ?>
         </tbody>
     </table>
+    </div>
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
