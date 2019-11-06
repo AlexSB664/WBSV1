@@ -20,16 +20,21 @@ class LeaguesController extends AppController
      */
     public function initialize()
     {
+        parent::initialize();
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
             'authorize' => ['Controller'] // Added this line
         ]);
+        $this->loadComponent('Paginator');
     }
+
+    public $paginate = [
+        'limit' => 50
+    ];
 
     public function index()
     {
         $this->viewBuilder()->layout('deejee');
-        
         $leagues = $this->paginate($this->Leagues->find('all', [
             'order' => ['Leagues.name' => 'ASC']
         ]));
