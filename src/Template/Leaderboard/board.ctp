@@ -31,8 +31,11 @@
                 <?php endforeach ?>
                 <a class="nav-item nav-link active" href="<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board', $leagues->slug]); ?>"> Otras Temporadas</a>
                 <a class="nav-item nav-link active" href="<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board']); ?>">Otras Ligas</a>
-                <a class="nav-item nav-link active" href="<?= $this->Url->build(['controller' => 'matches-users', 'action' => 'list-by-competition', $competition->id]); ?>">Ver Tiros</a>
-	    </div>
+                <?php if ($competition_slug === 'all') : ?>
+                <?php else : ?>
+                    <a class="nav-item nav-link active" href="<?= $this->Url->build(['controller' => 'matches-users', 'action' => 'list-by-competition', $competition_id->id]); ?>">Ver Tiros</a>
+                <?php endif ?>
+            </div>
         </div>
     </nav>
 
@@ -115,20 +118,20 @@
         <table class="table leaderboard">
             <tbody class="thead-dark">
 
-    		<?php foreach ($board as $row) : ?>
-		<tr>
-            		<td class="col-md-6 col-xs-6 text-right">
-                		<a href="<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board', $leagues->slug, $row->slug, 'all']); ?>">
-                    		<?= $this->Html->image(($row->flyer), ['alt' => "default-avatar", 'class' => 'logos', 'width' => '100', 'height' => '100']); ?>
-                		</a>
-            		</td>
-            		<td class="col-md-6 col-xs-6">
-                		<a href="<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board',  $leagues->slug, $row->slug, 'all']); ?>">
-                    		<h3><?= $row->name ?></h3>
-                		</a>
-            		</td>
-        	</tr>
-    		<?php endforeach; ?>
+                <?php foreach ($board as $row) : ?>
+                    <tr>
+                        <td class="col-md-6 col-xs-6 text-right">
+                            <a href="<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board', $leagues->slug, $row->slug, 'all']); ?>">
+                                <?= $this->Html->image(($row->flyer), ['alt' => "default-avatar", 'class' => 'logos', 'width' => '100', 'height' => '100']); ?>
+                            </a>
+                        </td>
+                        <td class="col-md-6 col-xs-6">
+                            <a href="<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board',  $leagues->slug, $row->slug, 'all']); ?>">
+                                <h3><?= $row->name ?></h3>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>
@@ -139,19 +142,19 @@
     <div class="col-sm-auto text-center">
         <table class="table leaderboard">
             <tbody class="thead-dark">
-    		<?php foreach ($board as $row) : ?>
+                <?php foreach ($board as $row) : ?>
 
-		<tr>
+                    <tr>
                         <td> <a href="<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board', $row->slug]); ?>">
                                 <?= $this->Html->image(($row->logo), ['alt' => "default-avatar", 'class' => 'logos', 'width' => '100', 'height' => '100']); ?>
-                        </a>
+                            </a>
                         </td>
                         <td> <a href="<?= $this->Url->build(['controller' => 'leaderboard', 'action' => 'board',  $row->slug]); ?>">
                                 <h3><?= $row->name ?></h3>
-                             </a>
+                            </a>
                         </td>
-		</tr>
-    		<?php endforeach; ?>
+                    </tr>
+                <?php endforeach; ?>
             </tbody>
         </table>
     </div>

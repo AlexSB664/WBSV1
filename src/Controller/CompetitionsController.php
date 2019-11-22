@@ -123,7 +123,7 @@ class CompetitionsController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($seasons_id = null)
     {
         $competition = $this->Competitions->newEntity();
         if ($this->request->is('post')) {
@@ -135,6 +135,7 @@ class CompetitionsController extends AppController
             $this->Flash->error(__('The competition could not be saved. Please, try again.'));
         }
         $seasons = $this->Competitions->Seasons->find('list', ['limit' => 200]);
+        $seasons_id?$seasons->where(['id'=>$seasons_id])->first():'';
         $locations = $this->Competitions->Locations->find('list', ['limit' => 200]);
         $schemes = $this->Competitions->Schemes->find('list', ['limit' => 200]);
         $this->set(compact('competition', 'seasons', 'locations', 'schemes'));

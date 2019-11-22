@@ -1,106 +1,95 @@
-<?php
-
-/**
- * CakePHP(tm) : Rapid Development Framework (https://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (https://cakefoundation.org)
- * @link          https://cakephp.org CakePHP(tm) Project
- * @since         0.10.0
- * @license       https://opensource.org/licenses/mit-license.php MIT License
- */
-
-$cakeDescription = 'CakePHP: the rapid development php framework';
-?>
 <!DOCTYPE html>
-<html lang="en" class=" ">
+<html lang="en">
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Coliseum | Web Battle System </title>
-
-    <!-- Bootstrap -->
-    <link href="<?php echo $this->request->webroot;  ?>vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="<?php echo $this->request->webroot;  ?>vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="<?php echo $this->request->webroot;  ?>vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- bootstrap-wysiwyg -->
-    <link href="<?php echo $this->request->webroot;  ?>vendors/google-code-prettify/bin/prettify.min.css" rel="stylesheet">
-
-    <!-- Custom styling plus plugins -->
-    <link href="<?php echo $this->request->webroot;  ?>build/css/custom.min.css" rel="stylesheet">
-
+    <!-- load icon -->
     <?= $this->Html->meta(
-                'img/favicon-wbs.png',
-                '/img/favicon-wbs.png',
-                ['type' => 'icon']
-        );
+        'img/favicon-wbs.png',
+        '/img/favicon-wbs.png',
+        ['type' => 'icon']
+    );
     ?>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Manage</title>
+
+    <!-- Fontfaces CSS-->
+    <link href="/css/cooladmin/font-face.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+
+    <!-- Bootstrap CSS-->
+    <link href="/vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+    <!-- /vendor CSS-->
+    <link href="/vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/wow/animate.css" rel="stylesheet" media="all">
+    <link href="/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/slick/slick.css" rel="stylesheet" media="all">
+    <link href="/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="/css/cooladmin/theme.css" rel="stylesheet" media="all">
 
 </head>
 
-<body class="nav-md">
-    <div class="container body">
-        <div class="main_container">
-            <?php echo $this->element('sidebar') ?>
-            <?php if($this->request->session()->read('Auth.User.username')): ?>
-                    <?php echo $this->element('top_bar') ?>
-            <?php endif; ?>
-            <!-- contenido -->
-            <?php echo $this->element('content') ?>
-            <?php echo $this->element('footer') ?>
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- HEADER MOBILE-->
+        <?php echo $this->element('header_mobile') ?>
+        <!-- END HEADER MOBILE-->
+
+        <!-- MENU SIDEBAR-->
+        <?php echo $this->element('menu_sidebar') ?>
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            <?php echo $this->element('header_desktop') ?>
+            <!-- HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+                <?php echo $this->element('content') ?>
+                <!-- END MAIN CONTENT-->
+                <!-- END PAGE CONTAINER-->
+
         </div>
-    </div>
 
-    <!-- jQuery -->
-    <script src="<?php echo $this->request->webroot;  ?>vendors/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="<?php echo $this->request->webroot;  ?>vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="<?php echo $this->request->webroot;  ?>vendors/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="<?php echo $this->request->webroot;  ?>vendors/nprogress/nprogress.js"></script>
-    <!-- Chart.js -->
-    <script src="<?php echo $this->request->webroot;  ?>vendors/Chart.js/dist/Chart.min.js"></script>
-    <!-- gauge.js -->
-    <script src="<?php echo $this->request->webroot;  ?>vendors/gauge.js/dist/gauge.min.js"></script>
-    <!-- bootstrap-progressbar -->
-    <script src="<?php echo $this->request->webroot;  ?>vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-    <!-- iCheck -->
-    <script src="<?php echo $this->request->webroot;  ?>vendors/iCheck/icheck.min.js"></script>
-    <!-- Skycons -->
-    <script src="<?php echo $this->request->webroot;  ?>vendors/skycons/skycons.js"></script>
-    <!-- Flot -->
-    <script src="<?php echo $this->request->webroot;  ?>vendors/Flot/jquery.flot.js"></script>
-    <script src="<?php echo $this->request->webroot;  ?>vendors/Flot/jquery.flot.pie.js"></script>
-    <script src="<?php echo $this->request->webroot;  ?>vendors/Flot/jquery.flot.time.js"></script>
-    <script src="<?php echo $this->request->webroot;  ?>vendors/Flot/jquery.flot.stack.js"></script>
-    <script src="<?php echo $this->request->webroot;  ?>vendors/Flot/jquery.flot.resize.js"></script>
-    <!-- Flot plugins -->
-    <script src="<?php echo $this->request->webroot;  ?>vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
-    <script src="<?php echo $this->request->webroot;  ?>vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
-    <script src="<?php echo $this->request->webroot;  ?>vendors/flot.curvedlines/curvedLines.js"></script>
-    <!-- DateJS -->
-    <script src="<?php echo $this->request->webroot;  ?>vendors/DateJS/build/date.js"></script>
-    <!-- JQVMap -->
-    <script src="<?php echo $this->request->webroot;  ?>vendors/jqvmap/dist/jquery.vmap.js"></script>
-    <script src="<?php echo $this->request->webroot;  ?>vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
-    <script src="<?php echo $this->request->webroot;  ?>vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="<?php echo $this->request->webroot;  ?>vendors/moment/min/moment.min.js"></script>
-    <script src="<?php echo $this->request->webroot;  ?>vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+        <!-- Jquery JS-->
+        <script src="/vendor/jquery-3.2.1.min.js"></script>
+        <!-- Bootstrap JS-->
+        <script src="/vendor/bootstrap-4.1/popper.min.js"></script>
+        <script src="/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+        <!-- /vendor JS       -->
+        <script src="/vendor/slick/slick.min.js">
+        </script>
+        <script src="/vendor/wow/wow.min.js"></script>
+        <script src="/vendor/animsition/animsition.min.js"></script>
+        <script src="/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+        </script>
+        <script src="/vendor/counter-up/jquery.waypoints.min.js"></script>
+        <script src="/vendor/counter-up/jquery.counterup.min.js">
+        </script>
+        <script src="/vendor/circle-progress/circle-progress.min.js"></script>
+        <script src="/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+        <script src="/vendor/chartjs/Chart.bundle.min.js"></script>
+        <script src="/vendor/select2/select2.min.js">
+        </script>
 
-    <!-- Custom Theme Scripts -->
-    <script src="<?php echo $this->request->webroot;  ?>build/js/custom.min.js"></script>
+        <!-- Main JS-->
+        <script src="/js/cooladmin/main.js"></script>
+
 </body>
 
 </html>
+<!-- end document-->

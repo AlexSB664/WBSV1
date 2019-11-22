@@ -8,6 +8,9 @@ use Cake\Database\Expression\QueryExpression;
 
 class Battles
 {
+    //exception stages
+    private $hiddenStages = ['Cypher'];
+
     // Model objectsSeasons
     private $MatchesUsers;
     private $required_args = ['competition_id'];
@@ -31,42 +34,27 @@ class Battles
     public function make()
     {
         $this->setUpData();
+        $this->cleancStages();
         return $this->results;
     }
 
     private function setUpData()
     {
         $this->list = $this->MatchesUsers->find('all', ['contain' => ['Matches', 'Users.Crews'], 'order' => 'Matches.id'])->where(['Matches.competition_id' => $this->competition])->toArray();
-        // echo implode($this->list);
         $this->orderData();
-        // die();
-        //structure match, users in same stage
     }
 
     private function orderData()
     {
         foreach ($this->list as $battle) {
-            $this->results[$battle->match->stage][$battle->match->id][]=$battle->user;
+            $this->results[$battle->match->stage][$battle->match->id][] = $battle->user;
         }
-
-        // foreach ($this->results as $key => $stage) {
-        //     echo "<br>";
-        //     echo "battles of " . $key;
-        //     echo "<br>";
-        //     echo "battle";
-        //     echo "<br>";
-        //     foreach ($stage as $match) {
-        //         echo "<br>";
-        //         echo "<-------------------------------------Battle--------------------------->";
-        //         echo "<br>";    
-        //         foreach ($match as $users) {
-        //             echo "<br>";
-        //             echo $users->aka;
-        //         }
-        //         echo "<br>";
-        //         echo "<----------------------------------------------------------------------->";    
-        //     }
-        // }
+    }
+    private function cleancStages()
+    {
+        foreach ($this->hiddenStages as $stage) {
+            unset($this->results[$stage]);
+        }
     }
 
     private function validateArgs($data = [])

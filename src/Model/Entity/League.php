@@ -51,6 +51,9 @@ class League extends Entity
         'schemes' => true,
         'seasons' => true,
         'slug' => true,
-        'since' => true
+        'since' => true,
+        'level' => true,
+        'score' => true,
+        'bonus' => true
     ];
 }

@@ -54,6 +54,10 @@
         echo $this->Form->control('contact_email',array('class' => 'form-control'));
         echo $this->Form->control('slug',array('class' => 'form-control'));
         echo $this->Form->control('since',array('class' => 'form-control'));
+        echo $this->Form->control('level',array('class' => 'form-control'));
+        echo $this->Form->control('score',array('class' => 'form-control'));
+        echo $this->Form->control('bonus',array('class' => 'form-control'));
+
         ?>
     </fieldset>
     <?= $this->Form->button(__('Editar'), array('class' => 'btn btn-outline-success')) ?>

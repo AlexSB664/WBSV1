@@ -116,6 +116,10 @@ class ContactController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    public function icons(){
+        
+    }
+
     public function beforeFilter(\Cake\Event\Event $event)
     {
         $this->Auth->allow(['contact']);

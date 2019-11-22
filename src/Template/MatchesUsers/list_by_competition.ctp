@@ -14,17 +14,17 @@
     <div class="container">
         <?php foreach ($list as $key =>  $item) : ?>
             <!-- Stage -->
-            <div class="row">
+            <div class="d-flex p-2">
                 <div class="col">
                     <h1><?= $key ?></h1>
                 </div>
             </div>
             <!-- Battles in stage -->
             <?php foreach ($item as  $match) : ?>
-            <div class="row"><div class="col">
+            <div class="d-flex p-2"><div class="col">
                 <h2>VS</h2></div>
             </div>
-                <div class="row">
+                <div class="d-flex p-2">
                     <?php foreach ($match as  $user) : ?>
                         <div class="col">
                             <!-- user card -->
@@ -36,16 +36,16 @@
                                         <div class="card card-personal">
 
                                             <!-- Card image-->
-                                            <?= $this->Html->image(($user->avatar), ['alt' => "default-avatar", 'class' => 'card-img-top']); ?>
+                                            <?= $this->Html->image(($user->avatar), ['alt' => "$user->aka", 'class' => 'card-img-top']); ?>
                                             <!-- Card image-->
 
                                             <!-- Card content -->
-                                            <div class="card-body bg-black">
+                                            <div class="card-body bg-black d-none d-sm-block" >
                                                 <!-- Title-->
                                                 <a>
-                                                    <h4 class="card-title title-one"><?= $user->aka ?></h4>
+                                                    <h4 style="font-size:4vw;"><?= $user->aka ?></h4>
                                                 </a>
-                                                <p class="card-meta"><?= $user->crew?$user->crew->name:'NA'?></p>
+                                                <!-- <p class="card-meta"><?= $user->crew?$user->crew->name:'NA'?></p> -->
                                                 <!-- Text -->
                                             </div>
                                             <!-- Card content -->
