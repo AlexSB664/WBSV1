@@ -29,6 +29,6 @@
             echo $this->Form->control('users._ids', ['options' => $users,'class'=> 'form-control']);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Agregar'), array('class' => 'btn btn-default btn-lg')) ?>
+    <?= $this->Form->button(__('Agregar'), array('class' => 'btn btn-outline-success')) ?>
     <?= $this->Form->end() ?>
 </div>

@@ -24,6 +24,6 @@
             <?= $this->Form->label('participante', array('class'=> 'Participante: ')); ?>
             <?= $this->Form->control('user_id', ['options' => $users,array('label'=>false,'class'=>'form-control')]); ?>
     </fieldset>
-    <?= $this->Form->button(__('Guardar'), array('class'=>'btn btn-default btn-lg')) ?>
+    <?= $this->Form->button(__('Guardar'), array('class'=>'btn btn-outline-success')) ?>
     <?= $this->Form->end() ?>
 </div>

@@ -30,6 +30,6 @@
             <?= $this->Form->control('league_id', ['options' => $leagues, 'label'=>false, 'class'=>'form-control']); ?>
             <?= $this->Form->control('is_default'); ?>
     </fieldset>
-    <?= $this->Form->button(__('Guardar'), array('class'=>'btn btn-default btn-lg')) ?>
+    <?= $this->Form->button(__('Guardar'), array('class'=>'btn btn-outline-success')) ?>
     <?= $this->Form->end() ?>
 </div>

@@ -68,6 +68,6 @@
             };
         </script>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Submit'),array('class'=>'btn btn-outline-success')) ?>
     <?= $this->Form->end() ?>
 </div>

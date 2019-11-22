@@ -58,6 +58,6 @@
             <?= $this->Form->control('scheme_id', ['options' => $schemes, 'empty' => true, 'class' => 'form-control', 'label' => false]); ?>
         </fieldset>
         <br>
-        <?= $this->Form->button(__('Agregar'), array('class' => 'btn btn-default btn-lg')) ?>
+        <?= $this->Form->button(__('Agregar'), array('class' => 'btn btn-outline-success')) ?>
         <?= $this->Form->end() ?>
 </div>

@@ -24,6 +24,6 @@
             <?= $this->Form->control('stage', array('label'=>false,'class'=>'form-control col-md-7 col-xs-12')); ?>
     </fieldset>
     <br>
-    <?= $this->Form->button(__('Agregar'), array('class'=>'btn btn-default btn-lg')) ?>
+    <?= $this->Form->button(__('Agregar'), array('class'=>'btn btn-outline-success')) ?>
     <?= $this->Form->end() ?>
 </div>

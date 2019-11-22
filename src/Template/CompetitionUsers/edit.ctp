@@ -31,6 +31,6 @@
             echo $this->Form->control('assistance');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Guardar'),array('class' => 'btn btn-default btn-lg')) ?>
+    <?= $this->Form->button(__('Guardar'),array('class' => 'btn btn-outline-success')) ?>
     <?= $this->Form->end() ?>
 </div>

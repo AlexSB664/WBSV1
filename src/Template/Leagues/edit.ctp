@@ -56,7 +56,7 @@
         echo $this->Form->control('since',array('class' => 'form-control'));
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Editar'), array('class' => 'btn btn-default btn-lg')) ?>
+    <?= $this->Form->button(__('Editar'), array('class' => 'btn btn-outline-success')) ?>
     <?= $this->Form->end() ?>
 </div>
 <script>

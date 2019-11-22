@@ -27,6 +27,6 @@
             <?= $this->Form->control('name', array('label'=>false, 'class'=>'form-control'));?>
     </fieldset>
     <br>
-    <?= $this->Form->button(__('Guardar'), array('class'=>'btn btn-default btn-lg')) ?>
+    <?= $this->Form->button(__('Guardar'), array('class'=>'btn btn-outline-success')) ?>
     <?= $this->Form->end() ?>
 </div>

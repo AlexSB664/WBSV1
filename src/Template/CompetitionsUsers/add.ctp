@@ -25,6 +25,6 @@
             echo $this->Form->control('assistance');
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Enviar'),array('class' => 'btn btn-default btn-lg')) ?>
+    <?= $this->Form->button(__('Enviar'),array('class' => 'btn btn-outline-success')) ?>
     <?= $this->Form->end() ?>
 </div>

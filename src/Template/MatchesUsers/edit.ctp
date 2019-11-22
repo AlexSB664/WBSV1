@@ -31,6 +31,6 @@
             <?= $this->Form->control('user_id', ['options' => $users,array('label'=>false,'class'=>'form-control col-md-7 col-xs-12')]); ?>
     </fieldset>
     <br>
-    <?= $this->Form->button(__('Guardar'), array('class'=>'btn btn-default btn-lg')) ?>
+    <?= $this->Form->button(__('Guardar'), array('class'=>'btn btn-outline-success')) ?>
     <?= $this->Form->end() ?>
 </div>

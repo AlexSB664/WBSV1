@@ -29,6 +29,6 @@
             <?= $this->Form->label('nivel', array('class'=> 'Nivel: ')); ?>
             <?= $this->Form->control('stage', array('label'=>false,'class'=>'form-control col-md-7 col-xs-12'));  ?>
     </fieldset>
-    <?= $this->Form->button(__('Guardar'), array('class'=>'btn btn-default btn-lg')) ?>
+    <?= $this->Form->button(__('Guardar'), array('class'=>'btn btn-outline-success')) ?>
     <?= $this->Form->end() ?>
 </div>
