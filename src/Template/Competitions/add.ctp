@@ -45,7 +45,7 @@
             <?= $this->Form->label('Nombre: '); ?>
             <?= $this->Form->input('name', ['label' => false, 'class' => 'form-control']); ?>
             <?= $this->Form->label('Fecha: '); ?>
-            <?= $this->Form->control('date', array('label' => false)); ?>
+            <?= $this->Form->control('date', array('label' => false, 'type'=>'datetime-local')); ?>
             <?= $this->Form->label('Slug: '); ?>
             <?= $this->Form->control('slug', ['label' => false]); ?>
             <?= $this->Form->label('Temporada: '); ?>

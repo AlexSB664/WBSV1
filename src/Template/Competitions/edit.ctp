@@ -55,7 +55,7 @@
         <?= $this->Form->label('Slug: '); ?>
         <?= $this->Form->control('slug', array('label' => false, 'class' => 'form-control')); ?>
         <?= $this->Form->label('Fecha: '); ?>
-        <?= $this->Form->control('date', ['class' => 'form-control', 'label' => false]); ?>
+        <?= $this->Form->control('date', ['type'=>'datetime-local', 'label' => false]); ?>
         <?= $this->Form->label('Temporada: '); ?>
         <?= $this->Form->control('season_id', ['options' => $seasons, 'class' => 'form-control', 'label' => false]); ?>
         <?= $this->Form->label('Activo: '); ?>

@@ -53,13 +53,17 @@
         echo $this->Form->control('contact_phone',array('class' => 'form-control'));
         echo $this->Form->control('contact_email',array('class' => 'form-control'));
         echo $this->Form->control('slug',array('class' => 'form-control'));
-        echo $this->Form->control('since',array('class' => 'form-control'));
+        //echo $this->Form->control('since',array('class' => 'form-control'));?>
+        <label>Since</label>
+        <br>
+        <input type="date" name="since" id="since">
+        <?php 
         echo $this->Form->control('level',array('class' => 'form-control'));
         echo $this->Form->control('score',array('class' => 'form-control'));
         echo $this->Form->control('bonus',array('class' => 'form-control'));
-
         ?>
     </fieldset>
+    <br>
     <?= $this->Form->button(__('Editar'), array('class' => 'btn btn-outline-success')) ?>
     <?= $this->Form->end() ?>
 </div>

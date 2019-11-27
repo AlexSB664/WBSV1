@@ -41,9 +41,9 @@
             <?= $this->Form->control('status'); ?>
             <?= $this->Form->control('slug',array('class'=>'form-control')); ?>
             <?= $this->Form->label('inicio', array('class'=>'Inicio: ')); ?>
-            <?= $this->Form->control('date_start', array('label'=>false)); ?>
+            <?= $this->Form->control('date_start', array('label'=>false,'type'=>'datetime-local')); ?>
             <?= $this->Form->label('fin', array('class'=>'Fin: ')); ?>
-            <?= $this->Form->control('date_end', array('label'=>false)); ?>
+            <?= $this->Form->control('date_end', array('label'=>false,'type'=>'datetime-local')); ?>
     </fieldset>
     <br>
     <?= $this->Form->button(__('Agregar'), array('class'=>'btn btn-outline-success')) ?>
