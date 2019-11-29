@@ -17,9 +17,11 @@
                         <li>
                             <a href="<?= $this->Url->build(['controller' => 'matches', 'action' => 'lazyAddV2']); ?>">Matches</a>
                         </li>
-                        <li>
-                            <a href="<?= $this->Url->build(['controller' => 'matches', 'action' => 'lazyAdd']); ?>">Old lazyAdd</a>
-                        </li>
+                        <?php if ($this->request->getSession()->read('Auth.User.role') == 'admin') : ?>
+                            <li>
+                                <a href="<?= $this->Url->build(['controller' => 'matches', 'action' => 'lazyAdd']); ?>">Old lazyAdd</a>
+                            </li>
+                        <?php endif ?>
                     </ul>
                 </li>
                 <li class="has-sub">
@@ -27,11 +29,16 @@
                         <i class="fa fa-tasks"></i>Leagues</a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
-                            <a href="<?= $this->Url->build(['controller' => 'leagues', 'action' => 'add']); ?>">Add Leagues</a>
-                        </li>
-                        <li>
                             <a href="<?= $this->Url->build(['controller' => 'leagues', 'action' => 'manage']); ?>">List Leagues</a>
                         </li>
+                        <?php if ($this->request->getSession()->read('Auth.User.role') == 'admin') : ?>
+                            <li>
+                                <a href="<?= $this->Url->build(['controller' => 'leagues', 'action' => 'add']); ?>">Add Leagues</a>
+                            </li>
+                            <li>
+                                <a href="<?= $this->Url->build(['controller' => 'leagues_users', 'action' => 'add']); ?>">Assign Organizer</a>
+                            </li>
+                        <?php endif ?>
                     </ul>
                 </li>
                 <li class="has-sub">
@@ -82,18 +89,20 @@
                         </li>
                     </ul>
                 </li>
-                <li class="has-sub">
-                    <a class="js-arrow" href="#">
-                        <i class="fa fa-group"></i>Users</a>
-                    <ul class="list-unstyled navbar__sub-list js-sub-list">
-                        <li>
-                            <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'add']); ?>">Add New User</a>
-                        </li>
-                        <li>
-                            <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'index']); ?>">List Users</a>
-                        </li>
-                    </ul>
-                </li>
+                <?php if ($this->request->getSession()->read('Auth.User.role') == 'admin') : ?>
+                    <li class="has-sub">
+                        <a class="js-arrow" href="#">
+                            <i class="fa fa-group"></i>Users</a>
+                        <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <li>
+                                <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'add']); ?>">Add New User</a>
+                            </li>
+                            <li>
+                                <a href="<?= $this->Url->build(['controller' => 'users', 'action' => 'index']); ?>">List Users</a>
+                            </li>
+                        </ul>
+                    </li>
+                <?php endif ?>
             </ul>
         </nav>
     </div>
