@@ -37,8 +37,8 @@
             <?= $this->Form->label('descripcion', array('class'=>'Descripcion: ')); ?>
             <?= $this->Form->control('description', array('label'=>false, 'class'=>'form-control')); ?>
             <?= $this->Form->label('liga', array('class'=>'Liga: ')); ?>
-            <?= $this->Form->control('league_id', ['options' => $leagues, 'label'=> false, 'class'=>'form-control']); ?>
-            <?= $this->Form->control('status'); ?>
+            <?= $this->Form->control('league_id', ['options' => $leagues, 'label'=> false, 'class'=>'form-control']); ?> 
+            <?= $this->Form->control('status',['label'=>'Activo?']); ?>
             <?= $this->Form->control('slug',array('class'=>'form-control')); ?>
             <?= $this->Form->label('inicio', array('class'=>'Inicio: ')); ?>
             <?= $this->Form->control('date_start', array('label'=>false,'type'=>'datetime-local')); ?>

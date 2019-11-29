@@ -77,6 +77,7 @@
                         </li>
                     </ul>
                 </li>
+                <?php if ($this->request->getSession()->read('Auth.User.role') == 'admin') : ?>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
                         <i class="fas fa-map-marker-alt"></i>Locations</a>
@@ -89,7 +90,6 @@
                         </li>
                     </ul>
                 </li>
-                <?php if ($this->request->getSession()->read('Auth.User.role') == 'admin') : ?>
                     <li class="has-sub">
                         <a class="js-arrow" href="#">
                             <i class="fa fa-group"></i>Users</a>

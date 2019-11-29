@@ -71,19 +71,19 @@
                     </li>
                 </ul>
             </li>
-            <li class="has-sub">
-                <a class="js-arrow" href="#">
-                    <i class="fas fa-map-marker-alt"></i>Locations</a>
-                <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
-                    <li>
-                        <a href="<?= $this->Url->build(['controller' => 'locations', 'action' => 'add']); ?>">Add Locations</a>
-                    </li>
-                    <li>
-                        <a href="<?= $this->Url->build(['controller' => 'locations', 'action' => 'index']); ?>">List Locations</a>
-                    </li>
-                </ul>
-            </li>
             <?php if ($this->request->getSession()->read('Auth.User.role') == 'admin') : ?>
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fas fa-map-marker-alt"></i>Locations</a>
+                    <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                        <li>
+                            <a href="<?= $this->Url->build(['controller' => 'locations', 'action' => 'add']); ?>">Add Locations</a>
+                        </li>
+                        <li>
+                            <a href="<?= $this->Url->build(['controller' => 'locations', 'action' => 'index']); ?>">List Locations</a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
                         <i class="fa fa-group"></i>Users</a>

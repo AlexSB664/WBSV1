@@ -64,6 +64,13 @@
         <div class="col-md-12">
             <div class="overview-wrap">
                 <h2 class="title-1"></h2>
+                <?php if ($this->request->getSession()->read('Auth.User.role') == 'organizers') : ?>
+                    <button class="au-btn au-btn-icon au-btn--green" onclick="window.location='<?= $this->Url->build([
+                                                                                                            'controller' => 'matches',
+                                                                                                            'action' => 'lazyAddV2'
+                                                                                                        ]); ?>'">
+                        <i class="fa fa-home"></i>Home</button>
+                <?php endif ?>
                 <?php if (isset($season_id)) : ?>
                     <button class="au-btn au-btn-icon au-btn--blue" onclick="window.location='<?= $this->Url->build([
                                                                                                             'controller' => 'competitions',

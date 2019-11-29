@@ -14,10 +14,8 @@ class SchemesController extends AppController
 {
     public function initialize()
     {
-    $this->loadComponent('Flash');
-    $this->loadComponent('Auth', [
-        'authorize' => ['Controller'] // Added this line
-        ]);
+        parent::initialize();
+        $this->loadModel('LeaguesUsers');
     }
 
     /**
@@ -27,10 +25,16 @@ class SchemesController extends AppController
      */
     public function index()
     {
+        $schemes=$this->Schemes->find('all');
+        $leagues = $this->LeaguesUsers->Leagues->find('list', ['limit' => 200]);
+        if ($this->request->getSession()->read('Auth.User.role') == 'organizers') {
+            $leagues_id  = $this->LeaguesUsers->getLeaguesByUser($this->request->getSession()->read('Auth.User.id'));
+            $schemes->where(['league_id IN' => $leagues_id]);
+        }
         $this->paginate = [
             'contain' => ['Leagues']
         ];
-        $schemes = $this->paginate($this->Schemes);
+        $schemes = $this->paginate($schemes);
 
         $this->set(compact('schemes'));
     }
@@ -68,7 +72,11 @@ class SchemesController extends AppController
             }
             $this->Flash->error(__('The scheme could not be saved. Please, try again.'));
         }
-        $leagues = $this->Schemes->Leagues->find('list', ['limit' => 200]);
+        $leagues = $this->LeaguesUsers->Leagues->find('list', ['limit' => 200]);
+        if ($this->request->getSession()->read('Auth.User.role') == 'organizers') {
+            $leagues_id  = $this->LeaguesUsers->getLeaguesByUser($this->request->getSession()->read('Auth.User.id'));
+            $leagues->where(['id IN' => $leagues_id]);
+        }
         $this->set(compact('scheme', 'leagues'));
     }
 
@@ -93,7 +101,11 @@ class SchemesController extends AppController
             }
             $this->Flash->error(__('The scheme could not be saved. Please, try again.'));
         }
-        $leagues = $this->Schemes->Leagues->find('list', ['limit' => 200]);
+        $leagues = $this->LeaguesUsers->Leagues->find('list', ['limit' => 200]);
+        if ($this->request->getSession()->read('Auth.User.role') == 'organizers') {
+            $leagues_id  = $this->LeaguesUsers->getLeaguesByUser($this->request->getSession()->read('Auth.User.id'));
+            $leagues->where(['id IN' => $leagues_id]);
+        }
         $this->set(compact('scheme', 'leagues'));
     }
 
@@ -127,7 +139,7 @@ class SchemesController extends AppController
          }
          break;
        case 'organizers':
-       if (in_array($this->request->action, ['index,view'])){
+       if (in_array($this->request->action, ['index','view','add'])){
              return true;
          }
          break;

@@ -61,16 +61,20 @@ class SeasonsController extends AppController
      */
     public function add($league_id=null)
     {
-        $season = $this->Seasons->newEntity();
         if ($this->request->is('post')) {
             if ($season = $this->Seasons->addSeason($this->request->getData())) {
                 $this->Flash->success(__('The season has been saved.'));
-
+                
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The season could not be saved. Please, try again.'));
         }
         $leagues = $this->Seasons->Leagues->find('list', ['limit' => 200]);
+        $season = $this->Seasons->newEntity();
+        if ($this->request->getSession()->read('Auth.User.role') == 'organizers') {
+            $leagues_id  = $this->LeaguesUsers->getLeaguesByUser($this->request->getSession()->read('Auth.User.id'));
+            $leagues->where(['id IN' => $leagues_id]);
+        }
         $league_id?$leagues->where(['id'=>$league_id])->first():'';
         $this->set(compact('season', 'leagues'));
     }
@@ -99,6 +103,10 @@ class SeasonsController extends AppController
             $this->Flash->error(__('The season could not be saved. Please, try again.'));
         }
         $leagues = $this->Seasons->Leagues->find('list', ['limit' => 200]);
+        if ($this->request->getSession()->read('Auth.User.role') == 'organizers') {
+            $leagues_id  = $this->LeaguesUsers->getLeaguesByUser($this->request->getSession()->read('Auth.User.id'));
+            $leagues->where(['id IN' => $leagues_id]);
+        }
         $this->set(compact('season', 'leagues'));
     }
 
@@ -132,7 +140,7 @@ class SeasonsController extends AppController
                    }
                    break;
                case 'organizers':
-                   if (in_array($this->request->action, ['add','index','view'])) {
+                   if (in_array($this->request->action, ['add','index','view','edit'])) {
                        return true;
                    }
                    break;
