@@ -4,16 +4,7 @@
  * @var \App\Model\Entity\User $user
  */
 ?>
-<!--<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Crews'), ['controller' => 'Crews', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Crew'), ['controller' => 'Crews', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Matches'), ['controller' => 'Matches', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Match'), ['controller' => 'Matches', 'action' => 'add']) ?></li>
-    </ul>
-</nav> -->
+
 <div class="users form large-9 medium-8 columns content">
     <?= $this->Form->create($user) ?>
     <fieldset>
@@ -41,7 +32,6 @@
                 <?= $this->Form->input('Telefono', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
                 <?= $this->Form->label('Avatar', array('class'=> 'Avatar: ')); ?>
                 <?= $this->Form->input('Avatar', array('label'=>false, 'class'=>'form-control col-md-7 col-xs-12')); ?>
-                <?= $this->Form->input('Combates', ['options' => $matches,'class'=>'form-control']); ?>
             </div>
         </div>
         <br>

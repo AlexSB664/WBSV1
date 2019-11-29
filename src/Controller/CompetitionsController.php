@@ -22,12 +22,8 @@ class CompetitionsController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->loadModel('CompetitionsUsers');
+        $this->loadModel('LeaguesUsers');
         $this->session = $this->getRequest()->getSession();
-        $this->loadComponent('Flash');
-        $this->loadComponent('Auth', [
-            'authorize' => ['Controller'] // Added this line
-        ]);
     }
     public function getLastUrl()
     {
@@ -50,7 +46,6 @@ class CompetitionsController extends AppController
 
         $activeEvents = $this->Competitions->find('all')->where(['Competitions.status' => '1']);
 
-
         $competitions = $this->paginate($activeEvents);
         Time::setDefaultLocale('es-MX');
         $this->set(compact('competitions'));
@@ -64,12 +59,15 @@ class CompetitionsController extends AppController
      */
     public function manage()
     {
+        $Events = $this->Competitions->find('all');
+        if ($this->request->getSession()->read('Auth.User.role') == 'organizers') {
+            $leagues_id  = $this->LeaguesUsers->getLeaguesByUser($this->request->getSession()->read('Auth.User.id'));
+            $Events->where(['Leagues.id IN' => $leagues_id]);
+        }
         $this->paginate = [
             'contain' => ['Seasons.Leagues', 'Locations', 'Schemes'],
-            'order' => ['date' => 'ASC']
+            'order' => ['date' => 'ASC'],
         ];
-
-        $Events = $this->Competitions->find('all');
 
         $competitions = $this->paginate($Events);
         Time::setDefaultLocale('es-MX');
@@ -135,7 +133,7 @@ class CompetitionsController extends AppController
             $this->Flash->error(__('The competition could not be saved. Please, try again.'));
         }
         $seasons = $this->Competitions->Seasons->find('list', ['limit' => 200]);
-        $seasons_id?$seasons->where(['id'=>$seasons_id])->first():'';
+        $seasons_id ? $seasons->where(['id' => $seasons_id])->first() : '';
         $locations = $this->Competitions->Locations->find('list', ['limit' => 200]);
         $schemes = $this->Competitions->Schemes->find('list', ['limit' => 200]);
         $this->set(compact('competition', 'seasons', 'locations', 'schemes'));
@@ -180,6 +178,10 @@ class CompetitionsController extends AppController
      */
     public function delete($id = null)
     {
+        if ($this->request->getSession()->read('Auth.User.role') == 'organizers') {
+            $this->Flash->error(__("You can't delete a Competition "));
+            return $this->redirect(['action' => 'manage']);
+        }
         $this->request->allowMethod(['post', 'delete']);
         $competition = $this->Competitions->get($id);
         if ($this->Competitions->delete($competition)) {
@@ -196,17 +198,17 @@ class CompetitionsController extends AppController
     {
         switch ($this->Auth->user('role')) {
             case 'admin':
-                if (in_array($this->request->action, ['index', 'view', 'add', 'edit', 'delete'])) {
+                if (in_array($this->request->action, ['index', 'view', 'add', 'edit', 'delete', 'manage'])) {
                     return true;
                 }
                 break;
             case 'organizers':
-                if (in_array($this->request->action, ['index,view'])) {
+                if (in_array($this->request->action, ['index', 'view', 'edit', 'manage'])) {
                     return true;
                 }
                 break;
             case 'participant':
-                if (in_array($this->request->action, ['index,view'])) {
+                if (in_array($this->request->action, ['index', 'view'])) {
                     return true;
                 }
                 break;
@@ -216,6 +218,6 @@ class CompetitionsController extends AppController
 
     public function beforeFilter(\Cake\Event\Event $event)
     {
-        $this->Auth->allow(['index','view']);
+        $this->Auth->allow(['index', 'view']);
     }
 }

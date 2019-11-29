@@ -21,11 +21,7 @@ class LeaguesController extends AppController
     public function initialize()
     {
         parent::initialize();
-        $this->loadComponent('Flash');
-        $this->loadComponent('Auth', [
-            'authorize' => ['Controller'] // Added this line
-        ]);
-        $this->loadComponent('Paginator');
+        $this->loadModel('LeaguesUsers');
     }
 
     public $paginate = [
@@ -48,7 +44,12 @@ class LeaguesController extends AppController
      */
     public function manage()
     {
-        $leagues = $this->paginate($this->Leagues);
+        $leagues = $this->Leagues->find('all');
+        if ($this->request->getSession()->read('Auth.User.role') == 'organizers') {
+            $leagues_id  = $this->LeaguesUsers->getLeaguesByUser($this->request->getSession()->read('Auth.User.id'));
+            $leagues->where(['id IN' => $leagues_id]);
+        }
+        $leagues = $this->paginate($leagues);
         $this->set(compact('leagues'));
     }
 
@@ -149,12 +150,12 @@ class LeaguesController extends AppController
                 }
                 break;
             case 'organizers':
-                if (in_array($this->request->action, ['index,view'])) {
+                if (in_array($this->request->action, ['index', 'view', 'manage', 'edit'])) {
                     return true;
                 }
                 break;
             case 'participant':
-                if (in_array($this->request->action, ['index,view'])) {
+                if (in_array($this->request->action, ['index', 'view'])) {
                     return true;
                 }
                 break;

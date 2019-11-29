@@ -14,10 +14,8 @@ class SeasonsController extends AppController
 {
     public function initialize()
     {
-        $this->loadComponent('Flash');
-        $this->loadComponent('Auth', [
-            'authorize' => ['Controller'] // Added this line
-        ]);
+        parent::initialize();
+        $this->loadModel('LeaguesUsers');
     }
 
     /**
@@ -27,10 +25,15 @@ class SeasonsController extends AppController
      */
     public function index()
     {
+        $season = $this->Seasons->find('all');
+        if ($this->request->getSession()->read('Auth.User.role') == 'organizers') {
+            $leagues_id  = $this->LeaguesUsers->getLeaguesByUser($this->request->getSession()->read('Auth.User.id'));
+            $season->where(['Leagues.id IN' => $leagues_id]);
+        }
         $this->paginate = [
             'contain' => ['Leagues']
         ];
-        $seasons = $this->paginate($this->Seasons);
+        $seasons = $this->paginate($season);
 
         $this->set(compact('seasons'));
     }
@@ -129,7 +132,7 @@ class SeasonsController extends AppController
                    }
                    break;
                case 'organizers':
-                   if (in_array($this->request->action, ['index,view'])) {
+                   if (in_array($this->request->action, ['add','index','view'])) {
                        return true;
                    }
                    break;

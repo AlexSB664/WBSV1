@@ -27,10 +27,6 @@ class CompetitionsUsersController extends AppController
         $this->loadModel('Users');
         $this->loadModel('Competitions');
         $this->session = $this->getRequest()->getSession();
-        $this->loadComponent('Flash');
-        $this->loadComponent('Auth', [
-            'authorize' => ['Controller'] // Added this line
-        ]);
     }
     public function getLastUrl()
     {
@@ -191,35 +187,41 @@ class CompetitionsUsersController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['post', 'delete', 'get']);
         $competitionsUser = $this->CompetitionsUsers->get($id);
         if ($this->CompetitionsUsers->delete($competitionsUser)) {
             $this->Flash->success(__('The competitions user has been deleted.'));
         } else {
             $this->Flash->error(__('The competitions user could not be deleted. Please, try again.'));
         }
+        $this->redirect($this->referer());
+    }
 
-        return $this->redirect(['action' => 'index']);
+    public function lazyDelete($competition_id = null)
+    {
+        $this->paginate = ['contain' => ['Users']];
+        $competitionsUsers = $this->paginate($this->CompetitionsUsers->find()->where(['competitions_id' => $competition_id]));
+        $this->set(compact('competitionsUsers'));
     }
 
     public function isAuthorized($user)
     {
         switch ($this->Auth->user('role')) {
             case 'admin':
-                if (in_array($this->request->action, ['index','view','add','edit','delete','getLastUrl','join','unjoin','Assistance','lazyAdd'])) {
+                if (in_array($this->request->action, ['index', 'view', 'add', 'edit', 'delete', 'getLastUrl', 'join', 'unjoin', 'assistance', 'lazyAdd', 'lazyDelete'])) {
                     return true;
                 }
                 break;
             case 'organizers':
-                if (in_array($this->request->action, ['index','view', 'Assistance'])) {
+                if (in_array($this->request->action, ['index', 'view', 'assistance'])) {
                     return true;
                 }
                 break;
-            // case 'participant':
-            //     if (in_array($this->request->action, ['index,view','join','unjoin'])) {
-            //         return true;
-            //     }
-            //     break;
+                // case 'participant':
+                //     if (in_array($this->request->action, ['index,view','join','unjoin'])) {
+                //         return true;
+                //     }
+                //     break;
         }
         return false;
     }

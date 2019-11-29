@@ -4,18 +4,8 @@
  * @var \App\Model\Entity\CompetitionUser[]|\Cake\Collection\CollectionInterface $competitionUsers
  */
 ?>
-<!--<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Competition User'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Competitions'), ['controller' => 'Competitions', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Competition'), ['controller' => 'Competitions', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-    </ul>
-</nav> -->
 <div class="competitionUsers index large-9 medium-8 columns content" id="divCompetitionUsers">
-    <h3><?= __('Assistance') ?></h3>
+    <h3>Desuscribir Competidores</h3>
     <table cellpadding="0" cellspacing="0" class="table table-striped table-bordered dataTable no-footer">
         <thead>
             <tr>
@@ -34,12 +24,8 @@
                 <td id="tdassistance"> 
                     <form action="<?= $this->Url->build([
                         'controller' => 'competitions_users',
-                        'action' => 'Assistance', $competitionUser->id]); ?>">
-                        <?php if ($competitionUser->assistance ==1): ?>
-                        <input type="submit" class="btn btn-success" value="Presente" />
-                        <?php else : ?>
-                        <input type="submit" class="btn btn-danger" value="Ausente" />
-                        <?php endif; ?>
+                        'action' => 'delete', $competitionUser->id]); ?>">
+                        <input type="submit" class="btn btn-danger" value="Eliminar" />
                     </form>
                 </td>
             </tr> 

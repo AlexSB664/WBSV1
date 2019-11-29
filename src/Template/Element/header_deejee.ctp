@@ -51,13 +51,23 @@
                                         ]);
                                         ?>">Contacto</a>
                         </li>
-                        <li>
-                            <a href="<?= $this->Url->build([
-                                            'controller' => 'users',
-                                            'action' => 'login'
-                                        ]);
-                                        ?>">Login</a>
-                        </li>
+                        <?php if (empty($this->request->getSession()->read('Auth.User.id'))) : ?>
+                            <li>
+                                <a href="<?= $this->Url->build([
+                                                    'controller' => 'users',
+                                                    'action' => 'login'
+                                                ]);
+                                                ?>">Login</a>
+                            </li>
+                        <?php else : ?>
+                            <li>
+                                <a href="<?= $this->Url->build([
+                                                    'controller' => 'users',
+                                                    'action' => 'logout'
+                                                ]);
+                                                ?>">Logout</a>
+                            </li>
+                        <?php endif ?>
                     </ul>
                 </nav>
             </div>

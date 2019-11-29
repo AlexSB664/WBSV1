@@ -14,14 +14,6 @@ use Cake\Core\Configure\Engine\PhpConfig;
  */
 class LocationsController extends AppController
 {
-    public function initialize()
-    {
-    $this->loadComponent('Flash');
-    $this->loadComponent('Auth', [
-        'authorize' => ['Controller'] // Added this line
-        ]);
-    }
-
     /**
      * Index method
      *

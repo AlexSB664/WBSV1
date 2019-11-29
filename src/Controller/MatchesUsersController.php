@@ -16,22 +16,20 @@ class MatchesUsersController extends AppController
 {
     public function initialize()
     {
-        $this->loadComponent('Flash');
-        $this->loadComponent('Auth', [
-            'authorize' => ['Controller'] // Added this line
-        ]);
+        parent::initialize();
     }
     /**
      * Index method
      *
      * @return \Cake\Http\Response|null
      */
-    public function index()
+    public function index($competition_id)
     {
+        $matchesUsers = $this->MatchesUsers->find('all',['contain'=>['Matches','Users']])->where(['Matches.competition_id'=>$competition_id]);
         $this->paginate = [
             'contain' => ['Matches', 'Users']
         ];
-        $matchesUsers = $this->paginate($this->MatchesUsers);
+        $matchesUsers = $this->paginate($matchesUsers);
 
         $this->set(compact('matchesUsers'));
     }

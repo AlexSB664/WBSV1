@@ -19,15 +19,13 @@ class MatchesController extends AppController
 
     public function initialize()
     {
+        parent::initialize();
         $this->CompetitionsUsers = TableRegistry::get('competitions_users');
         $this->Leagues = TableRegistry::get('leagues');
         $this->Seasons = TableRegistry::get('seasons');
         $this->Competitions = TableRegistry::get('competitions');
+        $this->loadModel('LeaguesUsers');
         $this->session = $this->getRequest()->getSession();
-        $this->loadComponent('Flash');
-        $this->loadComponent('Auth', [
-            'authorize' => ['Controller'] // Added this line
-        ]);
     }
 
     public function getLastUrl()
@@ -39,12 +37,16 @@ class MatchesController extends AppController
      *
      * @return \Cake\Http\Response|null
      */
-    public function index()
+    public function index($competition_id = null)
     {
-        $this->paginate = [
-            'contain' => ['Competitions']
-        ];
-        $matches = $this->paginate($this->Matches);
+        $matches = $this->Matches->find('all', [
+            'contain' => ['Competitions', 'Users']
+        ]);
+        if ($competition_id) {
+            $matches->where(['competition_id' => $competition_id]);
+            $this->set(compact('competition_id'));
+        }
+        $matches = $this->paginate($matches);
 
         $this->set(compact('matches'));
     }
@@ -95,7 +97,6 @@ class MatchesController extends AppController
                 $match = $this->Matches->patchEntity($match, $this->request->getData());
                 if ($this->Matches->save($match)) {
                     $this->Flash->success(__('The match has been saved.'));
-                    //return $this->redirect(['action' => 'index']);
                     return $this->redirect(Router::url($this->getLastUrl(), true));
                 }
                 $this->Flash->error(__('The match could not be saved. Please, try again.'));
@@ -117,14 +118,17 @@ class MatchesController extends AppController
             $this->set(compact('match', 'competition', 'competition2', 'users', 'stages'));
         } else {
             $competitions = $this->Matches->Competitions->find('all', ['contain' => ['Seasons.Leagues']]);
-            //$competitions = $this->Matches->Competitions->find();
             $this->set(compact('competitions'));
         }
     }
 
     public function lazyAddV2($league_id = null, $season_id = null, $competition_id = null)
     {
-        $list = $this->Leagues->find();
+        $list = $this->Leagues->find('all');
+        if ($this->Auth->user('role') == 'organizers') {
+            $leagues_id  = $this->LeaguesUsers->getLeaguesByUser($this->request->getSession()->read('Auth.User.id'));
+            $list->where(['id IN' => $leagues_id]);
+        }
         if ($league_id) {
             $this->set(compact('league_id'));
             $list = $this->Seasons->find()->where(['league_id' => $league_id]);
@@ -147,8 +151,9 @@ class MatchesController extends AppController
      * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit($id = null, $competition_id = null)
     {
+        $users = $this->Matches->Users->find('list');
         $match = $this->Matches->get($id, [
             'contain' => ['Users']
         ]);
@@ -156,13 +161,27 @@ class MatchesController extends AppController
             $match = $this->Matches->patchEntity($match, $this->request->getData());
             if ($this->Matches->save($match)) {
                 $this->Flash->success(__('The match has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                if (empty($this->getLastUrl())) {
+                    return $this->redirect(['action' => 'index']);
+                }
+                return $this->redirect(Router::url($this->getLastUrl(), true));
             }
             $this->Flash->error(__('The match could not be saved. Please, try again.'));
         }
+        $this->session->write([
+            'lastUrl' => $this->referer(),
+        ]);
         $competitions = $this->Matches->Competitions->find('list');
-        $users = $this->Matches->Users->find('list');
+        if ($competition_id) {
+            $competition = $this->Matches->Competitions->find('all', ['contain' => ['Seasons.Leagues', 'Schemes.SchemesDetails']])->where(['Competitions.id' => $competition_id])->first();
+            $competitions->where(['id' => $competition_id]);
+            foreach ($competition->scheme->schemes_details as $detail) {
+                $stages[$detail->position] = $detail->position;
+            }
+            $usr_id = $this->CompetitionsUsers->getUsersIdByCompetition($competition_id);
+            $users->where(['id IN' => $usr_id]);
+            $this->set(compact('stages', 'competition'));
+        }
         $this->set(compact('match', 'competitions', 'users'));
     }
 
@@ -185,26 +204,26 @@ class MatchesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-      //Autorizacion hacia las vistas del usuario
-  public function isAuthorized($user)
-  {
-     switch ($this->Auth->user('role')) {
-       case 'admin':
-         if (in_array($this->request->action, ['index','lazyAdd','lazyAddV2','view', 'add', 'edit', 'getLastUrl','delete'])){
-           return true;
-         }
-         break;
-       case 'organizers':
-       if (in_array($this->request->action, ['index,view'])){
-             return true;
-         }
-         break;
-    //   case 'participant':
-    //      if (in_array($this->request->action, ['index,view'])){
-    //          return true;
-    //      }
-    //      break;
-     }
-     return false;
-  }
+    //Autorizacion hacia las vistas del usuario
+    public function isAuthorized($user)
+    {
+        switch ($this->Auth->user('role')) {
+            case 'admin':
+                if (in_array($this->request->action, ['index', 'lazyAdd', 'lazyAddV2', 'view', 'add', 'edit', 'getLastUrl', 'delete'])) {
+                    return true;
+                }
+                break;
+            case 'organizers':
+                if (in_array($this->request->action, ['index', 'view', 'lazyAddV2'])) {
+                    return true;
+                }
+                break;
+                //   case 'participant':
+                //      if (in_array($this->request->action, ['index,view'])){
+                //          return true;
+                //      }
+                //      break;
+        }
+        return false;
+    }
 }

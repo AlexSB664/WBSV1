@@ -20,7 +20,7 @@ class UsersController extends AppController
      */
     public function index()
     {
-        if($this->Auth->user('role')!=='admin'){ 
+        if ($this->Auth->user('role') !== 'admin') {
             $this->Flash->error(__("You don't have 
             permissions"));
             return $this->redirect(['controller' => 'Competitions', 'action' => 'index']);
@@ -56,7 +56,7 @@ class UsersController extends AppController
      */
     public function add()
     {
-        if($this->Auth->user('role')!=='admin'){ 
+        if ($this->Auth->user('role') !== 'admin') {
             $this->Flash->error(__("You don't have 
             permissions"));
             return $this->redirect(['controller' => 'Competitions', 'action' => 'index']);
@@ -85,7 +85,7 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
-        if($this->Auth->user('role')!=='admin'){ 
+        if ($this->Auth->user('role') !== 'admin') {
             $this->Flash->error(__("You don't have 
             permissions"));
             return $this->redirect(['controller' => 'Competitions', 'action' => 'index']);
@@ -115,7 +115,7 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
-        if($this->Auth->user('role')!=='admin'){ 
+        if ($this->Auth->user('role') !== 'admin') {
             $this->Flash->error(__("You don't have 
             permissions"));
             return $this->redirect(['controller' => 'Competitions', 'action' => 'index']);
@@ -133,12 +133,24 @@ class UsersController extends AppController
 
     public function login()
     {
+        if (!empty($this->request->getSession()->read('Auth.User.id'))) {
+            if (in_array($this->request->getSession()->read('Auth.User.role'), ['admin', 'organizers'])) {
+                $this->redirect(['controller' => 'Competitions', 'action' => 'manage']);
+            }
+            $this->redirect($this->Auth->redirectUrl());
+        }
         $this->viewBuilder()->layout('login');
         if ($this->request->is('post')) {
             $user = $this->Auth->identify();
             if ($user) {
                 $this->Auth->setUser($user);
                 $this->Flash->success('Login successful');
+                if (in_array($user['role'], ['admin'])) {
+                    $this->redirect(['controller' => 'Competitions', 'action' => 'manage']);
+                }
+                if (in_array($user['role'], ['organizers'])) {
+                    $this->redirect(['controller' => 'Matches', 'action' => 'lazyAddV2']);
+                }
                 $this->redirect($this->Auth->redirectUrl());
             } else {
                 $this->Flash->error('Login failed');
@@ -167,8 +179,20 @@ class UsersController extends AppController
         }
     }
 
+    public function isAuthorized($user)
+    {
+        switch ($this->Auth->user('role')) {
+            case 'admin':
+                if (in_array($this->request->action, ['index', 'view', 'add', 'edit', 'delete'])) {
+                    return true;
+                }
+                break;
+        }
+        return false;
+    }
+
     public function beforeFilter(\Cake\Event\Event $event)
     {
-        $this->Auth->allow(['singup']);
+        $this->Auth->allow(['singup', 'logout']);
     }
 }

@@ -1,6 +1,7 @@
 <!-- page content -->
 
 <div class="main-content">
+<?= $this->Flash->render() ?>
     <div class="section__content section__content--p30">
         <div class="container-fluid">
             <?= $this->fetch('content') ?>

@@ -33,6 +33,7 @@
                 <th scope="col"><?= $this->Paginator->sort('name') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('date') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('season_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('leagues','Liga') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('status') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('location_id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
@@ -49,6 +50,7 @@
                 <td><?= h($competition->name) ?></td>
                 <td><?= h($competition->date) ?></td>
                 <td><?= $competition->has('season') ? $this->Html->link($competition->season->name, ['controller' => 'Seasons', 'action' => 'view', $competition->season->id]) : '' ?></td>
+                <td><?= $competition->has('season') ? $this->Html->link($competition->season->league->name, ['controller' => 'Leagues', 'action' => 'view', $competition->season->league->id]) : 'N/A' ?></td>
                 <td><?= h($competition->status) ?></td>
                 <td><?= $competition->has('location') ? $this->Html->link($competition->location->name, ['controller' => 'Locations', 'action' => 'view', $competition->location->id]) : '' ?></td>
                 <td><?= h($competition->created) ?></td>

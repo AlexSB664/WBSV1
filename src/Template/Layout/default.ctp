@@ -49,7 +49,8 @@
         <!-- END HEADER MOBILE-->
 
         <!-- MENU SIDEBAR-->
-        <?php echo $this->element('menu_sidebar') ?>
+        <?= $this->element('menu_sidebar'); ?>
+
         <!-- END MENU SIDEBAR-->
 
         <!-- PAGE CONTAINER-->
@@ -59,9 +60,9 @@
             <!-- HEADER DESKTOP-->
 
             <!-- MAIN CONTENT-->
-                <?php echo $this->element('content') ?>
-                <!-- END MAIN CONTENT-->
-                <!-- END PAGE CONTAINER-->
+            <?php echo $this->element('content') ?>
+            <!-- END MAIN CONTENT-->
+            <!-- END PAGE CONTAINER-->
 
         </div>
 
