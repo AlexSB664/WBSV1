@@ -47,6 +47,7 @@ class AppController extends Controller
         $this->loadComponent('Flash');
 
         $this->loadComponent('Auth',[
+            'authorize' => ['Controller'],
             'authenticate' => [
                 'Form'=>[
                     'fields' =>[
@@ -68,7 +69,7 @@ class AppController extends Controller
         //$this->loadComponent('Security');
         
         //check login
-        if($this->request->session()->read('Auth.User')){
+        if($this->request->getSession()->read('Auth.User')){
             $this->set('logedIn',true);
         }else{
             $this->set('logedIn',false);
