@@ -64,12 +64,16 @@ class FreestylersRanking
             if (array_key_exists($user->user_id, $this->users_list)) {
                 $this->users_list[$user->user_id]['points'] =  $this->users_list[$user->user_id]['points'] +  $this->getColiseumPoint($matches->stage, $matches->competition->season->league->bonus);
             } else {
-                $this->users_list[$user->user_id]['points'] = $this->getColiseumPoint($matches->stage, $matches->competition->season->league->bonus);
+                $this->users_list[$user->user_id]['points'] = $this->getColiseumPoint(
+                    $matches->stage,
+                    $matches->competition->season->league->bonus,
+                    $matches->competition->bonus
+                );
             }
         }
     }
 
-    public function getColiseumPoint($stage = null, $bonus = null)
+    public function getColiseumPoint($stage = null, $bonus_league = null, $bonus_competition = null)
     {
         $points = 0;
         if (in_array($stage, $this->stages)) {
@@ -77,7 +81,7 @@ class FreestylersRanking
             if ($stage === "Final") {
                 $pointsTmp = 2;
             }
-            $points = $pointsTmp * $bonus;
+            $points = $pointsTmp * $bonus_league * $bonus_competition;
         }
         return $points;
     }
