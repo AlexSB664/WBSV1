@@ -104,6 +104,10 @@ class CompetitionsTable extends Table
             ->maxLength('name', 50)
             ->notEmptyString('name');
 
+        $validator
+            ->numeric('bonus')
+            ->allowEmptyString('bonus');
+
         return $validator;
     }
 
@@ -152,7 +156,7 @@ class CompetitionsTable extends Table
         $cmps = $this->newEntity();
 
         $cmps = $this->patchEntity($cmps, $data);
-        $file_name =  $this->uploadFile($data['flyer'], 'img','flyer','uploads/competitions/');
+        $file_name =  $this->uploadFile($data['flyer'], 'img', 'flyer', 'uploads/competitions/');
         $cmps->flyer = $file_name;
 
         if (!$this->save($cmps)) {
@@ -175,7 +179,7 @@ class CompetitionsTable extends Table
             $cmps->flyer = $tmpFlyer;
         } else {
             $this->deleteFile($tmpFlyer, 'img');
-            $file_name =  $this->uploadFile($data['flyer'], 'img','flyer','uploads/competitions/');
+            $file_name =  $this->uploadFile($data['flyer'], 'img', 'flyer', 'uploads/competitions/');
             $cmps->flyer = $file_name;
         }
 

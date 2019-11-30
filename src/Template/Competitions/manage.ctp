@@ -39,6 +39,7 @@
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('scheme_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('bonus') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -56,6 +57,7 @@
                 <td><?= h($competition->created) ?></td>
                 <td><?= h($competition->modified) ?></td>
                 <td><?= $competition->has('scheme') ? $this->Html->link($competition->scheme->name, ['controller' => 'Schemes', 'action' => 'view', $competition->scheme->name]) : '' ?></td>
+                <td><?= h($competition->bonus) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $competition->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $competition->id]) ?>

@@ -56,6 +56,8 @@
             <?= $this->Form->control('location_id', ['options' => $locations, 'class' => 'form-control', 'label' => false]); ?>
             <?= $this->Form->label('Esquema: '); ?>
             <?= $this->Form->control('scheme_id', ['options' => $schemes, 'empty' => true, 'class' => 'form-control', 'label' => false]); ?>
+            <?= $this->Form->label('Bonus: '); ?>
+            <?= $this->Form->control('bonus', ['label' => false]);?>
         </fieldset>
         <br>
         <?= $this->Form->button(__('Agregar'), array('class' => 'btn btn-outline-success')) ?>
