@@ -22,8 +22,10 @@ class FreestylersRanking
     //Repor Data
     public $matches_list;
     public $users_list = [];
+    public $users_count = 0;
     public $position_count = 1;
     public $real_position_count = 1;
+    public $data=[];
 
     public function __construct($data = [])
     {
@@ -40,7 +42,7 @@ class FreestylersRanking
     {
         $this->beforeUpData();
         $this->setUpData();
-        return $this->users_list;
+        return $this;
     }
 
     private function beforeUpData()
@@ -62,9 +64,11 @@ class FreestylersRanking
         $users = $this->MatchesUsers->find()->where(['match_id' => $matches->id]);
         foreach ($users as $user) {
             if (array_key_exists($user->user_id, $this->users_list)) {
-                $this->users_list[$user->user_id]['points'] =  $this->users_list[$user->user_id]['points'] +  $this->getColiseumPoint($matches->stage, 
-                $matches->competition->season->league->bonus,
-                $matches->competition->bonus);
+                $this->users_list[$user->user_id]['points'] =  $this->users_list[$user->user_id]['points'] +  $this->getColiseumPoint(
+                    $matches->stage,
+                    $matches->competition->season->league->bonus,
+                    $matches->competition->bonus
+                );
             } else {
                 $this->users_list[$user->user_id]['points'] = $this->getColiseumPoint(
                     $matches->stage,
@@ -98,6 +102,7 @@ class FreestylersRanking
     {
         //order by points
         arsort($this->users_list, false);
+        $this->users_count =  count($this->users_list);
         $this->users_list = array_slice($this->users_list, 0, 100, true);
         $pointsTmp = 0;
         foreach ($this->users_list as $key => $user) {

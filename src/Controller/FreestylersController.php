@@ -22,8 +22,10 @@ class FreestylersController extends AppController
             // $currentYear = (int) $year;
         }
         $Frees = new FreestylersRanking(['year' => $currentYear]);
-        $freestylers = $Frees->make();
-        $this->set(compact('freestylers'));
+        $data = $Frees->make();
+        $freestylers =  $data->users_list;
+        $freestylers_count = $data->users_count;
+        $this->set(compact('freestylers','freestylers_count'));
     }
 
     public function isAuthorized($user)

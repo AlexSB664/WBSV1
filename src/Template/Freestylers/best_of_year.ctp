@@ -1,11 +1,12 @@
 <!-- HEADER -->
 <div class="site-blocks-cover inner-page-cover overlay" style="background-image: url('/img/hero_bg_02.jpg');" data-aos="fade" data-stellar-background-ratio="0.5" data-aos="fade">
     <div class="container">
-        <div class="freestyler align-items-center justify-content-center">
+        <div class="row align-items-center justify-content-center">
             <div class="col-md-8 text-center" data-aos="fade-up" data-aos-delay="400">
                 <h1 class="league-title text-white">WBS Coliseum</h1>
                 <h2 class="seasson-title">Presenta</h2>
                 <h2 class="event-title">Top 100 de Freestylers</h2>
+                <h2 class="event-title">De <?= $freestylers_count ?> Freestylers en este año</h2>
             </div>
         </div>
     </div>
