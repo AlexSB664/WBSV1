@@ -31,7 +31,7 @@
     </ul>
 </nav> -->
 <div class="competitions form large-9 medium-8 columns content">
-    <?= $this->Form->create($competition,['type' => 'file']) ?>
+    <?= $this->Form->create($competition, ['type' => 'file']) ?>
     <fieldset>
         <legend><?= __('Editar Competencia') ?></legend>
         <?= $this->Form->label('Nombre: '); ?>
@@ -55,7 +55,7 @@
         <?= $this->Form->label('Slug: '); ?>
         <?= $this->Form->control('slug', array('label' => false, 'class' => 'form-control')); ?>
         <?= $this->Form->label('Fecha: '); ?>
-        <?= $this->Form->control('date', ['type'=>'datetime-local', 'label' => false]); ?>
+        <?= $this->Form->control('date', ['type' => 'datetime-local', 'label' => false, 'value' => strftime('%Y-%m-%dT%H:%M:%S', strtotime($competition->date))]); ?>
         <?= $this->Form->label('Temporada: '); ?>
         <?= $this->Form->control('season_id', ['options' => $seasons, 'class' => 'form-control', 'label' => false]); ?>
         <?= $this->Form->label('Activo: '); ?>
@@ -68,6 +68,6 @@
         <?= $this->Form->control('bonus', ['label' => false]); ?>
     </fieldset>
     <br>
-    <?= $this->Form->button(__('Guardar'), array('class'=>'btn btn-outline-success')) ?>
+    <?= $this->Form->button(__('Guardar'), array('class' => 'btn btn-outline-success')) ?>
     <?= $this->Form->end() ?>
 </div>
