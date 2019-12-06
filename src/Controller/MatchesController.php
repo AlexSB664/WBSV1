@@ -155,7 +155,7 @@ class MatchesController extends AppController
     {
         $users = $this->Matches->Users->find('list');
         $match = $this->Matches->get($id, [
-            'contain' => ['Users']
+            'contain' => ['Users', 'Competitions.Seasons.Leagues']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $match = $this->Matches->patchEntity($match, $this->request->getData());
@@ -171,17 +171,26 @@ class MatchesController extends AppController
         $this->session->write([
             'lastUrl' => $this->referer(),
         ]);
-        $competitions = $this->Matches->Competitions->find('list');
+        $league_id = $match->competition->season->league->id;
+
+        $competitions = $this->Matches->Competitions->find('list')->matching('Seasons.Leagues', function ($q) use ($league_id) {
+            return $q->where(['Leagues.id' => $league_id]);
+        })->group(['Competitions.id']);
+
+        $competition_tmp = $match->competition->id;
         if ($competition_id) {
-            $competition = $this->Matches->Competitions->find('all', ['contain' => ['Seasons.Leagues', 'Schemes.SchemesDetails']])->where(['Competitions.id' => $competition_id])->first();
-            $competitions->where(['id' => $competition_id]);
-            foreach ($competition->scheme->schemes_details as $detail) {
-                $stages[$detail->position] = $detail->position;
-            }
-            $usr_id = $this->CompetitionsUsers->getUsersIdByCompetition($competition_id);
-            $users->where(['id IN' => $usr_id]);
-            $this->set(compact('stages', 'competition'));
+            $competition_tmp = $competition_id;
         }
+
+        $competition = $this->Matches->Competitions->get($competition_tmp, ['contain' => ['Seasons.Leagues', 'Schemes.SchemesDetails']]);
+        foreach ($competition->scheme->schemes_details as $detail) {
+            $stages[$detail->position] = $detail->position;
+        }
+
+        $usr_id = $this->CompetitionsUsers->getUsersIdByCompetition($competition_tmp);
+        $users->where(['id IN' => $usr_id]);
+
+        $this->set(compact('stages'));
         $this->set(compact('match', 'competitions', 'users'));
     }
 
