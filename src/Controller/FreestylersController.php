@@ -13,19 +13,60 @@ use App\Controller\Component\FreestylersRanking;
  */
 class FreestylersController extends AppController
 {
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadModel('FreestylersTops');
+        $this->loadModel('FreestylersTopsUsers');
+    }
     public function bestOfYear($year = null)
     {
         $this->viewBuilder()->layout('deejee');
         $currentYear = date('Y');
-        // $currentYear = (int) date('Y');
-        if ($year) {
-            // $currentYear = (int) $year;
+        $calculated = true;
+        if ( $free = $this->FreestylersTops->find()->where( ['id'=>(int) date('Y')])->first() ) {
+           
+            $freestylers_count = $free->count;
+            $freestylers = $this->FreestylersTopsUsers->find('all', ['contain' => ['Users']])->where(['FreestylersTopsUsers.freestylers_top_id' => $free->id])->toArray();
+            $calculated = false;
+        } else {
+            $Frees = new FreestylersRanking(['year' => $currentYear]);
+            $data = $Frees->make();
+            $freestylers =  json_decode(json_encode($data->users_list), FALSE);
+            $freestylers_count = $data->users_count;
         }
-        $Frees = new FreestylersRanking(['year' => $currentYear]);
-        $data = $Frees->make();
-        $freestylers =  $data->users_list;
-        $freestylers_count = $data->users_count;
-        $this->set(compact('freestylers','freestylers_count'));
+        $this->set(compact('freestylers', 'freestylers_count','calculated'));
+    }
+
+    public function save()
+    {
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $users = unserialize(base64_decode($this->request->getData('data')));
+            $users = json_decode(json_encode($users), FALSE);
+            $count = $this->request->getData('count');
+            
+            if ( $free = $this->FreestylersTops->find()->where( ['id'=>(int) date('Y')])->first() ) {
+                $this->Flash->error('Ya existe un registro anterior');
+                return $this->redirect(['action' => 'bestOfYear']);
+            }
+
+            $freeTop = $this->FreestylersTops->newEntity();
+            $freeTop->count = $count;
+            $freeTop->id = (int) date('Y');
+            $this->FreestylersTops->save($freeTop);
+            foreach ($users as  $user) {
+                $user_info = $this->FreestylersTopsUsers->newEntity();
+                $user_info->freestylers_top_id =  $freeTop->id;
+                $user_info->user_id = $user->user_id;
+                $user_info->points =  $user->points;
+                $user_info->position =  $user->position;
+                $this->FreestylersTopsUsers->save($user_info);
+            }
+
+            $this->Flash->success('Se guardo correctamente');
+            return $this->redirect(['action' => 'bestOfYear']);
+        }
+        die();
     }
 
     public function isAuthorized($user)

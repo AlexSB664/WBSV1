@@ -64,6 +64,7 @@ class FreestylersRanking
         $users = $this->MatchesUsers->find()->where(['match_id' => $matches->id]);
         foreach ($users as $user) {
             if (array_key_exists($user->user_id, $this->users_list)) {
+                $this->users_list[$user->user_id]['user_id']=$user->user_id;
                 $this->users_list[$user->user_id]['points'] =  $this->users_list[$user->user_id]['points'] +  $this->getColiseumPoint(
                     $matches->stage,
                     $matches->competition->season->league->bonus,

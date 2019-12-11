@@ -14,14 +14,13 @@
 <!-- END HEADER -->
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#"></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-        </div>
-    </div>
+<?php if($calculated): ?>
+    <?= $this->Form->create(null, ['url' => ['action' => 'save']]); ?>
+    <input type="hidden" name="data" value="<?= base64_encode(serialize($freestylers)) ?>">
+    <input type="hidden" name="count" value="<?= $freestylers_count ?>">
+    <?= $this->Form->submit(__('Download'), ['class' => 'btn btn-info']); ?>
+    <?= $this->Form->end(); ?>
+<?php endif ?>
 </nav>
 <!-- END NAVBAR -->
 <!-- Freestyler -->
@@ -38,12 +37,12 @@
         <tbody>
             <?php foreach ($freestylers as $freestyler) : ?>
                 <tr>
-                    <td><?= $freestyler['position'] ?></td>
+                    <td><?= $freestyler->position ?></td>
                     <td>
-                        <?= $this->Html->image($freestyler['avatar'], ['alt' => "default-avatar",  'class' => 'img-fluid img-thumbnail img-max']); ?>
+                        <?= $this->Html->image($freestyler->avatar?$freestyler->avatar:$freestyler->user->avatar, ['alt' => "default-avatar",  'class' => 'img-fluid img-thumbnail img-max']); ?>
                     </td>
-                    <td> <?= $freestyler['aka'] ?> </td>
-                    <td><?= $freestyler['points'] ?></td>
+                    <td> <?= $freestyler->aka?$freestyler->aka:$freestyler->user->aka ?> </td>
+                    <td><?= $freestyler->points ?></td>
                 </tr>
             <?php endforeach ?>
         </tbody>
