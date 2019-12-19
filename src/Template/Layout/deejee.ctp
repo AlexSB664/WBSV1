@@ -3,6 +3,29 @@
 
 <head>
   <title>Coliseum WBS</title>
+  <style type="text/css">
+    .paginate-alex {
+      padding: 50px 50px;
+    }
+
+    .paginate-alex li {
+      //whatever goes here
+      position: relative;
+      display: block;
+      padding: .75rem 1.25rem;
+      margin-bottom: -1px;
+      background-color: #e6cc95;
+      border: 1px solid rgba(0, 0, 0, .125);
+    }
+
+    .paginate-alex a {
+      color: #fff;
+    }
+
+    .paginate-alex a:hover {
+      color: #000;
+    }
+  </style>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -22,19 +45,19 @@
   <link rel="stylesheet" href="/css/deejee/aos.css">
   <link rel="stylesheet" href="/css/deejee/style.css">
 
-    <?= $this->Html->meta(
-    		'img/favicon-wbs.png',
-    		'/img/favicon-wbs.png',
-    		['type' => 'icon']
-    	); 
-    ?>
+  <?= $this->Html->meta(
+    'img/favicon-wbs.png',
+    '/img/favicon-wbs.png',
+    ['type' => 'icon']
+  );
+  ?>
 </head>
 
 <body>
   <div class="site-wrap">
-      <?php echo $this->element('header_deejee') ?>
-      <?= $this->fetch('content') ?>
-      <?php echo $this->element('footer_deejee') ?>
+    <?php echo $this->element('header_deejee') ?>
+    <?= $this->fetch('content') ?>
+    <?php echo $this->element('footer_deejee') ?>
   </div>
   <script src="/js/deejee//jquery-3.3.1.min.js"></script>
   <script src="/js/deejee//jquery-migrate-3.0.1.min.js"></script>
