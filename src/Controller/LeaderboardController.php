@@ -74,19 +74,19 @@ class LeaderboardController extends AppController
                 $seasons = $this->seasonsTable->find()->where(['slug' => $seasons_slug, 'league_id' => $leagues->id])->first();
                 $competitions = $this->competitionsTable->find('all', ['order' => ['date ASC']])->where(['season_id' => $seasons->id]);
                 $ldrBrd = new LeaderboardRanking(['league' => $leagues->id, 'season' => $seasons_slug, 'competition' => $competition_slug]);
-                $board=$ldrBrd->make();
-                $emptyScore = $ldrBrd->numericColumEmpty($board,'score');
+                $board = $ldrBrd->make();
+                $emptyScore = $ldrBrd->numericColumEmpty($board, 'score');
                 $this->set(compact('emptyScore'));
                 $this->set(compact('seasons_slug'));
                 $this->set(compact('competitions'));
                 $this->set(compact('competition_slug'));
-                if($competition_slug != "all"){
-                    $competition_id = $this->competitionsTable->find('all')->where(['slug'=>$competition_slug,'season_id'=>$seasons->id])->first();
+                if ($competition_slug != "all") {
+                    $competition_id = $this->competitionsTable->find('all')->where(['slug' => $competition_slug, 'season_id' => $seasons->id])->first();
                     $this->set(compact('competition_id'));
                 }
-                if (array_key_exists('colum',$this->request->query) & array_key_exists('direction',$this->request->query)) {
+                if (array_key_exists('colum', $this->request->query) & array_key_exists('direction', $this->request->query)) {
                     $customSort = new CustomSort();
-                    $customSort->arrayMultipleSort($board,$this->request->query['colum'],$this->request->query['direction']);
+                    $customSort->arrayMultipleSort($board, $this->request->query['colum'], $this->request->query['direction']);
                 }
             }
         }
