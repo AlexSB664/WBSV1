@@ -9,7 +9,7 @@ use Cake\Database\Expression\QueryExpression;
 class FreestylersRanking
 {
     //statitc data
-    private $stages = ['Dieciseisavos', 'Octavos', 'Cuartos', 'Semifinal', '3er_lugar', 'Final', 'Ganador'];
+    private $stages = ['Dieciseisavos', 'Octavos', 'Cuartos', 'Semifinal', '3er_lugar', 'Final', 'Ganador', 'fms_gana_sr', 'fms_gana_cr', 'fms_pierde_cr', 'fms_empate'];
     // Model objectsSeasons
     private $Matches;
     private $MatchesUsers;
@@ -25,7 +25,7 @@ class FreestylersRanking
     public $users_count = 0;
     public $position_count = 1;
     public $real_position_count = 1;
-    public $data=[];
+    public $data = [];
 
     public function __construct($data = [])
     {
@@ -53,7 +53,6 @@ class FreestylersRanking
     private function setUpData()
     {
         foreach ($this->matches_list as $match) {
-            // echo $match->competition->season->league->bonus;
             $this->getUsersIdsByMatches($match);
         }
         $this->getData();
@@ -64,7 +63,6 @@ class FreestylersRanking
         $users = $this->MatchesUsers->find()->where(['match_id' => $matches->id]);
         foreach ($users as $user) {
             if (array_key_exists($user->user_id, $this->users_list)) {
-                $this->users_list[$user->user_id]['user_id']=$user->user_id;
                 $this->users_list[$user->user_id]['points'] =  $this->users_list[$user->user_id]['points'] +  $this->getColiseumPoint(
                     $matches->stage,
                     $matches->competition->season->league->bonus,
@@ -85,8 +83,11 @@ class FreestylersRanking
         $points = 0;
         if (in_array($stage, $this->stages)) {
             $pointsTmp = 1;
-            if ($stage === "Final") {
+            if ($stage === "Final"  | $stage === "fms_gana_cr") {
                 $pointsTmp = 2;
+            }
+            if ($stage === "fms_gana_sr") {
+                $pointsTmp = 3;
             }
             $points = $pointsTmp * $bonus_league * $bonus_competition;
         }
@@ -104,9 +105,9 @@ class FreestylersRanking
         //order by points
         arsort($this->users_list, false);
         $this->users_count =  count($this->users_list);
-        $this->users_list = array_slice($this->users_list, 0, 100, true);
         $pointsTmp = 0;
         foreach ($this->users_list as $key => $user) {
+            $this->users_list[$key]['user_id'] = $key;
 
             if ($key === array_key_first($this->users_list)) {
                 $pointsTmp = $this->users_list[$key]['points'];
