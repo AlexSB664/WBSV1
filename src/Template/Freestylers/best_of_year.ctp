@@ -14,13 +14,13 @@
 <!-- END HEADER -->
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-<?php if($calculated): ?>
-    <?= $this->Form->create(null, ['url' => ['action' => 'save']]); ?>
-    <input type="hidden" name="data" value="<?= base64_encode(serialize($freestylers)) ?>">
-    <input type="hidden" name="count" value="<?= $freestylers_count ?>">
-    <?= $this->Form->submit(__('Download'), ['class' => 'btn btn-info']); ?>
-    <?= $this->Form->end(); ?>
-<?php endif ?>
+    <?php if ($calculated) : ?>
+        <?= $this->Form->create(null, ['url' => ['action' => 'save']]); ?>
+        <input type="hidden" name="data" value="<?= base64_encode(serialize($freestylers)) ?>">
+        <input type="hidden" name="count" value="<?= $freestylers_count ?>">
+        <?= $this->Form->submit('Guardar', ['class' => 'btn btn-success']); ?>
+        <?= $this->Form->end(); ?>
+    <?php endif ?>
 </nav>
 <!-- END NAVBAR -->
 <!-- Freestyler -->
@@ -39,13 +39,29 @@
                 <tr>
                     <td><?= $freestyler->position ?></td>
                     <td>
-                        <?= $this->Html->image($freestyler->avatar?$freestyler->avatar:$freestyler->user->avatar, ['alt' => "default-avatar",  'class' => 'img-fluid img-thumbnail img-max']); ?>
+                        <?= $this->Html->image($freestyler->avatar ? $freestyler->avatar : $freestyler->user->avatar, ['alt' => "default-avatar",  'class' => 'img-fluid img-thumbnail img-max']); ?>
                     </td>
-                    <td> <?= $freestyler->aka?$freestyler->aka:$freestyler->user->aka ?> </td>
+                    <td> <?= $freestyler->aka ? $freestyler->aka : $freestyler->user->aka ?> </td>
                     <td><?= $freestyler->points ?></td>
                 </tr>
             <?php endforeach ?>
         </tbody>
     </table>
+    <?php if (!$calculated) : ?>
+        <div class="container paginate-alex" style="padding: 50px 50px;">
+            <div class="row">
+                <div class="col-6 text-center py-6">
+                    <?php if ($this->Paginator->hasPrev()) : ?>
+                        <?= $this->Paginator->prev( __('Previous')) ?>
+                    <?php endif ?>
+                </div>
+                <div class="col-6 text-center py-6">
+                    <?php if ($this->Paginator->hasNext()) : ?>
+                        <?= $this->Paginator->next(__('Next'), ['class'=>'list-group-item'], ['class'=>'list-group-item'], ['class'=>'list-group-item']); ?>
+                    <?php endif ?>
+                </div>
+            </div>
+        </div>
+    <?php endif ?>
 </div>
 <!-- END Freestyler -->
