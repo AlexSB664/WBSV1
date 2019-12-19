@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Controller\Component\UserProfile;
 
 /**
  * Users Controller
@@ -179,11 +180,23 @@ class UsersController extends AppController
         }
     }
 
+    public function profile($id = null,$league_id = null)
+    {
+        $this->viewBuilder()->layout('deejee');
+        $user = $this->Users->get($id, [
+            'contain' => ['Crews', 'Matches']
+        ]);
+        $data = new UserProfile($id,$league_id);
+        $data = $data->make();
+        $this->set('user', $user);
+        $this->set(compact('data'));
+    }
+
     public function isAuthorized($user)
     {
         switch ($this->Auth->user('role')) {
             case 'admin':
-                if (in_array($this->request->action, ['index', 'view', 'add', 'edit', 'delete'])) {
+                if (in_array($this->request->action, ['index', 'view', 'add', 'edit', 'delete','profile'])) {
                     return true;
                 }
                 break;
