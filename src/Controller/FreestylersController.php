@@ -24,10 +24,13 @@ class FreestylersController extends AppController
         $this->viewBuilder()->layout('deejee');
         $currentYear = date('Y');
         $calculated = true;
-        if ( $free = $this->FreestylersTops->find()->where( ['id'=>(int) date('Y')])->first() ) {
-           
+        if ($free = $this->FreestylersTops->find()->where(['id' => (int) date('Y')])->first()) {
             $freestylers_count = $free->count;
-            $freestylers = $this->FreestylersTopsUsers->find('all', ['contain' => ['Users']])->where(['FreestylersTopsUsers.freestylers_top_id' => $free->id])->toArray();
+            $freestylers = $this->FreestylersTopsUsers->find('all', ['contain' => ['Users']])->where(['FreestylersTopsUsers.freestylers_top_id' => $free->id]);
+            $this->paginate = [
+                'limit' => 50
+            ];
+            $freestylers = $this->paginate($freestylers);
             $calculated = false;
         } else {
             $Frees = new FreestylersRanking(['year' => $currentYear]);
@@ -35,7 +38,7 @@ class FreestylersController extends AppController
             $freestylers =  json_decode(json_encode($data->users_list), FALSE);
             $freestylers_count = $data->users_count;
         }
-        $this->set(compact('freestylers', 'freestylers_count','calculated'));
+        $this->set(compact('freestylers', 'freestylers_count', 'calculated'));
     }
 
     public function save()
@@ -44,8 +47,8 @@ class FreestylersController extends AppController
             $users = unserialize(base64_decode($this->request->getData('data')));
             $users = json_decode(json_encode($users), FALSE);
             $count = $this->request->getData('count');
-            
-            if ( $free = $this->FreestylersTops->find()->where( ['id'=>(int) date('Y')])->first() ) {
+
+            if ($this->FreestylersTops->find()->where(['id' => (int) date('Y')])->first()) {
                 $this->Flash->error('Ya existe un registro anterior');
                 return $this->redirect(['action' => 'bestOfYear']);
             }
@@ -69,6 +72,20 @@ class FreestylersController extends AppController
         die();
     }
 
+    public function discoveryTop()
+    {
+        $this->paginate = [
+            'limit' => 1
+        ];
+        $top_id = (int) date('Y');
+        $userTop = $this->FreestylersTopsUsers->find('all', ['contain' => ['Users'], 'order' => [
+            'FreestylersTopsUsers.id' => 'DESC',
+            'Users.aka' => 'ASC'
+        ]])->where(['freestylers_top_id' => $top_id, 'position <=' => 32]);
+        $userTop = $this->paginate($userTop);
+        $this->set(compact('userTop'));
+    }
+
     public function isAuthorized($user)
     {
         switch ($this->Auth->user('role')) {
@@ -82,5 +99,6 @@ class FreestylersController extends AppController
     // public function beforeFilter(\Cake\Event\Event $event)
     // {
     //     $this->Auth->allow(['bestOfYear']);
+    // Notice (8): Undefined property: stdClass::$user_id [APP/Controller/FreestylersController.php, line 63]
     // }
 }
