@@ -97,6 +97,18 @@
                     </ul>
                 </li>
             <?php endif ?>
+            <li class="has-sub">
+                <a class="js-arrow" href="#">
+                    <i class="fa fa-line-chart"></i>Freestylers</a>
+                <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
+                    <li>
+                        <a href="<?= $this->Url->build(['controller' => 'freestylers', 'action' => 'discoveryTop']); ?>">Top 32 Ranking</a>
+                    </li>
+                    <li>
+                        <a href="<?= $this->Url->build(['controller' => 'freestylers', 'action' => 'bestOfYear']); ?>">All Ranking</a>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
 </nav>
