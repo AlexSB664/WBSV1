@@ -83,6 +83,10 @@ class FreestylersController extends AppController
             'FreestylersTopsUsers.id' => 'DESC',
             'Users.aka' => 'ASC'
         ]])->where(['freestylers_top_id' => $top_id, 'position <=' => 32]);
+        if($userTop->count()==0){
+            $this->Flash->error('Seguimos trabajando en el TOP :(');
+            $this->redirect($this->referer());
+        }
         $userTop = $this->paginate($userTop);
         $this->set(compact('userTop'));
     }
