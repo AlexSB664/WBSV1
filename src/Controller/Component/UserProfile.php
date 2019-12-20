@@ -36,7 +36,7 @@ class UserProfile
     public $matches_list;
     public $data_result = [];
     //stages 
-    private $stages = ['Dieciseisavos', 'Octavos', 'Cuartos', 'Semifinal', '3er_lugar', 'Final', 'Ganador'];
+    private $stages = ['Dieciseisavos', 'Octavos', 'Cuartos', 'Semifinal', '3er_lugar', 'Final', 'Ganador', 'fms_gana_sr', 'fms_gana_cr', 'fms_pierde_cr', 'fms_empate'];
 
     public function __construct($user_id = null, $league_id = null, $initial_date = null, $end_date = null)
     {
@@ -109,9 +109,12 @@ class UserProfile
         }
         if (in_array($match->stage, $this->stages)) {
             $points_tmp = 1;
-            if ($match->stage === "Final") {
+            if ($match->stage === "Final" | $match->stage === "fms_gana_cr") {
                 //only final stage set 2 points
                 $points_tmp += 1;
+            }
+            if ($match->stage === "fms_gana_sr") {
+                $points_tmp += 2;
             }
             $this->calculateColiseumPointsByMatch($match, $points, $points_tmp);
         }
@@ -130,6 +133,15 @@ class UserProfile
     {
         $this->beforeUpData();
         $this->setUpData();
+        $this->wipeData();
         return $this->data_result;
+    }
+
+    public function wipeData(){
+        foreach ($this->data_result as $key => $data){
+            if($data['points']===0){
+                unset($this->data_result[$key]); 
+            }
+        }
     }
 }
