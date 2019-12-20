@@ -28,8 +28,6 @@
         <p class="lead">
           <div class="text">
             <h2 class="mb-2 font-weight-light h4"> Nombre: <?= $user->fullname; ?> </h2>
-
-            <p class="mb-4"> Email: <?= $user->email; ?>.</p>
             <p>
 
             </p>
@@ -43,8 +41,8 @@
   <div class="container" data-aos="fade-up">
     <div class="row">
       <div class="site-section-heading text-center mb-5 w-border col-md-6 mx-auto">
-        <h2 class="mb-5"> <?= $is_competitions?'Eventos':'Ligas '?></h2>
-        <p><?= $is_competitions?'Eventos':'Ligas '?> donde pariticipo <?= h($user->aka) ?> este año <?= date('Y') ?></p>
+        <h2 class="mb-5"> <?= $is_competitions ? 'Eventos' : 'Ligas ' ?></h2>
+        <p><?= $is_competitions ? 'Eventos' : 'Ligas ' ?> donde pariticipo <?= h($user->aka) ?> este año <?= date('Y') ?></p>
       </div>
     </div>
 
