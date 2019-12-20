@@ -3,29 +3,7 @@
 
 <head>
   <title>Coliseum WBS</title>
-  <style type="text/css">
-    .paginate-alex {
-      padding: 50px 50px;
-    }
-
-    .paginate-alex li {
-      //whatever goes here
-      position: relative;
-      display: block;
-      padding: .75rem 1.25rem;
-      margin-bottom: -1px;
-      background-color: #e6cc95;
-      border: 1px solid rgba(0, 0, 0, .125);
-    }
-
-    .paginate-alex a {
-      color: #fff;
-    }
-
-    .paginate-alex a:hover {
-      color: #000;
-    }
-  </style>
+  <link rel="stylesheet" href="/css/alex.min.css">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
