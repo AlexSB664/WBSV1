@@ -38,10 +38,12 @@ class UserProfile
     //stages 
     private $stages = ['Dieciseisavos', 'Octavos', 'Cuartos', 'Semifinal', '3er_lugar', 'Final', 'Ganador'];
 
-    public function __construct($user_id = null, $league_id = null)
+    public function __construct($user_id = null, $league_id = null, $initial_date = null, $end_date = null)
     {
         $this->user_id = $user_id;
         $this->league_id = $league_id;
+        $this->initial_date = $initial_date;
+        $this->end_date = $end_date;
         $this->MatchesUsers =  TableRegistry::get('MatchesUsers');
     }
 
@@ -53,7 +55,7 @@ class UserProfile
         $user_id = $this->user_id;
         $this->matches_list = $this->MatchesUsers->Matches->find('all', ['contain' => ['Competitions.Seasons.Leagues']])->matching('MatchesUsers', function ($q) use ($user_id) {
             return $q->where(['MatchesUsers.user_id' => $user_id]);
-        })->group(['Matches.id'])->where(['Competitions.date >=' => $year, 'Competitions.date <=' => $nextYear]);
+        })->group(['Matches.id'])->where(['Competitions.date >=' => $this->initial_date, 'Competitions.date <=' => $this->end_date]);
         if ($this->league_id) {
             $this->matches_list->where(['Leagues.id' => $this->league_id]);
         }
