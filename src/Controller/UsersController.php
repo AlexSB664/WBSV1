@@ -14,6 +14,11 @@ use App\Controller\Component\UserProfile;
  */
 class UsersController extends AppController
 {
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadModel('FreestylersTops');
+    }
     /**
      * Index method
      *
@@ -180,23 +185,37 @@ class UsersController extends AppController
         }
     }
 
-    public function profile($id = null,$league_id = null)
+    public function profile($id = null, $league_id = null)
     {
+        $current_top = $this->FreestylersTops->find('all')->where(['id' => (int) date('Y')])->first();
+        $previous_top = $this->FreestylersTops->find()->where(['id' => (int) date('Y') - 1])->first();
+        $initial_date = date('Y-01-01 00:00:00');
+        $is_competitions = false;
+        if ($previous_top) {
+            $initial_date = $previous_top->created;
+        }
+        $end_date =  $current_top->created;
         $this->viewBuilder()->layout('deejee');
         $user = $this->Users->get($id, [
             'contain' => ['Crews', 'Matches']
         ]);
-        $data = new UserProfile($id,$league_id);
+        $data = new UserProfile($id, $league_id, $initial_date, $end_date);
         $data = $data->make();
         $this->set('user', $user);
-        $this->set(compact('data'));
+        if ($league_id) {
+            $is_competitions = true;
+        }
+        $this->set(compact('data', 'is_competitions'));
     }
 
     public function isAuthorized($user)
     {
         switch ($this->Auth->user('role')) {
             case 'admin':
-                if (in_array($this->request->action, ['index', 'view', 'add', 'edit', 'delete','profile'])) {
+                return true;
+                break;
+            case 'organizers':
+                if (in_array($this->request->action, ['profile'])) {
                     return true;
                 }
                 break;
