@@ -3,7 +3,7 @@
 
 <head>
   <title>Coliseum WBS</title>
-  <link rel="stylesheet" href="/css/alex.min.css">
+  <link rel="stylesheet" href="/css/coliseum.min.css">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -33,7 +33,10 @@
 
 <body>
   <div class="site-wrap">
-    <?php echo $this->element('header_deejee') ?>
+    <?php
+    if (!($this->request->params['controller'] === 'Freestylers' && $this->request->params['action']  === 'discoveryTop')) {
+      echo $this->element('header_deejee');
+    } ?>
     <?= $this->fetch('content') ?>
     <?php echo $this->element('footer_deejee') ?>
   </div>
