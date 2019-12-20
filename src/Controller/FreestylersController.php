@@ -74,6 +74,7 @@ class FreestylersController extends AppController
 
     public function discoveryTop()
     {
+        $this->viewBuilder()->layout('deejee');
         $this->paginate = [
             'limit' => 1
         ];
@@ -91,6 +92,11 @@ class FreestylersController extends AppController
         switch ($this->Auth->user('role')) {
             case 'admin':
                 return true;
+                break;
+            case 'organizers':
+                if (in_array($this->request->action, ['discoveryTop','bestOfYear'])) {
+                    return true;
+                }
                 break;
         }
         return false;
