@@ -1,0 +1,34 @@
+.paginate-alex {
+    padding: 50px 50px;
+}
+
+.paginate-alex li {
+    position: relative;
+    display: block;
+    padding: .75rem 1.25rem;
+    margin-bottom: -1px;
+    background-color: #e6cc95;
+    border: 1px solid rgba(0, 0, 0, .125);
+}
+
+.paginate-alex a {
+    color: #fff;
+}
+
+.paginate-alex a:hover {
+    color: #000;
+}
+
+.coliseum {
+    background: black;
+}
+
+.coliseum h1 {
+    font-size: 6rem;
+    color: white;
+}
+
+.coliseum h2 {
+    font-size: 5rem;
+    color: white;
+}
