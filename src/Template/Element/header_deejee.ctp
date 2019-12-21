@@ -34,7 +34,8 @@
                         </li>
                         <li <?= ($this->request->url) === 'freestylers' ? 'class="active"' : '' ?>>
                             <a href="<?= $this->Url->build([
-                                            'controller' => 'freestylers'
+                                            'controller' => 'freestylers',
+                                            'action'=>'bestOfYear'
                                         ]);
                                         ?>">Freestylers</a>
                         </li>

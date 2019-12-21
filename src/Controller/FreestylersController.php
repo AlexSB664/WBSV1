@@ -33,6 +33,9 @@ class FreestylersController extends AppController
             $freestylers = $this->paginate($freestylers);
             $calculated = false;
         } else {
+            if(!($this->request->session()->read('Auth.User'))){
+                return $this->redirect(['controller' => 'Pages', 'action' => 'display',"proxima"]);
+            }
             $Frees = new FreestylersRanking(['year' => $currentYear]);
             $data = $Frees->make();
             $freestylers =  json_decode(json_encode($data->users_list), FALSE);
@@ -106,9 +109,8 @@ class FreestylersController extends AppController
         return false;
     }
 
-    // public function beforeFilter(\Cake\Event\Event $event)
-    // {
-    //     $this->Auth->allow(['bestOfYear']);
-    // Notice (8): Undefined property: stdClass::$user_id [APP/Controller/FreestylersController.php, line 63]
-    // }
+    public function beforeFilter(\Cake\Event\Event $event)
+    {
+        $this->Auth->allow(['bestOfYear']);
+    }
 }
