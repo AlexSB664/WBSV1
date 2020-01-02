@@ -25,22 +25,27 @@ class FreestylersController extends AppController
         $currentYear = date('Y');
         $calculated = true;
         if ($free = $this->FreestylersTops->find()->where(['id' => (int) date('Y')])->first()) {
-            $freestylers_count = $free->count;
-            $freestylers = $this->FreestylersTopsUsers->find('all', ['contain' => ['Users']])->where(['FreestylersTopsUsers.freestylers_top_id' => $free->id]);
-            $this->paginate = [
-                'limit' => 50
-            ];
-            $freestylers = $this->paginate($freestylers);
-            $calculated = false;
+            // $freestylers_count = $free->count;
+            // $freestylers = $this->FreestylersTopsUsers->find('all', ['contain' => ['Users']])->where(['FreestylersTopsUsers.freestylers_top_id' => $free->id]);
+            // $this->paginate = [
+            //     'limit' => 50
+            // ];
+            // $freestylers = $this->paginate($freestylers);
+            // $calculated = false;
         } else {
-            if(!($this->request->session()->read('Auth.User'))){
-                return $this->redirect(['controller' => 'Pages', 'action' => 'display',"proxima"]);
-            }
-            $Frees = new FreestylersRanking(['year' => $currentYear]);
-            $data = $Frees->make();
-            $freestylers =  json_decode(json_encode($data->users_list), FALSE);
-            $freestylers_count = $data->users_count;
+            $free = $this->FreestylersTops->find()->first();
+            // $Frees = new FreestylersRanking(['year' => $currentYear]);
+            // $data = $Frees->make();
+            // $freestylers =  json_decode(json_encode($data->users_list), FALSE);
+            // $freestylers_count = $data->users_count;
         }
+        $freestylers_count = $free->count;
+        $freestylers = $this->FreestylersTopsUsers->find('all', ['contain' => ['Users']])->where(['FreestylersTopsUsers.freestylers_top_id' => $free->id]);
+        $this->paginate = [
+            'limit' => 50
+        ];
+        $freestylers = $this->paginate($freestylers);
+        $calculated = false;
         $this->set(compact('freestylers', 'freestylers_count', 'calculated'));
     }
 
@@ -86,7 +91,7 @@ class FreestylersController extends AppController
             'FreestylersTopsUsers.id' => 'DESC',
             'Users.aka' => 'ASC'
         ]])->where(['freestylers_top_id' => $top_id, 'position <=' => 32]);
-        if($userTop->count()==0){
+        if ($userTop->count() == 0) {
             $this->Flash->error('Seguimos trabajando en el TOP :(');
             $this->redirect($this->referer());
         }
@@ -101,7 +106,7 @@ class FreestylersController extends AppController
                 return true;
                 break;
             case 'organizers':
-                if (in_array($this->request->action, ['discoveryTop','bestOfYear'])) {
+                if (in_array($this->request->action, ['discoveryTop', 'bestOfYear'])) {
                     return true;
                 }
                 break;
