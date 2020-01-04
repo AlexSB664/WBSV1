@@ -34,11 +34,36 @@
             'onchange' => 'loadFile(event)'
         )); ?>
         <img id="output" width="75" height="75" />
+        <div class="row" style="padding-left: 20px; padding-right: 20px;">
+            <div class="col-md-6 col-md-offset-3" style="clear:both;" id="img-alert">
+            </div>
+        </div>
         <script>
             var loadFile = function(event) {
+                document.getElementById("img-alert").innerHTML = "";
                 var output = document.getElementById('output');
-                output.src = URL.createObjectURL(event.target.files[0]);
+                if (ValidateSize(event, output)) {
+                    output.src = URL.createObjectURL(event.target.files[0]);
+                }
             };
+
+            function ValidateSize(event, output) {
+                var accept = true;
+                fileSize = event.target.files[0].size / 1024 / 1024;
+                if (fileSize > 2) {
+                    accept = false;
+                    event.target.value = null;
+                    showAlert();
+                }
+                return accept;
+            }
+
+            function showAlert() {
+                document.getElementById("img-alert").innerHTML = '<div class="alert alert-dismissible alert-danger text-center" id="img-alert-div"></div>';
+                document.getElementById("img-alert-div").innerHTML = '<button type="button" class="close" data-dismiss="alert">×</button>';
+                document.getElementById("img-alert-div").innerHTML += 'La foto sobrepasa los 2 MB por favor intenta con otra  :(';
+
+            }
         </script>
         <fieldset>
             <legend><?= __('Agregar Competencia') ?></legend>
