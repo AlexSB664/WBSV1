@@ -12,13 +12,17 @@ use Cake\Utility\Text;
 class ResizeBot
 {
     public $formats = [
-        '0' => 'jpg',
-        '1' => 'png',
-        '2' => 'jpeg'
+        'jpg',
+        'png',
+        'jpeg',
+        'gif',
+        'JPG',
+        'PNG',
+        'JPEG',
+        'GIF'
     ];
     function resizeFlyer($img = null)
     {
-        $imgResize = $img;
         $width = 750;
         $heigth = 960;
         $resize_img = "";
@@ -26,12 +30,6 @@ class ResizeBot
         $merge_img = "";
         $bg_img = WWW_ROOT . 'img/black.png';
         $this->setData($img, $resize_img, $extension, $merge_img);
-
-        // $src = "/home/gabriel/Documents/WBS/events/practica-tu-free/alfa-j5.jpg";
-        // $dst = "/home/gabriel/Documents/WBS/events/practica-tu-free/alfa-j5-resize.jpg";
-        // $black = "/home/gabriel/Documents/WBS/events/practica-tu-free/black.png";
-        // $merge = "/home/gabriel/Documents/WBS/events/practica-tu-free/alfa-j5-merged.jpg";
-
         $this->resizeImage($img, $resize_img, $width, $heigth);
         $this->merge($resize_img, $bg_img, $merge_img);
         $this->cleanDir($img, $merge_img, $resize_img);
@@ -60,16 +58,25 @@ class ResizeBot
     public function validateFormat($format)
     {
         if (!in_array($format, $this->formats)) {
-            echo 'error';
+            echo('Invalid Image Format');
             die();
         }
     }
 
     function resizeImage($sourceImage, $targetImage, $maxWidth, $maxHeight, $quality = 80)
     {
-        // Obtain image from given source file.
-        if (!$image = @imagecreatefromjpeg($sourceImage)) {
-            return false;
+        $extension = strtolower(pathinfo($sourceImage, PATHINFO_EXTENSION));
+        if ($extension == 'jpg' || $extension == 'JPG' ) {
+            $image = imagecreatefromjpeg($sourceImage);
+        } else
+        if ($extension == 'jpeg' || $extension == 'JPEG') {
+            $image = imagecreatefromjpeg($sourceImage);
+        } else
+        if ($extension == 'png' || $extension == 'PNG') {
+            $image = imagecreatefrompng($sourceImage);
+        } else
+        if ($extension == 'gif' || $extension == 'GIF') {
+            $image = imagecreatefromgif($sourceImage);
         }
 
         // Get dimensions of source image.
