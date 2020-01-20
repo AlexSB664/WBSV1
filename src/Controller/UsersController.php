@@ -208,6 +208,26 @@ class UsersController extends AppController
         $this->set(compact('data', 'is_competitions'));
     }
 
+    public function getUsers()
+    {
+        if (!$this->request->query() || empty($this->request->query('name'))) {
+            die();
+        }
+        return $this->response
+            ->withType('application/json')
+            ->withStringBody(json_encode(
+                [
+                    'data' =>
+                    $this->Users->find()->select(['id', 'aka', 'avatar', 'email'])
+                        ->where([
+                            'OR' => [['email LIKE' => '%' . $this->request->query('name') . '%'], ['aka LIKE' => '%' . $this->request->query('name') . '%']]
+                        ])->toArray(),
+                ]
+            ))
+            ->withStatus(200);
+    }
+
+
     public function isAuthorized($user)
     {
         switch ($this->Auth->user('role')) {
@@ -215,7 +235,7 @@ class UsersController extends AppController
                 return true;
                 break;
             case 'organizers':
-                if (in_array($this->request->action, ['profile'])) {
+                if (in_array($this->request->action, ['profile', 'getUsers'])) {
                     return true;
                 }
                 break;

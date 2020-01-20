@@ -129,6 +129,10 @@ class CompetitionsUsersController extends AppController
         $competitionsUser = $this->CompetitionsUsers->newEntity();
         if ($this->request->is('post')) {
             $data = $this->request->getData();
+            if (empty($data['users_id'])) {
+                $this->Flash->error('No hay usuarios que suscribir a la competencia intenta de nuevo.');
+                return $this->redirect($this->referer());
+            }
             foreach ($data['users_id'] as $index => $value) {
                 $dataTmp = [];
                 $dataTmp['competitions_id'] = $data['competitions_id'];
@@ -137,12 +141,15 @@ class CompetitionsUsersController extends AppController
                 $competitionsTmp = $this->CompetitionsUsers->newEntity();
                 $competitionsTmp = $this->CompetitionsUsers->patchEntity($competitionsTmp, $dataTmp);
                 if ($this->CompetitionsUsers->save($competitionsTmp)) {
-                    $this->Flash->success(__('The competitions user has been saved.'));
                     if ($index === array_key_last($data['users_id'])) {
+                        $this->Flash->success(__('The competitions user has been saved.'));
                         return $this->redirect(Router::url($this->getLastUrl(), true));
                     }
                 }
-                $this->Flash->error(__('The competitions user could not be saved. Please, try again.'));
+                if ($index === array_key_last($data['users_id'])) {
+                    $this->Flash->error(__('The competitions user could not be saved. Please, try again.'));
+                    return $this->redirect(Router::url($this->getLastUrl(), true));
+                }
             }
         } else {
             $this->session->write([
