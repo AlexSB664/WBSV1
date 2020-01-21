@@ -63,7 +63,7 @@
                     new_div += "<img src='/img/" + freestylers.data[i].avatar + "' alt='Avatar' style='width:50px;height:50px''>";
                     new_div += "</a>";
                     new_div += "<p style='font-size:auto;'>" + freestylers.data[i].aka + "</p>";
-                    new_div += "<p style='font-size:1vw;'>" + freestylers.data[i].email + "</p>";
+                    new_div += "<div style='overflow:hidden;white-space:nowrap;text-overflow:ellipsis;width:200px;'><p style='font-size:auto;'>" + freestylers.data[i].email + "</p></div>";
                     new_div += "<button class='btn btn-outline-success'  onclick='addFreestyler(value)' value='" + freestylers.data[i].id + "'>Agregar</button>";
                     new_div += "</li>";
                     select.innerHTML += new_div;

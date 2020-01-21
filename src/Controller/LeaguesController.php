@@ -135,6 +135,21 @@ class LeaguesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    public function setCompetition($id = null,$competition_id=null)
+    {
+        if(!$this->request->query()){
+            $league = $this->Leagues->get($id);
+            $league->active_competition = $competition_id;
+            if($this->Leagues->save($league)){
+                $this->Flash->success("La Jornada fue fijada correctamente");
+            }else{
+                $this->Flash->error("No se pudo fijar la Jornada intentalo mas tarde.");
+            }
+            return $this->redirect($this->referer());
+        }
+        die();
+    }
+
     public function beforeFilter(\Cake\Event\Event $event)
     {
         $this->Auth->allow(['index', 'view']);
@@ -145,12 +160,12 @@ class LeaguesController extends AppController
     {
         switch ($this->Auth->user('role')) {
             case 'admin':
-                if (in_array($this->request->action, ['index', 'manage', 'view', 'add', 'edit', 'delete'])) {
+                if (in_array($this->request->action, ['index', 'manage', 'view', 'add', 'edit', 'delete', 'setCompetition'])) {
                     return true;
                 }
                 break;
             case 'organizers':
-                if (in_array($this->request->action, ['index', 'view', 'manage', 'edit'])) {
+                if (in_array($this->request->action, ['index', 'view', 'manage', 'edit', 'setCompetition'])) {
                     return true;
                 }
                 break;
