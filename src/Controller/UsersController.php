@@ -26,6 +26,12 @@ class UsersController extends AppController
      */
     public function index()
     {
+        $users = $this->Users->find('all');
+        if ($this->request->query()) {
+            $users->where([
+                'OR' => [['email LIKE' => '%' . $this->request->query("search") . '%'], ['aka LIKE' => '%' . $this->request->query("search") . '%']]
+            ]);
+        }
         if ($this->Auth->user('role') !== 'admin') {
             $this->Flash->error(__("You don't have 
             permissions"));
@@ -34,7 +40,7 @@ class UsersController extends AppController
         $this->paginate = [
             'contain' => ['Crews']
         ];
-        $users = $this->paginate($this->Users);
+        $users = $this->paginate($users);
 
         $this->set(compact('users'));
     }
@@ -227,6 +233,9 @@ class UsersController extends AppController
             ->withStatus(200);
     }
 
+    public function search()
+    {
+    }
 
     public function isAuthorized($user)
     {
