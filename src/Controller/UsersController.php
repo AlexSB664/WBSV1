@@ -33,8 +33,7 @@ class UsersController extends AppController
             ]);
         }
         if ($this->Auth->user('role') !== 'admin') {
-            $this->Flash->error(__("You don't have 
-            permissions"));
+            $this->Flash->error(__("You don't have permissions"));
             return $this->redirect(['controller' => 'Competitions', 'action' => 'index']);
         }
         $this->paginate = [
@@ -233,8 +232,20 @@ class UsersController extends AppController
             ->withStatus(200);
     }
 
-    public function search()
+    public function getUser()
     {
+	if (!$this->request->query() || empty($this->request->query('id'))) {
+            die();
+        }
+        return $this->response
+            ->withType('application/json')
+            ->withStringBody(json_encode(
+                [
+                    'data' =>
+                    $this->Users->find()->select(['id', 'aka', 'avatar', 'email'])->where(['id'=>$this->request->query('id')])->first()->toArray(),
+                ]
+            ))
+            ->withStatus(200);
     }
 
     public function isAuthorized($user)

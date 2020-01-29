@@ -211,16 +211,52 @@ class CompetitionsUsersController extends AppController
         $this->set(compact('competitionsUsers'));
     }
 
+	public function qr($competition_id){
+	$this->viewBuilder()->autoLayout(false);
+        $this->set(compact('competition_id'));
+	}
+
+   public function joinWithQR(){
+           if (!$this->request->query() || empty($this->request->query('user_id')) || empty($this->request->query('competition_id'))  ) {
+            die();
+        }
+        $compUsr = $this->CompetitionsUsers->newEntity();
+        $compUsr->users_id = $this->request->query('user_id');
+        $compUsr->competitions_id = $this->request->query('competition_id');
+        $compusr->assistance = 1;
+        $previus =  $this->CompetitionsUsers->find()->
+                    where(['competitions_id'=>$this->request->query('competition_id'),
+                    'users_id'=>$this->request->query('user_id')])->toArray();
+        $response = [
+        	'message'=>"El usuario ya esta suscrito a este evento",
+		'icon'=>'error',
+		'title'=>'Ops...'
+        ];
+        if (!$previus) {
+                $response['message']="Error no se pudo suscribir al freestyler";
+        	if($this->CompetitionsUsers->save($compUsr)){
+        		 $response['message']="Se suscribio correctamente al freestyler";
+			 $response['icon']="succes";
+			 $response['title']="Suscrito!!";
+        	}
+        }
+        return $this->response
+            ->withType('application/json')
+            ->withStringBody(json_encode($response))
+            ->withStatus(200);
+
+   }
+
     public function isAuthorized($user)
     {
         switch ($this->Auth->user('role')) {
             case 'admin':
-                if (in_array($this->request->action, ['index', 'view', 'add', 'edit', 'delete', 'getLastUrl', 'join', 'unjoin', 'assistance', 'lazyAdd', 'lazyDelete'])) {
+                if (in_array($this->request->action, ['index', 'view', 'add', 'edit', 'delete', 'getLastUrl', 'join', 'unjoin', 'assistance', 'lazyAdd', 'lazyDelete','qr','joinWithQR'])) {
                     return true;
                 }
                 break;
             case 'organizers':
-                if (in_array($this->request->action, ['index', 'view', 'assistance'])) {
+                if (in_array($this->request->action, ['index', 'view', 'assistance','qr','joinWithQR'])) {
                     return true;
                 }
                 break;
