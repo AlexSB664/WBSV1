@@ -19,12 +19,12 @@ class ContactController extends AppController
      */
     public function contact(){
         if ($this->request->is('post')) {
-            $info = $this->request->data;
+            $info = $this->request->getData();
             $email = new Email('default');
-            $subject='Duda de algun seguidor';
-            $message = 'Name: '.$info['name'].'<br>'.'Email: '.$info['email'].'<br>'.'Asunto: '.$info['affair'].'<br>'.'Mensaje: '.$info['message'];
-            $email->from('coliseumwbs@c4-technologies.com')
-                ->to('coliseumwbs@c4-technologies.com')
+            $subject=$info['affair'];
+            $message = 'Name: '.$info['name'].'<br>'.'Email: '.$info['email'].'<br>'.'Mensaje: '.$info['message'];
+            $email->emailFormat('html')->from('coliseumwbs@c4-technologies.com')
+                ->to('coliseumwbs@c4-technologies.com')->subject($subject)
                 ->send($message);
             }
         $this->viewBuilder()->layout('contactame');
