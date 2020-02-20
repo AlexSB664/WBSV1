@@ -203,7 +203,7 @@ class CompetitionsController extends AppController
                 }
                 break;
             case 'organizers':
-                if (in_array($this->request->action, ['index', 'view', 'edit', 'manage','add'])) {
+                if (in_array($this->request->action, ['index', 'view', 'edit', 'manage', 'add'])) {
                     return true;
                 }
                 break;

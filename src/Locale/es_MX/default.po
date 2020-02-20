@@ -1,0 +1,41 @@
+#translate doc in https://book.cakephp.org/3/en/core-libraries/internationalization-and-localization.html
+msgid "MANAGE"
+msgstr "ADMINISTRAR"
+
+msgid "Schemes Details"
+msgstr "Detalles de  los Esquemas"
+
+msgid "LEAGUES"
+msgstr "LIGAS"
+
+msgid "SEASONS"
+msgstr "TEMPORADAS"
+
+msgid "SCHEMES"
+msgstr "ESQUEMAS"
+
+msgid "SCHEMES DETAILS"
+msgstr "DETALLES DE LOS ESQUEMAS"
+
+
+msgid "Competitions"
+msgstr "Competencias" 
+
+msgid "Matches"
+msgstr "Tiros"
+
+msgid "List Leagues"
+msgstr "Lista De Ligas"
+
+
+msgid "Add Seasons"
+msgstr "Agregar Temporada"
+
+msgid "List Seasons"
+msgstr "Lista de Temporadas"
+
+msgid "Add Schemes Details"
+msgstr "Agregar Niveles de Esquema"
+
+msgid "List Schemes Details"
+msgstr "Lista de Niveles de Esquema"

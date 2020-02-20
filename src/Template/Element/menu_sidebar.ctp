@@ -9,13 +9,13 @@
             <ul class="list-unstyled navbar__list">
                 <li class="active has-sub">
                     <a class="js-arrow" href="#">
-                        <i class="fas fa-flash"></i>Manage</a>
+                        <i class="fas fa-flash"></i><?= __('MANAGE') ?></a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
-                            <a href="<?= $this->Url->build(['controller' => 'competitions', 'action' => 'manage']); ?>">Competitions</a>
+                            <a href="<?= $this->Url->build(['controller' => 'competitions', 'action' => 'manage']); ?>"><?= __('Competitions') ?></a>
                         </li>
                         <li>
-                            <a href="<?= $this->Url->build(['controller' => 'matches', 'action' => 'lazyAddV2']); ?>">Matches</a>
+                            <a href="<?= $this->Url->build(['controller' => 'matches', 'action' => 'lazyAddV2']); ?>"><?= __('Matches') ?></a>
                         </li>
                         <?php if ($this->request->getSession()->read('Auth.User.role') == 'admin') : ?>
                             <li>
@@ -26,11 +26,8 @@
                 </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
-                        <i class="fa fa-tasks"></i>Leagues</a>
+                        <i class="fa fa-tasks"></i><?= __('LEAGUES') ?></a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
-                        <li>
-                            <a href="<?= $this->Url->build(['controller' => 'leagues', 'action' => 'manage']); ?>">List Leagues</a>
-                        </li>
                         <?php if ($this->request->getSession()->read('Auth.User.role') == 'admin') : ?>
                             <li>
                                 <a href="<?= $this->Url->build(['controller' => 'leagues', 'action' => 'add']); ?>">Add Leagues</a>
@@ -39,41 +36,44 @@
                                 <a href="<?= $this->Url->build(['controller' => 'leagues_users', 'action' => 'add']); ?>">Assign Organizer</a>
                             </li>
                         <?php endif ?>
-                    </ul>
-                </li>
-                <li class="has-sub">
-                    <a class="js-arrow" href="#">
-                        <i class="fa fa-qrcode"></i>Seasons</a>
-                    <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
-                            <a href="<?= $this->Url->build(['controller' => 'seasons', 'action' => 'add']); ?>">Add Seasons</a>
-                        </li>
-                        <li>
-                            <a href="<?= $this->Url->build(['controller' => 'seasons', 'action' => 'index']); ?>">List Seasons</a>
+                            <a href="<?= $this->Url->build(['controller' => 'leagues', 'action' => 'manage']); ?>"><?= __('List Leagues') ?></a>
                         </li>
                     </ul>
                 </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
-                        <i class="fa fa-sitemap"></i>Schemes</a>
+                        <i class="fa fa-qrcode"></i><?= __('SEASONS') ?></a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
-                            <a href="<?= $this->Url->build(['controller' => 'schemes', 'action' => 'add']); ?>">Add Schemes</a>
+                            <a href="<?= $this->Url->build(['controller' => 'seasons', 'action' => 'add']); ?>"><?= __('Add Seasons') ?></a>
                         </li>
                         <li>
-                            <a href="<?= $this->Url->build(['controller' => 'schemes', 'action' => 'index']); ?>">List Schemes</a>
+                            <a href="<?= $this->Url->build(['controller' => 'seasons', 'action' => 'index']); ?>"><?= __('List Seasons') ?></a>
                         </li>
                     </ul>
                 </li>
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
-                        <i class="fa fa-edit"></i>Schemes Details</a>
+                        <i class="fa fa-sitemap"></i><?= __('SCHEMES') ?></a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
-                            <a href="<?= $this->Url->build(['controller' => 'schemes_details', 'action' => 'add']); ?>">Add Schemes Details</a>
+                            <a href="<?= $this->Url->build(['controller' => 'schemes', 'action' => 'add']); ?>"><?= __('Add Schemes') ?></a>
                         </li>
                         <li>
-                            <a href="<?= $this->Url->build(['controller' => 'schemes_details', 'action' => 'index']); ?>">List Schemes Details</a>
+                            <a href="<?= $this->Url->build(['controller' => 'schemes', 'action' => 'index']); ?>"><?= __('List Schemes') ?></a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a class="js-arrow" href="#">
+                        <i class="fa fa-edit"></i><?= __('SCHEMES DETAILS') ?></a>
+                    <ul class="list-unstyled navbar__sub-list js-sub-list">
+                        <li>
+                            <a href="<?= $this->Url->build(['controller' => 'schemes_details', 'action' => 'add']); ?>"><?= __('Add Schemes Details') ?></a>
+                        </li>
+                        <li>
+                            <a href="<?= $this->Url->build(['controller' => 'schemes_details', 'action' => 'index']); ?>"><?= __('List Schemes Details') ?></a>
                         </li>
                     </ul>
                 </li>
