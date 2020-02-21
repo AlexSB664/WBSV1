@@ -79,7 +79,7 @@
         <?= $this->Form->label('Slug: '); ?>
         <?= $this->Form->control('slug', array('label' => false, 'class' => 'form-control')); ?>
         <?= $this->Form->label('Fecha: '); ?>
-        <?= $this->Form->control('date', ['type' => 'datetime-local', 'label' => false, 'value' => strftime('%Y-%m-%dT%H:%M:%S', strtotime($competition->date))]); ?>
+        <?= $this->Form->control('date', ['type' => 'datetime-local', 'label' => false, 'value' => $competition->date->format('Y-m-d\TH:i:s')]); ?>
         <?= $this->Form->label('Temporada: '); ?>
         <?= $this->Form->control('season_id', ['options' => $seasons, 'class' => 'form-control', 'label' => false]); ?>
         <?= $this->Form->label('Activo: '); ?>
