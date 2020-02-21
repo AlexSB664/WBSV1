@@ -76,9 +76,10 @@
         </script>
         <br>
         <?= $this->Form->label('inicio', array('class' => 'Inicio: ')); ?>
-        <?= $this->Form->control('date_start', array('label' => false, 'type' => 'datetime-local')); ?>
+        <?= $this->Form->control('date_start', array('label' => false, 'type' => 'datetime-local', 'value' => $season->date_start->format('Y-m-d\TH:i:s'))); ?>
         <?= $this->Form->label('fin', array('class' => 'Fin: ')); ?>
-        <?= $this->Form->control('date_end', array('label' => false, 'type' => 'datetime-local')); ?>
+        <?= $this->Form->control('date_end', array('label' => false, 'type' => 'datetime-local', 'value' => 
+        $season->date_end?$season->date_end->format('Y-m-d\TH:i:s'):'')); ?>
     </fieldset>
     <?= $this->Form->button(__('Guardar'), array('class' => 'btn btn-outline-success')) ?>
     <?= $this->Form->end() ?>

@@ -68,23 +68,24 @@
         </script>
         <?php
         echo $this->Form->control('name', array('class' => 'form-control'));
-        echo $this->Form->control('description',array('id'=>'description','required'=>'false'));
-        echo $this->Form->control('social_facebook',array('class' => 'form-control'));
-        echo $this->Form->control('social_twitter',array('class' => 'form-control'));
-        echo $this->Form->control('social_instagram',array('class' => 'form-control'));
-        echo $this->Form->control('social_youtube',array('class' => 'form-control'));
-        echo $this->Form->control('social_website',array('class' => 'form-control'));
-        echo $this->Form->control('contact_phone',array('class' => 'form-control'));
-        echo $this->Form->control('contact_email',array('class' => 'form-control'));
-        echo $this->Form->control('slug',array('class' => 'form-control'));
-        //echo $this->Form->control('since',array('class' => 'form-control'));?>
+        echo $this->Form->control('description', array('id' => 'description', 'required' => 'false'));
+        echo $this->Form->control('social_facebook', array('class' => 'form-control'));
+        echo $this->Form->control('social_twitter', array('class' => 'form-control'));
+        echo $this->Form->control('social_instagram', array('class' => 'form-control'));
+        echo $this->Form->control('social_youtube', array('class' => 'form-control'));
+        echo $this->Form->control('social_website', array('class' => 'form-control'));
+        echo $this->Form->control('contact_phone', array('class' => 'form-control'));
+        echo $this->Form->control('contact_email', array('class' => 'form-control'));
+        echo $this->Form->control('slug', array('class' => 'form-control'));
+        //echo $this->Form->control('since',array('class' => 'form-control'));
+        ?>
         <label>Since</label>
         <br>
-        <input type="date" name="since" id="since">
-        <?php 
-        echo $this->Form->control('level',array('class' => 'form-control'));
-        echo $this->Form->control('score',array('class' => 'form-control'));
-        echo $this->Form->control('bonus',array('class' => 'form-control'));
+        <input type="date" name="since" id="since" value="<?= $league->since->format('Y-m-d') ?>">
+        <?php
+        echo $this->Form->control('level', array('class' => 'form-control'));
+        echo $this->Form->control('score', array('class' => 'form-control'));
+        echo $this->Form->control('bonus', array('class' => 'form-control'));
         ?>
     </fieldset>
     <br>
@@ -94,11 +95,20 @@
 <script>
     tinymce.init({
         selector: '#description',
-        menubar:false,
+        menubar: false,
         menu: {
-            edit: { title: 'Edit', items: 'undo redo | cut copy paste | selectall | searchreplace' },
-            view: { title: 'View', items: 'code | visualaid visualchars visualblocks | spellchecker | preview fullscreen' },
-            format: { title: 'Format', items: 'bold italic underline strikethrough superscript subscript codeformat | formats blockformats fontformats fontsizes align | forecolor backcolor | removeformat' }
+            edit: {
+                title: 'Edit',
+                items: 'undo redo | cut copy paste | selectall | searchreplace'
+            },
+            view: {
+                title: 'View',
+                items: 'code | visualaid visualchars visualblocks | spellchecker | preview fullscreen'
+            },
+            format: {
+                title: 'Format',
+                items: 'bold italic underline strikethrough superscript subscript codeformat | formats blockformats fontformats fontsizes align | forecolor backcolor | removeformat'
+            }
         },
         resize: false
     });
