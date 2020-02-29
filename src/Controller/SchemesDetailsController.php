@@ -34,7 +34,7 @@ class SchemesDetailsController extends AppController
         $this->paginate = [
             'contain' => ['Schemes.Leagues']
         ];
-        $schemesDetails = $this->paginate( $schemesDetails);
+        $schemesDetails = $this->paginate($schemesDetails);
 
         $this->set(compact('schemesDetails'));
     }
@@ -148,15 +148,15 @@ class SchemesDetailsController extends AppController
                 }
                 break;
             case 'organizers':
-                if (in_array($this->request->action, ['index','view','add','edit','getPoints'])) {
+                if (in_array($this->request->action, ['index', 'view', 'add', 'edit', 'getPoints'])) {
                     return true;
                 }
                 break;
-            // case 'participant':
-            //     if (in_array($this->request->action, ['index,view'])) {
-            //         return true;
-            //     }
-            //     break;
+                // case 'participant':
+                //     if (in_array($this->request->action, ['index,view'])) {
+                //         return true;
+                //     }
+                //     break;
         }
         return false;
     }

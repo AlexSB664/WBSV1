@@ -81,7 +81,7 @@
         ?>
         <label>Since</label>
         <br>
-        <input type="date" name="since" id="since" value="<?= $league->since->format('Y-m-d') ?>">
+        <input type="date" name="since" id="since" value="<?= $league->since ? $league->since->format('Y-m-d') : 'NA' ?>">
         <?php
         echo $this->Form->control('level', array('class' => 'form-control'));
         echo $this->Form->control('score', array('class' => 'form-control'));

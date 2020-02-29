@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Core\Configure;
 use Cake\Core\Configure\Engine\PhpConfig;
+
 /**
  * Locations Controller
  *
@@ -111,23 +112,23 @@ class LocationsController extends AppController
 
     public function isAuthorized($user)
     {
-       switch ($this->Auth->user('role')) {
-         case 'admin':
-           if (in_array($this->request->action, ['index','view', 'add', 'edit', 'delete'])){
-             return true;
-           }
-           break;
-         case 'organizers':
-         if (in_array($this->request->action, ['index,view'])){
-               return true;
-           }
-           break;
-        // case 'participant':
-        //    if (in_array($this->request->action, ['index,view'])){
-        //        return true;
-        //    }
-        //    break;
-       }
-       return false;
+        switch ($this->Auth->user('role')) {
+            case 'admin':
+                if (in_array($this->request->action, ['index', 'view', 'add', 'edit', 'delete'])) {
+                    return true;
+                }
+                break;
+            case 'organizers':
+                if (in_array($this->request->action, ['index','view', 'add', 'edit'])) {
+                    return true;
+                }
+                break;
+                // case 'participant':
+                //    if (in_array($this->request->action, ['index,view'])){
+                //        return true;
+                //    }
+                //    break;
+        }
+        return false;
     }
 }

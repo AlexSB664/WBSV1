@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Location[]|\Cake\Collection\CollectionInterface $locations
@@ -29,23 +30,23 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($locations as $location): ?>
-            <tr>
-                <td><?= $this->Number->format($location->id) ?></td>
-                <td><?= h($location->name) ?></td>
-                <td><?= h($location->city) ?></td>
-                <td><?= h($location->address) ?></td>
-                <td><?= $this->Number->format($location->lat) ?></td>
-                <td><?= $this->Number->format($location->lng) ?></td>
-                <td><?= h($location->type) ?></td>
-                <td><?= h($location->created) ?></td>
-                <td><?= h($location->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $location->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $location->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $location->id], ['confirm' => __('Are you sure you want to delete # {0}?', $location->id)]) ?>
-                </td>
-            </tr>
+            <?php foreach ($locations as $location) : ?>
+                <tr>
+                    <td><?= $this->Number->format($location->id) ?></td>
+                    <td><?= h($location->name) ?></td>
+                    <td><?= h($location->city) ?></td>
+                    <td><?= h($location->address) ?></td>
+                    <td><?= $this->Number->format($location->lat) ?></td>
+                    <td><?= $this->Number->format($location->lng) ?></td>
+                    <td><?= h($location->type) ?></td>
+                    <td><?= h($location->created) ?></td>
+                    <td><?= h($location->modified) ?></td>
+                    <td class="actions">
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $location->id]) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $location->id]) ?>
+                        <?= /*$this->Form->postLink(__('Delete'), ['action' => 'delete', $location->id], ['confirm' => __('Are you sure you want to delete # {0}?', $location->id)])*/ '' ?>
+                    </td>
+                </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
