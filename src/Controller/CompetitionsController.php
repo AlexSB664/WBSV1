@@ -193,6 +193,28 @@ class CompetitionsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    /**
+     * Delete method
+     *
+     * @param string|null $id Competition id.
+     * @return \Cake\Http\Response|null Redirects to index.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function myCompetitions($league_id = null)
+    {
+        $leagues_id  = $this->LeaguesUsers->getLeaguesByUser($this->request->getSession()->read('Auth.User.id'));
+        $info = $this->LeaguesUsers->Leagues->find('all', ['contain' => ['Seasons.Leagues']])->where(['id IN' => $leagues_id]);
+        if ($league_id) {
+            $this->set(compact('league_id'));
+            $info = $this->Competitions->find('all')->where(['Leagues.id' => $league_id]);
+            $this->paginate = [
+                'contain' => ['Seasons.Leagues']
+            ];
+        }
+        $info = $this->paginate($info);
+        $this->set(compact('info'));
+    }
+
     //Autorizacion hacia las vistas del usuario
     public function isAuthorized($user)
     {
@@ -203,7 +225,7 @@ class CompetitionsController extends AppController
                 }
                 break;
             case 'organizers':
-                if (in_array($this->request->action, ['index', 'view', 'edit', 'manage', 'add'])) {
+                if (in_array($this->request->action, ['index', 'view', 'edit', 'manage', 'add', 'myCompetitions'])) {
                     return true;
                 }
                 break;
