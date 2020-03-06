@@ -49,7 +49,17 @@
         <!-- END HEADER MOBILE-->
 
         <!-- MENU SIDEBAR-->
-        <?= $this->element('menu_sidebar'); ?>
+        <?php if ($this->request->getSession()->read('Auth.User.role') == 'admin') : ?>
+            <!-- for admin -->
+            <?= $this->element('menu_sidebar_admin'); ?>
+        <?php elseif ($this->request->getSession()->read('Auth.User.role') == 'organizers') : ?>
+            <!-- for organizer -->
+            <h3>sdhbfjhszDGhbfub</h3>
+            <?= $this->element('menu_sidebar_organizers'); ?>
+        <?php elseif ($this->request->getSession()->read('Auth.User.role') == 'participant') : ?>
+            <!-- for participants -->
+            <?= $this->element('menu_sidebar_participant'); ?>
+        <?php endif ?>
 
         <!-- END MENU SIDEBAR-->
 

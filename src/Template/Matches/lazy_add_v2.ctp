@@ -129,6 +129,11 @@
         </div>
     </div>
     <!-- END ADD ITEM -->
+    <?= isset($league_id) ? '' : '<h1>Elige una Liga</h1>' ?>
+    <?= isset($league_id) ? (isset($season_id) ? '' : '<h1>Elige una Temporada</h1>') : '' ?>
+    <?= isset($league_id) ? (isset($season_id) ? (isset($competition_id) ? '' : '<h1>Elige una Jornada</h1>') : '') : '' ?>
+    <br>
+    <br>
     <?php foreach ($list as $item) : ?>
         <div class="row" onclick="window.location='<?= $this->Url->build([
                                                         'controller' => 'matches',
