@@ -39,3 +39,9 @@ msgstr "Agregar Niveles de Esquema"
 
 msgid "List Schemes Details"
 msgstr "Lista de Niveles de Esquema"
+
+msgid "My Competitions"
+msgstr "Mis Competencias"
+
+msgid "Add Competition"
+msgstr "Agregar Competencia"

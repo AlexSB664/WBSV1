@@ -149,7 +149,7 @@ class CompetitionsController extends AppController
     public function edit($id = null)
     {
         $competition = $this->Competitions->get($id, [
-            'contain' => []
+            'contain' => ['Seasons']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             if ($this->Competitions->editCompetitions($competition, $this->request->data)) {
@@ -163,7 +163,7 @@ class CompetitionsController extends AppController
                 'lastUrl' => $this->referer(),
             ]);
         }
-        $seasons = $this->Competitions->Seasons->find('list', ['limit' => 200]);
+        $seasons = $this->Competitions->Seasons->find('list', ['limit' => 200])->where(['league_id' => $competition->season->league_id]);
         $locations = $this->Competitions->Locations->find('list', ['limit' => 200]);
         $schemes = $this->Competitions->Schemes->find('list', ['limit' => 200]);
         $this->set(compact('competition', 'seasons', 'locations', 'schemes'));
@@ -200,19 +200,23 @@ class CompetitionsController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function myCompetitions($league_id = null)
+    public function myCompetitions($league_id = null, $season_id = null)
     {
         $leagues_id  = $this->LeaguesUsers->getLeaguesByUser($this->request->getSession()->read('Auth.User.id'));
         $info = $this->LeaguesUsers->Leagues->find('all', ['contain' => ['Seasons.Leagues']])->where(['id IN' => $leagues_id]);
         if ($league_id) {
-            $this->set(compact('league_id'));
+            $seasons = $this->Competitions->Seasons->find('list', ['limit' => 200])->where(['league_id' => $league_id]);
+            $this->set(compact('league_id', 'seasons'));
             $info = $this->Competitions->find('all')->where(['Leagues.id' => $league_id]);
             $this->paginate = [
                 'contain' => ['Seasons.Leagues']
             ];
         }
+        if ($season_id) {
+            $info->where(['season_id' => $season_id]);
+        }
         $info = $this->paginate($info);
-        $this->set(compact('info'));
+        $this->set(compact('info', 'season_id'));
     }
 
     //Autorizacion hacia las vistas del usuario

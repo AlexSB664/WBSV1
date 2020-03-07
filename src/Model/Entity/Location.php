@@ -34,6 +34,7 @@ class Location extends Entity
         'type' => true,
         'created' => true,
         'city' => true,
-        'modified' => true
+        'modified' => true,
+        'league_id'=>true
     ];
 }

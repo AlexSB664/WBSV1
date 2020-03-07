@@ -6,9 +6,6 @@
                     <i class="fas fa-flash"></i><?= __('MANAGE') ?></a>
                 <ul class="navbar-mobile-sub__list list-unstyled js-sub-list">
                     <li>
-                        <a href="<?= $this->Url->build(['controller' => 'competitions', 'action' => 'manage']); ?>"><?= __('Competitions') ?></a>
-                    </li>
-                    <li>
                         <a href="<?= $this->Url->build(['controller' => 'matches', 'action' => 'lazyAddV2']); ?>"><?= __('Matches') ?></a>
                     </li>
                 </ul>

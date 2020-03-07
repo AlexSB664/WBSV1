@@ -12,9 +12,6 @@
                         <i class="fas fa-flash"></i><?= __('MANAGE') ?></a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
-                            <a href="<?= $this->Url->build(['controller' => 'competitions', 'action' => 'manage']); ?>"><?= __('Competitions') ?></a>
-                        </li>
-                        <li>
                             <a href="<?= $this->Url->build(['controller' => 'competitions', 'action' => 'myCompetitions']); ?>"><?= __('My Competitions') ?></a>
                         </li>
                         <li>
