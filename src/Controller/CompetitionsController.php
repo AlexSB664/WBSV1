@@ -24,6 +24,7 @@ class CompetitionsController extends AppController
         parent::initialize();
         $this->loadModel('LeaguesUsers');
         $this->session = $this->getRequest()->getSession();
+        $this->loadComponent('Policy');
     }
     public function getLastUrl()
     {
@@ -121,7 +122,7 @@ class CompetitionsController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add($seasons_id = null)
+    public function add($season_id = null, $league_id = null)
     {
         $competition = $this->Competitions->newEntity();
         if ($this->request->is('post')) {
@@ -133,7 +134,12 @@ class CompetitionsController extends AppController
             $this->Flash->error(__('The competition could not be saved. Please, try again.'));
         }
         $seasons = $this->Competitions->Seasons->find('list', ['limit' => 200]);
-        $seasons_id ? $seasons->where(['id' => $seasons_id])->first() : '';
+        if ($league_id && $league_id != 0) {
+            $seasons->where(['league_id' => $league_id]);
+        };
+        if ($season_id && $season_id != 0) {
+            $seasons->where(['id' => $season_id])->first();
+        };
         $locations = $this->Competitions->Locations->find('list', ['limit' => 200]);
         $schemes = $this->Competitions->Schemes->find('list', ['limit' => 200]);
         $this->set(compact('competition', 'seasons', 'locations', 'schemes'));
@@ -200,20 +206,27 @@ class CompetitionsController extends AppController
      * @return \Cake\Http\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function myCompetitions($league_id = null, $season_id = null)
+    public function myCompetitions($league_id = null, $season_id = 0)
     {
+        if ($this->request->getSession()->read('Auth.User.role') == 'organizers') {
+            $this->Policy->organizerPolicies([
+                'user' => $this->request->getSession()->read('Auth.User.id'),
+                'league' => $league_id,
+                'season' => $season_id
+            ]);
+        }
         $leagues_id  = $this->LeaguesUsers->getLeaguesByUser($this->request->getSession()->read('Auth.User.id'));
         $info = $this->LeaguesUsers->Leagues->find('all', ['contain' => ['Seasons.Leagues']])->where(['id IN' => $leagues_id]);
         if ($league_id) {
-            $seasons = $this->Competitions->Seasons->find('list', ['limit' => 200])->where(['league_id' => $league_id]);
+            $seasons = $this->Competitions->Seasons->find('list', ['limit' => 200])->where(['league_id' => $league_id])->toArray();
             $this->set(compact('league_id', 'seasons'));
             $info = $this->Competitions->find('all')->where(['Leagues.id' => $league_id]);
             $this->paginate = [
                 'contain' => ['Seasons.Leagues']
             ];
-        }
-        if ($season_id) {
-            $info->where(['season_id' => $season_id]);
+            if ($season_id != 0) {
+                $info->where(['season_id' => $season_id]);
+            }
         }
         $info = $this->paginate($info);
         $this->set(compact('info', 'season_id'));

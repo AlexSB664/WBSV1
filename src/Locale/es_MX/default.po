@@ -45,3 +45,6 @@ msgstr "Mis Competencias"
 
 msgid "Add Competition"
 msgstr "Agregar Competencia"
+
+msgid "All"
+msgstr "Todo"

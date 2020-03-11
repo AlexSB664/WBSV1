@@ -40,6 +40,10 @@
     <!-- Main CSS-->
     <link href="/css/cooladmin/theme.css" rel="stylesheet" media="all">
 
+    <!-- Coliseum CSS -->
+    <link href="/css/coliseum.min.css" rel="stylesheet" media="all">
+
+
 </head>
 
 <body class="animsition">

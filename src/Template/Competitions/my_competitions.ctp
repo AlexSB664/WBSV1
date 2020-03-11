@@ -1,20 +1,3 @@
-<style>
-    img.flyer-square {
-        max-height: 90px;
-        max-width: 110px;
-        min-height: 90px;
-        min-width: 110px;
-        height: auto;
-        width: auto;
-    }
-
-    p.flyer-square {
-        max-width: 100px;
-        min-width: 100px;
-        max-height: 42px;
-        min-height: 42px;
-    }
-</style>
 <div>
     <?php if (isset($league_id)) : ?>
         <div class="row">
@@ -25,7 +8,7 @@
                 <?= $this->Form->control(
                     'season_id',
                     [
-                        'options' => $seasons,
+                        'options' => [0 => __('All')] + $seasons,
                         'default' => $season_id ?: '',
                         'class' => 'form-control', 'label' => 'Escoje una Temporada',
                         'id' => 'seasons'
@@ -35,14 +18,13 @@
                     const selectElement = document.getElementById('seasons');
                     selectElement.addEventListener('change', (event) => {
                         window.location.replace("<?= $this->Url->build(['controller' => 'Competitions', 'action' => 'myCompetitions', $league_id]) ?>/" + event.target.value);
-                        console.log('You like ' + event.target.value);
                     });
                 </script>
             </div>
         </div>
         <div class="row">
             <div class="col-12">
-                <button class='btn btn-outline-success' onclick="window.location='<?= $this->Url->build(['controller' => 'Competitions', 'action' => 'add', $season_id]) ?>'"><?= __('Add Competition') ?></button>
+                <button class='btn btn-outline-success' onclick="window.location='<?= $this->Url->build(['controller' => 'Competitions', 'action' => 'add', $season_id, $league_id]) ?>'"><?= __('Add Competition') ?></button>
             </div>
         </div>
     <?php else : ?>
@@ -60,4 +42,40 @@
             </li>
         <?php endforeach ?>
     </ul>
+
+    <div class="row">
+        <div class="col-md-1">
+            <?php if ($this->Paginator->hasPrev()) : ?>
+                <ul class="pagination">
+                    <?= $this->Paginator->first('<<' . __('first')) ?>
+                </ul>
+            <?php endif ?>
+        </div>
+        <div class="col-md-1">
+            <?php if ($this->Paginator->hasPrev()) : ?>
+                <ul class="pagination">
+                    <?= $this->Paginator->prev('<' . __('prev.')) ?>
+                </ul>
+            <?php endif ?>
+        </div>
+        <div class="col-md-8">
+            <ul class="pagination">
+                <?= $this->Paginator->numbers() ?>
+            </ul>
+        </div>
+        <div class="col-md-1">
+            <?php if ($this->Paginator->hasNext()) : ?>
+                <ul class="pagination">
+                    <?= $this->Paginator->next(__('next') . '>') ?>
+                </ul>
+            <?php endif ?>
+        </div>
+        <div class="col-md-1">
+            <?php if ($this->Paginator->hasNext()) : ?>
+                <ul class="pagination">
+                    <?= $this->Paginator->last(__('last') . ' >>') ?>
+                </ul>
+            <?php endif ?>
+        </div>
+    </div>
 </div>
