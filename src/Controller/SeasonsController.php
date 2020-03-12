@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -16,6 +17,7 @@ class SeasonsController extends AppController
     {
         parent::initialize();
         $this->loadModel('LeaguesUsers');
+        $this->loadComponent('Policy');
     }
 
     /**
@@ -59,12 +61,12 @@ class SeasonsController extends AppController
      *
      * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add($league_id=null)
+    public function add($league_id = null)
     {
         if ($this->request->is('post')) {
             if ($season = $this->Seasons->addSeason($this->request->getData())) {
                 $this->Flash->success(__('The season has been saved.'));
-                
+
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The season could not be saved. Please, try again.'));
@@ -75,7 +77,7 @@ class SeasonsController extends AppController
             $leagues_id  = $this->LeaguesUsers->getLeaguesByUser($this->request->getSession()->read('Auth.User.id'));
             $leagues->where(['id IN' => $leagues_id]);
         }
-        $league_id?$leagues->where(['id'=>$league_id])->first():'';
+        $league_id ? $leagues->where(['id' => $league_id])->first() : '';
         $this->set(compact('season', 'leagues'));
     }
 
@@ -88,14 +90,19 @@ class SeasonsController extends AppController
      */
     public function edit($id = null)
     {
+        $this->Policy->organizerPolicies([
+            'league' => null,
+            'season' => $id,
+            'competition' => null,
+            'controller' => $this,
+            'action' => 'mySeasons'
+        ]);
         $season = $this->Seasons->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-           /* $season = $this->Seasons->patchEntity($season, $this->request->getData());
-            if ($this->Seasons->save($season)) { */
-        if ($this->Seasons->editSeason($season, $this->request->data))
-            {
+            
+            if ($this->Seasons->editSeason($season, $this->request->data)) {
                 $this->Flash->success(__('The season has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
@@ -130,26 +137,49 @@ class SeasonsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-       //Autorizacion hacia las vistas del usuario
-       public function isAuthorized($user)
-       {
-           switch ($this->Auth->user('role')) {
-               case 'admin':
-                   if (in_array($this->request->action, ['index', 'view', 'add', 'edit', 'delete'])) {
-                       return true;
-                   }
-                   break;
-               case 'organizers':
-                   if (in_array($this->request->action, ['add','index','view','edit'])) {
-                       return true;
-                   }
-                   break;
-            //    case 'participant':
-            //        if (in_array($this->request->action, ['index,view'])) {
-            //            return true;
-            //        }
-            //        break;
-           }
-           return false;
-       }
+    public function mySeasons($league_id = null)
+    {
+        $leagues_id  = $this->LeaguesUsers->getLeaguesByUser($this->request->getSession()->read('Auth.User.id'));
+        $info = $this->LeaguesUsers->Leagues->find('all', ['contain' => ['Seasons.Leagues']])->where(['id IN' => $leagues_id]);
+        if ($league_id) {
+            $this->Policy->organizerPolicies([
+                'league' => $league_id,
+                'season' => null,
+                'competition' => null,
+                'controller' => $this,
+                'action' => 'mySeasons'
+            ]);
+
+            $this->set(compact('league_id', 'seasons'));
+            $info = $this->Seasons->find('all')->where(['Leagues.id' => $league_id]);
+            $this->paginate = [
+                'contain' => ['Leagues']
+            ];
+        }
+        $info = $this->paginate($info);
+        $this->set(compact('info', 'season_id'));
+    }
+
+    //Autorizacion hacia las vistas del usuario
+    public function isAuthorized($user)
+    {
+        switch ($this->Auth->user('role')) {
+            case 'admin':
+                if (in_array($this->request->action, ['index', 'view', 'add', 'edit', 'delete'])) {
+                    return true;
+                }
+                break;
+            case 'organizers':
+                if (in_array($this->request->action, ['add', 'index', 'view', 'edit', 'mySeasons'])) {
+                    return true;
+                }
+                break;
+                //    case 'participant':
+                //        if (in_array($this->request->action, ['index,view'])) {
+                //            return true;
+                //        }
+                //        break;
+        }
+        return false;
+    }
 }

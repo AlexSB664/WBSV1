@@ -22,6 +22,7 @@ class LeaguesController extends AppController
     {
         parent::initialize();
         $this->loadModel('LeaguesUsers');
+        $this->loadComponent('Policy');
     }
 
     public $paginate = [
@@ -101,6 +102,13 @@ class LeaguesController extends AppController
      */
     public function edit($id = null)
     {
+        $this->Policy->organizerPolicies([
+            'league' => $id,
+            'season' => null,
+            'competition' => null,
+            'controller' => $this,
+            'action' => 'myLeagues'
+        ]);
         $league = $this->Leagues->get($id, [
             'contain' => []
         ]);
@@ -135,20 +143,27 @@ class LeaguesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function setCompetition($id = null,$competition_id=null)
+    public function setCompetition($id = null, $competition_id = null)
     {
-        if(!$this->request->query()){
+        if (!$this->request->query()) {
             $league = $this->Leagues->get($id);
             $league->active_competition = $competition_id;
-            if($this->Leagues->save($league)){
+            if ($this->Leagues->save($league)) {
                 $this->Flash->success("La Jornada fue fijada correctamente");
-            }else{
+            } else {
                 $this->Flash->error("No se pudo fijar la Jornada intentalo mas tarde.");
             }
             return $this->redirect($this->referer());
         }
-        die();
     }
+
+    public function myLeagues()
+    {
+        $leagues_id  = $this->LeaguesUsers->getLeaguesByUser($this->request->getSession()->read('Auth.User.id'));
+        $info = $this->paginate($this->LeaguesUsers->Leagues->find('all', ['contain' => ['Seasons.Leagues']])->where(['id IN' => $leagues_id]));
+        $this->set(compact('info'));
+    }
+
 
     public function beforeFilter(\Cake\Event\Event $event)
     {
@@ -165,7 +180,7 @@ class LeaguesController extends AppController
                 }
                 break;
             case 'organizers':
-                if (in_array($this->request->action, ['index', 'view', 'manage', 'edit', 'setCompetition'])) {
+                if (in_array($this->request->action, ['index', 'view', 'manage', 'edit', 'setCompetition', 'myLeagues'])) {
                     return true;
                 }
                 break;

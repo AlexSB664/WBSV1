@@ -24,7 +24,7 @@
                         <i class="fa fa-tasks"></i><?= __('LEAGUES') ?></a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
-                            <a href="<?= $this->Url->build(['controller' => 'leagues', 'action' => 'manage']); ?>"><?= __('List Leagues') ?></a>
+                            <a href="<?= $this->Url->build(['controller' => 'leagues', 'action' => 'myLeagues']); ?>"><?= __('My Leagues') ?></a>
                         </li>
                     </ul>
                 </li>
@@ -36,7 +36,7 @@
                             <a href="<?= $this->Url->build(['controller' => 'seasons', 'action' => 'add']); ?>"><?= __('Add Seasons') ?></a>
                         </li>
                         <li>
-                            <a href="<?= $this->Url->build(['controller' => 'seasons', 'action' => 'index']); ?>"><?= __('List Seasons') ?></a>
+                            <a href="<?= $this->Url->build(['controller' => 'seasons', 'action' => 'mySeasons']); ?>"><?= __('My Seasons') ?></a>
                         </li>
                     </ul>
                 </li>

@@ -26,6 +26,7 @@ class MatchesController extends AppController
         $this->Competitions = TableRegistry::get('competitions');
         $this->loadModel('LeaguesUsers');
         $this->session = $this->getRequest()->getSession();
+        $this->loadComponent('Policy');
     }
 
     public function getLastUrl()
@@ -130,6 +131,13 @@ class MatchesController extends AppController
             $list->where(['id IN' => $leagues_id]);
         }
         if ($league_id) {
+            $this->Policy->organizerPolicies([
+                'league' => $league_id,
+                'season' => $season_id,
+                'competition' => $competition_id,
+                'controller' => $this,
+                'action' => 'lazyAddV2'
+            ]);
             $this->set(compact('league_id'));
             $list = $this->Seasons->find()->where(['league_id' => $league_id]);
             if ($season_id) {
@@ -138,6 +146,7 @@ class MatchesController extends AppController
                 if ($competition_id) {
                     $competition_id = $this->Competitions->get($competition_id, ['contain' => ['Seasons.Leagues']]);
                     $this->set(compact('competition_id'));
+                    dd($this);
                 }
             }
         }

@@ -208,16 +208,17 @@ class CompetitionsController extends AppController
      */
     public function myCompetitions($league_id = null, $season_id = 0)
     {
-        if ($this->request->getSession()->read('Auth.User.role') == 'organizers') {
-            $this->Policy->organizerPolicies([
-                'user' => $this->request->getSession()->read('Auth.User.id'),
-                'league' => $league_id,
-                'season' => $season_id
-            ]);
-        }
         $leagues_id  = $this->LeaguesUsers->getLeaguesByUser($this->request->getSession()->read('Auth.User.id'));
         $info = $this->LeaguesUsers->Leagues->find('all', ['contain' => ['Seasons.Leagues']])->where(['id IN' => $leagues_id]);
         if ($league_id) {
+            $this->Policy->organizerPolicies([
+                'league' => $league_id,
+                'season' => $season_id,
+                'competition' => null,
+                'controller' => $this,
+                'action' => 'myCompetitions'
+            ]);
+
             $seasons = $this->Competitions->Seasons->find('list', ['limit' => 200])->where(['league_id' => $league_id])->toArray();
             $this->set(compact('league_id', 'seasons'));
             $info = $this->Competitions->find('all')->where(['Leagues.id' => $league_id]);
