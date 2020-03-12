@@ -146,7 +146,6 @@ class MatchesController extends AppController
                 if ($competition_id) {
                     $competition_id = $this->Competitions->get($competition_id, ['contain' => ['Seasons.Leagues']]);
                     $this->set(compact('competition_id'));
-                    dd($this);
                 }
             }
         }
