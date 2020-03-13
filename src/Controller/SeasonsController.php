@@ -91,9 +91,7 @@ class SeasonsController extends AppController
     public function edit($id = null)
     {
         $this->Policy->organizerPolicies([
-            'league' => null,
             'season' => $id,
-            'competition' => null,
             'controller' => $this,
             'action' => 'mySeasons'
         ]);
@@ -144,8 +142,6 @@ class SeasonsController extends AppController
         if ($league_id) {
             $this->Policy->organizerPolicies([
                 'league' => $league_id,
-                'season' => null,
-                'competition' => null,
                 'controller' => $this,
                 'action' => 'mySeasons'
             ]);

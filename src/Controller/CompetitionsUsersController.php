@@ -27,27 +27,34 @@ class CompetitionsUsersController extends AppController
         $this->loadModel('Users');
         $this->loadModel('Competitions');
         $this->session = $this->getRequest()->getSession();
+        $this->loadComponent('Policy');
+        $this->loadComponent('CompetitionUsersResolve', [
+            'className' => '\App\Controller\Component\Resolve\CompetitionUsersResolveComponent'
+        ]);
     }
     public function getLastUrl()
     {
         return $this->session->read('lastUrl');
     }
-    public function index($id = null)
+    public function index($competition_id = null)
     {
+        $this->Policy->organizerPolicies([
+            'competition' => $competition_id,
+            'controller' => $this,
+            'action' => 'previus'
+        ]);
         $this->paginate = ['contain' => ['Users']];
-        $competitionsUsers = $this->paginate($this->CompetitionsUsers->find()->where(['competitions_id' => $id]));
+        $competitionsUsers = $this->paginate($this->CompetitionsUsers->find()->where(['competitions_id' => $competition_id]));
         $this->set(compact('competitionsUsers'));
     }
     public function join($id = null)
     {
         $this->autoRender = false;
-        $competitionsUserTable = TableRegistry::get('CompetitionsUsers');
-        $competitionsUserTable = TableRegistry::getTableLocator()->get('CompetitionsUsers');
-        $competitionUser = $competitionsUserTable->newEntity();
+        $competitionUser = $this->CompetitionsUsers->newEntity();
         $competitionUser->users_id = $this->Auth->user('id');
         $competitionUser->competitions_id = $id;
 
-        if ($competitionsUserTable->save($competitionUser)) {
+        if ($this->CompetitionsUsers->save($competitionUser)) {
             $this->redirect($this->referer());
         }
         $this->redirect($this->referer());
@@ -67,18 +74,16 @@ class CompetitionsUsersController extends AppController
         }
         $this->redirect($this->referer());
     }
-    public function Assistance($id = null)
+    public function assistance($id = null)
     {
         $this->autoRender = false;
-        $competitionsUserTable = TableRegistry::get('CompetitionsUsers');
-        $competitionsUserTable = TableRegistry::getTableLocator()->get('CompetitionsUsers');
-        $competitionsUser = $competitionsUserTable->get($id);
+        $competitionsUser = $this->CompetitionsUsers->get($id);
         if ($competitionsUser->assistance == 1) {
             $competitionsUser->assistance = 0;
         } else {
             $competitionsUser->assistance = 1;
         }
-        if ($competitionsUserTable->save($competitionsUser)) {
+        if ($this->CompetitionsUsers->save($competitionsUser)) {
             $this->redirect($this->referer());
         }
         $this->redirect($this->referer());
@@ -126,39 +131,23 @@ class CompetitionsUsersController extends AppController
      */
     public function lazyAdd($competition_id = null)
     {
+        debug($this->referer());
+        $this->Policy->organizerPolicies([
+            'competition' => $competition_id,
+            'controller' => $this,
+            'action' => 'previus'
+        ]);
         $competitionsUser = $this->CompetitionsUsers->newEntity();
         if ($this->request->is('post')) {
-            $data = $this->request->getData();
-            if (empty($data['users_id'])) {
-                $this->Flash->error('No hay usuarios que suscribir a la competencia intenta de nuevo.');
-                return $this->redirect($this->referer());
-            }
-            foreach ($data['users_id'] as $index => $value) {
-                $dataTmp = [];
-                $dataTmp['competitions_id'] = $data['competitions_id'];
-                $dataTmp['users_id'] = $value;
-                $dataTmp['assistance'] = $data['assistance'];
-                $competitionsTmp = $this->CompetitionsUsers->newEntity();
-                $competitionsTmp = $this->CompetitionsUsers->patchEntity($competitionsTmp, $dataTmp);
-                if ($this->CompetitionsUsers->save($competitionsTmp)) {
-                    if ($index === array_key_last($data['users_id'])) {
-                        $this->Flash->success(__('The competitions user has been saved.'));
-                        return $this->redirect(Router::url($this->getLastUrl(), true));
-                    }
-                }
-                if ($index === array_key_last($data['users_id'])) {
-                    $this->Flash->error(__('The competitions user could not be saved. Please, try again.'));
-                    return $this->redirect(Router::url($this->getLastUrl(), true));
-                }
-            }
+            $this->CompetitionUsersResolve->resolveLazyAdd($this);
         } else {
             $this->session->write([
                 'lastUrl' => $this->referer()
             ]);
         }
-        $competitions = $this->CompetitionsUsers->Competitions->find('list', ['limit' => 200])->where(['id' => $competition_id]);
+        $competition = $this->CompetitionsUsers->Competitions->get($competition_id);
         $users = $this->CompetitionsUsers->Users->find('list');
-        $this->set(compact('competitionsUser', 'competitions', 'users'));
+        $this->set(compact('competitionsUser', 'competition', 'users'));
     }
     /**
      * Edit method
@@ -206,57 +195,64 @@ class CompetitionsUsersController extends AppController
 
     public function lazyDelete($competition_id = null)
     {
+        $this->Policy->organizerPolicies([
+            'competition' => $competition_id,
+            'controller' => $this,
+            'action' => 'previus'
+        ]);
         $this->paginate = ['contain' => ['Users']];
         $competitionsUsers = $this->paginate($this->CompetitionsUsers->find()->where(['competitions_id' => $competition_id]));
         $this->set(compact('competitionsUsers'));
     }
 
-	public function qr($competition_id){
-	$this->viewBuilder()->autoLayout(false);
+    public function qr($competition_id)
+    {
+        $this->viewBuilder()->autoLayout(false);
         $this->set(compact('competition_id'));
-	}
+    }
 
-   public function joinWithQR(){
-           if (!$this->request->query() || empty($this->request->query('user_id')) || empty($this->request->query('competition_id'))  ) {
+    public function joinWithQR()
+    {
+        if (!$this->request->query() || empty($this->request->query('user_id')) || empty($this->request->query('competition_id'))) {
             die();
         }
         $compUsr = $this->CompetitionsUsers->newEntity();
         $compUsr->users_id = $this->request->query('user_id');
         $compUsr->competitions_id = $this->request->query('competition_id');
-        $compusr->assistance = 1;
-        $previus =  $this->CompetitionsUsers->find()->
-                    where(['competitions_id'=>$this->request->query('competition_id'),
-                    'users_id'=>$this->request->query('user_id')])->toArray();
+        $compUsr->assistance = 1;
+        $previus =  $this->CompetitionsUsers->find()->where([
+            'competitions_id' => $this->request->query('competition_id'),
+            'users_id' => $this->request->query('user_id')
+        ])->toArray();
         $response = [
-        	'message'=>"El usuario ya esta suscrito a este evento",
-		'icon'=>'error',
-		'title'=>'Ops...'
+            'message' => "El usuario ya esta suscrito a este evento",
+            'icon' => 'error',
+            'title' => 'Ops...'
         ];
         if (!$previus) {
-                $response['message']="Error no se pudo suscribir al freestyler";
-        	if($this->CompetitionsUsers->save($compUsr)){
-        		 $response['message']="Se suscribio correctamente al freestyler";
-			 $response['icon']="succes";
-			 $response['title']="Suscrito!!";
-        	}
+            $response['message'] = "Error no se pudo suscribir al freestyler";
+            if ($this->CompetitionsUsers->save($compUsr)) {
+                $response['message'] = "Se suscribio correctamente al freestyler";
+                $response['icon'] = "succes";
+                $response['title'] = "Suscrito!!";
+            }
         }
         return $this->response
             ->withType('application/json')
             ->withStringBody(json_encode($response))
             ->withStatus(200);
-
-   }
+    }
 
     public function isAuthorized($user)
     {
         switch ($this->Auth->user('role')) {
             case 'admin':
-                if (in_array($this->request->action, ['index', 'view', 'add', 'edit', 'delete', 'getLastUrl', 'join', 'unjoin', 'assistance', 'lazyAdd', 'lazyDelete','qr','joinWithQR'])) {
+                if (in_array($this->request->action, ['index', 'view', 'add', 'edit', 'delete', 'getLastUrl', 'join', 'unjoin', 'assistance', 'lazyAdd', 'lazyDelete', 'qr', 'joinWithQR'])) {
                     return true;
                 }
                 break;
             case 'organizers':
-                if (in_array($this->request->action, ['index', 'view', 'assistance','qr','joinWithQR'])) {
+                if (in_array($this->request->action, ['index', 'view', 'assistance', 'qr', 'joinWithQR', 'lazyAdd', 'lazyDelete'])) {
                     return true;
                 }
                 break;

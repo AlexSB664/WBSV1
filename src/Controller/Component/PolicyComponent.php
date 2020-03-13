@@ -27,6 +27,7 @@ class PolicyComponent extends Component
     public function organizerPolicies($data = [])
     {
         $this->controller = $data['controller'];
+        $data= $data+['competition' => null, 'season' => null, 'league' => null];
         $user = $this->LeaguesUsers->Users->get($this->controller->request->getSession()->read('Auth.User.id'));
         if ($user->role == 'organizers') {
             $this->controller = $data['controller'];
@@ -79,6 +80,9 @@ class PolicyComponent extends Component
     {
         if (!$condition) {
             $this->controller->Flash->error(__($message));
+            if ($this->action == 'previus') {
+                return $this->controller->redirect($this->controller->referer());
+            }
             return $this->controller->redirect(['action' => $this->action]);
         }
     }

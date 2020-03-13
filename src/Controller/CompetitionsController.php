@@ -154,6 +154,11 @@ class CompetitionsController extends AppController
      */
     public function edit($id = null)
     {
+        $this->Policy->organizerPolicies([
+            'competition' => $id,
+            'controller' => $this,
+            'action' => 'myCompetitions'
+        ]);
         $competition = $this->Competitions->get($id, [
             'contain' => ['Seasons']
         ]);
@@ -214,7 +219,6 @@ class CompetitionsController extends AppController
             $this->Policy->organizerPolicies([
                 'league' => $league_id,
                 'season' => $season_id,
-                'competition' => null,
                 'controller' => $this,
                 'action' => 'myCompetitions'
             ]);

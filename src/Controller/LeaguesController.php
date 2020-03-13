@@ -104,8 +104,6 @@ class LeaguesController extends AppController
     {
         $this->Policy->organizerPolicies([
             'league' => $id,
-            'season' => null,
-            'competition' => null,
             'controller' => $this,
             'action' => 'myLeagues'
         ]);

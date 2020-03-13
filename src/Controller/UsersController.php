@@ -18,6 +18,7 @@ class UsersController extends AppController
     {
         parent::initialize();
         $this->loadModel('FreestylersTops');
+        $this->loadModel('CompetitionsUsers');
     }
     /**
      * Index method
@@ -234,7 +235,7 @@ class UsersController extends AppController
 
     public function getUser()
     {
-	if (!$this->request->query() || empty($this->request->query('id'))) {
+        if (!$this->request->query() || empty($this->request->query('id'))) {
             die();
         }
         return $this->response
@@ -242,7 +243,28 @@ class UsersController extends AppController
             ->withStringBody(json_encode(
                 [
                     'data' =>
-                    $this->Users->find()->select(['id', 'aka', 'avatar', 'email'])->where(['id'=>$this->request->query('id')])->first()->toArray(),
+                    $this->Users->find()->select(['id', 'aka', 'avatar', 'email'])->where(['id' => $this->request->query('id')])->first()->toArray(),
+                ]
+            ))
+            ->withStatus(200);
+    }
+
+    public function getUserOutCompetition()
+    {
+        if (!$this->request->query() || empty($this->request->query('name'))) {
+            die();
+        }
+        $users_ids = $this->CompetitionsUsers->getUsersIdByCompetition($this->request->query('comp'));
+        return $this->response
+            ->withType('application/json')
+            ->withStringBody(json_encode(
+                [
+                    'data' =>
+                    $this->Users->find()->select(['id', 'aka', 'avatar', 'email'])
+                        ->where([
+                            'id NOT IN' => $users_ids,
+                            'OR' => [['email LIKE' => '%' . $this->request->query('name') . '%'], ['aka LIKE' => '%' . $this->request->query('name') . '%']]
+                        ])->toArray(),
                 ]
             ))
             ->withStatus(200);
@@ -255,7 +277,7 @@ class UsersController extends AppController
                 return true;
                 break;
             case 'organizers':
-                if (in_array($this->request->action, ['profile', 'getUsers'])) {
+                if (in_array($this->request->action, ['profile', 'getUsers', 'getUserOutCompetition'])) {
                     return true;
                 }
                 break;

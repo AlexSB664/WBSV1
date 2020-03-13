@@ -34,7 +34,7 @@
                 <td id="tdassistance"> 
                     <form action="<?= $this->Url->build([
                         'controller' => 'competitions_users',
-                        'action' => 'Assistance', $competitionUser->id]); ?>">
+                        'action' => 'assistance', $competitionUser->id]); ?>">
                         <?php if ($competitionUser->assistance ==1): ?>
                         <input type="submit" class="btn btn-success" value="Presente" />
                         <?php else : ?>

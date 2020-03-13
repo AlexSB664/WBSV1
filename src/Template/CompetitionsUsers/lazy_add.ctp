@@ -10,7 +10,7 @@
     <fieldset>
         <legend><?= __('Add Competitions User') ?></legend>
         <?php
-        echo $this->Form->control('competitions_id', ['options' => $competitions]);
+        echo $this->Form->control('competitions_id', ['options' => [$competition->id => $competition->name]]);
         // echo $this->Form->control('users_id', ['options' => $users, 'multiple' => 'checkbox']);
         echo $this->Form->control('assistance', ['hidden' => true, 'label' => false]);
         ?>
@@ -29,7 +29,8 @@
 <script type="text/javascript">
     function loadUsers(value) {
         var xhttp = new XMLHttpRequest();
-        xhttp.open("GET", "<?= $this->Url->build(['controller' => 'users', 'action' => 'getUsers']); ?>?name=" + value);
+        xhttp.open("GET", "<?= $this->Url->build(['controller' => 'users', 'action' => 'getUserOutCompetition']); ?>?name=" + value + "&comp=" +
+            <?= $competition->id ?>);
         console.log("<?= $this->Url->build(['controller' => 'users', 'action' => 'getUsers']); ?>?name=" + value);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.onreadystatechange = function(e) {
