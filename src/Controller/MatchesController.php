@@ -108,9 +108,10 @@ class MatchesController extends AppController
             ])->where(['scheme_id' => $competition->scheme_id]);
 
             $usr_id = $this->CompetitionsUsers->getUsersIdByCompetition($competition_id);
-            $users = $this->Matches->Users->find('list', ['limit' => 200])->where(['id IN' => $usr_id]);
+            $users = $this->Matches->Users->find('list', ['limit' => 50])->where(['id IN' => $usr_id]);
+            $users_cards = $this->Matches->Users->find('all', ['limit' => 50])->where(['id IN' => $usr_id]);
 
-            $this->set(compact('match', 'competition', 'users', 'stages'));
+            $this->set(compact('match', 'competition', 'users', 'stages','users_cards'));
         }
         if ($this->request->is('post')) {
             $match = $this->Matches->patchEntity($match, $this->request->getData());

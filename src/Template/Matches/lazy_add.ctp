@@ -5,6 +5,34 @@
  * @var \App\Model\Entity\Match $match
  */
 ?>
+<style>
+    div.battle-container {
+        width: auto;
+        height: auto;
+        padding: 10px;
+        border: 1px solid #aaaaaa;
+    }
+</style>
+<script>
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+    }
+
+    function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        var str = ev.target.className;
+        var classArray = ev.target.className.split(" ");
+        console.log(classArray);
+        if (classArray.includes("battle-container")) {
+            ev.target.appendChild(document.getElementById(data));
+        }
+    }
+</script>
 <div class="matches form large-9 medium-8 columns content">
     <?= $this->Form->create($match) ?>
     <fieldset>
@@ -49,6 +77,27 @@
         }
         loadPoints(document.getElementById("stage").value);
     </script>
+    <div class="row battle">
+        <?php foreach ($users_cards as $user) : ?>
+            <div id="<?= $user->id ?>" draggable="true" ondragstart="drag(event)">
+            <?= $this->Html->image($user->avatar, ['id' => 'output', 'width' => '75', 'height' => '75', 'draggable' => 'false', 'id' => $user->id]); ?>
+            </div>
+        <?php endforeach ?>
+    </div>
+    <div class="row">
+        <div class="col-2">
+            Ganador
+            <div class="battle-container" style="background-color:#D4AF37;" ondrop="drop(event)" ondragover="allowDrop(event)">
+            </div>
+        </div>
+        <div class="col-10">
+            Tiro
+            <div class="row battle-container" ondrop="drop(event)" ondragover="allowDrop(event)">
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
     <?= $this->Form->button(__('Agregar'), array('class' => 'btn btn-outline-success')) ?>
     <?= $this->Form->end() ?>
 </div>

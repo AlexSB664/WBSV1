@@ -131,7 +131,6 @@ class CompetitionsUsersController extends AppController
      */
     public function lazyAdd($competition_id = null)
     {
-        debug($this->referer());
         $this->Policy->organizerPolicies([
             'competition' => $competition_id,
             'controller' => $this,

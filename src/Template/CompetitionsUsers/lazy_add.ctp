@@ -25,7 +25,6 @@
 <fieldset>
     <ul style="list-style:none;margin:0 auto;max-width: 900px;width:100%;text-align:center;padding:0;display: block;margin-block-start: 1em;margin-block-end: 1em;margin-inline-start: 0px;margin-inline-end: 0px;padding-inline-start: 40px;" id="results">Por favor escribe algun nombre para buscar</ul>
 </fieldset>
-</div>
 <script type="text/javascript">
     function loadUsers(value) {
         var xhttp = new XMLHttpRequest();
