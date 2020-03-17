@@ -254,17 +254,20 @@ class UsersController extends AppController
         if (!$this->request->query() || empty($this->request->query('name'))) {
             die();
         }
+        $users = $this->Users->find()->select(['id', 'aka', 'avatar', 'email'])
+            ->where([
+                'OR' => [['email LIKE' => '%' . $this->request->query('name') . '%'], ['aka LIKE' => '%' . $this->request->query('name') . '%']]
+            ]);
         $users_ids = $this->CompetitionsUsers->getUsersIdByCompetition($this->request->query('comp'));
+        if ($users_ids) {
+            $users->where(['id NOT IN' => $users_ids]);
+        }
         return $this->response
             ->withType('application/json')
             ->withStringBody(json_encode(
                 [
                     'data' =>
-                    $this->Users->find()->select(['id', 'aka', 'avatar', 'email'])
-                        ->where([
-                            'id NOT IN' => $users_ids,
-                            'OR' => [['email LIKE' => '%' . $this->request->query('name') . '%'], ['aka LIKE' => '%' . $this->request->query('name') . '%']]
-                        ])->toArray(),
+                    $users->toArray(),
                 ]
             ))
             ->withStatus(200);
