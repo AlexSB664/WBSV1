@@ -81,3 +81,10 @@ p.flyer-square {
     border-color: transparent;
     cursor: default;
 }
+
+div.battle-container {
+    width: auto;
+    height: auto;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+}

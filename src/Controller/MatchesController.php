@@ -28,6 +28,9 @@ class MatchesController extends AppController
         $this->loadModel('SchemesDetails');
         $this->session = $this->getRequest()->getSession();
         $this->loadComponent('Policy');
+        $this->loadComponent('MatchesResolve', [
+            'className' => '\App\Controller\Component\Resolve\MatchesResolveComponent'
+        ]);
     }
 
     public function getLastUrl()
@@ -120,6 +123,43 @@ class MatchesController extends AppController
                 return $this->redirect(Router::url($this->getLastUrl(), true));
             }
             $this->Flash->error(__('The match could not be saved. Please, try again.'));
+        } else {
+            $this->session->write([
+                'lastUrl' => $this->referer(),
+            ]);
+        }
+    }
+
+    public function battles($competition_id = null)
+    {
+        $match = $this->Matches->newEntity();
+        if ($competition_id) {
+            $this->Policy->organizerPolicies([
+                'competition' => $competition_id,
+                'controller' => $this,
+                'action' => 'lazyAddV2'
+            ]);
+            $competition = $this->Matches->Competitions->find('all', ['contain' => ['Seasons.Leagues', 'Schemes.SchemesDetails']])->where(['Competitions.id' => $competition_id])->first();
+
+            $stages = $this->SchemesDetails->find('list', [
+                'keyField' => 'position',
+                'valueField' => 'position'
+            ])->where(['scheme_id' => $competition->scheme_id]);
+
+            $usr_id = $this->CompetitionsUsers->getUsersIdByCompetition($competition_id);
+            $users = $this->Matches->Users->find('list', ['limit' => 50])->where(['id IN' => $usr_id]);
+            $users_cards = $this->Matches->Users->find('all', ['limit' => 50])->where(['id IN' => $usr_id]);
+
+            $this->set(compact('match', 'competition', 'users', 'stages','users_cards'));
+        }
+        if ($this->request->is('post')) {
+            $this->MatchesResolve->battles($this);
+            // $match = $this->Matches->patchEntity($match, $this->request->getData());
+            // if ($this->Matches->save($match)) {
+            //     $this->Flash->success(__('The match has been saved.'));
+            //     return $this->redirect(Router::url($this->getLastUrl(), true));
+            // }
+            // $this->Flash->error(__('The match could not be saved. Please, try again.'));
         } else {
             $this->session->write([
                 'lastUrl' => $this->referer(),
@@ -230,12 +270,12 @@ class MatchesController extends AppController
     {
         switch ($this->Auth->user('role')) {
             case 'admin':
-                if (in_array($this->request->action, ['index', 'lazyAdd', 'lazyAddV2', 'view', 'add', 'edit', 'getLastUrl', 'delete'])) {
+                if (in_array($this->request->action, ['index', 'lazyAdd', 'lazyAddV2', 'view', 'add', 'edit', 'getLastUrl', 'delete','battles'])) {
                     return true;
                 }
                 break;
             case 'organizers':
-                if (in_array($this->request->action, ['index', 'view', 'lazyAddV2', 'lazyAdd'])) {
+                if (in_array($this->request->action, ['index', 'view', 'lazyAddV2', 'lazyAdd','battles'])) {
                     return true;
                 }
                 break;

@@ -52,52 +52,6 @@
         echo $this->Form->control('users._ids', ['options' => $users, 'multiple' => 'checkbox']);
         ?>
     </fieldset>
-    <script type="text/javascript">
-        function loadPoints(value) {
-
-            var xhttp = new XMLHttpRequest();
-            xhttp.open("GET",
-                "<?= $this->Url->build([
-                        'controller' => 'schemesDetails',
-                        'action' => 'getPoints'
-                    ]);
-                    ?>?stage=" + value + "&scheme_id=<?= $competition->scheme_id ?> ");
-            xhttp.onreadystatechange = function(e) {
-                if (xhttp.readyState == 4) {
-                    if (xhttp.status === 200) {
-                        xhttp.addEventListener('load', function(e) {
-                            document.getElementById("points").value = xhttp.responseText;
-                        });
-                    } else {
-                        console.error(xhttp.status);
-                    }
-                }
-            }
-            xhttp.send();
-        }
-        loadPoints(document.getElementById("stage").value);
-    </script>
-    <div class="row battle">
-        <?php foreach ($users_cards as $user) : ?>
-            <div id="<?= $user->id ?>" draggable="true" ondragstart="drag(event)">
-            <?= $this->Html->image($user->avatar, ['id' => 'output', 'width' => '75', 'height' => '75', 'draggable' => 'false', 'id' => $user->id]); ?>
-            </div>
-        <?php endforeach ?>
-    </div>
-    <div class="row">
-        <div class="col-2">
-            Ganador
-            <div class="battle-container" style="background-color:#D4AF37;" ondrop="drop(event)" ondragover="allowDrop(event)">
-            </div>
-        </div>
-        <div class="col-10">
-            Tiro
-            <div class="row battle-container" ondrop="drop(event)" ondragover="allowDrop(event)">
-            </div>
-        </div>
-    </div>
-    <br>
-    <br>
     <?= $this->Form->button(__('Agregar'), array('class' => 'btn btn-outline-success')) ?>
     <?= $this->Form->end() ?>
 </div>
