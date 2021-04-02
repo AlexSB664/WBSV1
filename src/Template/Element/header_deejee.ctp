@@ -8,7 +8,7 @@
                     </a>
                 </h1>
             </div>
-            <div class="col-4 col-md-4 col-lg-8">
+            <div class="col-2 col-md-2 col-lg-10">
                 <nav class="site-navigation text-right text-md-right" role="navigation">
                     <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
                     <ul class="site-menu js-clone-nav d-none d-lg-block">
@@ -61,6 +61,15 @@
                                                 ?>">Login</a>
                             </li>
                         <?php else : ?>
+                            <?php if($this->request->session()->read('Auth.User.role')=='admin'):?>
+                            <li>
+                                <a href="<?= $this->Url->build([
+                                                    'controller' => 'matches',
+                                                    'action' => 'lazyAddV2'
+                                                ]);
+                                                ?>">Admin</a>
+                            </li>
+                            <?php endif ?>
                             <li>
                                 <a href="<?= $this->Url->build([
                                                     'controller' => 'users',
